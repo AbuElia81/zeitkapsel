@@ -54,6 +54,15 @@ const TON = {
   leer:        [0.0, 0.0]
 };
 
+// Größte Schriftgröße, mit der der Text noch in die Breite passt
+function passend(x, text, breite, basis, minimum, gewicht) {
+  if (!text) return basis;
+  x.font = `${gewicht} ${basis}px Georgia, serif`;
+  const b = x.measureText(text).width;
+  if (b <= breite) return basis;
+  return Math.max(minimum, Math.floor(basis * breite / b));
+}
+
 function bandTextur(schicht, segmente, hoehe, klein) {
   const B = 4096, H = hoehe;
   const c = document.createElement('canvas');
@@ -90,27 +99,46 @@ function bandTextur(schicht, segmente, hoehe, klein) {
     x.strokeStyle = rgb(linie * 0.9); x.lineWidth = 3;
     x.beginPath(); x.moveTo(x0, 0); x.lineTo(x0, H); x.stroke();
 
-    // Beschriftung, nur wenn Platz ist
+    // Beschriftung — die Schrift wird so weit verkleinert, bis sie ins Feld passt
     const gross = klein ? 34 : 52, mittel = klein ? 26 : 38;
+    const mx = x0 + br / 2, platz = br - 18;
     x.textAlign = 'center'; x.textBaseline = 'middle';
-    x.font = `600 ${gross}px Georgia, "Times New Roman", serif`;
-    const breiteName = x.measureText(seg.name).width;
-    if (seg.name && br > breiteName + 30) {
-      const mx = x0 + br / 2;
+    x.shadowColor = 'rgba(0,0,0,0.9)'; x.shadowBlur = 10;
+
+    const dauerText = `${String(seg.laenge).replace('.', ',')} ${schicht.einheit}`;
+
+    if (platz >= 52) {
+      // Waagerecht: Name oben, Dauer und Richtung darunter
       x.fillStyle = rgb(Math.min(1, linie + 0.25));
-      x.shadowColor = 'rgba(0,0,0,0.9)'; x.shadowBlur = 10;
-      if (klein) {
-        x.fillText(seg.name, mx, H / 2);
-      } else {
-        x.fillText(seg.name, mx, H * 0.36);
-        x.font = `400 ${mittel}px Georgia, serif`;
-        x.fillStyle = rgb(linie * 0.72);
-        const unten = seg.zusatz && br > x.measureText(seg.zusatz).width + 30
-          ? `${seg.laenge} ${schicht.einheit} · ${seg.zusatz}` : `${seg.laenge} ${schicht.einheit}`;
-        if (br > x.measureText(unten).width + 24) x.fillText(unten, mx, H * 0.70);
+      if (seg.name) {
+        const gN = passend(x, seg.name, platz, gross, 19, 600);
+        x.font = `600 ${gN}px Georgia, "Times New Roman", serif`;
+        x.fillText(seg.name, mx, klein ? H / 2 : H * 0.33);
       }
-      x.shadowBlur = 0;
+      if (!klein) {
+        x.fillStyle = rgb(linie * 0.78);
+        const gD = passend(x, dauerText, platz, mittel, 15, 400);
+        x.font = `400 ${gD}px Georgia, serif`;
+        x.fillText(dauerText, mx, H * 0.63);
+        if (seg.zusatz) {
+          const gZ = passend(x, seg.zusatz, platz, mittel * 0.86, 14, 400);
+          x.font = `400 ${gZ}px Georgia, serif`;
+          x.fillStyle = rgb(linie * 0.62);
+          x.fillText(seg.zusatz, mx, H * 0.86);
+        }
+      }
+    } else if (platz >= 14 && seg.name) {
+      // Schmales Feld (Sandhi): Dauer quer zum Band, wie in der Vorlage
+      x.save();
+      x.translate(mx, H / 2);
+      x.rotate(-Math.PI / 2);
+      x.fillStyle = rgb(Math.min(1, linie + 0.25));
+      const gQ = Math.min(passend(x, dauerText, H - 26, 30, 14, 400), platz * 1.4);
+      x.font = `400 ${gQ}px Georgia, serif`;
+      x.fillText(dauerText, 0, 0);
+      x.restore();
     }
+    x.shadowBlur = 0;
   }
   // Ränder
   x.strokeStyle = rgb(0.55); x.lineWidth = 4;
@@ -254,6 +282,8 @@ const schalen = SCHICHTEN.map((schicht, i) => {
   gruppe.add(marke);
   gruppe.userData.marke = marke;
 
+  if (schicht.periode && !schicht.kern) gruppe.userData.atem = true;
+
   welt.add(gruppe);
   teile.forEach(t => { t.grund = t.mat.opacity; });
   return { schicht, gruppe, teile, i };
@@ -261,8 +291,9 @@ const schalen = SCHICHTEN.map((schicht, i) => {
 
 // Marke auf ihre Position im Zyklus drehen
 function markeSetzen(schale, anteil) {
-  // u = 0 liegt bei phi = 0; Segmente laufen im mathematisch positiven Sinn
-  schale.gruppe.userData.marke.rotation.y = -anteil * Math.PI * 2;
+  // Die Textur beginnt bei phi = 0, und three.js legt diesen Punkt auf -x.
+  // Deshalb die halbe Umdrehung Versatz und der positive Umlaufsinn.
+  schale.gruppe.userData.marke.rotation.y = Math.PI + anteil * Math.PI * 2;
 }
 schalen.forEach(s => markeSetzen(s, s.schicht.jetzt));
 
@@ -422,10 +453,17 @@ function bild() {
     // Marken der schnellen Zyklen laufen mit
     const s = sch.schicht;
     if (s.periode) markeSetzen(sch, (t % s.periode) / s.periode);
-    if (sch.gruppe.userData.puls) {
-      const p = 1 + 0.10 * Math.pow(Math.max(0, Math.sin((t / 0.9) * Math.PI * 2)), 6)
-                  + 0.05 * Math.pow(Math.max(0, Math.sin((t / 0.9) * Math.PI * 2 - 0.9)), 6);
-      sch.gruppe.userData.puls.forEach(m => m.scale.setScalar(p));
+    if (s.periode) {
+      const ph = (t % s.periode) / s.periode;          // 0 … 1 im laufenden Zyklus
+      if (sch.gruppe.userData.puls) {
+        // Herzschlag: zwei kurze Stöße je Zyklus — Systole, dann die Klappen
+        const p = 1 + 0.11 * Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2)), 6)
+                    + 0.055 * Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2 - 0.9)), 6);
+        sch.gruppe.userData.puls.forEach(m => m.scale.setScalar(p));
+      } else if (sch.gruppe.userData.atem) {
+        // Atemzug: ein weiches Weiten und Senken über die ganze Periode
+        sch.gruppe.scale.setScalar(1 + 0.055 * (0.5 - 0.5 * Math.cos(ph * Math.PI * 2)));
+      }
     }
   });
 

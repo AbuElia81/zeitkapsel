@@ -40,12 +40,14 @@ export const SCHICHTEN = [
       durch 300-jährige Übergänge (Sandhi). Der Zyklus fällt vom Goldenen Zeitalter herab
       bis zum Eisernen und steigt auf der anderen Hälfte wieder auf. An den beiden Wendepunkten
       stehen zwei 1.200-jährige Katastrophenzeiten, für die er die griechischen Namen benutzt:
-      Ekpyrosis, der Weltenbrand, und Kataklysmos, die Sintflut.`,
+      Ekpyrosis, die Reinigung durch Feuer, und Kataklysmos, die Reinigung
+      durch Wasser.`,
     fakten: [
       '8 Yugas × 2.700 + 6 Sandhis × 300 + 2 × 1.200 Jahre = 25.800 Jahre',
       'Zwei der acht 300-Jahr-Übergänge stecken bereits in den Katastrophenzeiten',
       'Das absteigende Kali Yuga läuft nach Misra von 676 v. Chr. bis 2025 n. Chr.',
-      'Misra legt darüber den AGN-Zyklus von Sgr A*, dem schwarzen Loch der Milchstraße',
+      'Das schmale Band darüber: der Kern der Milchstraße schaltet ein, ist aktiv, schaltet ab',
+      'Ekpyrosis heißt Weltenbrand, Kataklysmos Überflutung — beide reinigen',
       'Die 25.800 Jahre sind astronomisch belegt — die Yuga-Zuordnung ist Misras These'
     ],
     hinweis: `Die Präzession ist gemessene Astronomie. Die Einteilung in Yugas und die Kopplung
@@ -71,17 +73,20 @@ export const SCHICHTEN = [
     ],
     // Zweites, schmales Band: die AGN-Phasen des galaktischen Zentrums
     nebenband: {
-      titel: 'AGN-Zyklus von Sgr A*',
+      titel: 'Der galaktische Kern — Sgr A*',
       segmente: [
-        { name: 'Einschalt-Phase', laenge: 3900, art: 'agn-an' },
+        { name: 'Galaktischer Kern schaltet ein', laenge: 3900, art: 'agn-an' },
         { name: '', laenge: 5100, art: 'leer' },
-        { name: 'AGN-Phase', laenge: 8100, art: 'agn' },
-        { name: 'Ausschalt-Phase', laenge: 3900, art: 'agn-aus' },
+        { name: 'Galaktischer Kern aktiv', laenge: 8100, art: 'agn' },
+        { name: 'Galaktischer Kern schaltet ab', laenge: 3900, art: 'agn-aus' },
         { name: '', laenge: 4800, art: 'leer' }
       ]
     },
-    jetzt: 12901 / 25800,
-    jetztText: 'Wir stehen am Anfang der Ekpyrosis — im ersten Jahrzehnt nach dem Kali Yuga.'
+    // 12.900 Jahre liegen vor der Ekpyrosis; sie beginnt mit dem Ende
+    // des absteigenden Kali Yuga im Jahr 2025.
+    jetzt: (12900 + Math.max(0, jahr - 2025)) / 25800,
+    jetztText: `Wir stehen am Ende des absteigenden Kali Yuga und am Beginn der
+      Ekpyrosis — der Reinigung durch Feuer.`
   },
 
   {
@@ -145,7 +150,7 @@ export const SCHICHTEN = [
     dauer: '208 Jahre',
     untertitel: 'Die großen Sonnenminima',
     quelle: 'Sonnenfleckenrekonstruktion und ¹⁴C',
-    radius: 3.5,
+    radius: 3.50,
     farbe: '#d4677a',
     einheit: 'Jahre',
     text: `Alle gut zweihundert Jahre schläft die Sonne für einige Jahrzehnte fast ein.
@@ -172,7 +177,7 @@ export const SCHICHTEN = [
     dauer: '88 Jahre',
     untertitel: 'Die Hüllkurve der Sonnenflecken',
     quelle: 'Sonnenfleckenzählung seit 1749',
-    radius: 3.1,
+    radius: 3.10,
     farbe: '#c05fa0',
     einheit: 'Jahre',
     text: `Die elfjährigen Sonnenzyklen sind nicht alle gleich stark. Ihre Höhe schwankt
@@ -199,7 +204,7 @@ export const SCHICHTEN = [
     dauer: '22 Jahre',
     untertitel: 'Das Magnetfeld der Sonne kehrt sich um',
     quelle: 'gemessen seit George Ellery Hale, 1908',
-    radius: 2.7,
+    radius: 2.74,
     farbe: '#9d63c4',
     einheit: 'Jahre',
     text: `Erst nach zwei Sonnenfleckenzyklen ist die Sonne wieder ganz sie selbst. Bei
@@ -225,11 +230,50 @@ export const SCHICHTEN = [
   },
 
   {
+    name: 'Jupiter-Saturn-Zyklus',
+    dauer: '19,86 Jahre',
+    untertitel: 'Die Große Konjunktion — der Große Chronokrator',
+    quelle: 'Abu Maʿšar, „Buch der Religionen und Dynastien“ (9. Jh.); Raymond Merriman, „Forecast 2020“',
+    radius: 2.40,
+    farbe: '#8869cb',
+    einheit: 'Jahre',
+    text: `Die beiden langsamsten Planeten, die das bloße Auge sieht, treffen sich alle
+      knapp zwanzig Jahre am Himmel. Die arabisch-persische Astrologie nannte dieses Paar
+      den Großen Chronokrator, den Zeitmarkierer, und baute darauf ihre gesamte
+      Geschichtsdeutung: Abu Maʿšar las aus den Großen Konjunktionen den Aufstieg und Fall
+      von Dynastien. Jede Konjunktion springt rund 243 Grad weiter — acht Zeichen und drei
+      Grad — und bleibt so über Jahrhunderte im selben Element, bis sie in das nächste
+      wechselt. Diesen Wechsel nennt man die Große Mutation.`,
+    fakten: [
+      'Am 21. Dezember 2020, zur Wintersonnenwende, in 0°29′ Wassermann',
+      'Damit begann die Große Mutation von Erde zu Luft — die erste Luftreihe seit 1226',
+      'Abu Maʿšar: alle 240 Jahre ein neues Trigon, nach 960 Jahren beginnt alles von vorn',
+      'Moderne Zählung: rund 200 Jahre je Element, rund 800 Jahre für die volle Runde',
+      'Der Stern von Betlehem gilt als die Konjunktion von 7 v. Chr. in den Fischen',
+      'Die nächste Große Konjunktion fällt auf den 31. Oktober 2040',
+      'Rund 1.300 dieser Zyklen füllen einen Yuga-Zyklus'
+    ],
+    hinweis: `Die 19,86 Jahre sind reine Himmelsmechanik. Was Abu Maʿšar und die moderne
+      Mundanastrologie daraus für Dynastien, Wirtschaft und Zeitgeist lesen, ist Deutung —
+      die beiden Zählungen widersprechen sich sogar: 240 und 960 Jahre in der klassischen,
+      200 und 800 Jahre in der neueren Lesart.`,
+    segmente: [
+      { name: 'Konjunktion', laenge: 4.97, art: 'hoch', zusatz: 'Neubeginn' },
+      { name: 'Zunehmendes Quadrat', laenge: 4.97, art: 'auf', zusatz: 'Aufbau' },
+      { name: 'Opposition', laenge: 4.96, art: 'hoch', zusatz: 'volle Entfaltung' },
+      { name: 'Abnehmendes Quadrat', laenge: 4.96, art: 'ab', zusatz: 'Abbau' }
+    ],
+    jetzt: langAnteil(jahr, 2020.97, 19.86),
+    jetztText: `Gut fünf Jahre nach der Großen Mutation von 2020 — im zweiten Viertel
+      des Zyklus, kurz nach dem zunehmenden Quadrat.`
+  },
+
+  {
     name: 'Das Jahr',
     dauer: '365,2422 Tage',
     untertitel: 'Ein Umlauf der Erde um die Sonne',
     quelle: 'tropisches Jahr',
-    radius: 2.3,
+    radius: 2.08,
     farbe: '#7b76d0',
     einheit: 'Tage',
     text: `Der Zyklus, in dem wir zu Hause sind. Weil die Erdachse um 23,4 Grad geneigt
@@ -260,7 +304,7 @@ export const SCHICHTEN = [
     dauer: '29,53 Tage',
     untertitel: 'Von Neumond zu Neumond',
     quelle: 'synodischer Monat',
-    radius: 1.92,
+    radius: 1.78,
     farbe: '#57a0d8',
     einheit: 'Tage',
     text: `Der älteste Kalender der Menschheit. Der Mond braucht 27,3 Tage für einen Umlauf
@@ -293,7 +337,7 @@ export const SCHICHTEN = [
     dauer: '23 h 56 min 4 s',
     untertitel: 'Eine Drehung der Erde',
     quelle: 'siderischer Tag',
-    radius: 1.55,
+    radius: 1.48,
     farbe: '#3fb8b2',
     einheit: 'Stunden',
     text: `Eine volle Drehung der Erde dauert nicht vierundzwanzig Stunden, sondern
@@ -323,7 +367,7 @@ export const SCHICHTEN = [
     dauer: 'rund 4 Sekunden',
     untertitel: 'Zwölf bis achtzehn Mal in der Minute',
     quelle: 'Ruheatmung eines Erwachsenen',
-    radius: 1.15,
+    radius: 1.12,
     farbe: '#5ec98b',
     einheit: 'Sekunden',
     text: `Der erste Zyklus, den wir selbst steuern können. In Ruhe atmet ein Mensch
@@ -353,7 +397,7 @@ export const SCHICHTEN = [
     dauer: 'rund 0,9 Sekunden',
     untertitel: 'Der Kern der Zeitkugel',
     quelle: 'Ruhepuls von etwa 70 Schlägen je Minute',
-    radius: 0.72,
+    radius: 0.70,
     farbe: '#f0654f',
     kern: true,
     einheit: 'Sekunden',
