@@ -1,9 +1,50 @@
 # Die Zeitkapsel
 
-Neues Projekt, angelegt am 2026-09-08.
+## Die Zeitkugel
 
-Statische Seiten ohne Build. Veröffentlichung über GitHub Pages
-(Quelle `main` / Root): https://abuelia81.github.io/zeitkapsel/
+Ein Zwiebelmodell der Zeit: elf ineinander liegende Schalen, jede ein Zyklus,
+von außen nach innen immer kürzer. Die Kugel lässt sich mit der Maus frei in
+jede Richtung drehen; Scrollen, die Pfeiltasten oder die Leiste am Rand tauchen
+Schicht für Schicht nach innen — bis zum Kern.
+
+| # | Schicht | Dauer |
+|---|---------|-------|
+| 1 | Yuga-Zyklus | 25.800 Jahre |
+| 2 | Halstatt-Zyklus | 2.400 Jahre |
+| 3 | Eddy-Zyklus | 1.000 Jahre |
+| 4 | Suess-de-Vries-Zyklus | 208 Jahre |
+| 5 | Gleißberg-Zyklus | 88 Jahre |
+| 6 | Hale-Zyklus | 22 Jahre |
+| 7 | Das Jahr | 365,2422 Tage |
+| 8 | Der Mondmonat | 29,53 Tage |
+| 9 | Der Tag | 23 h 56 min 4 s |
+| 10 | Der Atemzug | rund 4 Sekunden |
+| 11 | Der Herzschlag | rund 0,9 Sekunden |
+
+Die äußerste Schale folgt der Rekonstruktion des Yuga-Zyklus von Bibhu Dev Misra
+(*Yuga Shift*): acht Yugas zu je 2.700 Jahren, sechs Übergänge (Sandhi) zu je
+300 Jahren und zwei Katastrophenzeiten zu je 1.200 Jahren — Ekpyrosis und
+Kataklysmos — ergeben zusammen die 25.800 Jahre der Präzession. Zwei der acht
+300-Jahr-Übergänge stecken dabei bereits in den beiden Katastrophenzeiten.
+Ein zweites, schmales Band darüber zeigt Misras Zuordnung der AGN-Phasen von
+Sgr A*, dem schwarzen Loch im Zentrum der Milchstraße.
+
+Die weiße Marke auf jedem Band zeigt, wo wir gerade stehen. Bei Jahr, Mondmonat
+und Tag wird sie aus der aktuellen Uhrzeit gerechnet, bei Atem und Herzschlag
+läuft sie in Echtzeit mit.
+
+## Aufbau
+
+Statische Seiten, kein Build.
+
+- `index.html`, `stil.css` — Seite und Gestaltung
+- `zyklen.js` — die elf Schichten mit Texten, Segmenten und Zeitrechnung
+- `kugel.js` — die Szene (Three.js): Schalen, Bänder, Drehung, Eintauchen
+- `vendor/three.module.js` — Three.js r169, mitgeliefert
+- `bilder/milchstrasse.jpg` — Hintergrund, erzeugt mit `gemini-3-pro-image`
+
+Veröffentlichung über GitHub Pages (Quelle `main` / Root):
+https://abuelia81.github.io/zeitkapsel/
 
 ## Lokal ansehen
 

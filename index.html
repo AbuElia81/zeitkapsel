@@ -2,14 +2,36 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Die Zeitkapsel</title>
-<link rel="stylesheet" href="stil.css?v=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Die Zeitkapsel — Die Zeitkugel</title>
+<meta name="description" content="Ein Zwiebelmodell der Zeit: vom 25.800-jährigen Yuga-Zyklus bis zum Herzschlag. Frei drehbar in alle Richtungen.">
+<link rel="stylesheet" href="stil.css?v=11">
 </head>
 <body>
+
+<div id="himmel"></div>
+<div id="schleier"></div>
+
 <main>
-  <h1>Die Zeitkapsel</h1>
-  <p>Angelegt am 8. September 2026. Der Inhalt folgt.</p>
+  <div id="buehne"></div>
+
+  <header id="kopf">
+    <h1>Die Zeitkugel</h1>
+    <p>Ein Zwiebelmodell der Zyklen — von der Präzession der Erdachse bis zum Herzschlag</p>
+  </header>
+
+  <aside id="tafel" class="ein"></aside>
+
+  <nav id="leiste" aria-label="Zeitschichten"></nav>
+
+  <div id="pult">
+    <button id="hoeher" title="eine Schicht nach außen">↑ hinaus</button>
+    <button id="tiefer" title="eine Schicht nach innen">↓ eintauchen</button>
+  </div>
+
+  <p id="hinweisZeile">Ziehen dreht die Kugel in jede Richtung · Scrollen taucht ein · ↑ ↓ blättert durch die Schichten</p>
 </main>
+
+<script type="module" src="kugel.js?v=11"></script>
 </body>
 </html>

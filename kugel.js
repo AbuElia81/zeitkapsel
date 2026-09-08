@@ -1,0 +1,458 @@
+import * as THREE from './vendor/three.module.js';
+import { SCHICHTEN } from './zyklen.js';
+
+const HG = 0x05070d;
+
+// ---------------------------------------------------------------- Grundgerüst
+const buehne = document.getElementById('buehne');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+buehne.appendChild(renderer.domElement);
+
+const szene = new THREE.Scene();
+const kamera = new THREE.PerspectiveCamera(42, 1, 0.05, 400);
+kamera.position.set(0, 0, 14);
+
+const welt = new THREE.Group();      // dreht sich beim Ziehen
+szene.add(welt);
+
+// ------------------------------------------------------------------ Sternfeld
+function sternfeld() {
+  const n = 2600, pos = new Float32Array(n * 3), grau = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) {
+    const r = 90 + Math.random() * 130;
+    const t = Math.acos(2 * Math.random() - 1), p = Math.random() * Math.PI * 2;
+    pos[i * 3] = r * Math.sin(t) * Math.cos(p);
+    pos[i * 3 + 1] = r * Math.cos(t);
+    pos[i * 3 + 2] = r * Math.sin(t) * Math.sin(p);
+    const h = 0.45 + Math.random() * 0.55, w = 0.9 + Math.random() * 0.1;
+    grau[i * 3] = h; grau[i * 3 + 1] = h * w; grau[i * 3 + 2] = h * (0.85 + Math.random() * 0.15);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setAttribute('color', new THREE.BufferAttribute(grau, 3));
+  return new THREE.Points(g, new THREE.PointsMaterial({
+    size: 1.05, sizeAttenuation: false, vertexColors: true,
+    transparent: true, opacity: 0.85, depthWrite: false
+  }));
+}
+const sterne = sternfeld();
+szene.add(sterne);
+
+// --------------------------------------------------- Textur für ein Zyklusband
+const TON = {
+  yuga:        [0.30, 0.92],
+  sandhi:      [0.09, 0.45],
+  katastrophe: [0.62, 1.00],
+  hoch:        [0.42, 0.95],
+  auf:         [0.24, 0.80],
+  ab:          [0.16, 0.68],
+  tief:        [0.07, 0.42],
+  agn:         [0.45, 0.95],
+  'agn-an':    [0.30, 0.85],
+  'agn-aus':   [0.30, 0.85],
+  leer:        [0.0, 0.0]
+};
+
+function bandTextur(schicht, segmente, hoehe, klein) {
+  const B = 4096, H = hoehe;
+  const c = document.createElement('canvas');
+  c.width = B; c.height = H;
+  const x = c.getContext('2d');
+  const farbe = new THREE.Color(schicht.farbe);
+  const rgb = (a) => `rgba(${Math.round(farbe.r * 255)},${Math.round(farbe.g * 255)},${Math.round(farbe.b * 255)},${a})`;
+
+  x.clearRect(0, 0, B, H);
+  const gesamt = segmente.reduce((s, g) => s + g.laenge, 0);
+  let lauf = 0;
+
+  for (const seg of segmente) {
+    const x0 = (lauf / gesamt) * B, br = (seg.laenge / gesamt) * B;
+    lauf += seg.laenge;
+    const [fuell, linie] = TON[seg.art] || TON.auf;
+    if (fuell === 0 && linie === 0) continue;
+
+    x.fillStyle = rgb(fuell * 0.55);
+    x.fillRect(x0, 0, br, H);
+
+    // Schraffur für Übergangszeiten
+    if (seg.art === 'sandhi') {
+      x.save();
+      x.beginPath(); x.rect(x0, 0, br, H); x.clip();
+      x.strokeStyle = rgb(0.35); x.lineWidth = 2;
+      for (let s = -H; s < br + H; s += 14) {
+        x.beginPath(); x.moveTo(x0 + s, H); x.lineTo(x0 + s + H, 0); x.stroke();
+      }
+      x.restore();
+    }
+
+    // Trennlinien
+    x.strokeStyle = rgb(linie * 0.9); x.lineWidth = 3;
+    x.beginPath(); x.moveTo(x0, 0); x.lineTo(x0, H); x.stroke();
+
+    // Beschriftung, nur wenn Platz ist
+    const gross = klein ? 34 : 52, mittel = klein ? 26 : 38;
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.font = `600 ${gross}px Georgia, "Times New Roman", serif`;
+    const breiteName = x.measureText(seg.name).width;
+    if (seg.name && br > breiteName + 30) {
+      const mx = x0 + br / 2;
+      x.fillStyle = rgb(Math.min(1, linie + 0.25));
+      x.shadowColor = 'rgba(0,0,0,0.9)'; x.shadowBlur = 10;
+      if (klein) {
+        x.fillText(seg.name, mx, H / 2);
+      } else {
+        x.fillText(seg.name, mx, H * 0.36);
+        x.font = `400 ${mittel}px Georgia, serif`;
+        x.fillStyle = rgb(linie * 0.72);
+        const unten = seg.zusatz && br > x.measureText(seg.zusatz).width + 30
+          ? `${seg.laenge} ${schicht.einheit} · ${seg.zusatz}` : `${seg.laenge} ${schicht.einheit}`;
+        if (br > x.measureText(unten).width + 24) x.fillText(unten, mx, H * 0.70);
+      }
+      x.shadowBlur = 0;
+    }
+  }
+  // Ränder
+  x.strokeStyle = rgb(0.55); x.lineWidth = 4;
+  x.beginPath(); x.moveTo(0, 2); x.lineTo(B, 2); x.moveTo(0, H - 2); x.lineTo(B, H - 2); x.stroke();
+
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  return t;
+}
+
+// ------------------------------------------------------- Weicher Lichtschein
+function scheinTextur() {
+  const N = 256, c = document.createElement('canvas');
+  c.width = c.height = N;
+  const x = c.getContext('2d');
+  const g = x.createRadialGradient(N / 2, N / 2, 0, N / 2, N / 2, N / 2);
+  g.addColorStop(0.00, 'rgba(255,255,255,1)');
+  g.addColorStop(0.16, 'rgba(255,255,255,0.55)');
+  g.addColorStop(0.40, 'rgba(255,255,255,0.17)');
+  g.addColorStop(0.70, 'rgba(255,255,255,0.04)');
+  g.addColorStop(1.00, 'rgba(255,255,255,0)');
+  x.fillStyle = g; x.fillRect(0, 0, N, N);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+const SCHEIN = scheinTextur();
+
+// --------------------------------------------------- Gitterkugel (Zwiebelhaut)
+function gitterkugel(r, farbe, meridiane = 16, parallelen = 9) {
+  const p = [];
+  for (let m = 0; m < meridiane; m++) {
+    const phi = (m / meridiane) * Math.PI * 2;
+    for (let i = 0; i < 96; i++) {
+      const t0 = (i / 96) * Math.PI, t1 = ((i + 1) / 96) * Math.PI;
+      p.push(r * Math.sin(t0) * Math.cos(phi), r * Math.cos(t0), r * Math.sin(t0) * Math.sin(phi));
+      p.push(r * Math.sin(t1) * Math.cos(phi), r * Math.cos(t1), r * Math.sin(t1) * Math.sin(phi));
+    }
+  }
+  for (let k = 1; k <= parallelen; k++) {
+    const t = (k / (parallelen + 1)) * Math.PI, rr = r * Math.sin(t), y = r * Math.cos(t);
+    for (let i = 0; i < 128; i++) {
+      const a0 = (i / 128) * Math.PI * 2, a1 = ((i + 1) / 128) * Math.PI * 2;
+      p.push(rr * Math.cos(a0), y, rr * Math.sin(a0));
+      p.push(rr * Math.cos(a1), y, rr * Math.sin(a1));
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(p), 3));
+  return new THREE.LineSegments(g, new THREE.LineBasicMaterial({
+    color: farbe, transparent: true, opacity: 0.16, depthWrite: false
+  }));
+}
+
+// ------------------------------------------------------------ Schichten bauen
+const schalen = SCHICHTEN.map((schicht, i) => {
+  const gruppe = new THREE.Group();
+  const farbe = new THREE.Color(schicht.farbe);
+  const r = schicht.radius;
+  const teile = [];
+
+  if (schicht.kern) {
+    // Der Kern ist eine leuchtende Vollkugel
+    const kernMat = new THREE.MeshBasicMaterial({ color: 0xffd8c4, transparent: true, opacity: 0.95 });
+    const kern = new THREE.Mesh(new THREE.SphereGeometry(r * 0.30, 48, 32), kernMat);
+    gruppe.add(kern); teile.push({ mat: kernMat, rolle: 'haut' });
+
+    const puls = [kern];
+    [[0.46, 0.30], [0.70, 0.13], [1.00, 0.06]].forEach(([g, o]) => {
+      const m = new THREE.MeshBasicMaterial({
+        color: farbe, transparent: true, opacity: o,
+        blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false
+      });
+      const h = new THREE.Mesh(new THREE.SphereGeometry(r * g, 40, 26), m);
+      gruppe.add(h); teile.push({ mat: m, rolle: 'haut' });
+      puls.push(h);
+    });
+    const scheinMat = new THREE.SpriteMaterial({
+      map: SCHEIN, color: farbe, transparent: true, opacity: 0.85,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+    const schein = new THREE.Sprite(scheinMat);
+    schein.scale.setScalar(r * 3.6);
+    gruppe.add(schein); teile.push({ mat: scheinMat, rolle: 'haut' });
+    puls.push(schein);
+
+    gruppe.add(gitterkugel(r * 1.25, farbe, 14, 7));
+    teile.push({ mat: gruppe.children[gruppe.children.length - 1].material, rolle: 'haut' });
+    gruppe.userData.puls = puls;
+  } else {
+    const gitter = gitterkugel(r, farbe, i < 3 ? 18 : 14, i < 3 ? 9 : 7);
+    gruppe.add(gitter); teile.push({ mat: gitter.material, rolle: 'haut' });
+    const huelle = new THREE.MeshBasicMaterial({
+      color: farbe, transparent: true, opacity: 0.035,
+      blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false
+    });
+    gruppe.add(new THREE.Mesh(new THREE.SphereGeometry(r, 40, 26), huelle));
+    teile.push({ mat: huelle, rolle: 'haut' });
+  }
+
+  // Hauptband am Äquator
+  const bandHalb = schicht.kern ? 0.085 : 0.105;
+  const bandGeo = new THREE.SphereGeometry(
+    schicht.kern ? r * 1.25 : r, 200, 12, 0, Math.PI * 2,
+    Math.PI / 2 - bandHalb, bandHalb * 2
+  );
+  const bandMat = new THREE.MeshBasicMaterial({
+    map: bandTextur(schicht, schicht.segmente, 256, false),
+    transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 1
+  });
+  gruppe.add(new THREE.Mesh(bandGeo, bandMat));
+  teile.push({ mat: bandMat, rolle: 'band' });
+
+  // Nebenband (nur äußerste Schicht: AGN-Phasen)
+  if (schicht.nebenband) {
+    const nGeo = new THREE.SphereGeometry(r * 1.035, 200, 8, 0, Math.PI * 2, Math.PI / 2 - 0.20, 0.055);
+    const nMat = new THREE.MeshBasicMaterial({
+      map: bandTextur(schicht, schicht.nebenband.segmente, 128, true),
+      transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 1
+    });
+    gruppe.add(new THREE.Mesh(nGeo, nMat));
+    teile.push({ mat: nMat, rolle: 'band' });
+  }
+
+  // Marke „Jetzt“
+  const marke = new THREE.Group();
+  const mFarbe = new THREE.Color(0xfff2d0);
+  const mMat = new THREE.LineBasicMaterial({ color: mFarbe, transparent: true, opacity: 0.95, depthWrite: false });
+  const rr = schicht.kern ? r * 1.25 : r;
+  const linie = new THREE.BufferGeometry();
+  linie.setAttribute('position', new THREE.BufferAttribute(new Float32Array([
+    rr * 0.86, 0, 0, rr * 1.16, 0, 0
+  ]), 3));
+  marke.add(new THREE.Line(linie, mMat));
+  const kugelMat = new THREE.MeshBasicMaterial({ color: mFarbe, transparent: true, opacity: 1, depthWrite: false });
+  const punkt = new THREE.Mesh(new THREE.SphereGeometry(Math.max(0.035, r * 0.022), 16, 12), kugelMat);
+  punkt.position.x = rr * 1.16;
+  marke.add(punkt);
+  teile.push({ mat: mMat, rolle: 'marke' }, { mat: kugelMat, rolle: 'marke' });
+  gruppe.add(marke);
+  gruppe.userData.marke = marke;
+
+  welt.add(gruppe);
+  teile.forEach(t => { t.grund = t.mat.opacity; });
+  return { schicht, gruppe, teile, i };
+});
+
+// Marke auf ihre Position im Zyklus drehen
+function markeSetzen(schale, anteil) {
+  // u = 0 liegt bei phi = 0; Segmente laufen im mathematisch positiven Sinn
+  schale.gruppe.userData.marke.rotation.y = -anteil * Math.PI * 2;
+}
+schalen.forEach(s => markeSetzen(s, s.schicht.jetzt));
+
+// ------------------------------------------------------------------- Steuerung
+let ebene = 0;            // welche Schicht ist aktiv
+let versatz = 0;          // schiebt die Kugel bei hochkantem Bild nach oben
+let zielAbstand = 14, istAbstand = 14;
+
+function abstandFuer(e) {
+  const r = SCHICHTEN[e].radius;
+  const grund = r * (e === SCHICHTEN.length - 1 ? 4.4 : 3.15) + 0.7;
+  // Bei hochkantem Bild ist das Sichtfeld horizontal enger — dann weiter weg
+  return grund / Math.min(1, kamera.aspect || 1);
+}
+
+function ebeneSetzen(neu, sanft = true) {
+  ebene = Math.max(0, Math.min(SCHICHTEN.length - 1, neu));
+  zielAbstand = abstandFuer(ebene);
+  if (!sanft) istAbstand = zielAbstand;
+  tafelFuellen(SCHICHTEN[ebene]);
+  leisteMarkieren();
+}
+
+// Zielopazität je Schale abhängig von der aktiven Ebene
+function zielOpazitaet(i, rolle) {
+  if (i < ebene) return rolle === 'haut' ? 0.055 : 0;       // durchstoßen — nur noch ein Hauch
+  if (i === ebene) return 1;                                // aktiv
+  if (rolle === 'band') return 0.12;                        // tiefere Bänder nur andeuten
+  if (rolle === 'marke') return 0.10;
+  return 0.34;                                              // Zwiebelhaut bleibt sichtbar
+}
+
+// --------------------------------------------------------------- Drehen (frei)
+let ziehend = false, letzteX = 0, letzteY = 0, vX = 0, vY = 0;
+const el = renderer.domElement;
+
+function drehen(dx, dy) {
+  const laenge = Math.hypot(dx, dy);
+  if (laenge < 0.0001) return;
+  const achse = new THREE.Vector3(dy, dx, 0).normalize();
+  achse.applyQuaternion(kamera.quaternion);          // Achse im Kamerablick
+  const q = new THREE.Quaternion().setFromAxisAngle(achse, laenge * 0.0055);
+  welt.quaternion.premultiply(q);
+}
+
+el.addEventListener('pointerdown', e => {
+  ziehend = true; letzteX = e.clientX; letzteY = e.clientY;
+  el.setPointerCapture(e.pointerId); el.classList.add('greift');
+});
+el.addEventListener('pointermove', e => {
+  if (!ziehend) return;
+  const dx = e.clientX - letzteX, dy = e.clientY - letzteY;
+  letzteX = e.clientX; letzteY = e.clientY;
+  drehen(dx, dy);
+  vX = dx; vY = dy;
+});
+function loslassen(e) {
+  if (!ziehend) return;
+  ziehend = false; el.classList.remove('greift');
+  try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+}
+el.addEventListener('pointerup', loslassen);
+el.addEventListener('pointercancel', loslassen);
+
+// Rad: eintauchen und auftauchen
+let radSperre = 0;
+el.addEventListener('wheel', e => {
+  e.preventDefault();
+  const jetzt = performance.now();
+  if (jetzt - radSperre < 340) return;
+  radSperre = jetzt;
+  ebeneSetzen(ebene + (e.deltaY > 0 ? 1 : -1));
+}, { passive: false });
+
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === '+') { ebeneSetzen(ebene + 1); e.preventDefault(); }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === '-') { ebeneSetzen(ebene - 1); e.preventDefault(); }
+  if (e.key === 'Home') ebeneSetzen(0);
+  if (e.key === 'End') ebeneSetzen(SCHICHTEN.length - 1);
+});
+
+// ------------------------------------------------------------------- Bedienung
+document.getElementById('tiefer').onclick = () => ebeneSetzen(ebene + 1);
+document.getElementById('hoeher').onclick = () => ebeneSetzen(ebene - 1);
+
+// Tiefenleiste
+const leiste = document.getElementById('leiste');
+SCHICHTEN.forEach((s, i) => {
+  const b = document.createElement('button');
+  b.className = 'stufe';
+  b.style.setProperty('--ton', s.farbe);
+  b.innerHTML = `<span class="punkt"></span><span class="stufeText">
+    <em>${s.name}</em><small>${s.dauer}</small></span>`;
+  b.onclick = () => ebeneSetzen(i);
+  leiste.appendChild(b);
+});
+function leisteMarkieren() {
+  [...leiste.children].forEach((b, i) => {
+    b.classList.toggle('aktiv', i === ebene);
+    b.classList.toggle('durch', i < ebene);
+  });
+}
+
+// ----------------------------------------------------------------- Infotafel
+const tafel = document.getElementById('tafel');
+let tafelUhr = null;
+function tafelFuellen(s) {
+  tafel.classList.remove('ein');
+  clearTimeout(tafelUhr);
+  tafelUhr = setTimeout(() => {
+    tafel.style.setProperty('--ton', s.farbe);
+    tafel.innerHTML = `
+      <p class="stufeNr">Schicht ${String(SCHICHTEN.indexOf(s) + 1).padStart(2, '0')} von ${SCHICHTEN.length}</p>
+      <h2>${s.name}</h2>
+      <p class="dauer">${s.dauer}</p>
+      <p class="unter">${s.untertitel}</p>
+      <p class="fliess">${s.text}</p>
+      <p class="jetztZeile"><span class="jetztPunkt"></span>${s.jetztText}</p>
+      <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
+      ${s.hinweis ? `<p class="hinweis">${s.hinweis}</p>` : ''}
+      <p class="quelle">${s.quelle}</p>`;
+    tafel.classList.add('ein');
+  }, 160);
+}
+
+// ----------------------------------------------------------------- Bildschleife
+const uhr = new THREE.Clock();
+function bild() {
+  requestAnimationFrame(bild);
+  const dt = Math.min(uhr.getDelta(), 0.05);
+  const t = uhr.getElapsedTime();
+
+  // Nachlauf und ruhige Eigendrehung
+  if (!ziehend) {
+    vX *= 0.94; vY *= 0.94;
+    if (Math.abs(vX) > 0.02 || Math.abs(vY) > 0.02) drehen(vX, vY);
+    else drehen(0.12, 0);
+  }
+
+  // Kamera sanft nachziehen
+  istAbstand += (zielAbstand - istAbstand) * Math.min(1, dt * 3.4);
+  kamera.position.z = istAbstand;
+  const hoehe = 2 * istAbstand * Math.tan((kamera.fov / 2) * Math.PI / 180);
+  welt.position.y = versatz * hoehe;
+
+  // Schichten ein- und ausblenden
+  schalen.forEach((sch, i) => {
+    let wach = false;
+    sch.teile.forEach(t => {
+      const soll = t.grund * zielOpazitaet(i, t.rolle);
+      t.mat.opacity += (soll - t.mat.opacity) * Math.min(1, dt * 4);
+      t.mat.visible = t.mat.opacity > 0.004;
+      if (t.mat.visible) wach = true;
+    });
+    sch.gruppe.visible = wach;
+
+    // Marken der schnellen Zyklen laufen mit
+    const s = sch.schicht;
+    if (s.periode) markeSetzen(sch, (t % s.periode) / s.periode);
+    if (sch.gruppe.userData.puls) {
+      const p = 1 + 0.10 * Math.pow(Math.max(0, Math.sin((t / 0.9) * Math.PI * 2)), 6)
+                  + 0.05 * Math.pow(Math.max(0, Math.sin((t / 0.9) * Math.PI * 2 - 0.9)), 6);
+      sch.gruppe.userData.puls.forEach(m => m.scale.setScalar(p));
+    }
+  });
+
+  sterne.rotation.y += dt * 0.004;
+  renderer.render(szene, kamera);
+}
+
+// -------------------------------------------------------------------- Aufbau
+function groesse() {
+  const b = buehne.clientWidth, h = buehne.clientHeight;
+  renderer.setSize(b, h);
+  kamera.aspect = b / h;
+  kamera.updateProjectionMatrix();
+  zielAbstand = abstandFuer(ebene);
+  // Auf schmalen Geräten liegt die Infotafel unten — die Kugel rückt nach oben
+  versatz = kamera.aspect < 0.9 ? 0.19 : 0;
+}
+addEventListener('resize', groesse);
+groesse();
+
+welt.rotation.x = -0.34;
+ebeneSetzen(0, false);
+bild();
+
+// Die Uhrzeitmarke der Tagesschicht einmal je Minute nachführen
+setInterval(() => {
+  const d = new Date();
+  const tag = schalen.find(s => s.schicht.name === 'Der Tag');
+  if (tag) markeSetzen(tag, (d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds()) / 86400);
+}, 30000);
