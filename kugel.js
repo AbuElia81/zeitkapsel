@@ -247,7 +247,7 @@ function mensch(gruppe, r, teile) {
   herzSchein.scale.setScalar(menschGrund * 0.42);
   herzSchein.position.set(0, 0, 0.02);
   buehneMensch.add(herzSchein);
-  teile.push({ mat: hMat, rolle: 'mensch' });
+  teile.push({ mat: hMat, rolle: 'herz' });
   gruppe.userData.herz = herzSchein;
 }
 
@@ -259,9 +259,10 @@ function menschSetzen(licht) {
     t.mat.userData.ziel = j === k ? 1 - f : (j === k + 1 ? f : 0);
   });
   if (herzSchein) {
-    // Von dunkler Glut bis zu goldenem Licht
-    herzSchein.material.color.setHSL(0.02 + 0.10 * licht, 0.95 - 0.25 * licht, 0.28 + 0.42 * licht);
-    herzSchein.material.userData.ziel = 0.35 + 0.65 * licht;
+    // Das Herz ist die Quelle und brennt in jedem Zeitalter gleich stark.
+    // Nur seine Farbe wandert: von tiefer Glut im Kali Yuga zu goldenem Licht.
+    herzSchein.material.color.setHSL(0.035 + 0.085 * licht, 0.92 - 0.30 * licht, 0.50 + 0.20 * licht);
+    herzSchein.material.userData.ziel = 0.90 + 0.10 * licht;
   }
 }
 
@@ -588,6 +589,7 @@ function bild() {
   schalen.forEach((sch, i) => {
     let wach = false;
     sch.teile.forEach(t => {
+      if (t.rolle === 'herz') { wach = true; return; }   // schlägt unten im Takt
       const basis = t.rolle === 'mensch' ? (t.mat.userData.ziel ?? 0) : t.grund;
       const soll = basis * zielOpazitaet(i, t.rolle);
       t.mat.opacity += (soll - t.mat.opacity) * Math.min(1, dt * 4);
@@ -608,10 +610,16 @@ function bild() {
       const ph = (t % s.echtzeit) / s.echtzeit;        // 0 … 1 im laufenden Zyklus
       markeSetzen(sch, ph);
       if (sch.gruppe.userData.herz) {
-        // Herzschlag: zwei kurze Stöße je Zyklus — Systole, dann die Klappen
-        const p = 1 + 0.34 * Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2)), 6)
-                    + 0.17 * Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2 - 0.9)), 6);
-        sch.gruppe.userData.herz.scale.setScalar(menschGrund * 0.42 * p);
+        // Herzschlag: zwei Stöße je Zyklus — Systole, dann die Klappen.
+        // Größe und Helligkeit schlagen zusammen, damit der Takt deutlich wird.
+        const hz = sch.gruppe.userData.herz;
+        const st1 = Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2)), 6);
+        const st2 = Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2 - 0.9)), 6);
+        const schlag = st1 + 0.5 * st2;
+        hz.scale.setScalar(menschGrund * 0.42 * (1 + 0.55 * schlag));
+        hz.material.opacity = Math.min(1, (hz.material.userData.ziel ?? 1)
+          * zielOpazitaet(i, 'mensch') * (0.60 + 0.55 * schlag));
+        hz.material.visible = hz.material.opacity > 0.004;
       } else if (sch.gruppe.userData.atem) {
         // Atemzug: ein weiches Weiten und Senken über die ganze Periode
         sch.gruppe.scale.setScalar(1 + 0.055 * (0.5 - 0.5 * Math.cos(ph * Math.PI * 2)));
