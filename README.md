@@ -36,6 +36,27 @@ gerade steht und von wann bis wann der läuft. Die Schrittknöpfe springen um
 
 Atemzug und Herzschlag folgen dem Schieber nicht — sie laufen in Echtzeit.
 
+## Der Mensch im Kern
+
+Im Innersten steht kein Punkt mehr, sondern ein Mensch mit leuchtendem Herzen.
+Er wandelt sich mit dem Stand des Yuga-Zyklus: im Goldenen Zeitalter strahlend,
+aus Licht gebaut, mit blühendem Herzen — im Kali Yuga kahl, ausgedörrt, die Haut
+rissig wie trockene Erde, und nur noch ein winziger Funke an der Stelle des
+Herzens. Vier gemalte Zustände (Satya, Treta, Dwapara, Kali) blenden stufenlos
+ineinander, wenn man den Zeitschieber bewegt. Das Herz schlägt dabei weiter,
+alle 1,2 Sekunden.
+
+Die vier Bilder sind mit `gemini-3-pro-image` erzeugt: das Satya-Bild zuerst,
+die drei anderen mit ihm als Referenz, damit Haltung, Bildausschnitt und die
+Lage des Herzens gleich bleiben.
+
+## Die Zwiebel öffnet sich
+
+Jede Schale besteht aus zwei Halbschalen. Taucht man eine Ebene tiefer, springen
+sie nach links und rechts auseinander und geben den Blick auf die nächste frei;
+geht man wieder hinaus, setzen sie sich zusammen. Was man durchstoßen hat, bleibt
+blass an den Rändern stehen.
+
 Die äußerste Schale folgt der Rekonstruktion des Yuga-Zyklus von Bibhu Dev Misra
 (*Yuga Shift*): acht Yugas zu je 2.700 Jahren, sechs Übergänge (Sandhi) zu je
 300 Jahren und zwei Katastrophenzeiten zu je 1.200 Jahren — Ekpyrosis und

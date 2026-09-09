@@ -286,3 +286,11 @@ main { position: relative; z-index: 1; height: 100%; }
   #zeitSchritte button { font-size: .58rem; }
   #kopf p { display: none; }
 }
+
+#tafel .menschZeile {
+  margin: -.4rem 0 1rem; padding: .55rem .7rem;
+  font-size: .78rem; line-height: 1.5; color: #d8cfbd;
+  background: rgba(255,242,208,.04);
+  border-left: 1px solid var(--ton); border-radius: 0 2px 2px 0;
+}
+#tafel .menschZeile b { font-weight: 400; color: #fff2d0; }

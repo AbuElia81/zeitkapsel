@@ -1,5 +1,6 @@
 import * as THREE from './vendor/three.module.js';
-import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText, RING_ANKER } from './zyklen.js';
+import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
+         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js';
 
 const HG = 0x05070d;
 
@@ -146,6 +147,7 @@ function bandTextur(schicht, segmente, hoehe, klein) {
 
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
+  t.wrapS = THREE.RepeatWrapping;
   t.anisotropy = renderer.capabilities.getMaxAnisotropy();
   return t;
 }
@@ -168,11 +170,21 @@ function scheinTextur() {
 }
 const SCHEIN = scheinTextur();
 
+// Die Textur läuft einmal ganz um die Kugel. Eine Halbschale zeigt nur ihren
+// Ausschnitt davon — dafür werden die U-Koordinaten umgerechnet.
+function uvAusschnitt(geo, phiVon, phiLang) {
+  const uv = geo.attributes.uv;
+  const faktor = phiLang / (Math.PI * 2), versatz = phiVon / (Math.PI * 2);
+  for (let i = 0; i < uv.count; i++) uv.setX(i, uv.getX(i) * faktor + versatz);
+  uv.needsUpdate = true;
+  return geo;
+}
+
 // --------------------------------------------------- Gitterkugel (Zwiebelhaut)
-function gitterkugel(r, farbe, meridiane = 16, parallelen = 9) {
+function gitterkugel(r, farbe, meridiane = 16, parallelen = 9, phiVon = 0, phiLang = Math.PI * 2) {
   const p = [];
-  for (let m = 0; m < meridiane; m++) {
-    const phi = (m / meridiane) * Math.PI * 2;
+  for (let m = 0; m <= meridiane; m++) {
+    const phi = phiVon + (m / meridiane) * phiLang;
     for (let i = 0; i < 96; i++) {
       const t0 = (i / 96) * Math.PI, t1 = ((i + 1) / 96) * Math.PI;
       p.push(r * Math.sin(t0) * Math.cos(phi), r * Math.cos(t0), r * Math.sin(t0) * Math.sin(phi));
@@ -181,8 +193,8 @@ function gitterkugel(r, farbe, meridiane = 16, parallelen = 9) {
   }
   for (let k = 1; k <= parallelen; k++) {
     const t = (k / (parallelen + 1)) * Math.PI, rr = r * Math.sin(t), y = r * Math.cos(t);
-    for (let i = 0; i < 128; i++) {
-      const a0 = (i / 128) * Math.PI * 2, a1 = ((i + 1) / 128) * Math.PI * 2;
+    for (let i = 0; i < 96; i++) {
+      const a0 = phiVon + (i / 96) * phiLang, a1 = phiVon + ((i + 1) / 96) * phiLang;
       p.push(rr * Math.cos(a0), y, rr * Math.sin(a0));
       p.push(rr * Math.cos(a1), y, rr * Math.sin(a1));
     }
@@ -194,91 +206,141 @@ function gitterkugel(r, farbe, meridiane = 16, parallelen = 9) {
   }));
 }
 
+// -------------------------------------------------------- Der Mensch im Kern
+// Vier Zustände vom Goldenen Zeitalter bis zum Kali Yuga. Zwischen ihnen wird
+// überblendet, je nachdem, wo der Zeitschieber im Yuga-Zyklus steht.
+const STUFEN = ['kali', 'dwapara', 'treta', 'satya'];
+const HERZ_VERSATZ = { x: 0.01, y: -0.165 };   // Lage des Herzens im Bild
+let menschTeile = [], herzSchein = null, menschGrund = 1.55;
+
+function mensch(gruppe, r, teile) {
+  const lader = new THREE.TextureLoader();
+  menschGrund = r * 2.1;
+  // Eigene Gruppe unmittelbar in der Szene: der Mensch steht still und aufrecht,
+  // während sich die Zwiebelschalen um ihn drehen.
+  const buehneMensch = new THREE.Group();
+  szene.add(buehneMensch);
+
+  STUFEN.forEach((name, k) => {
+    const tex = lader.load(`bilder/mensch-${name}.jpg`);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    const mat = new THREE.SpriteMaterial({
+      map: tex, transparent: true, opacity: k === 0 ? 1 : 0,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+    const sp = new THREE.Sprite(mat);
+    sp.scale.setScalar(menschGrund);
+    // So verschoben, dass das Herz der Figur genau im Mittelpunkt der Kugel liegt
+    sp.position.y = -menschGrund * HERZ_VERSATZ.y;
+    sp.position.x = -menschGrund * HERZ_VERSATZ.x;
+    buehneMensch.add(sp);
+    teile.push({ mat, rolle: 'mensch' });
+    menschTeile.push({ mat, sprite: sp });
+  });
+
+  // Der Herzschein sitzt auf dem Herzen der Figur und schlägt
+  const hMat = new THREE.SpriteMaterial({
+    map: SCHEIN, color: 0xffcf7a, transparent: true, opacity: 0.85,
+    blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  herzSchein = new THREE.Sprite(hMat);
+  herzSchein.scale.setScalar(menschGrund * 0.42);
+  herzSchein.position.set(0, 0, 0.02);
+  buehneMensch.add(herzSchein);
+  teile.push({ mat: hMat, rolle: 'mensch' });
+  gruppe.userData.herz = herzSchein;
+}
+
+// Blendet die vier Zustände nach dem Yuga-Stand (1 = golden, 0 = erloschen)
+function menschSetzen(licht) {
+  const u = Math.max(0, Math.min(3, licht * 3));
+  const k = Math.min(2, Math.floor(u)), f = u - k;
+  menschTeile.forEach((t, j) => {
+    t.mat.userData.ziel = j === k ? 1 - f : (j === k + 1 ? f : 0);
+  });
+  if (herzSchein) {
+    // Von dunkler Glut bis zu goldenem Licht
+    herzSchein.material.color.setHSL(0.02 + 0.10 * licht, 0.95 - 0.25 * licht, 0.28 + 0.42 * licht);
+    herzSchein.material.userData.ziel = 0.35 + 0.65 * licht;
+  }
+}
+
 // ------------------------------------------------------------ Schichten bauen
 const schalen = SCHICHTEN.map((schicht, i) => {
   const gruppe = new THREE.Group();
   const farbe = new THREE.Color(schicht.farbe);
   const r = schicht.radius;
   const teile = [];
+  const haelften = [];
 
-  if (schicht.kern) {
-    // Der Kern ist eine leuchtende Vollkugel
-    const kernMat = new THREE.MeshBasicMaterial({ color: 0xffd8c4, transparent: true, opacity: 0.95 });
-    const kern = new THREE.Mesh(new THREE.SphereGeometry(r * 0.30, 48, 32), kernMat);
-    gruppe.add(kern); teile.push({ mat: kernMat, rolle: 'haut' });
-
-    const puls = [kern];
-    [[0.46, 0.30], [0.70, 0.13], [1.00, 0.06]].forEach(([g, o]) => {
-      const m = new THREE.MeshBasicMaterial({
-        color: farbe, transparent: true, opacity: o,
-        blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false
-      });
-      const h = new THREE.Mesh(new THREE.SphereGeometry(r * g, 40, 26), m);
-      gruppe.add(h); teile.push({ mat: m, rolle: 'haut' });
-      puls.push(h);
-    });
-    const scheinMat = new THREE.SpriteMaterial({
-      map: SCHEIN, color: farbe, transparent: true, opacity: 0.85,
-      blending: THREE.AdditiveBlending, depthWrite: false
-    });
-    const schein = new THREE.Sprite(scheinMat);
-    schein.scale.setScalar(r * 3.6);
-    gruppe.add(schein); teile.push({ mat: scheinMat, rolle: 'haut' });
-    puls.push(schein);
-
-    gruppe.add(gitterkugel(r * 1.25, farbe, 14, 7));
-    teile.push({ mat: gruppe.children[gruppe.children.length - 1].material, rolle: 'haut' });
-    gruppe.userData.puls = puls;
-  } else {
-    const gitter = gitterkugel(r, farbe, i < 3 ? 18 : 14, i < 3 ? 9 : 7);
-    gruppe.add(gitter); teile.push({ mat: gitter.material, rolle: 'haut' });
-    const huelle = new THREE.MeshBasicMaterial({
-      color: farbe, transparent: true, opacity: 0.035,
-      blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false
-    });
-    gruppe.add(new THREE.Mesh(new THREE.SphereGeometry(r, 40, 26), huelle));
-    teile.push({ mat: huelle, rolle: 'haut' });
-  }
-
-  // Hauptband am Äquator
   const bandHalb = schicht.kern ? 0.085 : 0.105;
-  const bandGeo = new THREE.SphereGeometry(
-    schicht.kern ? r * 1.25 : r, 200, 12, 0, Math.PI * 2,
-    Math.PI / 2 - bandHalb, bandHalb * 2
-  );
+  const bandRadius = schicht.kern ? r * 1.72 : r;
+  const bandTief = schicht.kern ? -0.62 : 0;   // der Kernring liegt unter der Figur
   const bandMat = new THREE.MeshBasicMaterial({
     map: bandTextur(schicht, schicht.segmente, 256, false),
     transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 1
   });
-  gruppe.add(new THREE.Mesh(bandGeo, bandMat));
   teile.push({ mat: bandMat, rolle: 'band' });
 
-  // Nebenband (nur äußerste Schicht: AGN-Phasen)
+  let nebenMat = null;
   if (schicht.nebenband) {
-    const nGeo = new THREE.SphereGeometry(r * 1.035, 200, 8, 0, Math.PI * 2, Math.PI / 2 - 0.20, 0.055);
-    const nMat = new THREE.MeshBasicMaterial({
+    nebenMat = new THREE.MeshBasicMaterial({
       map: bandTextur(schicht, schicht.nebenband.segmente, 128, true),
       transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 1
     });
-    gruppe.add(new THREE.Mesh(nGeo, nMat));
-    teile.push({ mat: nMat, rolle: 'band' });
+    teile.push({ mat: nebenMat, rolle: 'band' });
   }
 
-  // Marke „Jetzt“
+  // Jede Schale besteht aus zwei Halbschalen. Beim Eintauchen springen sie
+  // nach links und rechts auseinander wie eine aufgeschnittene Zwiebel.
+  [[-1, -Math.PI / 2], [1, Math.PI / 2]].forEach(([vorz, phiVon]) => {
+    const halb = new THREE.Group();
+    const lang = Math.PI;
+
+    if (!schicht.kern) {
+      const gitter = gitterkugel(r, farbe, i < 3 ? 9 : 7, i < 3 ? 9 : 7, phiVon, lang);
+      halb.add(gitter);
+      teile.push({ mat: gitter.material, rolle: 'haut' });
+
+      const huelle = new THREE.MeshBasicMaterial({
+        color: farbe, transparent: true, opacity: 0.035,
+        blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false
+      });
+      halb.add(new THREE.Mesh(new THREE.SphereGeometry(r, 24, 26, phiVon, lang), huelle));
+      teile.push({ mat: huelle, rolle: 'haut' });
+    }
+
+    halb.add(new THREE.Mesh(uvAusschnitt(
+      new THREE.SphereGeometry(bandRadius, 110, 12, phiVon, lang, Math.PI / 2 - bandHalb, bandHalb * 2),
+      phiVon, lang).translate(0, bandTief, 0), bandMat));
+
+    if (nebenMat) {
+      halb.add(new THREE.Mesh(uvAusschnitt(
+        new THREE.SphereGeometry(r * 1.035, 110, 8, phiVon, lang, Math.PI / 2 - 0.20, 0.055),
+        phiVon, lang), nebenMat));
+    }
+
+    gruppe.add(halb);
+    haelften.push({ gruppe: halb, vorz });
+  });
+
+  if (schicht.kern) mensch(gruppe, r, teile);
+
+  // Marke „Jetzt“ — sie bleibt in der Mitte und wandert nicht mit den Hälften
   const marke = new THREE.Group();
   const mFarbe = new THREE.Color(0xfff2d0);
   const mMat = new THREE.LineBasicMaterial({ color: mFarbe, transparent: true, opacity: 0.95, depthWrite: false });
-  const rr = schicht.kern ? r * 1.25 : r;
   const linie = new THREE.BufferGeometry();
   linie.setAttribute('position', new THREE.BufferAttribute(new Float32Array([
-    rr * 0.86, 0, 0, rr * 1.16, 0, 0
+    bandRadius * 0.86, 0, 0, bandRadius * 1.16, 0, 0
   ]), 3));
   marke.add(new THREE.Line(linie, mMat));
   const kugelMat = new THREE.MeshBasicMaterial({ color: mFarbe, transparent: true, opacity: 1, depthWrite: false });
   const punkt = new THREE.Mesh(new THREE.SphereGeometry(Math.max(0.035, r * 0.022), 16, 12), kugelMat);
-  punkt.position.x = rr * 1.16;
+  punkt.position.x = bandRadius * 1.16;
   marke.add(punkt);
   teile.push({ mat: mMat, rolle: 'marke' }, { mat: kugelMat, rolle: 'marke' });
+  marke.position.y = bandTief;
   gruppe.add(marke);
   gruppe.userData.marke = marke;
 
@@ -286,7 +348,7 @@ const schalen = SCHICHTEN.map((schicht, i) => {
 
   welt.add(gruppe);
   teile.forEach(t => { t.grund = t.mat.opacity; });
-  return { schicht, gruppe, teile, i };
+  return { schicht, gruppe, teile, haelften, i, oeffnung: 0 };
 });
 
 // Marke auf ihre Position im Zyklus drehen
@@ -315,7 +377,7 @@ let zielAbstand = 14, istAbstand = 14;
 
 function abstandFuer(e) {
   const r = SCHICHTEN[e].radius;
-  const grund = r * (e === SCHICHTEN.length - 1 ? 4.4 : 3.15) + 0.7;
+  const grund = r * (e === SCHICHTEN.length - 1 ? 3.3 : 3.15) + 0.55;
   // Bei hochkantem Bild ist das Sichtfeld horizontal enger — dann weiter weg
   return grund / Math.min(1, kamera.aspect || 1);
 }
@@ -330,10 +392,17 @@ function ebeneSetzen(neu, sanft = true) {
 
 // Zielopazität je Schale abhängig von der aktiven Ebene
 function zielOpazitaet(i, rolle) {
-  if (i < ebene) return rolle === 'haut' ? 0.055 : 0;       // durchstoßen — nur noch ein Hauch
+  // Durchstoßene Schalen springen auf und bleiben als offene Hälften am Rand
+  // stehen — je weiter man eingetaucht ist, desto blasser werden sie.
+  if (i < ebene) {
+    if (rolle === 'haut') return Math.max(0.10, 0.60 - 0.10 * (ebene - i));
+    if (rolle === 'band') return Math.max(0, 0.45 - 0.11 * (ebene - i));
+    return 0;
+  }
   if (i === ebene) return 1;                                // aktiv
   if (rolle === 'band') return 0.12;                        // tiefere Bänder nur andeuten
   if (rolle === 'marke') return 0.06;
+  if (rolle === 'mensch') return 0.42;                      // die Figur scheint durch
   return 0.34;                                              // Zwiebelhaut bleibt sichtbar
 }
 
@@ -407,6 +476,7 @@ function zeitSetzen(j, jetzt = false, vomSchieber = false) {
   zeitAnzeige.textContent = zeitText(zeitJahr, amJetzt);
   zeitleiste.classList.toggle('verschoben', !amJetzt);
   markenAktualisieren();
+  menschSetzen(yugaLicht(zeitJahr));
   tafelZeitTeil();
 }
 
@@ -460,6 +530,12 @@ function tafelZeitTeil() {
         ${amJetzt ? `<br><i>${s.jetztText}</i>` : ''}</span>`;
     }
   }
+  const mz = tafel.querySelector('.menschZeile');
+  if (mz) {
+    const l = yugaLicht(zeitJahr);
+    mz.innerHTML = `Der Mensch im Kern steht auf dem Stand des Yuga-Zyklus:
+      <b>${menschZustand(l)}</b>. Am Zeitschieber wandelt er sich mit.`;
+  }
   const liste = tafel.querySelector('.termine');
   if (liste && s.termine) {
     liste.innerHTML = s.termine(zeitJahr).map(e => terminZeile(e, s)).join('');
@@ -478,6 +554,7 @@ function tafelFuellen(s) {
       <p class="unter">${s.untertitel}</p>
       <p class="fliess">${s.text}</p>
       <p class="jetztZeile"></p>
+      ${s.kern ? '<p class="menschZeile"></p>' : ''}
       ${s.termine ? '<p class="terminKopf">Termine</p><ul class="termine"></ul>' : ''}
       <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
       ${s.hinweis ? `<p class="hinweis">${s.hinweis}</p>` : ''}
@@ -511,23 +588,30 @@ function bild() {
   schalen.forEach((sch, i) => {
     let wach = false;
     sch.teile.forEach(t => {
-      const soll = t.grund * zielOpazitaet(i, t.rolle);
+      const basis = t.rolle === 'mensch' ? (t.mat.userData.ziel ?? 0) : t.grund;
+      const soll = basis * zielOpazitaet(i, t.rolle);
       t.mat.opacity += (soll - t.mat.opacity) * Math.min(1, dt * 4);
       t.mat.visible = t.mat.opacity > 0.004;
       if (t.mat.visible) wach = true;
     });
     sch.gruppe.visible = wach;
 
+    // Aufspringen: die beiden Halbschalen weichen nach links und rechts
+    const aufZiel = i < ebene ? 1 : 0;
+    sch.oeffnung += (aufZiel - sch.oeffnung) * Math.min(1, dt * 3.0);
+    const weg = sch.schicht.radius * 1.32 * sch.oeffnung;
+    sch.haelften.forEach(h => { h.gruppe.position.x = h.vorz * weg; });
+
     // Marken der schnellen Zyklen laufen mit
     const s = sch.schicht;
     if (s.echtzeit) {
       const ph = (t % s.echtzeit) / s.echtzeit;        // 0 … 1 im laufenden Zyklus
       markeSetzen(sch, ph);
-      if (sch.gruppe.userData.puls) {
+      if (sch.gruppe.userData.herz) {
         // Herzschlag: zwei kurze Stöße je Zyklus — Systole, dann die Klappen
-        const p = 1 + 0.11 * Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2)), 6)
-                    + 0.055 * Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2 - 0.9)), 6);
-        sch.gruppe.userData.puls.forEach(m => m.scale.setScalar(p));
+        const p = 1 + 0.34 * Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2)), 6)
+                    + 0.17 * Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2 - 0.9)), 6);
+        sch.gruppe.userData.herz.scale.setScalar(menschGrund * 0.42 * p);
       } else if (sch.gruppe.userData.atem) {
         // Atemzug: ein weiches Weiten und Senken über die ganze Periode
         sch.gruppe.scale.setScalar(1 + 0.055 * (0.5 - 0.5 * Math.cos(ph * Math.PI * 2)));

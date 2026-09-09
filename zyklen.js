@@ -66,6 +66,33 @@ export function segmentBei(schicht, jahr) {
   return { seg: schicht.segmente[0], vonJahr: jahr, bisJahr: jahr };
 }
 
+// Wie hell ist der Mensch im Kern? 1 = Goldenes Zeitalter, 0 = erloschen.
+// Zwischen den Yugas wird linear überblendet, die Sandhis halten den Stand.
+export function yugaLicht(jahr) {
+  const y = SCHICHTEN[0];
+  const a = anteil(y, jahr) * 25800;
+  let lauf = 0, letztes = 1;
+  for (const seg of y.segmente) {
+    if (a < lauf + seg.laenge) {
+      if (!seg.licht) return letztes;
+      const f = (a - lauf) / seg.laenge;
+      return seg.licht[0] + (seg.licht[1] - seg.licht[0]) * f;
+    }
+    lauf += seg.laenge;
+    if (seg.licht) letztes = seg.licht[1];
+  }
+  return letztes;
+}
+
+// Wie der Zustand heißt, in dem der Mensch gerade steht
+export function menschZustand(licht) {
+  if (licht >= 0.92) return 'strahlend — das Goldene Zeitalter';
+  if (licht >= 0.68) return 'licht, aber schon zurückgenommen';
+  if (licht >= 0.42) return 'stofflich geworden, das Leuchten zieht sich zurück';
+  if (licht >= 0.18) return 'verdunkelt, das Licht sammelt sich im Herzen';
+  return 'ausgedörrt und erloschen — nur das Herz glimmt noch';
+}
+
 const ZEICHEN = ['Widder', 'Stier', 'Zwillinge', 'Krebs', 'Löwe', 'Jungfrau',
                  'Waage', 'Skorpion', 'Schütze', 'Steinbock', 'Wassermann', 'Fische'];
 
@@ -109,22 +136,22 @@ export const SCHICHTEN = [
       an das galaktische Zentrum sind Misras Deutung und keine gesicherte Wissenschaft —
       alle tieferen Schichten dieser Kugel dagegen sind messbare Zyklen.`,
     segmente: [
-      { name: 'Kataklysmos', laenge: 1200, art: 'katastrophe' },
-      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'absteigend' },
+      { name: 'Kataklysmos', laenge: 1200, art: 'katastrophe', licht: [1, 1] },
+      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [1, 0.75] },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'absteigend' },
+      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.75, 0.5] },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'absteigend' },
+      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.5, 0.25] },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'absteigend' },
-      { name: 'Ekpyrosis', laenge: 1200, art: 'katastrophe' },
-      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend' },
+      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.25, 0] },
+      { name: 'Ekpyrosis', laenge: 1200, art: 'katastrophe', licht: [0, 0] },
+      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0, 0.25] },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend' },
+      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0.25, 0.5] },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend' },
+      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0.5, 0.75] },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend' }
+      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0.75, 1] }
     ],
     nebenband: {
       titel: 'Der galaktische Kern — Sgr A*',
@@ -541,7 +568,7 @@ export const SCHICHTEN = [
       'Rund 20.000 Atemzüge an einem Tag',
       'Ausatmen dauert etwa doppelt so lang wie Einatmen',
       'Respiratorische Sinusarrhythmie: der Herzschlag folgt dem Atem',
-      'Etwa vier bis fünf Herzschläge auf einen Atemzug'
+      'Etwa drei bis vier Herzschläge auf einen Atemzug'
     ],
     segmente: [
       { name: 'Einatmen', laenge: 1.6, art: 'auf' },
@@ -554,28 +581,29 @@ export const SCHICHTEN = [
 
   {
     name: 'Der Herzschlag',
-    dauer: 'rund 0,9 Sekunden',
+    dauer: 'rund 1,2 Sekunden',
     untertitel: 'Der Kern der Zeitkugel',
-    quelle: 'Ruhepuls von etwa 70 Schlägen je Minute',
+    quelle: 'ruhiger Puls von etwa 50 Schlägen je Minute',
     radius: 0.70,
     farbe: '#f0654f',
     kern: true,
     einheit: 'Sekunden',
-    echtzeit: 0.9,
-    text: `Im Innersten schlägt der kleinste Zyklus, den wir unmittelbar spüren. Er ist
-      der Maßstab, an dem alle anderen gemessen werden: rund 2,5 Milliarden Schläge in
-      einem Menschenleben, etwa 900 Millionen in einem Yuga-Jahr — und knapp neunhundert
-      Billionen in einem einzigen Umlauf der äußersten Schale. Von hier aus gesehen ist
-      die Präzession der Erdachse nur ein sehr langsamer Herzschlag.`,
+    echtzeit: 1.2,
+    text: `Im Innersten schlägt der kleinste Zyklus, den wir unmittelbar spüren — und in
+      ihm steht der Mensch. Bei einem ruhigen Puls von fünfzig Schlägen in der Minute sind
+      das rund 26 Millionen Schläge in einem Jahr, gut zwei Milliarden in einem langen
+      Leben und etwa 680 Milliarden in einem einzigen Umlauf der äußersten Schale. Von
+      hier aus gesehen ist die Präzession der Erdachse nur ein sehr langsamer Herzschlag.`,
     fakten: [
-      'Etwa 100.000 Schläge an einem Tag, 2,5 Milliarden in einem Leben',
-      'Systole 0,3 s, Diastole 0,6 s',
-      'Ein Yuga-Zyklus fasst rund 900 Billionen Herzschläge',
+      'Bei 50 Schlägen in der Minute rund 72.000 an einem Tag',
+      'Der normale Ruhepuls liegt zwischen 50 und 100 Schlägen',
+      'Systole 0,4 s, Diastole 0,8 s',
+      'Ein Yuga-Zyklus fasst rund 680 Milliarden Herzschläge',
       'Der Sinusknoten taktet ohne jeden Nervenimpuls von außen'
     ],
     segmente: [
-      { name: 'Systole', laenge: 0.3, art: 'hoch' },
-      { name: 'Diastole', laenge: 0.6, art: 'tief' }
+      { name: 'Systole', laenge: 0.4, art: 'hoch' },
+      { name: 'Diastole', laenge: 0.8, art: 'tief' }
     ],
     jetztText: 'Der Kern schlägt in Echtzeit — der Zeitschieber gilt hier nicht.'
   }
