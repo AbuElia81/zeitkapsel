@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Die Zeitkapsel — Die Zeitkugel</title>
 <meta name="description" content="Ein Zwiebelmodell der Zeit: vom 25.800-jährigen Yuga-Zyklus bis zum Herzschlag. Frei drehbar in alle Richtungen.">
-<link rel="stylesheet" href="stil.css?v=18">
+<link rel="stylesheet" href="stil.css?v=22">
 </head>
 <body>
 
@@ -14,6 +14,24 @@
 
 <main>
   <div id="buehne"></div>
+
+  <div id="zeitleiste">
+    <div id="zeitKopf">
+      <span id="zeitAnzeige">—</span>
+      <button id="jetztKnopf" title="zurück zur Gegenwart">Jetzt</button>
+    </div>
+    <input id="schieber" type="range" aria-label="Zeitschieber durch den Yuga-Zyklus">
+    <div id="zeitSchritte">
+      <button data-schritt="-1000">−1000</button>
+      <button data-schritt="-100">−100</button>
+      <button data-schritt="-10">−10</button>
+      <button data-schritt="-1">−1</button>
+      <button data-schritt="1">+1</button>
+      <button data-schritt="10">+10</button>
+      <button data-schritt="100">+100</button>
+      <button data-schritt="1000">+1000</button>
+    </div>
+  </div>
 
   <header id="kopf">
     <h1>Die Zeitkugel</h1>
@@ -29,9 +47,9 @@
     <button id="tiefer" title="eine Schicht nach innen">↓ eintauchen</button>
   </div>
 
-  <p id="hinweisZeile">Ziehen dreht die Kugel in jede Richtung · Scrollen taucht ein · ↑ ↓ blättert durch die Schichten</p>
+  <p id="hinweisZeile">Ziehen dreht die Kugel · Scrollen taucht ein · ↑ ↓ blättert durch die Schichten · der Schieber oben verschiebt die Zeit</p>
 </main>
 
-<script type="module" src="kugel.js?v=18"></script>
+<script type="module" src="kugel.js?v=22"></script>
 </body>
 </html>

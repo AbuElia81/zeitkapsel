@@ -194,3 +194,95 @@ main { position: relative; z-index: 1; height: 100%; }
   #pult button { padding: .42rem .7rem; font-size: .72rem; }
   #hinweisZeile { display: none; }
 }
+
+/* ------------------------------------------------------------ Zeitschieber */
+#zeitleiste {
+  position: absolute; top: clamp(.9rem, 2.4vw, 1.6rem); left: 50%; transform: translateX(-50%);
+  width: min(30rem, 44vw); min-width: 19rem;
+  padding: .7rem .95rem .6rem;
+  background: linear-gradient(160deg, rgba(10,13,22,.78), rgba(6,8,14,.66));
+  border: 1px solid var(--linie); border-radius: 3px;
+  backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+  transition: border-color .3s;
+}
+#zeitleiste.verschoben { border-color: rgba(255,242,208,.34); }
+
+#zeitKopf { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; }
+#zeitAnzeige {
+  font-size: 1.02rem; letter-spacing: .02em; color: #f2e7cf;
+  font-variant-numeric: tabular-nums;
+}
+#zeitleiste.verschoben #zeitAnzeige { color: #fff2d0; }
+
+#jetztKnopf {
+  flex: none; padding: .2rem .6rem; border-radius: 2px;
+  border: 1px solid var(--linie); background: transparent;
+  color: var(--gedaempft); font: inherit; font-size: .68rem; letter-spacing: .08em;
+  text-transform: uppercase; cursor: pointer; transition: color .25s, border-color .25s;
+}
+#jetztKnopf:hover { color: #f4ecdd; border-color: rgba(236,231,220,.4); }
+#zeitleiste.verschoben #jetztKnopf { color: #fff2d0; border-color: rgba(255,242,208,.4); }
+
+#schieber {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 22px; margin: .35rem 0 .1rem;
+  background: transparent; cursor: ew-resize;
+}
+#schieber::-webkit-slider-runnable-track {
+  height: 2px; border-radius: 1px;
+  background: linear-gradient(to right, #e8b95c, #c9628a, #8a68cd, #5696d9, #3fb8b2);
+  opacity: .55;
+}
+#schieber::-moz-range-track {
+  height: 2px; border-radius: 1px;
+  background: linear-gradient(to right, #e8b95c, #c9628a, #8a68cd, #5696d9, #3fb8b2);
+  opacity: .55;
+}
+#schieber::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 11px; height: 11px; margin-top: -4.5px; border-radius: 50%;
+  background: #fff2d0; box-shadow: 0 0 9px rgba(255,242,208,.85); border: 0;
+}
+#schieber::-moz-range-thumb {
+  width: 11px; height: 11px; border-radius: 50%; border: 0;
+  background: #fff2d0; box-shadow: 0 0 9px rgba(255,242,208,.85);
+}
+#schieber:focus-visible { outline: 1px solid rgba(255,242,208,.5); outline-offset: 3px; }
+
+#zeitSchritte { display: flex; gap: 2px; justify-content: space-between; }
+#zeitSchritte button {
+  flex: 1; padding: .18rem 0; border: 0; border-radius: 2px;
+  background: rgba(255,255,255,.035); color: #7d7568;
+  font: inherit; font-size: .62rem; font-variant-numeric: tabular-nums;
+  cursor: pointer; transition: background .2s, color .2s;
+}
+#zeitSchritte button:hover { background: rgba(255,255,255,.1); color: #ded6c7; }
+
+/* Termine in der Infotafel */
+#tafel .terminKopf {
+  margin: 0 0 .35rem; font-size: .64rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ton); opacity: .75;
+}
+#tafel .termine { margin: 0 0 1rem; padding: 0; list-style: none; }
+#tafel .termine li {
+  display: flex; gap: .5rem; margin-bottom: .3rem;
+  font-size: .76rem; line-height: 1.4; color: #c3bcae;
+}
+#tafel .termine b {
+  flex: none; min-width: 7.4rem; font-weight: 400; color: #e6dccb;
+  font-variant-numeric: tabular-nums;
+}
+#tafel .jetztZeile em { font-style: normal; color: var(--gedaempft); }
+#tafel .jetztZeile i { color: #cfc6b6; }
+#tafel .jetztZeile b { font-weight: 600; color: #fff2d0; }
+
+@media (max-width: 900px) {
+  #zeitleiste {
+    top: auto; bottom: calc(40vh + 3rem); left: .6rem; right: .6rem;
+    width: auto; min-width: 0; transform: none;
+    padding: .5rem .7rem .45rem;
+  }
+  #zeitAnzeige { font-size: .88rem; }
+  #zeitSchritte button { font-size: .58rem; }
+  #kopf p { display: none; }
+}

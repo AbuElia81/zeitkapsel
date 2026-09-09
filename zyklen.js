@@ -1,29 +1,84 @@
 // Die Schichten der Zeitkugel — von der äußersten (größter Zyklus) bis zum Kern.
-// Jede Schicht: Name, Dauer, Segmente des Zyklus und die Stelle, an der wir gerade stehen.
+// Jede Schicht kennt einen Anker (ein Jahr, in dem der Zyklus bei null steht)
+// und ihre Periode in Jahren. Daraus wird für jede beliebige Zeit die Stelle
+// im Zyklus gerechnet — der Zeitschieber verschiebt nur dieses eine Jahr.
 
-const TAG = 86400000;
+const TAG_IM_JAHR = 365.2422;
 
-// Anteil des laufenden Jahres, mondgenau bzw. tagesgenau berechnet
-function jahresAnteil(d) {
-  const j0 = Date.UTC(d.getUTCFullYear(), 0, 1);
-  const j1 = Date.UTC(d.getUTCFullYear() + 1, 0, 1);
-  return (d.getTime() - j0) / (j1 - j0);
+// Dezimaljahr aus einem Zeitpunkt: 2026,687 = 8. September 2026
+export function jahrAus(d) {
+  const j = d.getUTCFullYear();
+  const j0 = Date.UTC(j, 0, 1), j1 = Date.UTC(j + 1, 0, 1);
+  return j + (d.getTime() - j0) / (j1 - j0);
 }
-function mondAnteil(d) {
-  const neumond = Date.UTC(2000, 0, 6, 18, 14); // bekannter Neumond
-  const synodisch = 29.530588853 * TAG;
-  return (((d.getTime() - neumond) % synodisch) + synodisch) % synodisch / synodisch;
-}
-function tagesAnteil(d) {
-  return (d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds()) / 86400;
-}
-// Phase eines langen Zyklus aus einem Ankerjahr heraus
-function langAnteil(jahr, anker, dauer) {
-  return (((jahr - anker) % dauer) + dauer) % dauer / dauer;
+export function jahrJetzt() { return jahrAus(new Date()); }
+
+// Zeitpunkt aus einem Dezimaljahr — auch für Jahre weit vor unserer Zeitrechnung
+export function datumAus(j) {
+  const g = Math.floor(j);
+  const a = new Date(0); a.setUTCFullYear(g, 0, 1); a.setUTCHours(0, 0, 0, 0);
+  const b = new Date(0); b.setUTCFullYear(g + 1, 0, 1); b.setUTCHours(0, 0, 0, 0);
+  return new Date(a.getTime() + (j - g) * (b.getTime() - a.getTime()));
 }
 
-const jetzt = new Date();
-const jahr = jetzt.getUTCFullYear() + jahresAnteil(jetzt);
+// Datum, wenn es nah genug an unserer Zeit liegt, sonst nur die Jahreszahl
+export function zeitText(j, mitTag) {
+  if (Math.abs(j) > 3000) return jahrText(j);
+  const d = datumAus(j);
+  // Den Monatsnamen holen und die Jahreszahl selbst anhängen — sonst schreibt
+  // die Ortsformatierung negative Jahre als „-2500“ statt „2501 v. Chr.“
+  const monat = d.toLocaleDateString('de-DE', { month: 'long', timeZone: 'UTC' });
+  const jt = jahrText(d.getUTCFullYear(), true);
+  return mitTag ? `${d.getUTCDate()}. ${monat} ${jt}` : `${monat} ${jt}`;
+}
+
+// „2026 n. Chr.“ / „10876 v. Chr.“
+// Jahre werden ohne Tausenderpunkt geschrieben. Astronomisch gibt es ein Jahr null,
+// die Zeitrechnung kennt keines — deshalb ist das Jahr 0 das Jahr 1 v. Chr.
+export function jahrText(j, kurz = false) {
+  const g = Math.round(j);
+  return g <= 0 ? `${1 - g} v. Chr.` : (kurz ? `${g}` : `${g} n. Chr.`);
+}
+
+// Stelle im Zyklus, 0 … 1
+export function anteil(schicht, jahr) {
+  const p = schicht.periode;
+  return (((jahr - schicht.anker) % p) + p) % p / p;
+}
+
+// In welchem Segment stehen wir, und von wann bis wann läuft es?
+export function segmentBei(schicht, jahr) {
+  const a = anteil(schicht, jahr);
+  const gesamt = schicht.segmente.reduce((s, g) => s + g.laenge, 0);
+  let lauf = 0;
+  for (const seg of schicht.segmente) {
+    const von = lauf / gesamt, bis = (lauf + seg.laenge) / gesamt;
+    if (a >= von && a < bis) {
+      const start = schicht.anker + Math.floor((jahr - schicht.anker) / schicht.periode) * schicht.periode;
+      return {
+        seg,
+        vonJahr: start + von * schicht.periode,
+        bisJahr: start + bis * schicht.periode
+      };
+    }
+    lauf += seg.laenge;
+  }
+  return { seg: schicht.segmente[0], vonJahr: jahr, bisJahr: jahr };
+}
+
+const ZEICHEN = ['Widder', 'Stier', 'Zwillinge', 'Krebs', 'Löwe', 'Jungfrau',
+                 'Waage', 'Skorpion', 'Schütze', 'Steinbock', 'Wassermann', 'Fische'];
+
+// Hilfsfunktion: die nächsten Wiederkehrungen eines Ereignisses um ein Jahr herum
+function reihe(anker, schritt, jahr, anzahl, benenner) {
+  const n = Math.floor((jahr - anker) / schritt);
+  const liste = [];
+  for (let k = n; k < n + anzahl; k++) liste.push({ jahr: anker + k * schritt, was: benenner(k) });
+  return liste;
+}
+
+// Der Ring der äußersten Schicht beginnt mit dem Kataklysmos
+export const RING_ANKER = -10875;
 
 export const SCHICHTEN = [
   {
@@ -31,47 +86,46 @@ export const SCHICHTEN = [
     dauer: '25.800 Jahre',
     untertitel: 'Die Präzession der Erdachse',
     quelle: 'nach Bibhu Dev Misra, „Yuga Shift“',
-    radius: 5.0,
+    radius: 5.00,
     farbe: '#e8b95c',
     einheit: 'Jahre',
+    anker: RING_ANKER,
+    periode: 25800,
     text: `Die äußerste Schicht ist der große Weltenzyklus: 25.800 Jahre, genau die Zeit,
       in der die Erdachse einmal um den Himmelspol kreist. Bibhu Dev Misra rekonstruiert
       darin die vier Yugas der indischen Überlieferung — jedes 2.700 Jahre lang, getrennt
       durch 300-jährige Übergänge (Sandhi). Der Zyklus fällt vom Goldenen Zeitalter herab
       bis zum Eisernen und steigt auf der anderen Hälfte wieder auf. An den beiden Wendepunkten
       stehen zwei 1.200-jährige Katastrophenzeiten, für die er die griechischen Namen benutzt:
-      Ekpyrosis, die Reinigung durch Feuer, und Kataklysmos, die Reinigung
-      durch Wasser.`,
+      Ekpyrosis, die Reinigung durch Feuer, und Kataklysmos, die Reinigung durch Wasser.`,
     fakten: [
       '8 Yugas × 2.700 + 6 Sandhis × 300 + 2 × 1.200 Jahre = 25.800 Jahre',
       'Zwei der acht 300-Jahr-Übergänge stecken bereits in den Katastrophenzeiten',
       'Das absteigende Kali Yuga läuft nach Misra von 676 v. Chr. bis 2025 n. Chr.',
       'Das schmale Band darüber: der Kern der Milchstraße schaltet ein, ist aktiv, schaltet ab',
-      'Ekpyrosis heißt Weltenbrand, Kataklysmos Überflutung — beide reinigen',
       'Die 25.800 Jahre sind astronomisch belegt — die Yuga-Zuordnung ist Misras These'
     ],
     hinweis: `Die Präzession ist gemessene Astronomie. Die Einteilung in Yugas und die Kopplung
       an das galaktische Zentrum sind Misras Deutung und keine gesicherte Wissenschaft —
       alle tieferen Schichten dieser Kugel dagegen sind messbare Zyklen.`,
     segmente: [
-      { name: 'Kataklysmos', laenge: 1200, art: 'katastrophe', zeit: '10876 – 9676 v. Chr.' },
-      { name: 'Satya', laenge: 2700, art: 'yuga', zeit: '9676 – 6976 v. Chr.', zusatz: 'absteigend' },
-      { name: 'Sandhi', laenge: 300, art: 'sandhi', zeit: '6976 – 6676 v. Chr.' },
-      { name: 'Treta', laenge: 2700, art: 'yuga', zeit: '6676 – 3976 v. Chr.', zusatz: 'absteigend' },
-      { name: 'Sandhi', laenge: 300, art: 'sandhi', zeit: '3976 – 3676 v. Chr.' },
-      { name: 'Dwapara', laenge: 2700, art: 'yuga', zeit: '3676 – 976 v. Chr.', zusatz: 'absteigend' },
-      { name: 'Sandhi', laenge: 300, art: 'sandhi', zeit: '976 – 676 v. Chr.' },
-      { name: 'Kali', laenge: 2700, art: 'yuga', zeit: '676 v. Chr. – 2025 n. Chr.', zusatz: 'absteigend' },
-      { name: 'Ekpyrosis', laenge: 1200, art: 'katastrophe', zeit: '2025 – 3225 n. Chr.' },
-      { name: 'Kali', laenge: 2700, art: 'yuga', zeit: '3225 – 5925 n. Chr.', zusatz: 'aufsteigend' },
-      { name: 'Sandhi', laenge: 300, art: 'sandhi', zeit: '5925 – 6225 n. Chr.' },
-      { name: 'Dwapara', laenge: 2700, art: 'yuga', zeit: '6225 – 8925 n. Chr.', zusatz: 'aufsteigend' },
-      { name: 'Sandhi', laenge: 300, art: 'sandhi', zeit: '8925 – 9225 n. Chr.' },
-      { name: 'Treta', laenge: 2700, art: 'yuga', zeit: '9225 – 11925 n. Chr.', zusatz: 'aufsteigend' },
-      { name: 'Sandhi', laenge: 300, art: 'sandhi', zeit: '11925 – 12225 n. Chr.' },
-      { name: 'Satya', laenge: 2700, art: 'yuga', zeit: '12225 – 14925 n. Chr.', zusatz: 'aufsteigend' }
+      { name: 'Kataklysmos', laenge: 1200, art: 'katastrophe' },
+      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'absteigend' },
+      { name: 'Sandhi', laenge: 300, art: 'sandhi' },
+      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'absteigend' },
+      { name: 'Sandhi', laenge: 300, art: 'sandhi' },
+      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'absteigend' },
+      { name: 'Sandhi', laenge: 300, art: 'sandhi' },
+      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'absteigend' },
+      { name: 'Ekpyrosis', laenge: 1200, art: 'katastrophe' },
+      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend' },
+      { name: 'Sandhi', laenge: 300, art: 'sandhi' },
+      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend' },
+      { name: 'Sandhi', laenge: 300, art: 'sandhi' },
+      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend' },
+      { name: 'Sandhi', laenge: 300, art: 'sandhi' },
+      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend' }
     ],
-    // Zweites, schmales Band: die AGN-Phasen des galaktischen Zentrums
     nebenband: {
       titel: 'Der galaktische Kern — Sgr A*',
       segmente: [
@@ -82,9 +136,6 @@ export const SCHICHTEN = [
         { name: '', laenge: 4800, art: 'leer' }
       ]
     },
-    // 12.900 Jahre liegen vor der Ekpyrosis; sie beginnt mit dem Ende
-    // des absteigenden Kali Yuga im Jahr 2025.
-    jetzt: (12900 + Math.max(0, jahr - 2025)) / 25800,
     jetztText: `Wir stehen am Ende des absteigenden Kali Yuga und am Beginn der
       Ekpyrosis — der Reinigung durch Feuer.`
   },
@@ -94,9 +145,11 @@ export const SCHICHTEN = [
     dauer: '2.400 Jahre',
     untertitel: 'Der große Sonnenrhythmus, auch Bray-Zyklus',
     quelle: 'aus ¹⁴C- und ¹⁰Be-Reihen in Baumringen und Eisbohrkernen',
-    radius: 4.45,
-    farbe: '#e39a52',
+    radius: 4.58,
+    farbe: '#e2a054',
     einheit: 'Jahre',
+    anker: 1500,
+    periode: 2400,
     text: `Unter dem Weltenzyklus liegt der längste Rhythmus, den wir in der Sonne wirklich
       messen können. In den Radiokohlenstoff-Kurven von Baumringen und im Beryllium der
       Eisbohrkerne kehrt alle rund 2.400 Jahre eine Zeit schwacher Sonne wieder. Jedes
@@ -114,7 +167,6 @@ export const SCHICHTEN = [
       { name: 'Maximum', laenge: 300, art: 'hoch' },
       { name: 'Rückgang', laenge: 900, art: 'ab' }
     ],
-    jetzt: langAnteil(jahr, 1500, 2400),
     jetztText: 'Etwa ein Fünftel nach dem Minimum der Kleinen Eiszeit — ungefähre Lage.'
   },
 
@@ -123,9 +175,11 @@ export const SCHICHTEN = [
     dauer: '1.000 Jahre',
     untertitel: 'Warmzeiten und Kaltzeiten',
     quelle: 'Klimaproxys des Holozäns',
-    radius: 3.95,
-    farbe: '#dd7f5e',
+    radius: 4.20,
+    farbe: '#dc8757',
     einheit: 'Jahre',
+    anker: 1500,
+    periode: 1000,
     text: `Der Eddy-Zyklus trägt die Wärmeschaukel der letzten Jahrtausende: die römische
       Warmzeit, die Kälte der Völkerwanderung, das mittelalterliche Klimaoptimum, die
       Kleine Eiszeit. Rund tausend Jahre von einem Wärmegipfel zum nächsten — der Takt,
@@ -141,7 +195,6 @@ export const SCHICHTEN = [
       { name: 'Warmphase', laenge: 250, art: 'hoch' },
       { name: 'Abkühlung', laenge: 250, art: 'ab' }
     ],
-    jetzt: langAnteil(jahr, 1500, 1000),
     jetztText: 'Gut die Hälfte nach dem Tiefpunkt der Kleinen Eiszeit — ungefähre Lage.'
   },
 
@@ -150,9 +203,11 @@ export const SCHICHTEN = [
     dauer: '208 Jahre',
     untertitel: 'Die großen Sonnenminima',
     quelle: 'Sonnenfleckenrekonstruktion und ¹⁴C',
-    radius: 3.50,
-    farbe: '#d4677a',
+    radius: 3.85,
+    farbe: '#d4706a',
     einheit: 'Jahre',
+    anker: 1810,
+    periode: 208,
     text: `Alle gut zweihundert Jahre schläft die Sonne für einige Jahrzehnte fast ein.
       Das Spörer-Minimum, das Maunder-Minimum mit seinen fleckenlosen Jahren um 1670,
       das Dalton-Minimum um 1810 — sie folgen diesem Takt. In den Jahren des Maunder-Minimums
@@ -168,7 +223,6 @@ export const SCHICHTEN = [
       { name: 'Großes Maximum', laenge: 60, art: 'hoch' },
       { name: 'Abklingen', laenge: 44, art: 'ab' }
     ],
-    jetzt: langAnteil(jahr, 1810, 208),
     jetztText: 'Kurz nach dem Dalton-Minimum gerechnet — ungefähre Lage.'
   },
 
@@ -177,9 +231,11 @@ export const SCHICHTEN = [
     dauer: '88 Jahre',
     untertitel: 'Die Hüllkurve der Sonnenflecken',
     quelle: 'Sonnenfleckenzählung seit 1749',
-    radius: 3.10,
-    farbe: '#c05fa0',
+    radius: 3.53,
+    farbe: '#c9628a',
     einheit: 'Jahre',
+    anker: 1900,
+    periode: 88,
     text: `Die elfjährigen Sonnenzyklen sind nicht alle gleich stark. Ihre Höhe schwankt
       selbst wieder — in einer Welle von rund 88 Jahren, die Wolfgang Gleißberg in den
       Zählreihen fand. Acht Sonnenzyklen bilden eine solche Welle: erst schwache, dann
@@ -195,7 +251,6 @@ export const SCHICHTEN = [
       { name: 'Starke Zyklen', laenge: 22, art: 'hoch' },
       { name: 'Abnahme', laenge: 22, art: 'ab' }
     ],
-    jetzt: langAnteil(jahr, 1900, 88),
     jetztText: 'Rund vier Jahrzehnte nach dem letzten schwachen Abschnitt.'
   },
 
@@ -204,9 +259,11 @@ export const SCHICHTEN = [
     dauer: '22 Jahre',
     untertitel: 'Das Magnetfeld der Sonne kehrt sich um',
     quelle: 'gemessen seit George Ellery Hale, 1908',
-    radius: 2.74,
-    farbe: '#9d63c4',
+    radius: 3.23,
+    farbe: '#b85fa8',
     einheit: 'Jahre',
+    anker: 2008.96,
+    periode: 22,
     text: `Erst nach zwei Sonnenfleckenzyklen ist die Sonne wieder ganz sie selbst. Bei
       jedem Maximum klappt ihr Magnetfeld um: Nordpol wird Südpol. Nach elf Jahren ist
       die Polarität vertauscht, nach zweiundzwanzig wieder hergestellt. Der sichtbare
@@ -225,7 +282,7 @@ export const SCHICHTEN = [
       { name: 'Maximum', laenge: 2, art: 'hoch', zusatz: 'umgekehrte Polarität' },
       { name: 'Abfall', laenge: 4.5, art: 'ab', zusatz: 'umgekehrte Polarität' }
     ],
-    jetzt: langAnteil(jahr, 2008.96, 22),
+    termine: (j) => reihe(2008.96, 11, j, 4, k => `Sonnenzyklus ${24 + k} beginnt`),
     jetztText: 'Im absteigenden Ast von Sonnenzyklus 25, nach dem Maximum von 2024.'
   },
 
@@ -234,9 +291,11 @@ export const SCHICHTEN = [
     dauer: '19,86 Jahre',
     untertitel: 'Die Große Konjunktion — der Große Chronokrator',
     quelle: 'Abu Maʿšar, „Buch der Religionen und Dynastien“ (9. Jh.); Raymond Merriman, „Forecast 2020“',
-    radius: 2.40,
-    farbe: '#8869cb',
+    radius: 2.96,
+    farbe: '#a163c2',
     einheit: 'Jahre',
+    anker: 2020.97,
+    periode: 19.86,
     text: `Die beiden langsamsten Planeten, die das bloße Auge sieht, treffen sich alle
       knapp zwanzig Jahre am Himmel. Die arabisch-persische Astrologie nannte dieses Paar
       den Großen Chronokrator, den Zeitmarkierer, und baute darauf ihre gesamte
@@ -250,7 +309,6 @@ export const SCHICHTEN = [
       'Abu Maʿšar: alle 240 Jahre ein neues Trigon, nach 960 Jahren beginnt alles von vorn',
       'Moderne Zählung: rund 200 Jahre je Element, rund 800 Jahre für die volle Runde',
       'Der Stern von Betlehem gilt als die Konjunktion von 7 v. Chr. in den Fischen',
-      'Die nächste Große Konjunktion fällt auf den 31. Oktober 2040',
       'Rund 1.300 dieser Zyklen füllen einen Yuga-Zyklus'
     ],
     hinweis: `Die 19,86 Jahre sind reine Himmelsmechanik. Was Abu Maʿšar und die moderne
@@ -263,9 +321,111 @@ export const SCHICHTEN = [
       { name: 'Opposition', laenge: 4.96, art: 'hoch', zusatz: 'volle Entfaltung' },
       { name: 'Abnehmendes Quadrat', laenge: 4.96, art: 'ab', zusatz: 'Abbau' }
     ],
-    jetzt: langAnteil(jahr, 2020.97, 19.86),
+    termine: (j) => reihe(2020.97, 19.86, j, 4, () => 'Große Konjunktion'),
     jetztText: `Gut fünf Jahre nach der Großen Mutation von 2020 — im zweiten Viertel
       des Zyklus, kurz nach dem zunehmenden Quadrat.`
+  },
+
+  {
+    name: 'Mondknoten-Zyklus',
+    dauer: '18,61 Jahre',
+    untertitel: 'Große und kleine Mondwende',
+    quelle: 'Rückläufigkeit der Mondknoten; Griffith Observatory zur Mondwende 2024/25',
+    radius: 2.71,
+    farbe: '#8a68cd',
+    einheit: 'Jahre',
+    anker: 2024.96,
+    periode: 18.6130,
+    text: `Die Bahn des Mondes ist gegen die Erdbahn um gut fünf Grad geneigt. Die beiden
+      Punkte, an denen sie sich kreuzen — die Mondknoten — wandern rückwärts durch den
+      Tierkreis und brauchen dafür 18,61 Jahre. In dieser Zeit schwingt der Mond zwischen
+      zwei Extremen: Bei der großen Mondwende geht er weiter im Norden und im Süden auf
+      als die Sonne je im Jahr, bei der kleinen bleibt er innerhalb ihres Bogens. Nur an
+      den Knoten kann es Finsternisse geben — deshalb heißt der Aufsteigende Knoten in
+      der Überlieferung Drachenkopf und der Absteigende Drachenschwanz.`,
+    fakten: [
+      'Große Mondwende: der Mond erreicht ±28,7° Deklination',
+      'Kleine Mondwende: nur noch ±18,1° — zehn Grad weniger Spielraum',
+      'Die jüngste große Mondwende fiel auf Dezember 2024 und reicht in 2025 hinein',
+      'Die letzte kleine lag im Oktober 2015, die nächste kommt um 2034',
+      'Stonehenge und die Steinreihen von Callanish sind auf die große Mondwende ausgerichtet',
+      'Finsternisse gibt es nur, wenn Neu- oder Vollmond nahe an einem Knoten steht'
+    ],
+    segmente: [
+      { name: 'Große Mondwende', laenge: 2.3, art: 'hoch' },
+      { name: 'Rückgang', laenge: 7.0, art: 'ab' },
+      { name: 'Kleine Mondwende', laenge: 2.3, art: 'tief' },
+      { name: 'Anstieg', laenge: 7.0, art: 'auf' }
+    ],
+    termine: (j) => reihe(2024.96, 18.6130 / 2, j, 4,
+      k => (((k % 2) + 2) % 2 === 0) ? 'Große Mondwende' : 'Kleine Mondwende'),
+    jetztText: 'Mitten in der großen Mondwende, die von Dezember 2024 bis in das Jahr 2026 reicht.'
+  },
+
+  {
+    name: 'Jupiter-Zyklus',
+    dauer: '11,86 Jahre',
+    untertitel: 'Ein Umlauf durch den Tierkreis, ein Zeichen je Jahr',
+    quelle: 'siderische Umlaufzeit; chinesischer Jahresstern Suìxīng',
+    radius: 2.48,
+    farbe: '#7772d4',
+    einheit: 'Jahre',
+    anker: 2022.54,
+    periode: 11.8618,
+    text: `Jupiter braucht knapp zwölf Jahre für eine Runde um die Sonne und steht damit
+      rund ein Jahr lang in jedem Tierkreiszeichen. Diese Regelmäßigkeit hat ganze
+      Kalender geprägt: Die chinesische Astronomie nannte ihn Suìxīng, den Jahresstern,
+      und teilte den Himmel in zwölf Jupiter-Stationen — daraus wurde der Zwölf-Tiere-Zyklus.
+      In der abendländischen Astrologie ist die Rückkehr Jupiters an seinen Geburtsort
+      alle zwölf Jahre eine der wenigen Wiederkehrungen, die ein Mensch mehrfach erlebt.`,
+    fakten: [
+      'Siderische Umlaufzeit 11,862 Jahre — rund 361 Tage je Tierkreiszeichen',
+      'Der chinesische Zwölfjahreszyklus geht auf den Jahresstern Suìxīng zurück',
+      'Sechs Jupiter-Umläufe entsprechen fast genau fünf Jupiter-Saturn-Konjunktionen',
+      'Ein Mensch erlebt seine Jupiter-Rückkehr mit 12, 24, 36, 48, 60, 72 Jahren'
+    ],
+    hinweis: `Die Zeichenwechsel sind Mittelwerte. Jupiter läuft jedes Jahr für einige
+      Monate rückläufig und überquert eine Zeichengrenze dann bis zu dreimal — die
+      wirklichen Eintrittsdaten weichen um Wochen ab.`,
+    segmente: ZEICHEN.map(z => ({ name: z, laenge: 11.8618 / 12, art: 'auf', anzeige: 'rund 1 Jahr' })),
+    termine: (j) => reihe(2022.54, 11.8618 / 12, j, 4,
+      k => `Jupiter tritt in ${ZEICHEN[((k % 12) + 12) % 12]}`),
+    jetztText: 'Jupiter steht im Löwen — gut vier Jahre nach seinem Eintritt in den Widder.'
+  },
+
+  {
+    name: 'Venus-Zyklus',
+    dauer: '8 Jahre',
+    untertitel: 'Die Rose der Venus — fünf Blätter in acht Jahren',
+    quelle: 'synodische Periode 583,92 Tage; Venustafeln des Dresdner Kodex',
+    radius: 2.27,
+    farbe: '#6683d8',
+    einheit: 'Jahre',
+    anker: 2025.22,
+    periode: 7.9933,
+    text: `Alle 584 Tage schiebt sich Venus zwischen Erde und Sonne. Fünf solcher Umläufe
+      dauern fast genau acht Jahre — deshalb kehrt Venus alle acht Jahre an dieselbe
+      Stelle des Himmels zurück, und wenn man ihre fünf Begegnungspunkte verbindet,
+      entsteht ein Fünfstern: die Rose der Venus. Die Maya haben diesen Takt in den
+      Venustafeln des Dresdner Kodex über Jahrhunderte fortgeschrieben, und in Babylon
+      wurde Inanna als Morgenstern und Abendstern an genau diesem Rhythmus abgelesen.`,
+    fakten: [
+      'Synodische Periode 583,92 Tage — fünf davon sind 2.919,6 Tage',
+      'Acht Jahre sind 2.921,9 Tage: die Rose verschiebt sich um gut zwei Tage je Runde',
+      '13 Venusumläufe entsprechen 8 Erdjahren',
+      'Die Venustafeln des Dresdner Kodex rechnen mit 584 Tagen je Venusrunde',
+      'Morgenstern und Abendstern sind derselbe Planet — die Babylonier wussten es',
+      'Rund 3.200 Venus-Rosen füllen einen Yuga-Zyklus'
+    ],
+    segmente: [
+      { name: 'Erstes Blatt', laenge: 1.5987, art: 'hoch' },
+      { name: 'Zweites Blatt', laenge: 1.5987, art: 'auf' },
+      { name: 'Drittes Blatt', laenge: 1.5987, art: 'hoch' },
+      { name: 'Viertes Blatt', laenge: 1.5987, art: 'auf' },
+      { name: 'Fünftes Blatt', laenge: 1.5987, art: 'hoch' }
+    ],
+    termine: (j) => reihe(2025.22, 7.9933 / 5, j, 5, () => 'Untere Konjunktion — Venus zwischen Erde und Sonne'),
+    jetztText: 'Im ersten Blatt der laufenden Rose, gerechnet ab der Konjunktion vom März 2025.'
   },
 
   {
@@ -273,9 +433,11 @@ export const SCHICHTEN = [
     dauer: '365,2422 Tage',
     untertitel: 'Ein Umlauf der Erde um die Sonne',
     quelle: 'tropisches Jahr',
-    radius: 2.08,
-    farbe: '#7b76d0',
+    radius: 2.05,
+    farbe: '#5696d9',
     einheit: 'Tage',
+    anker: 2000.216,
+    periode: 1,
     text: `Der Zyklus, in dem wir zu Hause sind. Weil die Erdachse um 23,4 Grad geneigt
       ist, wandert die Sonne im Lauf eines Umlaufs am Himmel auf und ab — daraus werden
       die Jahreszeiten. Die vier Abschnitte sind nicht gleich lang: im Nordsommer steht
@@ -293,10 +455,7 @@ export const SCHICHTEN = [
       { name: 'Herbst', laenge: 89.8, art: 'ab' },
       { name: 'Winter', laenge: 89.0, art: 'tief' }
     ],
-    // Frühlingsanfang liegt rund 79 Tage nach Jahresbeginn
-    jetzt: ((jahresAnteil(jetzt) * 365.2422 - 79) % 365.2422 + 365.2422) % 365.2422 / 365.2422,
-    jetztText: 'Die Marke steht auf dem heutigen Tag.',
-    lebend: true
+    jetztText: 'Die Marke steht auf dem eingestellten Tag.'
   },
 
   {
@@ -304,9 +463,11 @@ export const SCHICHTEN = [
     dauer: '29,53 Tage',
     untertitel: 'Von Neumond zu Neumond',
     quelle: 'synodischer Monat',
-    radius: 1.78,
-    farbe: '#57a0d8',
+    radius: 1.80,
+    farbe: '#48a8d2',
     einheit: 'Tage',
+    anker: 2000.01851,
+    periode: 29.530588853 / TAG_IM_JAHR,
     text: `Der älteste Kalender der Menschheit. Der Mond braucht 27,3 Tage für einen Umlauf
       um die Erde — bis er wieder in derselben Stellung zur Sonne steht und die Phasen sich
       wiederholen, vergehen aber 29,53 Tage, weil die Erde inzwischen weitergewandert ist.
@@ -317,6 +478,9 @@ export const SCHICHTEN = [
       '235 Mondmonate entsprechen fast genau 19 Jahren: der Meton-Zyklus',
       'Der Mond entfernt sich jährlich 3,8 cm von der Erde'
     ],
+    hinweis: `Steht der Zeitschieber weit von heute entfernt, ist die angezeigte Phase
+      eine reine Fortschreibung des heutigen Rhythmus. Weil sich der Mond langsam
+      entfernt und die Erde bremst, weicht die wirkliche Phase über Jahrtausende ab.`,
     segmente: [
       { name: 'Neumond', laenge: 3.69, art: 'tief' },
       { name: 'Zunehmende Sichel', laenge: 3.69, art: 'auf' },
@@ -327,9 +491,7 @@ export const SCHICHTEN = [
       { name: 'Letztes Viertel', laenge: 3.69, art: 'ab' },
       { name: 'Abnehmende Sichel', laenge: 3.69, art: 'tief' }
     ],
-    jetzt: mondAnteil(jetzt),
-    jetztText: 'Die Marke steht auf der heutigen Mondphase.',
-    lebend: true
+    jetztText: 'Die Marke steht auf der Mondphase des eingestellten Tages.'
   },
 
   {
@@ -337,9 +499,11 @@ export const SCHICHTEN = [
     dauer: '23 h 56 min 4 s',
     untertitel: 'Eine Drehung der Erde',
     quelle: 'siderischer Tag',
-    radius: 1.48,
+    radius: 1.52,
     farbe: '#3fb8b2',
     einheit: 'Stunden',
+    anker: 2000.0,
+    periode: 1 / TAG_IM_JAHR,
     text: `Eine volle Drehung der Erde dauert nicht vierundzwanzig Stunden, sondern
       drei Minuten und sechsundfünfzig Sekunden weniger. Die fehlende Zeit ist der
       Weg, den die Erde in einem Tag um die Sonne zurückgelegt hat — sie muss sich
@@ -357,9 +521,7 @@ export const SCHICHTEN = [
       { name: 'Nachmittag', laenge: 6, art: 'hoch' },
       { name: 'Abend', laenge: 6, art: 'ab' }
     ],
-    jetzt: tagesAnteil(jetzt),
-    jetztText: 'Die Marke läuft mit der Uhr mit.',
-    lebend: true
+    jetztText: 'Die Marke läuft mit der Uhr mit.'
   },
 
   {
@@ -367,9 +529,10 @@ export const SCHICHTEN = [
     dauer: 'rund 4 Sekunden',
     untertitel: 'Zwölf bis achtzehn Mal in der Minute',
     quelle: 'Ruheatmung eines Erwachsenen',
-    radius: 1.12,
+    radius: 1.18,
     farbe: '#5ec98b',
     einheit: 'Sekunden',
+    echtzeit: 4,
     text: `Der erste Zyklus, den wir selbst steuern können. In Ruhe atmet ein Mensch
       zwölf- bis achtzehnmal in der Minute; das Ausatmen dauert länger als das Einatmen.
       Zwischen Atem und Herzschlag besteht eine feste Kopplung — der Puls beschleunigt
@@ -386,10 +549,7 @@ export const SCHICHTEN = [
       { name: 'Ausatmen', laenge: 1.8, art: 'ab' },
       { name: 'Pause', laenge: 0.2, art: 'tief' }
     ],
-    jetzt: 0,
-    jetztText: 'Die Marke atmet in Echtzeit mit.',
-    lebend: true,
-    periode: 4
+    jetztText: 'Die Schale weitet und senkt sich in Echtzeit — der Zeitschieber gilt hier nicht.'
   },
 
   {
@@ -401,6 +561,7 @@ export const SCHICHTEN = [
     farbe: '#f0654f',
     kern: true,
     einheit: 'Sekunden',
+    echtzeit: 0.9,
     text: `Im Innersten schlägt der kleinste Zyklus, den wir unmittelbar spüren. Er ist
       der Maßstab, an dem alle anderen gemessen werden: rund 2,5 Milliarden Schläge in
       einem Menschenleben, etwa 900 Millionen in einem Yuga-Jahr — und knapp neunhundert
@@ -416,11 +577,6 @@ export const SCHICHTEN = [
       { name: 'Systole', laenge: 0.3, art: 'hoch' },
       { name: 'Diastole', laenge: 0.6, art: 'tief' }
     ],
-    jetzt: 0,
-    jetztText: 'Die Marke schlägt in Echtzeit.',
-    lebend: true,
-    periode: 0.9
+    jetztText: 'Der Kern schlägt in Echtzeit — der Zeitschieber gilt hier nicht.'
   }
 ];
-
-export { jahresAnteil, mondAnteil, tagesAnteil };

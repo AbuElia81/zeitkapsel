@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three.module.js';
-import { SCHICHTEN } from './zyklen.js';
+import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText, RING_ANKER } from './zyklen.js';
 
 const HG = 0x05070d;
 
@@ -282,7 +282,7 @@ const schalen = SCHICHTEN.map((schicht, i) => {
   gruppe.add(marke);
   gruppe.userData.marke = marke;
 
-  if (schicht.periode && !schicht.kern) gruppe.userData.atem = true;
+  if (schicht.echtzeit && !schicht.kern) gruppe.userData.atem = true;
 
   welt.add(gruppe);
   teile.forEach(t => { t.grund = t.mat.opacity; });
@@ -295,7 +295,18 @@ function markeSetzen(schale, anteil) {
   // Deshalb die halbe Umdrehung Versatz und der positive Umlaufsinn.
   schale.gruppe.userData.marke.rotation.y = Math.PI + anteil * Math.PI * 2;
 }
-schalen.forEach(s => markeSetzen(s, s.schicht.jetzt));
+// ------------------------------------------------------------------ Die Zeit
+const RING_ENDE = RING_ANKER + 25800;
+let zeitJahr = jahrJetzt();
+let amJetzt = true;
+
+function markenAktualisieren() {
+  schalen.forEach(sch => {
+    if (sch.schicht.echtzeit) return;      // Atem und Herz laufen in Echtzeit
+    markeSetzen(sch, anteil(sch.schicht, zeitJahr));
+  });
+}
+markenAktualisieren();
 
 // ------------------------------------------------------------------- Steuerung
 let ebene = 0;            // welche Schicht ist aktiv
@@ -322,7 +333,7 @@ function zielOpazitaet(i, rolle) {
   if (i < ebene) return rolle === 'haut' ? 0.055 : 0;       // durchstoßen — nur noch ein Hauch
   if (i === ebene) return 1;                                // aktiv
   if (rolle === 'band') return 0.12;                        // tiefere Bänder nur andeuten
-  if (rolle === 'marke') return 0.10;
+  if (rolle === 'marke') return 0.06;
   return 0.34;                                              // Zwiebelhaut bleibt sichtbar
 }
 
@@ -379,6 +390,32 @@ addEventListener('keydown', e => {
 document.getElementById('tiefer').onclick = () => ebeneSetzen(ebene + 1);
 document.getElementById('hoeher').onclick = () => ebeneSetzen(ebene - 1);
 
+// --------------------------------------------------------- Zeitschieber
+const schieber = document.getElementById('schieber');
+const zeitAnzeige = document.getElementById('zeitAnzeige');
+const zeitleiste = document.getElementById('zeitleiste');
+
+schieber.min = RING_ANKER;
+schieber.max = RING_ENDE;
+schieber.step = 0.0005;
+schieber.value = zeitJahr;
+
+function zeitSetzen(j, jetzt = false, vomSchieber = false) {
+  zeitJahr = Math.min(RING_ENDE, Math.max(RING_ANKER, j));
+  amJetzt = jetzt;
+  if (!vomSchieber) schieber.value = zeitJahr;
+  zeitAnzeige.textContent = zeitText(zeitJahr, amJetzt);
+  zeitleiste.classList.toggle('verschoben', !amJetzt);
+  markenAktualisieren();
+  tafelZeitTeil();
+}
+
+schieber.addEventListener('input', () => zeitSetzen(parseFloat(schieber.value), false, true));
+document.getElementById('jetztKnopf').onclick = () => zeitSetzen(jahrJetzt(), true);
+document.querySelectorAll('#zeitSchritte button').forEach(b => {
+  b.onclick = () => zeitSetzen(zeitJahr + parseFloat(b.dataset.schritt), false);
+});
+
 // Tiefenleiste
 const leiste = document.getElementById('leiste');
 SCHICHTEN.forEach((s, i) => {
@@ -400,6 +437,35 @@ function leisteMarkieren() {
 // ----------------------------------------------------------------- Infotafel
 const tafel = document.getElementById('tafel');
 let tafelUhr = null;
+
+// Formatiert einen Termin je nach Länge des Zyklus grob oder auf den Monat genau
+function terminZeile(e, schicht) {
+  const fein = schicht.periode && schicht.periode < 40;
+  return `<li><b>${fein ? zeitText(e.jahr, false) : jahrText(e.jahr)}</b>${e.was}</li>`;
+}
+
+// Nur die zeitabhängigen Teile der Tafel erneuern
+function tafelZeitTeil() {
+  const s = SCHICHTEN[ebene];
+  const feld = tafel.querySelector('.jetztZeile');
+  if (feld) {
+    if (s.echtzeit) {
+      feld.innerHTML = `<span class="jetztPunkt"></span>${s.jetztText}`;
+    } else {
+      const { seg, vonJahr, bisJahr } = segmentBei(s, zeitJahr);
+      const spanne = s.periode >= 40
+        ? ` <em>${jahrText(vonJahr)} bis ${jahrText(bisJahr)}</em>` : '';
+      feld.innerHTML = `<span class="jetztPunkt"></span><span>
+        <b>${seg.name}</b>${seg.zusatz ? ', ' + seg.zusatz : ''}${spanne}
+        ${amJetzt ? `<br><i>${s.jetztText}</i>` : ''}</span>`;
+    }
+  }
+  const liste = tafel.querySelector('.termine');
+  if (liste && s.termine) {
+    liste.innerHTML = s.termine(zeitJahr).map(e => terminZeile(e, s)).join('');
+  }
+}
+
 function tafelFuellen(s) {
   tafel.classList.remove('ein');
   clearTimeout(tafelUhr);
@@ -411,10 +477,12 @@ function tafelFuellen(s) {
       <p class="dauer">${s.dauer}</p>
       <p class="unter">${s.untertitel}</p>
       <p class="fliess">${s.text}</p>
-      <p class="jetztZeile"><span class="jetztPunkt"></span>${s.jetztText}</p>
+      <p class="jetztZeile"></p>
+      ${s.termine ? '<p class="terminKopf">Termine</p><ul class="termine"></ul>' : ''}
       <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
       ${s.hinweis ? `<p class="hinweis">${s.hinweis}</p>` : ''}
       <p class="quelle">${s.quelle}</p>`;
+    tafelZeitTeil();
     tafel.classList.add('ein');
   }, 160);
 }
@@ -452,9 +520,9 @@ function bild() {
 
     // Marken der schnellen Zyklen laufen mit
     const s = sch.schicht;
-    if (s.periode) markeSetzen(sch, (t % s.periode) / s.periode);
-    if (s.periode) {
-      const ph = (t % s.periode) / s.periode;          // 0 … 1 im laufenden Zyklus
+    if (s.echtzeit) {
+      const ph = (t % s.echtzeit) / s.echtzeit;        // 0 … 1 im laufenden Zyklus
+      markeSetzen(sch, ph);
       if (sch.gruppe.userData.puls) {
         // Herzschlag: zwei kurze Stöße je Zyklus — Systole, dann die Klappen
         const p = 1 + 0.11 * Math.pow(Math.max(0, Math.sin(ph * Math.PI * 2)), 6)
@@ -486,11 +554,8 @@ groesse();
 
 welt.rotation.x = -0.34;
 ebeneSetzen(0, false);
+zeitSetzen(jahrJetzt(), true);
 bild();
 
-// Die Uhrzeitmarke der Tagesschicht einmal je Minute nachführen
-setInterval(() => {
-  const d = new Date();
-  const tag = schalen.find(s => s.schicht.name === 'Der Tag');
-  if (tag) markeSetzen(tag, (d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds()) / 86400);
-}, 30000);
+// Solange der Schieber auf der Gegenwart steht, läuft die Zeit weiter
+setInterval(() => { if (amJetzt) zeitSetzen(jahrJetzt(), true); }, 1000);
