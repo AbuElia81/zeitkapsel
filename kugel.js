@@ -387,6 +387,7 @@ function ebeneSetzen(neu, sanft = true) {
   ebene = Math.max(0, Math.min(SCHICHTEN.length - 1, neu));
   zielAbstand = abstandFuer(ebene);
   if (!sanft) istAbstand = zielAbstand;
+  ausrichten = true;
   tafelFuellen(SCHICHTEN[ebene]);
   leisteMarkieren();
 }
@@ -407,6 +408,28 @@ function zielOpazitaet(i, rolle) {
   return 0.34;                                              // Zwiebelhaut bleibt sichtbar
 }
 
+// ------------------------------------------------- Die Jetzt-Marke nach vorn
+// Nach jedem Wechsel von Schicht oder Zeit dreht sich die Kugel um ihre
+// Hochachse, bis die Marke zum Betrachter zeigt. Sobald jemand selbst zieht,
+// hört sie damit auf und bleibt stehen, wo sie steht.
+let ausrichten = true;
+const HOCH = new THREE.Vector3(0, 1, 0);
+
+function markeNachVorn(dt) {
+  const sch = schalen[ebene];
+  if (sch.schicht.echtzeit) { ausrichten = false; return; }
+  const psi = Math.PI + anteil(sch.schicht, zeitJahr) * Math.PI * 2;
+  const richtung = new THREE.Vector3(Math.cos(psi), 0, -Math.sin(psi))
+    .applyQuaternion(welt.quaternion);
+  const phi = Math.atan2(richtung.x, richtung.z);
+  if (Math.abs(phi) < 0.004) { ausrichten = false; return; }
+  // Um die eigene Hochachse der Kugel drehen, nicht um die des Bildschirms —
+  // sonst kippt die Neigung beim Ausrichten in eine Schräglage.
+  const achse = HOCH.clone().applyQuaternion(welt.quaternion);
+  welt.quaternion.premultiply(
+    new THREE.Quaternion().setFromAxisAngle(achse, -phi * Math.min(1, dt * 3.2)));
+}
+
 // --------------------------------------------------------------- Drehen (frei)
 let ziehend = false, letzteX = 0, letzteY = 0, vX = 0, vY = 0;
 const el = renderer.domElement;
@@ -421,7 +444,7 @@ function drehen(dx, dy) {
 }
 
 el.addEventListener('pointerdown', e => {
-  ziehend = true; letzteX = e.clientX; letzteY = e.clientY;
+  ziehend = true; ausrichten = false; letzteX = e.clientX; letzteY = e.clientY;
   el.setPointerCapture(e.pointerId); el.classList.add('greift');
 });
 el.addEventListener('pointermove', e => {
@@ -470,13 +493,14 @@ schieber.max = RING_ENDE;
 schieber.step = 0.0005;
 schieber.value = zeitJahr;
 
-function zeitSetzen(j, jetzt = false, vomSchieber = false) {
+function zeitSetzen(j, jetzt = false, vomSchieber = false, richten = true) {
   zeitJahr = Math.min(RING_ENDE, Math.max(RING_ANKER, j));
   amJetzt = jetzt;
   if (!vomSchieber) schieber.value = zeitJahr;
   zeitAnzeige.textContent = zeitText(zeitJahr, amJetzt);
   zeitleiste.classList.toggle('verschoben', !amJetzt);
   markenAktualisieren();
+  if (richten) ausrichten = true;
   menschSetzen(yugaLicht(zeitJahr));
   tafelZeitTeil();
 }
@@ -576,7 +600,7 @@ function bild() {
   if (!ziehend) {
     vX *= 0.94; vY *= 0.94;
     if (Math.abs(vX) > 0.02 || Math.abs(vY) > 0.02) drehen(vX, vY);
-    else drehen(0.12, 0);
+    else { vX = 0; vY = 0; if (ausrichten) markeNachVorn(dt); }
   }
 
   // Kamera sanft nachziehen
@@ -650,4 +674,4 @@ zeitSetzen(jahrJetzt(), true);
 bild();
 
 // Solange der Schieber auf der Gegenwart steht, läuft die Zeit weiter
-setInterval(() => { if (amJetzt) zeitSetzen(jahrJetzt(), true); }, 1000);
+setInterval(() => { if (amJetzt) zeitSetzen(jahrJetzt(), true, false, false); }, 1000);
