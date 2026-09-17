@@ -1,0 +1,17 @@
+{
+  "name": "Die Zeitkugel",
+  "short_name": "Zeitkugel",
+  "description": "Ein Zwiebelmodell der Zeit aus fünfzehn Zyklen, vom Yuga-Zyklus bis zum Herzschlag",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#05070d",
+  "theme_color": "#05070d",
+  "icons": [
+    { "src": "bilder/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "bilder/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "bilder/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -5,7 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Die Zeitkapsel — Die Zeitkugel</title>
 <meta name="description" content="Ein Zwiebelmodell der Zeit: vom 25.800-jährigen Yuga-Zyklus bis zum Herzschlag. Frei drehbar in alle Richtungen.">
-<link rel="stylesheet" href="stil.css?v=42">
+<link rel="icon" href="bilder/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="bilder/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#05070d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Zeitkugel">
+<link rel="stylesheet" href="stil.css?v=45">
 </head>
 <body>
 
@@ -38,7 +45,14 @@
     <p>Ein Zwiebelmodell der Zyklen — von der Präzession der Erdachse bis zum Herzschlag</p>
   </header>
 
-  <aside id="tafel" class="ein"></aside>
+  <div id="linkeSpalte">
+    <aside id="chronik" aria-live="polite">
+      <p class="chronikKopf"><span id="epoche">—</span></p>
+      <ul id="chronikListe"></ul>
+    </aside>
+
+    <aside id="tafel" class="ein"></aside>
+  </div>
 
   <nav id="leiste" aria-label="Zeitschichten"></nav>
 
@@ -50,6 +64,6 @@
   <p id="hinweisZeile">Ziehen dreht die Kugel · Scrollen taucht ein · ↑ ↓ blättert durch die Schichten · der Schieber oben verschiebt die Zeit</p>
 </main>
 
-<script type="module" src="kugel.js?v=42"></script>
+<script type="module" src="kugel.js?v=45"></script>
 </body>
 </html>

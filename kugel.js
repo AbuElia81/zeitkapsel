@@ -1,6 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
          yugaLicht, menschZustand, RING_ANKER } from './zyklen.js';
+import { ereignisseUm, epocheVon } from './geschichte.js';
 
 const HG = 0x05070d;
 
@@ -483,6 +484,34 @@ addEventListener('keydown', e => {
 document.getElementById('tiefer').onclick = () => ebeneSetzen(ebene + 1);
 document.getElementById('hoeher').onclick = () => ebeneSetzen(ebene - 1);
 
+// ------------------------------------------------------------------ Chronik
+// Was zu der eingestellten Zeit geschah — das jüngste Ereignis davor,
+// hervorgehoben, und die nächsten beiden danach.
+const chronik = document.getElementById('chronik');
+const chronikListe = document.getElementById('chronikListe');
+const epocheFeld = document.getElementById('epoche');
+let chronikUhr = null;
+
+function chronikFuellen() {
+  epocheFeld.textContent = epocheVon(zeitJahr);
+  const liste = ereignisseUm(zeitJahr);
+  chronikListe.innerHTML = liste.map(e => `
+    <li class="${e.laufend ? 'laufend' : ''}">
+      <b>${jahrText(e.jahr)}</b>
+      <span><em>${e.ort}</em>${e.was}</span>
+    </li>`).join('') ||
+    '<li><span>Vor dieser Zeit reicht keine Überlieferung zurück.</span></li>';
+
+  if (zeitJahr > 2035) {
+    chronikListe.insertAdjacentHTML('beforeend',
+      '<li class="laufend"><b>—</b><span>Hier endet die Überlieferung. Was folgt, steht nur noch im Zyklus.</span></li>');
+  }
+  // kurz aufleuchten, damit man den Wechsel bemerkt
+  chronik.classList.add('regt');
+  clearTimeout(chronikUhr);
+  chronikUhr = setTimeout(() => chronik.classList.remove('regt'), 700);
+}
+
 // --------------------------------------------------------- Zeitschieber
 const schieber = document.getElementById('schieber');
 const zeitAnzeige = document.getElementById('zeitAnzeige');
@@ -500,6 +529,7 @@ function zeitSetzen(j, jetzt = false, vomSchieber = false, richten = true) {
   zeitAnzeige.textContent = zeitText(zeitJahr, amJetzt);
   zeitleiste.classList.toggle('verschoben', !amJetzt);
   markenAktualisieren();
+  chronikFuellen();
   if (richten) ausrichten = true;
   menschSetzen(yugaLicht(zeitJahr));
   tafelZeitTeil();

@@ -55,11 +55,21 @@ main { position: relative; z-index: 1; height: 100%; }
 }
 
 /* -------------------------------------------------------------- Infotafel */
-#tafel {
-  position: absolute; left: clamp(1.1rem, 3vw, 2.6rem); bottom: clamp(4.6rem, 8vh, 6.4rem);
+/* Links stehen Chronik und Infotafel untereinander in einer Spalte und teilen
+   sich die Höhe: die Chronik so hoch wie nötig, die Tafel nimmt den Rest. */
+#linkeSpalte {
+  position: absolute; left: clamp(1.1rem, 3vw, 2.6rem);
+  top: clamp(8rem, 16vh, 9.5rem); bottom: clamp(2.6rem, 6vh, 4rem);
   width: min(24rem, 34vw);
-  max-height: 58vh; overflow-y: auto; overscroll-behavior: contain;
-  padding: 1.35rem 1.5rem 1.4rem;
+  display: flex; flex-direction: column; gap: .7rem;
+  pointer-events: none;
+}
+#linkeSpalte > * { pointer-events: auto; }
+
+#tafel {
+  flex: 1 1 auto; min-height: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: 1.2rem 1.4rem 1.3rem;
   background: linear-gradient(155deg, rgba(10,13,22,.80), rgba(6,8,14,.68));
   border: 1px solid var(--linie);
   border-left: 2px solid var(--ton);
@@ -182,14 +192,16 @@ main { position: relative; z-index: 1; height: 100%; }
 @media (max-width: 900px) {
   #kopf { max-width: 60vw; }
   #kopf p { display: none; }
-  #tafel {
-    left: 0; right: 0; bottom: 0; width: auto;
-    max-height: 44vh; border-left: 0; border-top: 2px solid var(--ton);
-    border-radius: 0; padding: 1rem 1.1rem 3.2rem;
+  #linkeSpalte {
+    left: 0; right: 0; bottom: 0; top: auto; width: auto;
+    max-height: 46vh; gap: 0;
   }
-  #tafel { max-height: 40vh; }
+  #tafel {
+    border-left: 0; border-top: 2px solid var(--ton);
+    border-radius: 0; padding: .9rem 1.1rem 3.2rem;
+  }
   #leiste {
-    top: auto; bottom: calc(40vh + .55rem); left: 0; right: 0; transform: none;
+    top: auto; bottom: calc(46vh + .55rem); left: 0; right: 0; transform: none;
     flex-direction: row; justify-content: center; align-items: center;
     gap: .1rem; max-height: none; padding: .3rem .5rem;
   }
@@ -286,7 +298,7 @@ main { position: relative; z-index: 1; height: 100%; }
 
 @media (max-width: 900px) {
   #zeitleiste {
-    top: auto; bottom: calc(40vh + 3rem); left: .6rem; right: .6rem;
+    top: auto; bottom: calc(46vh + 3.1rem); left: .6rem; right: .6rem;
     width: auto; min-width: 0; transform: none;
     padding: .5rem .7rem .45rem;
   }
@@ -306,3 +318,47 @@ main { position: relative; z-index: 1; height: 100%; }
 /* Auf flachen Bildschirmen rückt die Zyklenleiste wieder etwas enger zusammen,
    damit alle fünfzehn Schichten ohne Scrollen nebeneinander stehen. */
 
+
+/* ------------------------------------------------------------------ Chronik */
+#chronik {
+  flex: none;
+  padding: .7rem .9rem .75rem;
+  background: linear-gradient(155deg, rgba(10,13,22,.76), rgba(6,8,14,.62));
+  border: 1px solid var(--linie); border-left: 2px solid rgba(255,242,208,.4);
+  border-radius: 3px;
+  backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+  transition: border-left-color .5s ease, box-shadow .5s ease;
+}
+#chronik.regt {
+  border-left-color: #fff2d0;
+  box-shadow: -6px 0 22px -14px rgba(255,242,208,.9);
+}
+
+.chronikKopf {
+  margin: 0 0 .5rem; font-size: .64rem; letter-spacing: .2em; text-transform: uppercase;
+  color: #a2937a;
+}
+#chronikListe { margin: 0; padding: 0; list-style: none; }
+#chronikListe li {
+  display: flex; gap: .55rem; align-items: baseline;
+  margin-bottom: .4rem; font-size: .74rem; line-height: 1.42;
+  color: #8d8577; opacity: .78;
+}
+#chronikListe li:last-child { margin-bottom: 0; }
+#chronikListe li b {
+  flex: none; min-width: 5.4rem; font-weight: 400;
+  font-variant-numeric: tabular-nums; color: #9b9080;
+}
+#chronikListe li em { display: block; font-style: normal; color: #9b9080; }
+#chronikListe li.laufend { color: #ddd6c8; opacity: 1; font-size: .79rem; }
+#chronikListe li.laufend b { color: #fff2d0; }
+#chronikListe li.laufend em { color: var(--ton); }
+
+@media (max-width: 900px) {
+  #chronik {
+    border-left: 0; border-top: 1px solid var(--linie);
+    border-radius: 0; padding: .5rem 1.1rem .55rem;
+  }
+  #chronikListe li:not(.laufend) { display: none; }
+  #chronikListe li { font-size: .72rem; }
+}

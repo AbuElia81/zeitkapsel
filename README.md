@@ -40,6 +40,15 @@ gerade steht und von wann bis wann der läuft. Die Schrittknöpfe springen um
 
 Atemzug und Herzschlag folgen dem Schieber nicht — sie laufen in Echtzeit.
 
+## Die Chronik
+
+Links neben der Kugel steht, was zu der eingestellten Zeit geschah: die Epoche,
+das jüngste Ereignis davor — hervorgehoben — und die nächsten danach. Knapp
+fünfzig Marken spannen den Bogen vom Ende der Jüngeren Dryaszeit über Göbekli
+Tepe, Çatalhöyük, Varna, Uruk, Gizeh, den Bronzezeitkollaps und die Achsenzeit
+bis in die Gegenwart. Jenseits von 2035 endet die Überlieferung; dort trägt nur
+noch der Zyklus.
+
 ## Der Mensch im Kern
 
 Im Innersten steht kein Punkt mehr, sondern ein Mensch mit leuchtendem Herzen.
@@ -89,7 +98,14 @@ Statische Seiten, kein Build.
 - `zyklen.js` — die fünfzehn Schichten mit Anker, Periode, Texten und Terminen
 - `kugel.js` — die Szene (Three.js): Schalen, Bänder, Drehung, Eintauchen
 - `vendor/three.module.js` — Three.js r169, mitgeliefert
+- `geschichte.js` — die historischen Marken und die Epocheneinteilung
 - `bilder/milchstrasse.jpg` — Hintergrund, erzeugt mit `gemini-3-pro-image`
+- `bilder/icon-*.png`, `site.webmanifest` — Symbol für den Startbildschirm
+
+## Auf den Startbildschirm legen
+
+In Safari die Seite öffnen, Teilen → „Zum Home-Bildschirm". Sie erscheint dann
+als **Zeitkugel** mit eigenem Symbol und startet ohne Browserleiste.
 
 Veröffentlichung über GitHub Pages (Quelle `main` / Root), jeder Push auf `main`
 geht sofort live: **https://abuelia81.github.io/zeitkapsel/**
