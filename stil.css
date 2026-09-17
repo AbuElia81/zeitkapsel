@@ -137,7 +137,7 @@ main { position: relative; z-index: 1; height: 100%; }
 /* Die Zeilenhöhe wächst mit dem Fenster, bleibt aber so bemessen, dass alle
    fünfzehn Schichten ohne Scrollen untereinander stehen. */
 #leiste {
-  --zeile: min(5.4vh, 58px);
+  --zeile: min(5.05vh, 54px);
   position: absolute; right: clamp(1.2rem, 4vw, 4.5rem); top: 50%; transform: translateY(-50%);
   display: flex; flex-direction: column; gap: 1px;
   max-height: 94vh; overflow-y: auto; overscroll-behavior: contain;
@@ -362,3 +362,25 @@ main { position: relative; z-index: 1; height: 100%; }
   #chronikListe li:not(.laufend) { display: none; }
   #chronikListe li { font-size: .72rem; }
 }
+
+/* Art des Ereignisses: Himmel, Natur, Menschenwerk */
+#chronikListe li b { display: flex; align-items: baseline; gap: .38rem; }
+#chronikListe li .art {
+  flex: none; width: 5px; height: 5px; border-radius: 50%;
+  background: #8d8577; opacity: .8;
+}
+#chronikListe li.himmel .art { background: #8fb6f0; }
+#chronikListe li.natur  .art { background: #e0724f; }
+#chronikListe li.kultur .art { background: #d9b46a; }
+#chronikListe li.laufend .art { box-shadow: 0 0 7px currentColor; opacity: 1; }
+#chronikListe li.laufend.himmel .art { box-shadow: 0 0 7px #8fb6f0; }
+#chronikListe li.laufend.natur  .art { box-shadow: 0 0 7px #e0724f; }
+#chronikListe li.laufend.kultur .art { box-shadow: 0 0 7px #d9b46a; }
+
+#halley {
+  margin: .6rem 0 0; padding-top: .5rem;
+  border-top: 1px solid rgba(236,231,220,.09);
+  font-size: .7rem; line-height: 1.4; color: #8fa3bd;
+  font-variant-numeric: tabular-nums;
+}
+#halley::before { content: "☄ "; opacity: .7; }

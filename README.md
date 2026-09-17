@@ -6,7 +6,7 @@
 
 ## Die Zeitkugel
 
-Ein Zwiebelmodell der Zeit: fünfzehn ineinander liegende Schalen, jede ein Zyklus,
+Ein Zwiebelmodell der Zeit: sechzehn ineinander liegende Schalen, jede ein Zyklus,
 von außen nach innen immer kürzer. Die Kugel lässt sich mit der Maus frei in
 jede Richtung drehen; Scrollen, die Pfeiltasten oder die Leiste am Rand tauchen
 Schicht für Schicht nach innen — bis zum Kern.
@@ -23,11 +23,12 @@ Schicht für Schicht nach innen — bis zum Kern.
 | 8 | Mondknoten-Zyklus | 18,61 Jahre |
 | 9 | Jupiter-Zyklus | 11,86 Jahre |
 | 10 | Venus-Zyklus | 8 Jahre |
-| 11 | Das Jahr | 365,2422 Tage |
-| 12 | Der Mondmonat | 29,53 Tage |
-| 13 | Der Tag | 23 h 56 min 4 s |
-| 14 | Der Atemzug | rund 4 Sekunden |
-| 15 | Der Herzschlag | rund 0,9 Sekunden |
+| 11 | Der Tauriden-Schwarm | 3,3 Jahre |
+| 12 | Das Jahr | 365,2422 Tage |
+| 13 | Der Mondmonat | 29,53 Tage |
+| 14 | Der Tag | 23 h 56 min 4 s |
+| 15 | Der Atemzug | rund 4 Sekunden |
+| 16 | Der Herzschlag | rund 1,2 Sekunden |
 
 ## Der Zeitschieber
 
@@ -43,11 +44,25 @@ Atemzug und Herzschlag folgen dem Schieber nicht — sie laufen in Echtzeit.
 ## Die Chronik
 
 Links neben der Kugel steht, was zu der eingestellten Zeit geschah: die Epoche,
-das jüngste Ereignis davor — hervorgehoben — und die nächsten danach. Knapp
-fünfzig Marken spannen den Bogen vom Ende der Jüngeren Dryaszeit über Göbekli
-Tepe, Çatalhöyük, Varna, Uruk, Gizeh, den Bronzezeitkollaps und die Achsenzeit
-bis in die Gegenwart. Jenseits von 2035 endet die Überlieferung; dort trägt nur
-noch der Zyklus.
+das jüngste Ereignis davor — hervorgehoben — und die nächsten danach. 112 Marken
+spannen den Bogen vom Ende der Jüngeren Dryaszeit bis in die Gegenwart, jede nach
+ihrer Art gekennzeichnet:
+
+- **Himmel** (33) — Kometen, Einschläge, Finsternisse, Sternexplosionen: die
+  Halley-Erscheinungen von 240 v. Chr. bis 1986, SN 1006 und SN 1054, Tychos und
+  Keplers Supernova, die Krater von Henbury, Campo del Cielo und Kaali, der
+  Leonidensturm von 1833, das Carrington-Ereignis, Tunguska, Tscheljabinsk
+- **Natur** (27) — die Jüngere Dryaszeit, die Storegga-Rutschung und das
+  8,2-ka-Ereignis, die umstrittene Schwarzmeerflutung, das Ende der Grünen
+  Sahara, die 4,2-ka-Dürre, Thera, Hekla 3, der Staubschleier von 536, Samalas
+  1257, Lissabon, Laki, Tambora, Krakatau
+- **Kultur** (52) — von Göbekli Tepe über Varna, Uruk und Gizeh bis heute
+
+Darunter steht die Wiederkehr des Halleyschen Kometen: welche Erscheinung vor der
+eingestellten Zeit lag und welche als nächste kommt — aus der Liste der wirklich
+verzeichneten Jahre, weil seine Umlaufzeit zwischen 74 und 79 Jahren schwankt.
+
+Jenseits von 2035 endet die Überlieferung; dort trägt nur noch der Zyklus.
 
 ## Der Mensch im Kern
 
@@ -95,7 +110,7 @@ läuft sie in Echtzeit mit.
 Statische Seiten, kein Build.
 
 - `index.html`, `stil.css` — Seite und Gestaltung
-- `zyklen.js` — die fünfzehn Schichten mit Anker, Periode, Texten und Terminen
+- `zyklen.js` — die sechzehn Schichten mit Anker, Periode, Texten und Terminen
 - `kugel.js` — die Szene (Three.js): Schalen, Bänder, Drehung, Eintauchen
 - `vendor/three.module.js` — Three.js r169, mitgeliefert
 - `geschichte.js` — die historischen Marken und die Epocheneinteilung

@@ -456,11 +456,53 @@ export const SCHICHTEN = [
   },
 
   {
+    name: 'Der Tauriden-Schwarm',
+    dauer: '3,3 Jahre',
+    untertitel: 'Der Umlauf des Kometen Encke',
+    quelle: 'Asher & Clube zur 7:2-Resonanz; Clube & Napier, „The Cosmic Winter“',
+    radius: 2.09,
+    farbe: '#5e8cd9',
+    einheit: 'Jahre',
+    anker: 2023.81,
+    periode: 3.30,
+    text: `Der kürzeste Kometenzyklus, den wir kennen: 2P/Encke braucht nur 3,3 Jahre
+      für einen Umlauf. Auf seiner Bahn zieht er eine Spur aus Staub und Brocken hinter
+      sich her — die Tauriden, durch die die Erde jedes Jahr von Ende Oktober bis Anfang
+      Dezember fliegt. Sieben Umläufe Enckes dauern 23,1 Jahre und damit fast genau so
+      lang wie zwei Jupiterjahre. Diese 7:2-Resonanz ballt das Material zu einem
+      dichteren Schwarm zusammen, den die Erde nur alle drei bis sieben Jahre trifft.`,
+    fakten: [
+      'Encke hat mit 3,3 Jahren die kürzeste Umlaufzeit aller bekannten Kometen',
+      '7 Umläufe Enckes = 23,1 Jahre ≈ 2 Jupiterjahre = 23,7 Jahre — die 7:2-Resonanz',
+      'Verdichtete Schwarmbegegnungen: 1998, 2005, 2015, 2022 — 2032 besonders günstig',
+      'Die Tunguska-Explosion von 1908 fiel in die Zeit der Beta-Tauriden',
+      'Clube und Napier führen den ganzen Komplex auf einen Riesenkometen zurück, der vor rund 20.000 Jahren zerbrach',
+      'Rund 7.800 Encke-Umläufe füllen einen Yuga-Zyklus'
+    ],
+    hinweis: `Genau auf diesen Schwarm stützt Misra seinen Kataklysmos: wiederkehrende
+      Einschläge aus dem Tauriden-Komplex. Der Schwarm ist gemessen, der Zusammenhang
+      mit den Katastrophenzeiten des Yuga-Zyklus ist seine These.`,
+    segmente: [
+      { name: 'Perihel', laenge: 0.4, art: 'hoch', zusatz: 'sonnennah' },
+      { name: 'Auswärts', laenge: 1.25, art: 'ab' },
+      { name: 'Aphel', laenge: 0.4, art: 'tief', zusatz: 'jenseits des Jupiter' },
+      { name: 'Einwärts', laenge: 1.25, art: 'auf' }
+    ],
+    termine: (j) => {
+      const schwaerme = [1988, 1995, 1998, 2005, 2015, 2022, 2032];
+      const nah = schwaerme.filter(y => y >= j - 12).slice(0, 4);
+      if (!nah.length) return [{ jahr: 1998, grob: true, was: 'Erste gut vermessene Schwarmbegegnung' }];
+      return nah.map(y => ({ jahr: y, grob: true, was: y === 2032 ? 'Schwarmbegegnung — besonders günstig' : 'Schwarmbegegnung' }));
+    },
+    jetztText: 'Encke lief im Oktober 2023 durch sein Perihel; die nächste Annäherung folgt 2027.'
+  },
+
+  {
     name: 'Das Jahr',
     dauer: '365,2422 Tage',
     untertitel: 'Ein Umlauf der Erde um die Sonne',
     quelle: 'tropisches Jahr',
-    radius: 2.05,
+    radius: 1.91,
     farbe: '#5696d9',
     einheit: 'Tage',
     anker: 2000.216,
@@ -490,7 +532,7 @@ export const SCHICHTEN = [
     dauer: '29,53 Tage',
     untertitel: 'Von Neumond zu Neumond',
     quelle: 'synodischer Monat',
-    radius: 1.80,
+    radius: 1.73,
     farbe: '#48a8d2',
     einheit: 'Tage',
     anker: 2000.01851,
@@ -556,7 +598,7 @@ export const SCHICHTEN = [
     dauer: 'rund 4 Sekunden',
     untertitel: 'Zwölf bis achtzehn Mal in der Minute',
     quelle: 'Ruheatmung eines Erwachsenen',
-    radius: 1.18,
+    radius: 1.16,
     farbe: '#5ec98b',
     einheit: 'Sekunden',
     echtzeit: 4,
@@ -584,7 +626,7 @@ export const SCHICHTEN = [
     dauer: 'rund 1,2 Sekunden',
     untertitel: 'Der Kern der Zeitkugel',
     quelle: 'ruhiger Puls von etwa 50 Schlägen je Minute',
-    radius: 0.70,
+    radius: 0.68,
     farbe: '#f0654f',
     kern: true,
     einheit: 'Sekunden',

@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js';
-import { ereignisseUm, epocheVon } from './geschichte.js';
+         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=48';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=48';
 
 const HG = 0x05070d;
 
@@ -490,14 +490,15 @@ document.getElementById('hoeher').onclick = () => ebeneSetzen(ebene - 1);
 const chronik = document.getElementById('chronik');
 const chronikListe = document.getElementById('chronikListe');
 const epocheFeld = document.getElementById('epoche');
+const halleyFeld = document.getElementById('halley');
 let chronikUhr = null;
 
 function chronikFuellen() {
   epocheFeld.textContent = epocheVon(zeitJahr);
   const liste = ereignisseUm(zeitJahr);
   chronikListe.innerHTML = liste.map(e => `
-    <li class="${e.laufend ? 'laufend' : ''}">
-      <b>${jahrText(e.jahr)}</b>
+    <li class="${e.laufend ? 'laufend' : ''} ${e.art}">
+      <b><i class="art"></i>${jahrText(e.jahr)}</b>
       <span><em>${e.ort}</em>${e.was}</span>
     </li>`).join('') ||
     '<li><span>Vor dieser Zeit reicht keine Überlieferung zurück.</span></li>';
@@ -506,6 +507,13 @@ function chronikFuellen() {
     chronikListe.insertAdjacentHTML('beforeend',
       '<li class="laufend"><b>—</b><span>Hier endet die Überlieferung. Was folgt, steht nur noch im Zyklus.</span></li>');
   }
+
+  // Der Komet, der als einziger in ein Menschenleben zweimal passt
+  const h = halleyUm(zeitJahr);
+  halleyFeld.innerHTML = h.letzte === null
+    ? `Halleyscher Komet — erste überlieferte Erscheinung ${jahrText(h.naechste)}`
+    : `Halleyscher Komet — zuletzt ${jahrText(h.letzte)}` +
+      (h.naechste ? `, wieder ${jahrText(h.naechste)}` : '');
   // kurz aufleuchten, damit man den Wechsel bemerkt
   chronik.classList.add('regt');
   clearTimeout(chronikUhr);
@@ -565,7 +573,7 @@ let tafelUhr = null;
 
 // Formatiert einen Termin je nach Länge des Zyklus grob oder auf den Monat genau
 function terminZeile(e, schicht) {
-  const fein = schicht.periode && schicht.periode < 40;
+  const fein = schicht.periode && schicht.periode < 40 && !e.grob;
   return `<li><b>${fein ? zeitText(e.jahr, false) : jahrText(e.jahr)}</b>${e.was}</li>`;
 }
 
