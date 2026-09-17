@@ -1,5 +1,9 @@
 # Die Zeitkapsel
 
+## ▶ [Die Zeitkugel öffnen — abuelia81.github.io/zeitkapsel](https://abuelia81.github.io/zeitkapsel/)
+
+---
+
 ## Die Zeitkugel
 
 Ein Zwiebelmodell der Zeit: fünfzehn ineinander liegende Schalen, jede ein Zyklus,
@@ -87,8 +91,8 @@ Statische Seiten, kein Build.
 - `vendor/three.module.js` — Three.js r169, mitgeliefert
 - `bilder/milchstrasse.jpg` — Hintergrund, erzeugt mit `gemini-3-pro-image`
 
-Veröffentlichung über GitHub Pages (Quelle `main` / Root):
-https://abuelia81.github.io/zeitkapsel/
+Veröffentlichung über GitHub Pages (Quelle `main` / Root), jeder Push auf `main`
+geht sofort live: **https://abuelia81.github.io/zeitkapsel/**
 
 ## Lokal ansehen
 
