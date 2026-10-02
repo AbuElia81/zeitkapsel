@@ -41,6 +41,29 @@ gerade steht und von wann bis wann der läuft. Die Schrittknöpfe springen um
 
 Atemzug und Herzschlag folgen dem Schieber nicht — sie laufen in Echtzeit.
 
+## Ovids Weltalter
+
+Die äußerste Schale trägt eine zweite Lesart: Ovid schreibt in den *Metamorphosen*
+(8 n. Chr.) achtzehn Jahrhunderte vor Misra dieselbe Folge nieder.
+
+| Yuga | Ovid | Stelle |
+|------|------|--------|
+| Satya | Goldenes Zeitalter — *aurea aetas* | I, 89–112 |
+| Treta | Silbernes Zeitalter — *argentea* | I, 113–124 |
+| Dwapara | Ehernes Zeitalter — *aenea* | I, 125–127 |
+| Kali | Eisernes Zeitalter — *ferrea* | I, 127–150 |
+| Kataklysmos | Deukalions Flut | I, 253–415 |
+| Ekpyrosis | Phaethons Fahrt | II, 1–400 |
+
+Vier absteigende Weltalter, benannt nach denselben vier Metallen — und danach
+beide Katastrophen, erst die Flut, dann der Weltenbrand. Schiebt man die Zeit,
+zeigt die Infotafel zu jedem Abschnitt die passende Ovid-Stelle.
+
+Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm geht es nur
+abwärts — der aufsteigende Bogen fehlt. Seine Vorlage, Hesiods *Werke und Tage*,
+kennt sogar fünf Geschlechter: zwischen Erz und Eisen steht dort noch das der
+Heroen. Ovid lässt es weg und kommt damit auf genau vier.
+
 ## Die Chronik
 
 Links neben der Kugel steht, was zu der eingestellten Zeit geschah: die Epoche,

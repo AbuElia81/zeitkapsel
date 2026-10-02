@@ -57,6 +57,7 @@ const ROH = [
   [-221,   'kultur', 'China', 'Qin Shihuangdi einigt China; Große Mauer und Terrakottaarmee entstehen'],
   [-150,   'kultur', 'Antikythera, Ägäis', 'Ein Räderwerk aus Bronze rechnet Sonnen- und Mondstände und Finsternisse voraus'],
   [-44,    'himmel', 'Rom', 'Nach Caesars Tod steht sieben Tage lang ein Komet am Himmel; das Volk sieht darin seine Vergöttlichung'],
+  [8,      'kultur', 'Rom und Tomis', 'Ovid vollendet die Metamorphosen: vier absteigende Weltalter aus Gold, Silber, Erz und Eisen, danach Deukalions Flut und Phaethons Weltenbrand'],
   [30,     'kultur', 'Judäa', 'Die Anfänge des Christentums im römischen Osten'],
   [79,     'natur',  'Pompeji, Golf von Neapel', 'Der Vesuv begräbt Pompeji und Herculaneum unter Asche und Glutlawinen'],
   [105,    'kultur', 'China', 'Das Papier wird am Kaiserhof eingeführt'],

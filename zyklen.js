@@ -130,28 +130,83 @@ export const SCHICHTEN = [
       'Zwei der acht 300-Jahr-Übergänge stecken bereits in den Katastrophenzeiten',
       'Das absteigende Kali Yuga läuft nach Misra von 676 v. Chr. bis 2025 n. Chr.',
       'Das schmale Band darüber: der Kern der Milchstraße schaltet ein, ist aktiv, schaltet ab',
-      'Die 25.800 Jahre sind astronomisch belegt — die Yuga-Zuordnung ist Misras These'
+      'Die 25.800 Jahre sind astronomisch belegt — die Yuga-Zuordnung ist Misras These',
+      'Ovid erzählt dieselbe Abfolge: Gold, Silber, Erz, Eisen — und beide Katastrophen'
     ],
+    vergleich: {
+      titel: 'Ovid, Metamorphosen',
+      quelle: 'Buch I, 89–150 und I, 253–415; Buch II, 1–400 (8 n. Chr.)',
+      einleitung: `Ovid schreibt achtzehn Jahrhunderte vor Misra dieselbe Folge nieder —
+        vier absteigende Weltalter, benannt nach denselben vier Metallen, und danach
+        beide Katastrophen: erst die Flut, dann der Weltenbrand.`,
+      zeilen: [
+        ['Satya', 'Goldenes Zeitalter', 'aurea aetas'],
+        ['Treta', 'Silbernes Zeitalter', 'argentea'],
+        ['Dwapara', 'Ehernes Zeitalter', 'aenea'],
+        ['Kali', 'Eisernes Zeitalter', 'ferrea'],
+        ['Kataklysmos', 'Deukalions Flut', 'I, 253–415'],
+        ['Ekpyrosis', 'Phaethons Fahrt', 'II, 1–400']
+      ],
+      nachsatz: `Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm
+        geht es nur abwärts — der aufsteigende Bogen fehlt. Seine Vorlage, Hesiods
+        „Werke und Tage“, kennt sogar fünf Geschlechter: zwischen Erz und Eisen steht
+        dort noch das der Heroen. Ovid lässt es weg und kommt damit auf genau vier —
+        dieselbe Zahl wie die Yugas.`
+    },
     hinweis: `Die Präzession ist gemessene Astronomie. Die Einteilung in Yugas und die Kopplung
       an das galaktische Zentrum sind Misras Deutung und keine gesicherte Wissenschaft —
       alle tieferen Schichten dieser Kugel dagegen sind messbare Zyklen.`,
     segmente: [
-      { name: 'Kataklysmos', laenge: 1200, art: 'katastrophe', licht: [1, 1] },
-      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [1, 0.75] },
+      { name: 'Kataklysmos', laenge: 1200, art: 'katastrophe', licht: [1, 1],
+        ovid: { alter: 'Deukalions Flut', stelle: 'Metamorphosen I, 253–415',
+          was: `Jupiter ertränkt das eiserne Geschlecht. Nur Deukalion und Pyrrha
+            überleben auf dem Parnass und werfen die Gebeine der großen Mutter —
+            Steine — hinter sich, aus denen neue Menschen wachsen.` } },
+      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [1, 0.75],
+        ovid: { alter: 'Goldenes Zeitalter', latein: 'aurea aetas', stelle: 'Metamorphosen I, 89–112',
+          was: `Unter Saturns Herrschaft. Kein Gesetz, kein Richter, kein Krieg — die
+            Menschen tun das Rechte aus freien Stücken. Ewiger Frühling, die Erde gibt
+            ungepflügt, in den Bächen fließen Milch und Nektar.` } },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.75, 0.5] },
+      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.75, 0.5],
+        ovid: { alter: 'Silbernes Zeitalter', latein: 'argentea', stelle: 'Metamorphosen I, 113–124',
+          was: `Jupiter stürzt Saturn und zerbricht den ewigen Frühling in vier
+            Jahreszeiten. Zum ersten Mal suchen die Menschen Schutz in Häusern und
+            müssen den Acker pflügen.` } },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.5, 0.25] },
+      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.5, 0.25],
+        ovid: { alter: 'Ehernes Zeitalter', latein: 'aenea', stelle: 'Metamorphosen I, 125–127',
+          was: `Schärfer im Sinn und schneller bei den Waffen — aber noch nicht
+            ruchlos.` } },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.25, 0] },
-      { name: 'Ekpyrosis', laenge: 1200, art: 'katastrophe', licht: [0, 0] },
-      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0, 0.25] },
+      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.25, 0],
+        ovid: { alter: 'Eisernes Zeitalter', latein: 'ferrea', stelle: 'Metamorphosen I, 127–150',
+          was: `Scham, Wahrheit und Treue weichen; an ihre Stelle treten List, Gewalt
+            und Habgier. Man sticht in See, teilt den Boden auf, gräbt nach Erz. Als
+            letzte der Götter verlässt Astraea, die Gerechtigkeit, die Erde.` } },
+      { name: 'Ekpyrosis', laenge: 1200, art: 'katastrophe', licht: [0, 0],
+        ovid: { alter: 'Phaethons Fahrt', stelle: 'Metamorphosen II, 1–400',
+          was: `Der Sonnenwagen gerät außer Kontrolle und setzt die Erde in Brand.
+            Schon vorher erinnert sich Jupiter, es sei vom Schicksal bestimmt, dass
+            einst Meer, Land und Himmelsburg brennen werden (I, 256–258).` } },
+      { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0, 0.25],
+        ovid: { alter: 'Eisernes Zeitalter', latein: 'ferrea', stelle: 'Metamorphosen I, 127–150',
+          was: `Bei Ovid endet die Reihe hier. Dass es nach dem Eisen wieder aufwärts
+            geht, steht nicht bei ihm — das ist der entscheidende Unterschied zum
+            Yuga-Zyklus.` } },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0.25, 0.5] },
+      { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0.25, 0.5],
+        ovid: { alter: 'Ehernes Zeitalter', latein: 'aenea', stelle: 'Metamorphosen I, 125–127',
+          was: `Dieselbe Stufe, nun aufwärts gelesen: schon wieder Erz statt Eisen.` } },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0.5, 0.75] },
+      { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0.5, 0.75],
+        ovid: { alter: 'Silbernes Zeitalter', latein: 'argentea', stelle: 'Metamorphosen I, 113–124',
+          was: `Die Jahreszeiten mildern sich wieder, das Silber kehrt zurück.` } },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
-      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0.75, 1] }
+      { name: 'Satya', laenge: 2700, art: 'yuga', zusatz: 'aufsteigend', licht: [0.75, 1],
+        ovid: { alter: 'Goldenes Zeitalter', latein: 'aurea aetas', stelle: 'Metamorphosen I, 89–112',
+          was: `Saturns Zeit kehrt wieder — was Vergil in der vierten Ekloge der
+            Menschheit verheißt: „iam redit et Virgo, redeunt Saturnia regna“.` } }
     ],
     nebenband: {
       titel: 'Der galaktische Kern — Sgr A*',

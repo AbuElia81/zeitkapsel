@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=48';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=48';
+         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=49';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=49';
 
 const HG = 0x05070d;
 
@@ -593,6 +593,17 @@ function tafelZeitTeil() {
         ${amJetzt ? `<br><i>${s.jetztText}</i>` : ''}</span>`;
     }
   }
+  const ov = tafel.querySelector('.ovidZeile');
+  if (ov) {
+    const { seg } = segmentBei(s, zeitJahr);
+    ov.innerHTML = seg.ovid ? `
+      <span class="ovidKopf">Bei Ovid</span>
+      <b>${seg.ovid.alter}</b>${seg.ovid.latein ? ` <i>${seg.ovid.latein}</i>` : ''}
+      <span class="ovidStelle">${seg.ovid.stelle}</span>
+      <span class="ovidText">${seg.ovid.was}</span>` : '';
+    ov.style.display = seg.ovid ? '' : 'none';
+  }
+
   const mz = tafel.querySelector('.menschZeile');
   if (mz) {
     const l = yugaLicht(zeitJahr);
@@ -617,9 +628,17 @@ function tafelFuellen(s) {
       <p class="unter">${s.untertitel}</p>
       <p class="fliess">${s.text}</p>
       <p class="jetztZeile"></p>
+      ${s.vergleich ? '<div class="ovidZeile"></div>' : ''}
       ${s.kern ? '<p class="menschZeile"></p>' : ''}
       ${s.termine ? '<p class="terminKopf">Termine</p><ul class="termine"></ul>' : ''}
       <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
+      ${s.vergleich ? `
+        <p class="terminKopf">${s.vergleich.titel}</p>
+        <p class="fliess klein">${s.vergleich.einleitung}</p>
+        <table class="vergleich">${s.vergleich.zeilen.map(([a, b, c]) =>
+          `<tr><td>${a}</td><td>${b}</td><td><i>${c}</i></td></tr>`).join('')}</table>
+        <p class="hinweis">${s.vergleich.nachsatz}</p>
+        <p class="quelle quelleKlein">${s.vergleich.quelle}</p>` : ''}
       ${s.hinweis ? `<p class="hinweis">${s.hinweis}</p>` : ''}
       <p class="quelle">${s.quelle}</p>`;
     tafelZeitTeil();

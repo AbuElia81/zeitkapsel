@@ -384,3 +384,39 @@ main { position: relative; z-index: 1; height: 100%; }
   font-variant-numeric: tabular-nums;
 }
 #halley::before { content: "☄ "; opacity: .7; }
+
+/* ------------------------------------------------------- Ovids Weltalter */
+#tafel .ovidZeile {
+  margin: -.4rem 0 1rem; padding: .6rem .75rem;
+  background: rgba(255,242,208,.045);
+  border-left: 1px solid var(--ton); border-radius: 0 2px 2px 0;
+  font-size: .78rem; line-height: 1.5;
+}
+#tafel .ovidKopf {
+  display: block; margin-bottom: .2rem;
+  font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ton); opacity: .8;
+}
+#tafel .ovidZeile b { font-weight: 400; color: #f2e7cf; }
+#tafel .ovidZeile > i { color: var(--gedaempft); }
+#tafel .ovidStelle {
+  display: block; margin: .05rem 0 .3rem;
+  font-size: .66rem; color: #6f695d; font-variant-numeric: tabular-nums;
+}
+#tafel .ovidText { display: block; color: #cdc5b6; }
+
+#tafel .fliess.klein { font-size: .8rem; margin-bottom: .6rem; }
+#tafel table.vergleich {
+  width: 100%; border-collapse: collapse; margin: 0 0 .8rem;
+  font-size: .76rem;
+}
+#tafel table.vergleich td {
+  padding: .22rem .4rem .22rem 0; vertical-align: top;
+  border-bottom: 1px solid rgba(236,231,220,.07);
+}
+#tafel table.vergleich td:first-child { color: var(--ton); white-space: nowrap; }
+#tafel table.vergleich td:nth-child(2) { color: #ddd6c8; }
+#tafel table.vergleich td:last-child {
+  color: #7d7568; text-align: right; white-space: nowrap; font-size: .7rem;
+}
+#tafel .quelle.quelleKlein { margin: -.4rem 0 1rem; }
