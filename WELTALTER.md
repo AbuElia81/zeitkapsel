@@ -14,15 +14,16 @@ erwartet — und die Abweichungen sind genauso aufschlussreich wie die
 
 ## 1. Die Übersicht
 
-| | **Yugas** (Misra) | **Ovid** | **Hesiod** | **Mesoamerika** |
-|---|---|---|---|---|
-| Zahl der Zeitalter | 4 absteigend, 4 aufsteigend | 4, nur absteigend | 5, nur absteigend | 4 bzw. 5 Welten |
-| Benennung | Satya, Treta, Dwapara, Kali | Gold, Silber, Erz, Eisen | Gold, Silber, Erz, **Heroen**, Eisen | nach Untergangsart |
-| Dauer | 2.700 Jahre je Yuga | keine Angabe | keine Angabe | 13 Baktun = 5.125 Jahre |
-| Untergang durch Wasser | Kataklysmos, 1.200 Jahre | Deukalions Flut | — | 2. Welt / 4. Sonne |
-| Untergang durch Feuer | Ekpyrosis, 1.200 Jahre | Phaethons Fahrt | — | 3. Welt / 3. Sonne |
-| Wiederaufstieg | ja | nein | angedeutet | neue Welt, kein Aufstieg |
-| Datiertes Ende | 2025 | — | — | 21. Dezember 2012 |
+| Überlieferung | Zeitalter | Richtung | Untergang durch Wasser | durch Feuer | Zahlen |
+|---|---|---|---|---|---|
+| **Yugas** (Misra) | 4 ab, 4 auf | ab und auf | Kataklysmos | Ekpyrosis | 2.700 J. je Yuga, 25.800 gesamt |
+| **Ovid** | 4 | nur abwärts | Deukalions Flut | Phaethons Fahrt | keine |
+| **Hesiod** | 5 | nur abwärts | — | — | keine |
+| **Babylon** | vor / nach der Flut | Bruch | die Flut | Weltenbrand (Krebs) | 432.000 J. vor der Flut |
+| **Ägypten** | Götter, Halbgötter, Menschen | nur abwärts | — | — | Sothis 1.461 J. |
+| **Maya / Azteken** | 4 bzw. 5 Welten | Ersatz, kein Abstieg | 2. Welt / 4. Sonne | 3. Welt / 3. Sonne | 13 Baktun = 5.125 J. |
+| **Anden** | 5 | Umbrüche | — | — | Pachakuti ≈ 500 J. |
+| **Afrika südl. d. Sahara** | keine | Erneuerung | Flutgeschichten | — | Sigui 60 J. |
 
 ---
 
@@ -129,30 +130,139 @@ Kali Yuga (2025) nur dreizehn Jahre auseinanderliegen.
 
 ---
 
-## 5. Was sich wirklich überschneidet
+## 5. Babylon: Berossos und die Könige vor der Flut
 
-**Stark:**
+Der stärkste Fund dieses Vergleichs, aus zwei Gründen.
 
-1. **Die Richtung.** Alle vier Überlieferungen erzählen einen Abstieg, keinen
-   Fortschritt. Die Vergangenheit ist der Gegenwart überlegen.
-2. **Die zwei Untergangsarten.** Wasser und Feuer, unabhängig voneinander in
-   Indien, bei Ovid und in Mesoamerika. Hesiod ist hier die Ausnahme.
-3. **Die Vierzahl** — bei Yugas, Ovid und Popol Vuh.
-4. **Ein Umbruch in unserer Lebenszeit** — 2012 und 2025.
+**Die Zahl.** Die *Sumerische Königsliste* (um 2100 v. Chr.) verzeichnet acht
+Könige vor der Flut mit zusammen **241.200** Regierungsjahren; danach heißt es
+schlicht: „Die Flut kam." Berossos, babylonischer Priester, gibt in seinen
+*Babyloniaka* (um 290 v. Chr.) zehn Könige mit zusammen **432.000** Jahren an.
 
-**Schwach oder gar nicht:**
+432.000 ist exakt die Länge des **Kali Yuga** in der klassischen indischen
+Rechnung. Und das volle Mahayuga von 4.320.000 Jahren ist das Zehnfache davon.
 
-1. **Die Zahlen.** Nur die Yugas und die Lange Zählung nennen Jahre, und die
-   stimmen nicht überein: 25.800 gegen 5.125 pro Zyklus.
-2. **Der Wiederaufstieg.** Nur die Yugas kennen ihn. Ovid und Hesiod enden im
-   Eisen; Mesoamerika setzt eine neue Welt an, steigt aber nicht auf.
-3. **Die Metalle.** In Mesoamerika gibt es sie nicht; die Welten heißen nach
-   ihrer Untergangsart.
-4. **Die Vierzahl bei den Griechen** ist sekundär — Hesiod hat fünf.
+**Die Lehre.** Seneca überliefert in den *Naturales quaestiones* (III, 29) eine
+Lehre des Berossos, die man kaum glaubt, wenn man sie zum ersten Mal liest:
+
+> Die Welt wird im Feuer vergehen, wenn alle Planeten, die jetzt verschiedene
+> Bahnen ziehen, im Zeichen des **Krebses** zusammentreffen — und in der Flut,
+> wenn dieselbe Konjunktion im **Steinbock** stattfindet.
+
+Das ist Ekpyrosis und Kataklysmos, als astronomische Lehre, achtzehn
+Jahrhunderte vor Misra — und an Planetenstände geknüpft, nicht an Mythen.
+
+**Nüchtern betrachtet:** 432.000 = 120 × 3.600, und 3.600 (60²) ist die
+Grundzahl des babylonischen Sechzigersystems. Auch 241.200 und 28.800 sind
+Vielfache davon. Die Zahl kann also aus derselben Rechenkultur stammen statt
+aus gemeinsamer Überlieferung. Ein Übertragungsweg von Babylon nach Indien ist
+allerdings belegbar: Hellenistische Astronomie erreichte Indien, das
+*Yavanajataka* ist ihr Zeugnis.
 
 ---
 
-## 6. Einordnung
+## 6. Ägypten: Zep Tepi und die Götterdynastien
+
+Ägypten kennt keine Metallalter, aber dieselbe Grundfigur. Der **Turiner
+Königspapyrus** (13. Jh. v. Chr.) führt vor den menschlichen Pharaonen ein
+Register der **Götter**, die Ägypten regierten, danach Halbgötter und die
+Horusgefolgschaft. Ägypten datierte seine Geschichte also ausdrücklich in eine
+Zeit zurück, in der keine Menschen herrschten.
+
+Das Gegensatzpaar heißt hier nicht Zeitalter, sondern **Maat** und **Isfet** —
+Ordnung und Unordnung. Maat ist nichts, was einmal da ist; sie muss beständig
+wiederhergestellt werden, weil Isfet immer vordringt. Das ist Verfall als
+Dauerzustand statt als Stufenfolge.
+
+**Was fehlt:** jede Einteilung in gleich lange Zeitalter und jede Zahl, die
+sich mit den Yugas vergleichen ließe. Der einzige große Zyklus, den Ägypten
+wirklich rechnete, ist der **Sothis-Zyklus** von 1.461 ägyptischen Jahren, nach
+dem der Frühaufgang des Sirius wieder auf denselben Kalendertag fällt. Er misst
+den Kalender, nicht den Verfall der Welt.
+
+---
+
+## 7. Anden: Pachakuti und die fünf Menschengeschlechter
+
+Felipe Guamán Poma de Ayala beschreibt 1615 in der *Nueva corónica y buen
+gobierno* fünf andine Menschengeschlechter:
+
+1. Wari Wira Qucha Runa
+2. Wari Runa
+3. Purun Runa
+4. Auca Runa
+5. Inca Runa — die Zeit der Inka
+
+Fünf Zeitalter wie bei Hesiod. Dazwischen steht ein eigenes Wort für den
+Umbruch: **Pachakuti**, wörtlich „Umkehrung der Welt und der Zeit". Am Ende
+jedes Zyklus steht eine Katastrophe; zwei Pachakuti bilden ein Großes Jahr, von
+den Chronisten mit je rund 500 Jahren angesetzt.
+
+Zu beachten: Guamán Poma schrieb als Christ für einen spanischen König und
+legte die andine Zählung bewusst neben die biblische. Wie viel davon andine
+Überlieferung ist und wie viel Anpassung, ist umstritten.
+
+---
+
+## 8. Südlich der Sahara: ein Befund ohne Entsprechung
+
+Hier fällt das Ergebnis anders aus, und das gehört genauso zum Vergleich:
+**Außerhalb Ägyptens findet sich in Afrika kein absteigendes Weltalterschema.**
+
+Was es gibt, sind echte Zyklen. Die **Dogon** in Mali begehen alle sechzig
+Jahre die **Sigui**, eine Zeremonie, die sich über Jahre hinzieht — die letzte
+lief 1967 bis 1973, die nächste beginnt **2032**. Sie stellt die Erneuerung des
+Kosmos dar. Aber die Richtung ist eine andere: Es geht nicht abwärts, sondern
+immer wieder von vorn.
+
+Die oft zitierte Verbindung der sechzig Jahre zu Sirius B gilt heute als
+Fehldeutung der Griaule-Aufzeichnungen; die Zeitspanne ist als Menschenleben
+gemeint, damit jeder die Sigui einmal erlebt.
+
+Verbreitet sind südlich der Sahara dagegen **Flutgeschichten** und die
+Vorstellung einer **Urzeit, in der Himmel und Erde noch nahe beieinanderlagen**
+und der Mensch mit Gott sprach. Das sind Bausteine derselben Figur — aber nicht
+zu vier Zeitaltern geordnet.
+
+---
+
+## 9. Was sich wirklich überschneidet
+
+**Stark:**
+
+1. **Die Richtung.** Indien, Griechenland, Rom und Ägypten erzählen alle einen
+   Abstieg, keinen Fortschritt. Die Vergangenheit ist der Gegenwart überlegen.
+2. **Die zwei Untergangsarten.** Wasser und Feuer — in Indien, bei Ovid, in
+   Babylon und in Mesoamerika, über drei Kontinente verteilt. Bei Berossos
+   sogar als astronomische Lehre mit Zeichenangabe.
+3. **Eine Urzeit, in der keine Menschen herrschten.** Götter oder gottähnliche
+   Wesen am Anfang: Zep Tepi, Kronos' Zeit, die Könige vor der Flut.
+4. **Die Zahl 432.000** — Kali Yuga und Berossos' Könige vor der Flut.
+5. **Ein Umbruch in unserer Lebenszeit** — 2012 und 2025.
+
+**Schwach oder gar nicht:**
+
+1. **Die Zahlen für die Zeitalter selbst.** 2.700 Jahre je Yuga, 5.125 Jahre je
+   Baktun-Zyklus, 500 Jahre je Pachakuti, bei Ovid, Hesiod und Ägypten gar
+   keine. Nur die 432.000 treffen sich.
+2. **Der Wiederaufstieg.** Nur die Yugas kennen ihn. Ovid und Hesiod enden im
+   Eisen; Mesoamerika und die Anden setzen eine neue Welt an, steigen aber
+   nicht auf.
+3. **Die Metalle.** Nur in Griechenland und Rom. Mesoamerika benennt die Welten
+   nach ihrer Untergangsart, Ägypten nach dem Rang der Herrscher.
+4. **Die Vierzahl bei den Griechen** ist sekundär — Hesiod hat fünf, die Anden
+   auch.
+5. **Afrika südlich der Sahara** fällt ganz heraus: Erneuerung statt Verfall.
+
+**Zur Präzession:** Dass die 25.800 Jahre überhaupt als Zyklus taugen, ist eine
+moderne Einsicht. Hipparch entdeckte die Präzession um 130 v. Chr. und setzte
+das Große Jahr auf 36.000 Jahre an, Ptolemaios bestätigte diese Zahl — beide
+lagen um gut vierzig Prozent daneben. Keine der hier verglichenen
+Überlieferungen konnte den Wert kennen.
+
+---
+
+## 10. Einordnung
 
 Die Übereinstimmungen sind real, aber sie belegen nicht, was sie auf den ersten
 Blick zu belegen scheinen. Dass drei weit auseinanderliegende Kulturen von
@@ -161,8 +271,9 @@ Flut und Weltenbrand erzählen, lässt sich mindestens dreifach erklären:
 - **Gemeinsame Erfahrung** — Fluten und Vulkanausbrüche gibt es überall; die
   Erinnerung an das Ende der Eiszeit, an die Storegga-Rutschung oder das Ende
   der Grünen Sahara kann lange nachwirken.
-- **Gemeinsame Überlieferung** — zwischen Indien und Griechenland ist ein Weg
-  denkbar; für Mesoamerika nicht.
+- **Gemeinsame Überlieferung** — zwischen Babylon, Indien und Griechenland ist
+  ein Weg belegbar: hellenistische Astronomie erreichte Indien. Für Mesoamerika
+  und die Anden nicht.
 - **Gemeinsame Denkform** — Verfall als Erzählmuster ist menschlich naheliegend,
   wenn eine Gesellschaft ihre eigene Zeit als mangelhaft erlebt.
 
@@ -184,5 +295,14 @@ nebeneinander und benennt, wo sie sich decken und wo nicht.
 - Popol Vuh, Lange Zählung und die Fünf Sonnen —
   [Lange Zählung und 2012](https://en.wikipedia.org/wiki/2012_phenomenon),
   [Fünfte Welt](https://en.wikipedia.org/wiki/Fifth_World_(mythology))
+- Sumerische Königsliste und Berossos —
+  [241.200 und 432.000 Jahre](https://ahotcupofjoe.net/2016/11/sumerian-kings-list-and-241000-years-of-rule/)
+- Seneca, *Naturales quaestiones* III, 29, zu Berossos' Weltenbrand und Flut —
+  [Übersicht](https://www.jasoncolavito.com/blog/astrological-calculations-of-the-flood-and-the-end-times-in-medieval-literature)
+- Turiner Königspapyrus — [Überblick](https://en.wikipedia.org/wiki/Turin_King_List)
+- Guamán Poma, *Nueva corónica*, und der Pachakuti —
+  [Die Generationen der Welt](https://estudioslatinoamericanos.pl/index.php/estudios/article/view/293),
+  [Pachakuti](https://axismundi.blog/en/2016/10/18/pachacuti-cicli-di-creazione-e-distruzione-del-mondo-nella-tradizione-andina/)
+- Dogon, Sigui-Zeremonie — [Britannica](https://www.britannica.com/topic/Dogon)
 - Bibhu Dev Misra, *Yuga Shift* —
   [Der Yuga-Zyklus und die Präzession](https://www.bibhudevmisra.com/2024/03/the-yuga-cycle-and-earths-precession.html)

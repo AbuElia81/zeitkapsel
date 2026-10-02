@@ -131,7 +131,8 @@ export const SCHICHTEN = [
       'Das absteigende Kali Yuga läuft nach Misra von 676 v. Chr. bis 2025 n. Chr.',
       'Das schmale Band darüber: der Kern der Milchstraße schaltet ein, ist aktiv, schaltet ab',
       'Die 25.800 Jahre sind astronomisch belegt — die Yuga-Zuordnung ist Misras These',
-      'Ovid erzählt dieselbe Abfolge: Gold, Silber, Erz, Eisen — und beide Katastrophen'
+      'Ovid erzählt dieselbe Abfolge: Gold, Silber, Erz, Eisen — und beide Katastrophen',
+      '432.000 Jahre: die babylonischen Könige vor der Flut und das Kali Yuga tragen dieselbe Zahl'
     ],
     vergleiche: [{
       titel: 'Ovid, Metamorphosen',
@@ -197,6 +198,90 @@ export const SCHICHTEN = [
         dieselben zwei Untergangsarten kommen — Wasser und Feuer — und dass das Ende
         des 13. Baktun 2012 und Misras Ende des Kali Yuga 2025 nur dreizehn Jahre
         auseinanderliegen.`
+    },
+    {
+      titel: 'Babylon: Berossos und die Könige vor der Flut',
+      quelle: 'Sumerische Königsliste (um 2100 v. Chr.); Berossos, Babyloniaka (um 290 v. Chr.), überliefert bei Seneca, Naturales quaestiones III, 29',
+      einleitung: `Hier wird es auffällig. Babylon kennt beides — eine Urzeit vor der Flut
+        mit unmenschlich langen Regierungen, und eine astronomische Lehre, nach der die
+        Welt abwechselnd durch Feuer und durch Wasser untergeht.`,
+      zeilen: [
+        ['Vor der Flut', 'zehn Könige, 432.000 Jahre', 'Berossos'],
+        ['', 'acht Könige, 241.200 Jahre', 'Königsliste'],
+        ['Die Flut', 'danach beginnt das Königtum neu', ''],
+        ['danach', 'Regierungen von menschlichem Maß', ''],
+        ['Weltenbrand', 'wenn alle Planeten im Krebs stehen', 'Seneca III, 29'],
+        ['Sintflut', 'wenn alle Planeten im Steinbock stehen', 'Seneca III, 29']
+      ],
+      nachsatz: `Zwei Dinge springen ins Auge. Erstens die Zahl: Die 432.000 Jahre der
+        zehn Könige vor der Flut sind genau die Länge des Kali Yuga in der klassischen
+        indischen Rechnung. Zweitens die Lehre bei Seneca — Berossos sagt den Weltenbrand
+        für eine Planetenkonjunktion im Krebs voraus und die Flut für eine im Steinbock.
+        Das ist Ekpyrosis und Kataklysmos als astronomische Lehre, achtzehn Jahrhunderte
+        vor Misra. Nüchtern betrachtet: 432.000 ist 120 × 3.600, und 3.600 ist die
+        Grundzahl des babylonischen Sechzigersystems. Die Zahl kann aus derselben
+        Rechenkultur stammen statt aus einer gemeinsamen Überlieferung — ein Weg von
+        Babylon nach Indien ist über die hellenistische Astronomie aber belegbar.`
+    },
+    {
+      titel: 'Ägypten: Zep Tepi und die Götterdynastien',
+      quelle: 'Turiner Königspapyrus (13. Jh. v. Chr.); Manetho, Aigyptiaka (3. Jh. v. Chr.)',
+      einleitung: `Ägypten kennt keine Metallalter, aber dieselbe Grundfigur: eine Erste
+        Zeit, in der die Götter selbst regierten, danach Halbgötter, dann erst Menschen —
+        und eine Ordnung, die seither beständig gegen den Verfall verteidigt werden muss.`,
+      zeilen: [
+        ['Zep Tepi', 'die Erste Zeit, die Götter regieren selbst', ''],
+        ['danach', 'Halbgötter und die Horusgefolgschaft', 'Turiner Papyrus'],
+        ['dann', 'die menschlichen Pharaonen', ''],
+        ['Maat', 'die Ordnung, immer wieder herzustellen', ''],
+        ['Isfet', 'die Unordnung, beständig vordringend', ''],
+        ['Sothis-Zyklus', '1.461 Jahre', 'Kalender']
+      ],
+      nachsatz: `Der Turiner Königspapyrus führt vor den menschlichen Königen ein Register
+        der Götter — Ägypten datierte seine Geschichte also ausdrücklich in eine Zeit
+        zurück, in der keine Menschen herrschten. Was fehlt, ist die Einteilung in gleich
+        lange Zeitalter und jede Zahl, die sich mit den Yugas vergleichen ließe. Der
+        einzige große Zyklus, den Ägypten wirklich rechnete, ist der Sothis-Zyklus von
+        1.461 Jahren, nach dem der Frühaufgang des Sirius wieder auf denselben Kalendertag
+        fällt. Er misst den Kalender, nicht den Verfall der Welt.`
+    },
+    {
+      titel: 'Anden: Pachakuti und die fünf Menschengeschlechter',
+      quelle: 'Felipe Guamán Poma de Ayala, Nueva corónica y buen gobierno (1615)',
+      einleitung: `Südamerika zählt fünf Zeitalter wie Hesiod — und hat ein eigenes Wort
+        für den Umbruch dazwischen: pachakuti, die Umwälzung von Raum und Zeit.`,
+      zeilen: [
+        ['1.', 'Wari Wira Qucha Runa', ''],
+        ['2.', 'Wari Runa', ''],
+        ['3.', 'Purun Runa', ''],
+        ['4.', 'Auca Runa', ''],
+        ['5.', 'Inca Runa', 'die Zeit der Inka'],
+        ['Pachakuti', 'rund 500 Jahre je Umbruch', '']
+      ],
+      nachsatz: `Pachakuti heißt wörtlich „Umkehrung der Welt und der Zeit“. Am Ende jedes
+        Zyklus steht eine Katastrophe, zwei Pachakuti bilden ein Großes Jahr. In der
+        Struktur trifft sich das mit der Yuga-Figur — Zeitalter, durch Umbrüche getrennt —,
+        in den Zahlen nicht: 500 Jahre gegen 2.700.`
+    },
+    {
+      titel: 'Südlich der Sahara: ein Befund ohne Entsprechung',
+      quelle: 'Dogon (Mali), Sigui-Zeremonie; die Griaule-Überlieferung mit Vorbehalt',
+      einleitung: `Hier fällt das Ergebnis anders aus, und das gehört genauso dazu:
+        Außerhalb Ägyptens findet sich in Afrika kein absteigendes Weltalterschema.`,
+      zeilen: [
+        ['Dogon', 'Sigui alle 60 Jahre', 'Erneuerung'],
+        ['zuletzt', '1967 bis 1973', ''],
+        ['nächste', '2032', ''],
+        ['Richtung', 'Erneuerung statt Verfall', '']
+      ],
+      nachsatz: `Die Dogon begehen alle sechzig Jahre die Sigui, eine Zeremonie, die sich
+        über Jahre hinzieht und die Erneuerung des Kosmos darstellt. Das ist ein echter
+        Zyklus, aber kein Weltalterschema: Es geht nicht abwärts, sondern immer wieder von
+        vorn. Die oft zitierte Verbindung zu Sirius B gilt heute als Fehldeutung; die
+        sechzig Jahre sind als Menschenleben gemeint, damit jeder die Sigui einmal erlebt.
+        Verbreitet sind südlich der Sahara dagegen Flutgeschichten und die Vorstellung
+        einer Urzeit, in der Himmel und Erde noch nahe beieinanderlagen — Bausteine
+        derselben Figur, aber nicht zu vier Zeitaltern geordnet.`
     }],
     hinweis: `Die Präzession ist gemessene Astronomie. Die Einteilung in Yugas und die Kopplung
       an das galaktische Zentrum sind Misras Deutung und keine gesicherte Wissenschaft —

@@ -420,3 +420,22 @@ main { position: relative; z-index: 1; height: 100%; }
   color: #7d7568; text-align: right; white-space: nowrap; font-size: .7rem;
 }
 #tafel .quelle.quelleKlein { margin: -.4rem 0 1rem; }
+
+/* Aufklappbare Vergleichstafeln */
+#tafel details.vergleichsBlock {
+  margin: 0 0 .5rem; padding: 0 0 .3rem;
+  border-bottom: 1px solid rgba(236,231,220,.07);
+}
+#tafel details.vergleichsBlock > summary {
+  list-style: none; cursor: pointer;
+  padding: .35rem 0; font-size: .82rem; color: #c9c0b0;
+  transition: color .2s;
+}
+#tafel details.vergleichsBlock > summary::-webkit-details-marker { display: none; }
+#tafel details.vergleichsBlock > summary::before {
+  content: "▸"; display: inline-block; width: 1em;
+  color: var(--ton); opacity: .7; transition: transform .2s;
+}
+#tafel details[open].vergleichsBlock > summary::before { transform: rotate(90deg); }
+#tafel details.vergleichsBlock > summary:hover { color: #f2e7cf; }
+#tafel details.vergleichsBlock > *:not(summary) { margin-left: 1em; }

@@ -43,9 +43,9 @@ Atemzug und Herzschlag folgen dem Schieber nicht — sie laufen in Echtzeit.
 
 ## Ovids Weltalter
 
-> Ausführlich im Arbeitspapier **[Die Weltalter — vier Überlieferungen im
-> Vergleich](WELTALTER.md)**: Yugas, Ovid, Hesiod und Mesoamerika nebeneinander,
-> mit dem, was sich deckt, und dem, was nicht.
+> Ausführlich im Arbeitspapier **[Die Weltalter im Vergleich](WELTALTER.md)**:
+> Yugas, Ovid, Hesiod, Babylon, Ägypten, Mesoamerika, die Anden und Afrika
+> nebeneinander — mit dem, was sich deckt, und dem, was nicht.
 
 Die äußerste Schale trägt eine zweite Lesart: Ovid schreibt in den *Metamorphosen*
 (8 n. Chr.) achtzehn Jahrhunderte vor Misra dieselbe Folge nieder.
@@ -66,10 +66,13 @@ zeigt die Infotafel zu jedem Abschnitt die passende Ovid-Stelle.
 Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm geht es nur
 abwärts — der aufsteigende Bogen fehlt.
 
-Die Infotafel der äußersten Schale zeigt daneben **Hesiods fünf Geschlechter**
-(Werke und Tage 106–201) und die **mesoamerikanischen Weltalter** — Popol Vuh,
-die aztekischen Fünf Sonnen und die Lange Zählung mit ihren 5.125 Jahren. Auch
-dort gehen Welten in Flut und Feuer unter.
+Die Infotafel der äußersten Schale trägt dazu sieben aufklappbare
+Vergleichstafeln: Ovid, Hesiod, Mesoamerika, Babylon, Ägypten, die Anden und
+Afrika südlich der Sahara. Am auffälligsten ist Babylon — Berossos gibt den
+zehn Königen vor der Flut zusammen **432.000 Jahre**, exakt die Länge des Kali
+Yuga in der klassischen indischen Rechnung, und Seneca überliefert von ihm die
+Lehre, dass die Welt im Feuer vergeht, wenn alle Planeten im Krebs
+zusammentreffen, und in der Flut, wenn sie im Steinbock stehen.
 
 ## Die Chronik
 

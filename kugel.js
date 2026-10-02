@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=51';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=51';
+         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=53';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=53';
 
 const HG = 0x05070d;
 
@@ -634,13 +634,16 @@ function tafelFuellen(s) {
       ${s.kern ? '<p class="menschZeile"></p>' : ''}
       ${s.termine ? '<p class="terminKopf">Termine</p><ul class="termine"></ul>' : ''}
       <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
-      ${(s.vergleiche || []).map(v => `
-        <p class="terminKopf">${v.titel}</p>
-        <p class="fliess klein">${v.einleitung}</p>
-        <table class="vergleich">${v.zeilen.map(([a, b, c]) =>
-          `<tr><td>${a}</td><td>${b}</td><td><i>${c}</i></td></tr>`).join('')}</table>
-        <p class="hinweis">${v.nachsatz}</p>
-        <p class="quelle quelleKlein">${v.quelle}</p>`).join('')}
+      ${s.vergleiche ? `<p class="terminKopf">Dieselbe Figur anderswo</p>
+        ${s.vergleiche.map((v, k) => `
+        <details class="vergleichsBlock"${k === 0 ? ' open' : ''}>
+          <summary>${v.titel}</summary>
+          <p class="fliess klein">${v.einleitung}</p>
+          <table class="vergleich">${v.zeilen.map(([a, b, c]) =>
+            `<tr><td>${a}</td><td>${b}</td><td><i>${c}</i></td></tr>`).join('')}</table>
+          <p class="hinweis">${v.nachsatz}</p>
+          <p class="quelle quelleKlein">${v.quelle}</p>
+        </details>`).join('')}` : ''}
       ${s.hinweis ? `<p class="hinweis">${s.hinweis}</p>` : ''}
       <p class="quelle">${s.quelle}</p>`;
     tafelZeitTeil();
