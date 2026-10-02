@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=49';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=49';
+         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=51';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=51';
 
 const HG = 0x05070d;
 
@@ -596,12 +596,14 @@ function tafelZeitTeil() {
   const ov = tafel.querySelector('.ovidZeile');
   if (ov) {
     const { seg } = segmentBei(s, zeitJahr);
-    ov.innerHTML = seg.ovid ? `
-      <span class="ovidKopf">Bei Ovid</span>
-      <b>${seg.ovid.alter}</b>${seg.ovid.latein ? ` <i>${seg.ovid.latein}</i>` : ''}
-      <span class="ovidStelle">${seg.ovid.stelle}</span>
-      <span class="ovidText">${seg.ovid.was}</span>` : '';
-    ov.style.display = seg.ovid ? '' : 'none';
+    const block = (kopf, q) => !q ? '' : `
+      <span class="ovidKopf">${kopf}</span>
+      <b>${q.alter}</b>${q.latein ? ` <i>${q.latein}</i>` : ''}
+      <span class="ovidStelle">${q.stelle}</span>
+      <span class="ovidText">${q.was}</span>`;
+    const inhalt = block('Bei Ovid', seg.ovid) + block('Bei Hesiod', seg.hesiod);
+    ov.innerHTML = inhalt;
+    ov.style.display = inhalt ? '' : 'none';
   }
 
   const mz = tafel.querySelector('.menschZeile');
@@ -628,17 +630,17 @@ function tafelFuellen(s) {
       <p class="unter">${s.untertitel}</p>
       <p class="fliess">${s.text}</p>
       <p class="jetztZeile"></p>
-      ${s.vergleich ? '<div class="ovidZeile"></div>' : ''}
+      ${s.vergleiche ? '<div class="ovidZeile"></div>' : ''}
       ${s.kern ? '<p class="menschZeile"></p>' : ''}
       ${s.termine ? '<p class="terminKopf">Termine</p><ul class="termine"></ul>' : ''}
       <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
-      ${s.vergleich ? `
-        <p class="terminKopf">${s.vergleich.titel}</p>
-        <p class="fliess klein">${s.vergleich.einleitung}</p>
-        <table class="vergleich">${s.vergleich.zeilen.map(([a, b, c]) =>
+      ${(s.vergleiche || []).map(v => `
+        <p class="terminKopf">${v.titel}</p>
+        <p class="fliess klein">${v.einleitung}</p>
+        <table class="vergleich">${v.zeilen.map(([a, b, c]) =>
           `<tr><td>${a}</td><td>${b}</td><td><i>${c}</i></td></tr>`).join('')}</table>
-        <p class="hinweis">${s.vergleich.nachsatz}</p>
-        <p class="quelle quelleKlein">${s.vergleich.quelle}</p>` : ''}
+        <p class="hinweis">${v.nachsatz}</p>
+        <p class="quelle quelleKlein">${v.quelle}</p>`).join('')}
       ${s.hinweis ? `<p class="hinweis">${s.hinweis}</p>` : ''}
       <p class="quelle">${s.quelle}</p>`;
     tafelZeitTeil();

@@ -43,6 +43,10 @@ Atemzug und Herzschlag folgen dem Schieber nicht — sie laufen in Echtzeit.
 
 ## Ovids Weltalter
 
+> Ausführlich im Arbeitspapier **[Die Weltalter — vier Überlieferungen im
+> Vergleich](WELTALTER.md)**: Yugas, Ovid, Hesiod und Mesoamerika nebeneinander,
+> mit dem, was sich deckt, und dem, was nicht.
+
 Die äußerste Schale trägt eine zweite Lesart: Ovid schreibt in den *Metamorphosen*
 (8 n. Chr.) achtzehn Jahrhunderte vor Misra dieselbe Folge nieder.
 
@@ -60,9 +64,12 @@ beide Katastrophen, erst die Flut, dann der Weltenbrand. Schiebt man die Zeit,
 zeigt die Infotafel zu jedem Abschnitt die passende Ovid-Stelle.
 
 Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm geht es nur
-abwärts — der aufsteigende Bogen fehlt. Seine Vorlage, Hesiods *Werke und Tage*,
-kennt sogar fünf Geschlechter: zwischen Erz und Eisen steht dort noch das der
-Heroen. Ovid lässt es weg und kommt damit auf genau vier.
+abwärts — der aufsteigende Bogen fehlt.
+
+Die Infotafel der äußersten Schale zeigt daneben **Hesiods fünf Geschlechter**
+(Werke und Tage 106–201) und die **mesoamerikanischen Weltalter** — Popol Vuh,
+die aztekischen Fünf Sonnen und die Lange Zählung mit ihren 5.125 Jahren. Auch
+dort gehen Welten in Flut und Feuer unter.
 
 ## Die Chronik
 

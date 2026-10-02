@@ -133,7 +133,7 @@ export const SCHICHTEN = [
       'Die 25.800 Jahre sind astronomisch belegt — die Yuga-Zuordnung ist Misras These',
       'Ovid erzählt dieselbe Abfolge: Gold, Silber, Erz, Eisen — und beide Katastrophen'
     ],
-    vergleich: {
+    vergleiche: [{
       titel: 'Ovid, Metamorphosen',
       quelle: 'Buch I, 89–150 und I, 253–415; Buch II, 1–400 (8 n. Chr.)',
       einleitung: `Ovid schreibt achtzehn Jahrhunderte vor Misra dieselbe Folge nieder —
@@ -153,6 +153,51 @@ export const SCHICHTEN = [
         dort noch das der Heroen. Ovid lässt es weg und kommt damit auf genau vier —
         dieselbe Zahl wie die Yugas.`
     },
+    {
+      titel: 'Hesiod, Werke und Tage',
+      quelle: 'Verse 106–201, um 700 v. Chr. — die älteste Fassung der Weltalter',
+      einleitung: `Ovids Vorlage, siebenhundert Jahre älter. Hesiod zählt fünf
+        Geschlechter statt vier: zwischen Erz und Eisen schiebt er das Geschlecht der
+        Heroen ein, das aus der Metallreihe herausfällt.`,
+      zeilen: [
+        ['Satya', 'Goldenes Geschlecht', '109–126'],
+        ['Treta', 'Silbernes Geschlecht', '127–142'],
+        ['Dwapara', 'Ehernes Geschlecht', '143–155'],
+        ['—', 'Geschlecht der Heroen', '156–173'],
+        ['Kali', 'Eisernes Geschlecht', '174–201']
+      ],
+      nachsatz: `Das Heldengeschlecht hat in keiner Yuga-Stufe eine Entsprechung — es
+        ist besser und gerechter als das eherne vor ihm und bricht damit den Abstieg.
+        Erst Ovid streicht es und erhält die glatte Viererreihe. Katastrophen zwischen
+        den Zeitaltern kennt Hesiod nicht; wohl aber einen Hoffnungsschimmer: er wünscht
+        sich, später geboren zu sein — als könnte nach dem Eisen etwas anderes kommen.`
+    },
+    {
+      titel: 'Mesoamerika: Maya und Azteken',
+      quelle: 'Popol Vuh der Kʼicheʼ-Maya; Leyenda de los Soles der Nahua; Lange Zählung',
+      einleitung: `Jenseits des Atlantiks dieselbe Grundfigur: nicht eine Schöpfung,
+        sondern eine Reihe von Welten, von denen jede untergeht. Und auch hier stehen
+        Feuer und Flut unter den Untergängen.`,
+      zeilen: [
+        ['Popol Vuh', 'die jetzige ist die vierte Welt', ''],
+        ['2. Welt', 'durch die Flut vernichtet', ''],
+        ['3. Welt', 'durch Feuer vernichtet', ''],
+        ['3. Sonne', 'Regen aus Feuer — Tlaloc', 'Azteken'],
+        ['4. Sonne', 'die große Flut — Chalchiuhtlicue', 'Azteken'],
+        ['Großer Zyklus', '13 Baktun = 5.125 Jahre', 'Lange Zählung'],
+        ['Beginn', '11. August 3114 v. Chr.', ''],
+        ['Ende', '21. Dezember 2012', '']
+      ],
+      nachsatz: `Eine Zahl fällt auf: Fünf Große Zyklen der Langen Zählung ergeben
+        25.627 Jahre und kommen damit der Präzession von rund 25.800 Jahren auf
+        0,7 Prozent nahe. Das ist eine moderne Beobachtung, keine Maya-Lehre — in den
+        Inschriften steht nichts davon. Und der Aufbau ist ein anderer: kein Abstieg
+        durch Metalle, sondern abgeschlossene Welten, die enden und ersetzt werden.
+        Bemerkenswert bleibt, dass drei Überlieferungen unabhängig voneinander auf
+        dieselben zwei Untergangsarten kommen — Wasser und Feuer — und dass das Ende
+        des 13. Baktun 2012 und Misras Ende des Kali Yuga 2025 nur dreizehn Jahre
+        auseinanderliegen.`
+    }],
     hinweis: `Die Präzession ist gemessene Astronomie. Die Einteilung in Yugas und die Kopplung
       an das galaktische Zentrum sind Misras Deutung und keine gesicherte Wissenschaft —
       alle tieferen Schichten dieser Kugel dagegen sind messbare Zyklen.`,
@@ -166,24 +211,38 @@ export const SCHICHTEN = [
         ovid: { alter: 'Goldenes Zeitalter', latein: 'aurea aetas', stelle: 'Metamorphosen I, 89–112',
           was: `Unter Saturns Herrschaft. Kein Gesetz, kein Richter, kein Krieg — die
             Menschen tun das Rechte aus freien Stücken. Ewiger Frühling, die Erde gibt
-            ungepflügt, in den Bächen fließen Milch und Nektar.` } },
+            ungepflügt, in den Bächen fließen Milch und Nektar.` },
+        hesiod: { alter: 'Goldenes Geschlecht', stelle: 'Werke und Tage 109–126',
+          was: `Unter Kronos. Sie lebten wie Götter, ohne Mühsal und Kummer, alterten
+            nicht und starben wie im Schlaf; die Erde trug von selbst. Nach ihrem Tod
+            wurden sie zu wohlwollenden Geistern über der Erde.` } },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
       { name: 'Treta', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.75, 0.5],
         ovid: { alter: 'Silbernes Zeitalter', latein: 'argentea', stelle: 'Metamorphosen I, 113–124',
           was: `Jupiter stürzt Saturn und zerbricht den ewigen Frühling in vier
             Jahreszeiten. Zum ersten Mal suchen die Menschen Schutz in Häusern und
-            müssen den Acker pflügen.` } },
+            müssen den Acker pflügen.` },
+        hesiod: { alter: 'Silbernes Geschlecht', stelle: 'Werke und Tage 127–142',
+          was: `Hundert Jahre Kindheit, dann ein kurzes, unbeherrschtes Mannesalter.
+            Sie ließen die Altäre leer; Zeus verbarg sie unter der Erde.` } },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
       { name: 'Dwapara', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.5, 0.25],
         ovid: { alter: 'Ehernes Zeitalter', latein: 'aenea', stelle: 'Metamorphosen I, 125–127',
           was: `Schärfer im Sinn und schneller bei den Waffen — aber noch nicht
-            ruchlos.` } },
+            ruchlos.` },
+        hesiod: { alter: 'Ehernes Geschlecht', stelle: 'Werke und Tage 143–155',
+          was: `Aus Eschen gemacht, furchtbar und stark — eherne Waffen, eherne Häuser,
+            ehernes Gerät. Sie rieben sich selbst auf und gingen namenlos in den Hades.` } },
       { name: 'Sandhi', laenge: 300, art: 'sandhi' },
       { name: 'Kali', laenge: 2700, art: 'yuga', zusatz: 'absteigend', licht: [0.25, 0],
         ovid: { alter: 'Eisernes Zeitalter', latein: 'ferrea', stelle: 'Metamorphosen I, 127–150',
           was: `Scham, Wahrheit und Treue weichen; an ihre Stelle treten List, Gewalt
             und Habgier. Man sticht in See, teilt den Boden auf, gräbt nach Erz. Als
-            letzte der Götter verlässt Astraea, die Gerechtigkeit, die Erde.` } },
+            letzte der Götter verlässt Astraea, die Gerechtigkeit, die Erde.` },
+        hesiod: { alter: 'Eisernes Geschlecht', stelle: 'Werke und Tage 174–201',
+          was: `Hesiods eigene Zeit: kein Ende der Mühsal bei Tag, kein Ende der Sorge
+            bei Nacht. Zuletzt verlassen Aidos und Nemesis — Scham und Vergeltung — die
+            Erde. Hesiod wünscht, er wäre früher gestorben oder später geboren.` } },
       { name: 'Ekpyrosis', laenge: 1200, art: 'katastrophe', licht: [0, 0],
         ovid: { alter: 'Phaethons Fahrt', stelle: 'Metamorphosen II, 1–400',
           was: `Der Sonnenwagen gerät außer Kontrolle und setzt die Erde in Brand.
