@@ -353,6 +353,61 @@ export const SCHICHTEN = [
         ins Gegenteil: „magnus ab integro saeclorum nascitur ordo“ — die große Ordnung der
         Zeitalter wird neu geboren, die Jungfrau kehrt zurück, Saturns Reich beginnt
         wieder. Derselbe Satz steht in dieser Kugel beim aufsteigenden Satya Yuga.`
+    },
+    {
+      titel: 'Kelten: Feuer und Wasser bei den Druiden',
+      quelle: 'Strabon, Geographika IV, 4, 4; Kalender von Coligny (2. Jh.); Lebor Gabála Érenn (11. Jh.)',
+      einleitung: `Die Kelten haben nichts aufgeschrieben — die Druiden lernten zwanzig
+        Jahre lang auswendig und misstrauten der Schrift. Was wir haben, steht bei
+        römischen Beobachtern und in irischen Handschriften, die ein Jahrtausend jünger
+        sind. Umso bemerkenswerter ist, was Strabon notiert.`,
+      zeilen: [
+        ['Strabon', 'Seelen und Weltall sind unzerstörbar', 'IV, 4, 4'],
+        ['', 'doch zuweilen gewinnen Feuer und Wasser', ''],
+        ['Coligny', 'Fünfjahreszyklus aus 62 Monaten', '2. Jh.'],
+        ['Lebor Gabála', 'sechs Landnahmen Irlands', '11. Jh.'],
+        ['1. Landnahme', 'Cessair — geht in der Sintflut unter', ''],
+        ['2.', 'Partholón — stirbt an der Pest', ''],
+        ['5.', 'Tuatha Dé Danann — das Göttergeschlecht', '']
+      ],
+      nachsatz: `Der Satz bei Strabon ist der Fund: „Nicht nur die Druiden, auch andere
+        sagen, dass die Seelen der Menschen und das Weltall unzerstörbar sind, obwohl
+        zuweilen Feuer und Wasser die Oberhand gewinnen werden.“ Dasselbe Paar —
+        Ekpyrosis und Kataklysmos — aus keltischem Mund, aufgeschrieben um das Jahr 20.
+        Ob es druidische Lehre ist oder Strabons stoische Brille, lässt sich nicht
+        entscheiden: Die Stoiker lehrten genau das. Das Lebor Gabála ordnet die irische
+        Vorgeschichte in sechs Landnahmen, deren erste in der Sintflut untergeht und
+        deren fünfte das Göttergeschlecht der Tuatha Dé Danann ist, das den Menschen
+        voranging — dieselbe Figur wie in Ägypten. Nur ist es eine christliche Synthese
+        des 11. Jahrhunderts, in die biblische Chronologie eingepasst. Zahlen für
+        Weltalter gibt es nirgends.`
+    },
+    {
+      titel: 'Slawen: ein zweiter Befund ohne Entsprechung',
+      quelle: 'Nestorchronik und christliche Polemiken; Ivanov und Toporov (1974); byzantinische Weltära',
+      einleitung: `Wie südlich der Sahara: Hier gibt es kein Weltalterschema — und bei
+        kaum einer anderen Überlieferung ist so viel im Umlauf, das nachweislich
+        erfunden ist.`,
+      zeilen: [
+        ['Weltbild', 'Weltenbaum mit drei Ebenen', 'räumlich'],
+        ['Krone', 'Himmel und himmlische Götter', ''],
+        ['Stamm', 'die Welt der Sterblichen', ''],
+        ['Wurzeln', 'Unterwelt und Totenreich', ''],
+        ['Weltära', '5508 Jahre von der Schöpfung bis Christus', 'byzantinisch'],
+        ['bis 1700', 'in Russland in Gebrauch', '']
+      ],
+      nachsatz: `Die slawische Kosmologie ordnet den Raum, nicht die Zeit: ein Weltenbaum
+        mit dem Himmel in der Krone, der Menschenwelt im Stamm und dem Totenreich in den
+        Wurzeln. Starke Jahreszyklen gibt es — Koliada zur Winter-, Kupala zur
+        Sommersonnenwende —, aber keine Folge von Weltaltern. Zwei Warnungen gehören
+        dazu. Das „Buch des Veles“, das angeblich slawische Weltalter überliefert, ist
+        eine Fälschung des 20. Jahrhunderts; seine Sprache ist ein Gemisch moderner
+        slawischer Formen ohne regelmäßige Grammatik. Und der oft erzählte kosmische
+        Zweikampf zwischen Perun und Veles ist keine Quelle, sondern eine Rekonstruktion
+        von Ivanov und Toporov aus dem Jahr 1974; die Deutung des Veles als Schlange gilt
+        inzwischen als widerlegt. Die einzige Weltära, die slawische Länder wirklich
+        gerechnet haben, ist die byzantinische: 5508 Jahre von der Schöpfung bis Christi
+        Geburt. Peter I. schaffte sie 1700 ab — aus dem Jahr 7208 wurde das Jahr 1700.`
     }],
     hinweis: `Die Präzession ist gemessene Astronomie. Die Einteilung in Yugas und die Kopplung
       an das galaktische Zentrum sind Misras Deutung und keine gesicherte Wissenschaft —

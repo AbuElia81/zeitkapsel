@@ -27,6 +27,8 @@ erwartet — und die Abweichungen sind genauso aufschlussreich wie die
 | **Germanen** | 1 Welt, erneuert | ab **und auf** | Erde sinkt ins Meer | Surts Feuer | keine |
 | **China** | kein Weltalterschema | abwärts (Dao, Datong) | — | — | Yuan 129.600 J. |
 | **Etrusker** | 10 Saecula | gezählte Frist | — | — | Saeculum ≈ Menschenleben |
+| **Kelten** | 6 Landnahmen (irisch) | abwärts | Sintflut, Pest | **Feuer** (Strabon) | keine |
+| **Slawen** | keine | — | — | — | nur die byzantinische Weltära |
 
 ---
 
@@ -324,15 +326,79 @@ Derselbe Satz steht in der Zeitkugel beim **aufsteigenden Satya Yuga**.
 
 ---
 
-## 12. Was sich wirklich überschneidet
+## 12. Kelten: Feuer und Wasser bei den Druiden
+
+Die Kelten haben nichts aufgeschrieben — die Druiden lernten zwanzig Jahre lang
+auswendig und misstrauten der Schrift. Was wir haben, steht bei römischen
+Beobachtern und in irischen Handschriften, die ein Jahrtausend jünger sind.
+
+Umso bemerkenswerter ist, was **Strabon** um das Jahr 20 notiert
+(*Geographika* IV, 4, 4):
+
+> Nicht nur die Druiden, auch andere sagen, dass die Seelen der Menschen und
+> das Weltall unzerstörbar sind, obwohl zuweilen **Feuer und Wasser** die
+> Oberhand gewinnen werden.
+
+Dasselbe Paar — Ekpyrosis und Kataklysmos — aus keltischem Mund.
+
+**Der Vorbehalt:** Ob das druidische Lehre ist oder Strabons stoische Brille,
+lässt sich nicht entscheiden. Die Stoiker lehrten genau das, und Strabon war
+mit ihrer Philosophie vertraut. Römische Autoren haben fremde Lehren regelmäßig
+in vertraute Begriffe übersetzt.
+
+**Irland:** Das *Lebor Gabála Érenn* (11. Jh.) ordnet die Vorgeschichte der
+Insel in **sechs Landnahmen**. Die erste, unter Cessair, geht in der Sintflut
+unter; die zweite, unter Partholón, stirbt an der Pest; die fünfte sind die
+**Tuatha Dé Danann**, das Göttergeschlecht, das den Menschen voranging — dieselbe
+Figur wie in Ägypten. Jede Stufe endet in einer Katastrophe.
+
+Auch hier ein Vorbehalt: Das Lebor Gabála ist eine christliche Synthese, die
+die irische Vorzeit in die biblische Chronologie einpasst.
+
+**Gerechnet** haben die Kelten nachweislich nur eines: Der **Kalender von
+Coligny** (2. Jh.) ordnet einen Fünfjahreszyklus aus 62 Monaten. Zahlen für
+Weltalter gibt es nirgends.
+
+---
+
+## 13. Slawen: ein zweiter Befund ohne Entsprechung
+
+Wie südlich der Sahara — und bei kaum einer anderen Überlieferung ist so viel
+im Umlauf, das nachweislich erfunden ist.
+
+Die slawische Kosmologie ordnet den **Raum**, nicht die Zeit: ein Weltenbaum
+mit dem Himmel in der Krone, der Menschenwelt im Stamm und dem Totenreich in
+den Wurzeln. Starke Jahreszyklen gibt es — Koliada zur Winter-, Kupala zur
+Sommersonnenwende —, aber **keine Folge von Weltaltern**.
+
+Zwei Warnungen gehören dazu:
+
+- Das **„Buch des Veles"**, das angeblich slawische Weltalter überliefert, ist
+  eine **Fälschung** — entstanden in den 1940er/50er Jahren oder früher. Die
+  Sprache ist ein Gemisch moderner slawischer Formen mit erfundenen
+  Bildungen und ohne regelmäßige Grammatik.
+- Der oft erzählte kosmische **Zweikampf zwischen Perun und Veles** ist keine
+  überlieferte Quelle, sondern eine **Rekonstruktion** von Ivanov und Toporov
+  aus dem Jahr 1974, gewonnen aus baltischer und belarussischer Folklore. Die
+  Deutung des Veles als Schlange gilt in der neueren Forschung als widerlegt.
+
+Die einzige Weltära, die slawische Länder wirklich gerechnet haben, ist die
+**byzantinische**: 5508 Jahre von der Schöpfung bis Christi Geburt. Sie war in
+Russland bis 1700 in Gebrauch — dann schaffte Peter I. sie ab, und aus dem Jahr
+7208 wurde der 1. Januar 1700.
+
+---
+
+## 14. Was sich wirklich überschneidet
 
 **Stark:**
 
 1. **Die Richtung.** Indien, Griechenland, Rom und Ägypten erzählen alle einen
    Abstieg, keinen Fortschritt. Die Vergangenheit ist der Gegenwart überlegen.
 2. **Die zwei Untergangsarten.** Wasser und Feuer — in Indien, bei Ovid, in
-   Babylon und in Mesoamerika, über drei Kontinente verteilt. Bei Berossos
-   sogar als astronomische Lehre mit Zeichenangabe.
+   Babylon, bei den Germanen, in Mesoamerika und bei den Druiden, über drei
+   Kontinente verteilt. Bei Berossos sogar als astronomische Lehre mit
+   Zeichenangabe, bei Strabon als ausdrückliche Druidenlehre.
 3. **Eine Urzeit, in der keine Menschen herrschten.** Götter oder gottähnliche
    Wesen am Anfang: Zep Tepi, Kronos' Zeit, die Könige vor der Flut.
 4. **Die Zahlen 432.000 und 4.320** — Kali Yuga und Berossos' Könige vor der
@@ -360,6 +426,16 @@ Derselbe Satz steht in der Zeitkugel beim **aufsteigenden Satya Yuga**.
    Weltalterfolge; der Abstieg steht dort in der Ethik, nicht im Kalender.
 7. **Die Etrusker** zählen nicht Zeitalter der Welt, sondern die Frist *ihres
    eigenen Volkes*. Das ist eine andere Denkfigur: endlich statt zyklisch.
+8. **Die Slawen** haben kein Weltalterschema; was dazu kursiert, stammt aus
+   einer Fälschung des 20. Jahrhunderts und aus einer Rekonstruktion von 1974.
+
+**Zur Quellenlage:** Je weiter nach Norden und Westen, desto dünner wird sie.
+Kelten und Germanen haben selbst nichts aufgeschrieben; alles, was wir haben,
+ist entweder römische Außenbeobachtung oder christliche Verschriftlichung
+Jahrhunderte später. Das macht Übereinstimmungen verdächtig: Ein römischer
+Beobachter sah fremde Lehren leicht durch die eigene stoische Brille, ein
+christlicher Mönch passte Vorzeit an die Bibel an. Wo die Figur also besonders
+gut passt, ist Vorsicht geboten.
 
 **Zur Präzession:** Dass die 25.800 Jahre überhaupt als Zyklus taugen, ist eine
 moderne Einsicht. Hipparch entdeckte die Präzession um 130 v. Chr. und setzte
@@ -369,7 +445,7 @@ lagen um gut vierzig Prozent daneben. Keine der hier verglichenen
 
 ---
 
-## 13. Einordnung
+## 15. Einordnung
 
 Die Übereinstimmungen sind real, aber sie belegen nicht, was sie auf den ersten
 Blick zu belegen scheinen. Dass drei weit auseinanderliegende Kulturen von
@@ -421,5 +497,12 @@ nebeneinander und benennt, wo sie sich decken und wo nicht.
   [Saeculum](https://en.wikipedia.org/wiki/Saeculum),
   [De die natali 17](https://www.csun.edu/%7Ehcfll004/AboutSaecc.html),
   [Caesars Komet](https://en.wikipedia.org/wiki/Caesar%27s_Comet)
+- Strabon zu den Druiden, Coligny-Kalender, Lebor Gabála —
+  [Druiden](https://www.encyclopedia.com/philosophy-and-religion/ancient-religions/ancient-religion/druids)
+- Slawische Quellenlage und das Buch des Veles —
+  [Slawische Mythologie](https://www.encyclopedia.com/reference/encyclopedias-almanacs-transcripts-and-maps/slavic-religion),
+  [Buch des Veles als Fälschung](https://en.wikipedia.org/wiki/Book_of_Veles)
+- Byzantinische Weltära und Peters Kalenderreform —
+  [Byzantinischer Kalender](https://en.wikipedia.org/wiki/Byzantine_calendar)
 - Bibhu Dev Misra, *Yuga Shift* —
   [Der Yuga-Zyklus und die Präzession](https://www.bibhudevmisra.com/2024/03/the-yuga-cycle-and-earths-precession.html)
