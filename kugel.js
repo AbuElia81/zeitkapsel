@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=53';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=53';
+         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=54';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=54';
 
 const HG = 0x05070d;
 

@@ -24,6 +24,9 @@ erwartet — und die Abweichungen sind genauso aufschlussreich wie die
 | **Maya / Azteken** | 4 bzw. 5 Welten | Ersatz, kein Abstieg | 2. Welt / 4. Sonne | 3. Welt / 3. Sonne | 13 Baktun = 5.125 J. |
 | **Anden** | 5 | Umbrüche | — | — | Pachakuti ≈ 500 J. |
 | **Afrika südl. d. Sahara** | keine | Erneuerung | Flutgeschichten | — | Sigui 60 J. |
+| **Germanen** | 1 Welt, erneuert | ab **und auf** | Erde sinkt ins Meer | Surts Feuer | keine |
+| **China** | kein Weltalterschema | abwärts (Dao, Datong) | — | — | Yuan 129.600 J. |
+| **Etrusker** | 10 Saecula | gezählte Frist | — | — | Saeculum ≈ Menschenleben |
 
 ---
 
@@ -226,7 +229,102 @@ zu vier Zeitaltern geordnet.
 
 ---
 
-## 9. Was sich wirklich überschneidet
+## 9. Germanen: Ragnarök und die goldenen Spielsteine
+
+Von allen hier verglichenen Überlieferungen kommt diese der Yuga-Figur am
+nächsten — weil sie als **einzige neben Indien den Wiederaufstieg** kennt.
+
+Die *Völuspá* beginnt mit einem goldenen Anfang: Die Asen spielen auf Idavoll
+mit **goldenen Spielsteinen** (Str. 8), bis drei Riesinnen kommen und die Zeit
+des Goldes endet. Es folgt der Zerfall, in Strophe 45 in einer Formel, die man
+neben das Kali Yuga legen kann:
+
+> Brüder werden kämpfen und einander erschlagen …
+> Beilzeit, Schwertzeit, Schilde bersten,
+> Windzeit, Wolfszeit, eh die Welt versinkt.
+
+Dann der **Fimbulwinter**: drei Winter hintereinander ohne Sommer dazwischen.
+Dann Ragnarök — und zwar mit **beiden** Untergangsarten: **Surts Feuer**
+verbrennt die Welt, und die **Erde sinkt ins Meer**.
+
+Und dann, anders als bei Ovid und Hesiod, geht es weiter: Die Erde steigt grün
+wieder aus dem Meer auf (Str. 59), zwei Menschen — **Líf und Lífþrasir** —
+haben überdauert, und die überlebenden Götter finden im Gras von Idavoll die
+**goldenen Spielsteine der Anfangszeit wieder** (Str. 61).
+
+Das ist, bis auf die Zahlen, der vollständige Yuga-Bogen: goldener Anfang,
+Abstieg, Feuer und Wasser, Neubeginn im Gold.
+
+**Ein realer Kern?** Der Fimbulwinter könnte Erinnerung sein. Der Staubschleier
+von 536 traf Skandinavien besonders hart; Bo Gräslund und Neil Price haben
+argumentiert, dass dieses Ereignis — Missernten, Siedlungsabbrüche,
+Bevölkerungseinbruch — seinen Abdruck in der nordischen Dichtung hinterließ.
+
+---
+
+## 10. China: der Yuan und der Abstieg vom Dao
+
+China rechnet groß, aber anders. **Shao Yong** (1011–1077) legt im *Huangji
+Jingshi* einen kosmischen Zyklus fest, in dem die Welt entsteht, blüht,
+verfällt und vergeht:
+
+| | |
+|---|---|
+| 1 Yuan | **129.600 Jahre** |
+| = 12 Hui | je 10.800 Jahre |
+| = 360 Yun | je 360 Jahre |
+| = **4.320 Shi** | je 30 Jahre |
+
+Die Zahl **4.320** fällt auf: So viele Generationen bilden einen Yuan — und
+4.320.000 Jahre misst das indische Mahayuga. Beide Systeme rechnen mit 60 und
+360 als Grundzahlen; das erklärt die Nähe wahrscheinlich ohne Entlehnung.
+
+Den **Abstieg** erzählt China anderswo. Im *Liji*, Kapitel Liyun, herrschte
+einst **Datong** (大同), die Große Einheit, als die Welt allen gehörte; darauf
+folgte **Xiaokang** (小康), der Kleine Wohlstand, als jeder nur noch für die
+eigene Familie sorgte. Laozi sagt es knapper (*Daodejing* 18): Als das große
+Dao verfiel, entstanden Menschlichkeit und Pflicht. Aus Indien kam später das
+buddhistische **Mofa** (末法) dazu, das Zeitalter des verfallenden Dharma.
+
+**Was fehlt:** vier benannte Weltalter. Der chinesische Blick geht im Zweifel
+auf den Dynastiezyklus — Aufstieg, Blüte, Verfall, Mandatsverlust — und der
+wiederholt sich in Jahrhunderten, nicht in Weltaltern.
+
+---
+
+## 11. Etrusker: die zehn Saecula
+
+Die unheimlichste Fassung, weil sie kein Rad ist, sondern eine **gezählte
+Frist**.
+
+Nach der *Etrusca disciplina* war jedem Volk eine bestimmte Zahl von
+**Saecula** zugeteilt — den Etruskern zehn. Ein Saeculum ist kein fester
+Zeitraum, sondern das **längste Leben unter den bei seinem Beginn Geborenen**:
+Es ist zu Ende, wenn der letzte gestorben ist, der den Anfang erlebt hat. Wann
+das soweit war, erkannten die Haruspices nicht am Kalender, sondern an
+**Vorzeichen**.
+
+Censorinus überliefert in *De die natali* 17 die Szene, die daraus folgt. Als
+44 v. Chr. nach Caesars Tod der Komet erschien, trat der Haruspex **Vulcatius**
+öffentlich auf und erklärte, dieser Komet zeige das Ende des neunten und den
+Beginn des **zehnten — des letzten** — etruskischen Saeculum an. Weil er damit
+gegen den Willen der Götter ein Geheimnis preisgegeben habe, werde er auf der
+Stelle sterben. Noch während der Rede fiel er tot um.
+
+Rom übernahm das Saeculum als Maß, aber ohne die Frist. Und **Vergil** drehte
+es in der vierten Ekloge ins Gegenteil:
+
+> *magnus ab integro saeclorum nascitur ordo* —
+> die große Ordnung der Zeitalter wird neu geboren,
+> *iam redit et Virgo, redeunt Saturnia regna* —
+> schon kehrt die Jungfrau zurück, Saturns Reich beginnt wieder.
+
+Die Jungfrau ist Astraea, die bei Ovid als letzte die Erde verlassen hatte.
+Derselbe Satz steht in der Zeitkugel beim **aufsteigenden Satya Yuga**.
+
+---
+
+## 12. Was sich wirklich überschneidet
 
 **Stark:**
 
@@ -237,22 +335,31 @@ zu vier Zeitaltern geordnet.
    sogar als astronomische Lehre mit Zeichenangabe.
 3. **Eine Urzeit, in der keine Menschen herrschten.** Götter oder gottähnliche
    Wesen am Anfang: Zep Tepi, Kronos' Zeit, die Könige vor der Flut.
-4. **Die Zahl 432.000** — Kali Yuga und Berossos' Könige vor der Flut.
-5. **Ein Umbruch in unserer Lebenszeit** — 2012 und 2025.
+4. **Die Zahlen 432.000 und 4.320** — Kali Yuga und Berossos' Könige vor der
+   Flut; Mahayuga und Shao Yongs Generationen im Yuan. Beide Reihen sind aus
+   60 und 360 gebaut.
+5. **Beide Untergangsarten in einem Ereignis** — bei Ragnarök brennt die Welt
+   *und* versinkt im Meer.
+6. **Ein Umbruch in unserer Lebenszeit** — 2012 und 2025.
 
 **Schwach oder gar nicht:**
 
 1. **Die Zahlen für die Zeitalter selbst.** 2.700 Jahre je Yuga, 5.125 Jahre je
    Baktun-Zyklus, 500 Jahre je Pachakuti, bei Ovid, Hesiod und Ägypten gar
    keine. Nur die 432.000 treffen sich.
-2. **Der Wiederaufstieg.** Nur die Yugas kennen ihn. Ovid und Hesiod enden im
-   Eisen; Mesoamerika und die Anden setzen eine neue Welt an, steigen aber
-   nicht auf.
+2. **Der Wiederaufstieg.** Außer den Yugas kennt ihn nur die *Völuspá* — dort
+   aber vollständig, bis hin zu den goldenen Spielsteinen, die im Gras der
+   neuen Erde wiedergefunden werden. Ovid und Hesiod enden im Eisen;
+   Mesoamerika und die Anden setzen eine neue Welt an, steigen aber nicht auf.
 3. **Die Metalle.** Nur in Griechenland und Rom. Mesoamerika benennt die Welten
    nach ihrer Untergangsart, Ägypten nach dem Rang der Herrscher.
 4. **Die Vierzahl bei den Griechen** ist sekundär — Hesiod hat fünf, die Anden
    auch.
 5. **Afrika südlich der Sahara** fällt ganz heraus: Erneuerung statt Verfall.
+6. **China** hat den größten Zyklus von allen — 129.600 Jahre — aber keine
+   Weltalterfolge; der Abstieg steht dort in der Ethik, nicht im Kalender.
+7. **Die Etrusker** zählen nicht Zeitalter der Welt, sondern die Frist *ihres
+   eigenen Volkes*. Das ist eine andere Denkfigur: endlich statt zyklisch.
 
 **Zur Präzession:** Dass die 25.800 Jahre überhaupt als Zyklus taugen, ist eine
 moderne Einsicht. Hipparch entdeckte die Präzession um 130 v. Chr. und setzte
@@ -262,7 +369,7 @@ lagen um gut vierzig Prozent daneben. Keine der hier verglichenen
 
 ---
 
-## 10. Einordnung
+## 13. Einordnung
 
 Die Übereinstimmungen sind real, aber sie belegen nicht, was sie auf den ersten
 Blick zu belegen scheinen. Dass drei weit auseinanderliegende Kulturen von
@@ -304,5 +411,15 @@ nebeneinander und benennt, wo sie sich decken und wo nicht.
   [Die Generationen der Welt](https://estudioslatinoamericanos.pl/index.php/estudios/article/view/293),
   [Pachakuti](https://axismundi.blog/en/2016/10/18/pachacuti-cicli-di-creazione-e-distruzione-del-mondo-nella-tradizione-andina/)
 - Dogon, Sigui-Zeremonie — [Britannica](https://www.britannica.com/topic/Dogon)
+- Völuspá und Ragnarök — [Die goldenen Spielsteine](https://en.wikipedia.org/wiki/Game_of_the_Gods),
+  [Gylfaginning 51–54](https://www.voluspa.org/gylfaginning51-54.htm)
+- Fimbulwinter und der Staubschleier von 536 —
+  [Gräslund & Price, „Twilight of the Gods?“](https://www.cambridge.org/core/journals/antiquity/article/abs/twilight-of-the-gods-the-dust-veil-event-of-ad-536-in-critical-perspective/4FABB859643B4B4213B97D0F98ED8D85)
+- Shao Yong und der Yuan von 129.600 Jahren —
+  [Übersicht](https://www.universalis.fr/encyclopedie/shao-yong-chao-yong/)
+- Etruskische Saecula, Censorinus und Vulcatius —
+  [Saeculum](https://en.wikipedia.org/wiki/Saeculum),
+  [De die natali 17](https://www.csun.edu/%7Ehcfll004/AboutSaecc.html),
+  [Caesars Komet](https://en.wikipedia.org/wiki/Caesar%27s_Comet)
 - Bibhu Dev Misra, *Yuga Shift* —
   [Der Yuga-Zyklus und die Präzession](https://www.bibhudevmisra.com/2024/03/the-yuga-cycle-and-earths-precession.html)

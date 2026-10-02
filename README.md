@@ -44,8 +44,9 @@ Atemzug und Herzschlag folgen dem Schieber nicht — sie laufen in Echtzeit.
 ## Ovids Weltalter
 
 > Ausführlich im Arbeitspapier **[Die Weltalter im Vergleich](WELTALTER.md)**:
-> Yugas, Ovid, Hesiod, Babylon, Ägypten, Mesoamerika, die Anden und Afrika
-> nebeneinander — mit dem, was sich deckt, und dem, was nicht.
+> Yugas, Ovid, Hesiod, Babylon, Ägypten, Mesoamerika, die Anden, Afrika, die
+> Germanen, China und die Etrusker nebeneinander — mit dem, was sich deckt, und
+> dem, was nicht.
 
 Die äußerste Schale trägt eine zweite Lesart: Ovid schreibt in den *Metamorphosen*
 (8 n. Chr.) achtzehn Jahrhunderte vor Misra dieselbe Folge nieder.
@@ -66,13 +67,17 @@ zeigt die Infotafel zu jedem Abschnitt die passende Ovid-Stelle.
 Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm geht es nur
 abwärts — der aufsteigende Bogen fehlt.
 
-Die Infotafel der äußersten Schale trägt dazu sieben aufklappbare
-Vergleichstafeln: Ovid, Hesiod, Mesoamerika, Babylon, Ägypten, die Anden und
-Afrika südlich der Sahara. Am auffälligsten ist Babylon — Berossos gibt den
+Die Infotafel der äußersten Schale trägt dazu zehn aufklappbare
+Vergleichstafeln: Ovid, Hesiod, Mesoamerika, Babylon, Ägypten, die Anden,
+Afrika südlich der Sahara, die Germanen, China und die Etrusker. Am auffälligsten ist Babylon — Berossos gibt den
 zehn Königen vor der Flut zusammen **432.000 Jahre**, exakt die Länge des Kali
 Yuga in der klassischen indischen Rechnung, und Seneca überliefert von ihm die
 Lehre, dass die Welt im Feuer vergeht, wenn alle Planeten im Krebs
-zusammentreffen, und in der Flut, wenn sie im Steinbock stehen.
+zusammentreffen, und in der Flut, wenn sie im Steinbock stehen. Am nächsten
+kommt der Yuga-Figur aber die **Völuspá**: goldener Anfang, Beilzeit und
+Wolfszeit, Fimbulwinter, Surts Feuer *und* das Versinken im Meer — und danach
+steigt die Erde grün wieder auf, und die goldenen Spielsteine der Anfangszeit
+liegen wieder im Gras. Außer den Yugas kennt nur sie den Wiederaufstieg.
 
 ## Die Chronik
 

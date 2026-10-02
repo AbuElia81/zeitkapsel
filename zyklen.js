@@ -282,6 +282,77 @@ export const SCHICHTEN = [
         Verbreitet sind südlich der Sahara dagegen Flutgeschichten und die Vorstellung
         einer Urzeit, in der Himmel und Erde noch nahe beieinanderlagen — Bausteine
         derselben Figur, aber nicht zu vier Zeitaltern geordnet.`
+    },
+    {
+      titel: 'Germanen: Ragnarök und die goldenen Spielsteine',
+      quelle: 'Völuspá (Lieder-Edda); Snorri Sturluson, Gylfaginning (um 1220)',
+      einleitung: `Von allen hier verglichenen Überlieferungen kommt diese der Yuga-Figur
+        am nächsten — weil sie als einzige neben Indien den Wiederaufstieg kennt.`,
+      zeilen: [
+        ['Am Anfang', 'die Asen spielen mit goldenen Steinen auf Idavoll', 'Völuspá 8'],
+        ['Abstieg', 'Beilzeit, Schwertzeit, Windzeit, Wolfszeit', 'Völuspá 45'],
+        ['Fimbulwinter', 'drei Winter ohne Sommer dazwischen', ''],
+        ['Ragnarök', 'Surts Feuer verbrennt die Welt', ''],
+        ['', 'die Erde sinkt ins Meer', ''],
+        ['Danach', 'die Erde steigt grün wieder auf', 'Völuspá 59'],
+        ['', 'die goldenen Spielsteine liegen wieder im Gras', 'Völuspá 61'],
+        ['Überlebende', 'Lif und Lifthrasir', '']
+      ],
+      nachsatz: `Hier stimmt fast alles: ein goldener Anfang, ein moralischer Zerfall, in
+        dem Brüder einander erschlagen, beide Untergangsarten — Surts Feuer und das
+        Versinken im Meer — und danach eine neue grüne Erde, auf der die Überlebenden die
+        goldenen Spielsteine der Anfangszeit wiederfinden. Zwei Menschen, Lif und
+        Lifthrasir, überdauern und bevölkern sie neu. Was fehlt, sind Zahlen: Die Edda
+        nennt keine Jahre. Der Fimbulwinter hat womöglich einen realen Kern — der
+        Staubschleier von 536 traf Skandinavien hart, und Gräslund und Price halten ihn
+        für den Ursprung des Motivs.`
+    },
+    {
+      titel: 'China: der Yuan und der Abstieg vom Dao',
+      quelle: 'Shao Yong, Huangji Jingshi (11. Jh.); Liji, Kapitel Liyun; Laozi, Daodejing 18 und 38',
+      einleitung: `China rechnet groß, aber anders. Shao Yong legt im 11. Jahrhundert einen
+        kosmischen Zyklus fest, in dem die Welt entsteht, blüht, verfällt und vergeht —
+        und seine Zahlen führen auf dieselbe Reihe wie in Indien.`,
+      zeilen: [
+        ['1 Yuan', '129.600 Jahre', 'Shao Yong'],
+        ['= 12 Hui', 'je 10.800 Jahre', ''],
+        ['= 360 Yun', 'je 360 Jahre', ''],
+        ['= 4.320 Shi', 'je 30 Jahre', ''],
+        ['Datong', 'die Große Einheit, als die Welt allen gehörte', 'Liji'],
+        ['Xiaokang', 'der Kleine Wohlstand, jeder für die eigene Familie', 'Liji'],
+        ['Sechzigerzyklus', '10 Stämme × 12 Zweige', 'Kalender']
+      ],
+      nachsatz: `Die Zahl 4.320 fällt auf: So viele Generationen bilden einen Yuan — und
+        4.320.000 Jahre misst das indische Mahayuga. Beide Systeme rechnen mit 60 und 360
+        als Grundzahlen; das erklärt die Nähe wahrscheinlich ohne Entlehnung. Der Verfall
+        selbst steht im Liji: Einst herrschte Datong, die Große Einheit, als die Welt
+        allen gehörte; darauf folgte Xiaokang, als jeder nur noch für die eigene Familie
+        sorgte. Laozi sagt es knapper: Als das große Dao verfiel, entstanden Menschlichkeit
+        und Pflicht. Aus Indien kam später noch das buddhistische Mofa dazu, das Zeitalter
+        des verfallenden Dharma. Was fehlt, sind vier benannte Weltalter — der chinesische
+        Blick geht im Zweifel auf den Dynastiezyklus, nicht auf das Weltalter.`
+    },
+    {
+      titel: 'Etrusker: die zehn Saecula',
+      quelle: 'Etrusca disciplina, Libri fatales; Censorinus, De die natali 17 (238 n. Chr.)',
+      einleitung: `Die Etrusker maßen die Zeit nicht in gleichen Abschnitten, sondern am
+        Menschenleben — und wussten, dass ihrem Volk nur zehn davon zugeteilt waren.`,
+      zeilen: [
+        ['Ein Saeculum', 'das längste Leben der bei Beginn Geborenen', ''],
+        ['Zugeteilt', 'zehn Saecula, dann ist das Volk vorbei', 'Libri fatales'],
+        ['Erkennbar', 'an Vorzeichen, nicht am Kalender', ''],
+        ['44 v. Chr.', 'ein Komet kündigt das zehnte an', 'Censorinus 17']
+      ],
+      nachsatz: `Das ist die unheimlichste Fassung: kein Rad, das sich dreht, sondern eine
+        gezählte Frist. Als 44 v. Chr. nach Caesars Tod der Komet erschien, trat der
+        Haruspex Vulcatius öffentlich auf und erklärte, dieser Komet zeige das Ende des
+        neunten und den Beginn des zehnten — des letzten — etruskischen Saeculum an. Weil
+        er damit gegen den Willen der Götter ein Geheimnis preisgegeben habe, werde er auf
+        der Stelle sterben; und noch während der Rede fiel er tot um. Rom übernahm das
+        Saeculum als Maß, aber ohne die Frist, und Vergil drehte es in der vierten Ekloge
+        ins Gegenteil: „magnus ab integro saeclorum nascitur ordo“ — die große Ordnung der
+        Zeitalter wird neu geboren, die Jungfrau kehrt zurück, Saturns Reich beginnt
+        wieder. Derselbe Satz steht in dieser Kugel beim aufsteigenden Satya Yuga.`
     }],
     hinweis: `Die Präzession ist gemessene Astronomie. Die Einteilung in Yugas und die Kopplung
       an das galaktische Zentrum sind Misras Deutung und keine gesicherte Wissenschaft —
