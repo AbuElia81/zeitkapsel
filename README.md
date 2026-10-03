@@ -144,6 +144,13 @@ Die weiße Marke auf jedem Band zeigt, wo wir gerade stehen. Bei Jahr, Mondmonat
 und Tag wird sie aus der aktuellen Uhrzeit gerechnet, bei Atem und Herzschlag
 läuft sie in Echtzeit mit.
 
+## Etwas dalassen
+
+Die Seite kostet nichts, zeigt keine Werbung und sammelt keine Daten. In der
+linken Spalte sitzt ein kleiner Spendenknopf über PayPal.Me — wie beim
+[Oracle](https://github.com/AbuElia81/Oracle). Steht `PAYPAL` in `spende.js`
+auf leer, erscheint er gar nicht.
+
 ## Aufbau
 
 Statische Seiten, kein Build.
@@ -153,6 +160,7 @@ Statische Seiten, kein Build.
 - `kugel.js` — die Szene (Three.js): Schalen, Bänder, Drehung, Eintauchen
 - `vendor/three.module.js` — Three.js r169, mitgeliefert
 - `geschichte.js` — die historischen Marken und die Epocheneinteilung
+- `spende.js` — der Spendenknopf, PayPal.Me mit Betrag im Pfad
 - `bilder/milchstrasse.jpg` — Hintergrund, erzeugt mit `gemini-3-pro-image`
 - `bilder/icon-*.png`, `site.webmanifest` — Symbol für den Startbildschirm
 

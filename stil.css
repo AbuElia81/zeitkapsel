@@ -67,7 +67,7 @@ main { position: relative; z-index: 1; height: 100%; }
 #linkeSpalte > * { pointer-events: auto; }
 
 #tafel {
-  flex: 1 1 auto; min-height: 0;
+  flex: 1 1 auto; min-height: 9rem;
   overflow-y: auto; overscroll-behavior: contain;
   padding: 1.2rem 1.4rem 1.3rem;
   background: linear-gradient(155deg, rgba(10,13,22,.80), rgba(6,8,14,.68));
@@ -439,3 +439,51 @@ main { position: relative; z-index: 1; height: 100%; }
 #tafel details[open].vergleichsBlock > summary::before { transform: rotate(90deg); }
 #tafel details.vergleichsBlock > summary:hover { color: #f2e7cf; }
 #tafel details.vergleichsBlock > *:not(summary) { margin-left: 1em; }
+
+/* ------------------------------------------------------------- Spendenknopf */
+.spende {
+  flex: none;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .6rem;
+  padding: .45rem .9rem .5rem;
+  background: linear-gradient(155deg, rgba(10,13,22,.72), rgba(6,8,14,.58));
+  border: 1px solid var(--linie); border-left: 2px solid var(--ton);
+  border-radius: 3px;
+  backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+}
+.spendeTitel {
+  margin: 0; font-size: .62rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--ton); opacity: .85;
+}
+.spendeReihe { display: flex; gap: .45rem; align-items: center; flex-wrap: wrap; }
+.spendeKnopf {
+  display: inline-block; text-decoration: none;
+  border: 1px solid var(--ton); border-radius: 2px;
+  color: #f2e7cf; font-size: .82rem; letter-spacing: .05em;
+  padding: .28rem .85rem;
+  transition: background .18s, color .18s;
+}
+.spendeKnopf:hover { background: var(--ton); color: var(--grund); }
+/* Der freie Betrag ist die Nebentür — kein eigener Kasten, nur ein Hinweis. */
+.spendeKnopf.frei {
+  border: none; padding: .2rem .2rem;
+  color: var(--gedaempft); font-size: .74rem;
+  text-decoration: underline; text-decoration-color: var(--linie);
+  text-underline-offset: .3em;
+}
+.spendeKnopf.frei:hover { background: transparent; color: #ded6c7; }
+.spendeNot {
+  flex-basis: 100%;
+  margin: .4rem 0 0; font-size: .68rem; line-height: 1.45; color: #7d7568;
+}
+/* Auf flachen Bildschirmen soll die Infotafel den Platz behalten. */
+@media (max-height: 820px) {
+  .spendeNot { display: none; }
+}
+
+@media (max-width: 900px) {
+  .spende {
+    border-left: 0; border-top: 1px solid var(--linie);
+    border-radius: 0; padding: .5rem 1.1rem .55rem;
+  }
+  .spendeNot { display: none; }
+}
