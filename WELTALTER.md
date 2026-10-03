@@ -29,6 +29,9 @@ erwartet — und die Abweichungen sind genauso aufschlussreich wie die
 | **Etrusker** | 10 Saecula | gezählte Frist | — | — | Saeculum ≈ Menschenleben |
 | **Kelten** | 6 Landnahmen (irisch) | abwärts | Sintflut, Pest | **Feuer** (Strabon) | keine |
 | **Slawen** | keine | — | — | — | nur die byzantinische Weltära |
+| **Hopi / Diné** | 4 Welten | Ersatz | 3. Welt | 1. Welt (dazu Eis) | keine |
+| **Lakota** | 4 Zeitalter | abwärts | — | — | ein Büffelbein je Zeitalter |
+| **Aborigines** | **keine Reihe** | „everywhen“ | Küstenfluten erinnert | — | keine |
 
 ---
 
@@ -389,7 +392,69 @@ Russland bis 1700 in Gebrauch — dann schaffte Peter I. sie ab, und aus dem Jah
 
 ---
 
-## 14. Was sich wirklich überschneidet
+## 14. Nordamerika: vier Welten und der Büffel auf vier Beinen
+
+Hier steht die auffälligste Einzelheit des ganzen Vergleichs.
+
+**Hopi und Diné.** Die Hopi zählen vier Welten; die ersten drei vergingen durch
+**Feuer**, durch **Eis und Kälte** und durch die **Flut**. Die vierte, in der
+wir stehen, endet im Feuer, wenn *Koyaanisqatsi* — das Leben aus dem
+Gleichgewicht — anhält. Die Diné steigen im *Diné Bahaneʼ* durch vier Welten
+auf, und auch dort entscheidet das Verhalten über den Übergang.
+
+**Der Vorbehalt** wiegt hier schwer. Die bekannte Fassung der Hopi-Welten
+stammt aus Frank Waters' *Book of the Hopi* (1963). Armin Geertz und andere
+haben gezeigt, dass die dort gegebene Deutung der Prophezeiungen stark von der
+Gegenkultur der sechziger Jahre gefärbt ist; die Veröffentlichung geschützten
+Zeremonialwissens war unter den Hopi selbst umstritten. Die Vierweltenstruktur
+ist gut bezeugt — die populäre Prophetieliteratur darüber nicht.
+
+**Der Büffel der Lakota.** Dieses Bild steht für sich:
+
+> Der Büffel trägt die Welt auf **vier Beinen**. In jedem Zeitalter verliert er
+> ein Bein, in jedem Jahr ein Haar. Fällt das letzte Bein, kehrt die Weiße
+> Büffelkalbfrau wieder.
+
+Und in Indien steht genau dasselbe Bild. Der **Stier des Dharma** steht im
+Satya Yuga auf vier Beinen, im Treta auf drei, im Dwapara auf zwei und im Kali
+auf einem.
+
+Vier Zeitalter, ein vierbeiniges Rind, je ein Bein weniger pro Zeitalter. Eine
+Übertragung ist ausgeschlossen. Es bleibt die engste Einzelübereinstimmung
+dieses ganzen Vergleichs — und zugleich die beste Illustration dafür, dass
+solche Übereinstimmungen nichts über Herkunft beweisen.
+
+---
+
+## 15. Australien: kein Zeitalter, aber das längste Gedächtnis
+
+Hier fällt die Frage selbst weg.
+
+Die **Traumzeit** ist kein vergangenes Zeitalter. W. E. H. Stanner prägte dafür
+das Wort **„everywhen"**: Sie ist nicht damals, sondern immer, und sie wird in
+der Zeremonie nicht erinnert, sondern gegenwärtig gehalten. Damit fehlt die
+Grundfigur dieses ganzen Vergleichs — es gibt keinen Abstieg, weil es keine
+Reihe gibt. Keine Metalle, keine Welten, kein Ende.
+
+**Und dafür steht hier etwas, das keine andere Überlieferung hat.**
+
+Patrick Nunn und Nicholas Reid haben 2016 gezeigt, dass entlang der **gesamten
+australischen Küste** Geschichten von Land erzählt werden, das das Meer
+verschlang: von Inseln, die zu Fuß erreichbar waren, von Plätzen, die heute
+unter Wasser liegen. Diese Geschichten lassen sich auf den nacheiszeitlichen
+Meeresspiegelanstieg beziehen — auf Ereignisse zwischen etwa **13.000 und
+7.000 Jahren vor heute**.
+
+Bis dahin galt in der Forschung, dass mündliche Überlieferung höchstens
+achthundert Jahre trägt.
+
+Wenn das stimmt, ist hier nicht die *Figur* eines Weltalters überliefert,
+sondern die **Katastrophe selbst** — und zwar dieselbe, die in der Zeitkugel
+als Doggerland, Schwarzmeerflutung und Storegga steht.
+
+---
+
+## 16. Was sich wirklich überschneidet
 
 **Stark:**
 
@@ -401,12 +466,15 @@ Russland bis 1700 in Gebrauch — dann schaffte Peter I. sie ab, und aus dem Jah
    Zeichenangabe, bei Strabon als ausdrückliche Druidenlehre.
 3. **Eine Urzeit, in der keine Menschen herrschten.** Götter oder gottähnliche
    Wesen am Anfang: Zep Tepi, Kronos' Zeit, die Könige vor der Flut.
-4. **Die Zahlen 432.000 und 4.320** — Kali Yuga und Berossos' Könige vor der
+4. **Der Vierbeiner, der Beine verliert.** Der Stier des Dharma in Indien und
+   der Büffel der Lakota: vier Zeitalter, je ein Bein weniger. Zwischen
+   Nordamerika und Indien ist keine Übertragung denkbar.
+5. **Die Zahlen 432.000 und 4.320** — Kali Yuga und Berossos' Könige vor der
    Flut; Mahayuga und Shao Yongs Generationen im Yuan. Beide Reihen sind aus
    60 und 360 gebaut.
-5. **Beide Untergangsarten in einem Ereignis** — bei Ragnarök brennt die Welt
+6. **Beide Untergangsarten in einem Ereignis** — bei Ragnarök brennt die Welt
    *und* versinkt im Meer.
-6. **Ein Umbruch in unserer Lebenszeit** — 2012 und 2025.
+7. **Ein Umbruch in unserer Lebenszeit** — 2012 und 2025.
 
 **Schwach oder gar nicht:**
 
@@ -428,6 +496,9 @@ Russland bis 1700 in Gebrauch — dann schaffte Peter I. sie ab, und aus dem Jah
    eigenen Volkes*. Das ist eine andere Denkfigur: endlich statt zyklisch.
 8. **Die Slawen** haben kein Weltalterschema; was dazu kursiert, stammt aus
    einer Fälschung des 20. Jahrhunderts und aus einer Rekonstruktion von 1974.
+9. **Die Aborigines** haben nicht einmal eine Reihe: Die Traumzeit ist nicht
+   damals, sondern immer. Dafür bewahren sie möglicherweise die älteste
+   zutreffende Erinnerung an ein reales Ereignis, die es auf der Erde gibt.
 
 **Zur Quellenlage:** Je weiter nach Norden und Westen, desto dünner wird sie.
 Kelten und Germanen haben selbst nichts aufgeschrieben; alles, was wir haben,
@@ -445,7 +516,7 @@ lagen um gut vierzig Prozent daneben. Keine der hier verglichenen
 
 ---
 
-## 15. Einordnung
+## 17. Einordnung
 
 Die Übereinstimmungen sind real, aber sie belegen nicht, was sie auf den ersten
 Blick zu belegen scheinen. Dass drei weit auseinanderliegende Kulturen von
@@ -504,5 +575,14 @@ nebeneinander und benennt, wo sie sich decken und wo nicht.
   [Buch des Veles als Fälschung](https://en.wikipedia.org/wiki/Book_of_Veles)
 - Byzantinische Weltära und Peters Kalenderreform —
   [Byzantinischer Kalender](https://en.wikipedia.org/wiki/Byzantine_calendar)
+- Hopi-Welten, Frank Waters und die Kritik —
+  [Vier Welten](https://ammsa.com/publications/windspeaker/hopi-tale-four-worlds),
+  [Die Erzählung vom Aufstieg](https://www.worldhistory.org/article/2624)
+- Diné Bahaneʼ — [Überblick](https://en.wikipedia.org/wiki/Din%C3%A9_Bahane%CA%BC)
+- Der Büffel der Lakota und die Weiße Büffelkalbfrau —
+  [Überlieferung](https://wilderutopia.com/traditions/lakota-vision-world-harmony-white-buffalo-calf-woman/)
+- Nunn und Reid zu australischen Küstenfluten —
+  [Mündliche Überlieferung über Jahrtausende](https://une.edu.au/about-une/faculty-of-humanities-arts-social-sciences-and-education/hass/news-and-events/linguistics-seminars/seminar-series/oral-traditions-about-sea-level-rises-aboriginal-cultural-transmission-over-great-time-depths),
+  [Zusammenfassung](https://www.sciencenews.org/?p=18856)
 - Bibhu Dev Misra, *Yuga Shift* —
   [Der Yuga-Zyklus und die Präzession](https://www.bibhudevmisra.com/2024/03/the-yuga-cycle-and-earths-precession.html)

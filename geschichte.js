@@ -15,6 +15,7 @@ const ROH = [
   [-9500,  'kultur', 'Göbekli Tepe, Obermesopotamien', 'Jäger und Sammler richten die ältesten bekannten Heiligtümer auf — Kreise aus tonnenschweren T-Pfeilern mit Tierreliefs'],
   [-9000,  'natur',  'Sahara', 'Die Grüne Sahara beginnt: Monsunregen füllt Seen und Flüsse, wo heute Wüste liegt'],
   [-8000,  'kultur', 'Jericho, Jordantal', 'Eine ummauerte Siedlung mit steinernem Turm, eine der ältesten Städte der Welt'],
+  [-7500,  'natur',  'Australien', 'Entlang der gesamten Küste erzählen Geschichten vom Land, das das Meer verschlang. Nunn und Reid führen sie auf den nacheiszeitlichen Meeresspiegelanstieg zurück — mündliche Überlieferung über sieben bis dreizehn Jahrtausende'],
   [-7100,  'kultur', 'Çatalhöyük, Anatolien', 'Eine Stadt ohne Gassen: Tausende leben in aneinandergebauten Lehmhäusern und steigen durch das Dach hinein'],
   [-6500,  'kultur', 'Vorderasien', 'Rinder, Schafe und Ziegen sind domestiziert; die Milchwirtschaft beginnt'],
   [-6200,  'natur',  'Norwegische See, Doggerland', 'Die Storegga-Rutschung — der größte bekannte Unterwasser-Bergsturz — löst einen Tsunami aus, der Schottland und das Doggerland überrollt'],

@@ -45,8 +45,8 @@ Atemzug und Herzschlag folgen dem Schieber nicht — sie laufen in Echtzeit.
 
 > Ausführlich im Arbeitspapier **[Die Weltalter im Vergleich](WELTALTER.md)**:
 > Yugas, Ovid, Hesiod, Babylon, Ägypten, Mesoamerika, die Anden, Afrika, die
-> Germanen, China, die Etrusker, die Kelten und die Slawen nebeneinander — mit
-> dem, was sich deckt, und dem, was nicht.
+> Germanen, China, die Etrusker, die Kelten, die Slawen, Nordamerika und
+> Australien nebeneinander — mit dem, was sich deckt, und dem, was nicht.
 
 Die äußerste Schale trägt eine zweite Lesart: Ovid schreibt in den *Metamorphosen*
 (8 n. Chr.) achtzehn Jahrhunderte vor Misra dieselbe Folge nieder.
@@ -67,10 +67,10 @@ zeigt die Infotafel zu jedem Abschnitt die passende Ovid-Stelle.
 Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm geht es nur
 abwärts — der aufsteigende Bogen fehlt.
 
-Die Infotafel der äußersten Schale trägt dazu zwölf aufklappbare
+Die Infotafel der äußersten Schale trägt dazu vierzehn aufklappbare
 Vergleichstafeln: Ovid, Hesiod, Mesoamerika, Babylon, Ägypten, die Anden,
-Afrika südlich der Sahara, die Germanen, China, die Etrusker, die Kelten und
-die Slawen. Am auffälligsten ist Babylon — Berossos gibt den
+Afrika südlich der Sahara, die Germanen, China, die Etrusker, die Kelten, die
+Slawen, Nordamerika und Australien. Am auffälligsten ist Babylon — Berossos gibt den
 zehn Königen vor der Flut zusammen **432.000 Jahre**, exakt die Länge des Kali
 Yuga in der klassischen indischen Rechnung, und Seneca überliefert von ihm die
 Lehre, dass die Welt im Feuer vergeht, wenn alle Planeten im Krebs

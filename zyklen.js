@@ -408,6 +408,60 @@ export const SCHICHTEN = [
         inzwischen als widerlegt. Die einzige Weltära, die slawische Länder wirklich
         gerechnet haben, ist die byzantinische: 5508 Jahre von der Schöpfung bis Christi
         Geburt. Peter I. schaffte sie 1700 ab — aus dem Jahr 7208 wurde das Jahr 1700.`
+    },
+    {
+      titel: 'Nordamerika: vier Welten und der Büffel auf vier Beinen',
+      quelle: 'Hopi-Überlieferung (mit Vorbehalt); Diné Bahaneʼ; Lakota-Überlieferung der Weißen Büffelkalbfrau',
+      einleitung: `Hier steht die auffälligste Einzelheit des ganzen Vergleichs — ein Bild,
+        das bei den Lakota und in Indien fast gleich lautet.`,
+      zeilen: [
+        ['Hopi', 'die jetzige ist die vierte Welt', ''],
+        ['1. Welt', 'durch Feuer vernichtet', ''],
+        ['2. Welt', 'durch Eis und Kälte', ''],
+        ['3. Welt', 'durch die Flut', ''],
+        ['Diné', 'Aufstieg durch vier Welten', 'Diné Bahaneʼ'],
+        ['Lakota', 'der Büffel steht auf vier Beinen', ''],
+        ['', 'je Zeitalter verliert er ein Bein', ''],
+        ['', 'je Jahr ein Haar', '']
+      ],
+      nachsatz: `Die Hopi zählen vier Welten; die ersten drei vergingen durch Feuer, Eis
+        und Flut, und die vierte endet im Feuer, wenn Koyaanisqatsi — das Leben aus dem
+        Gleichgewicht — anhält. Dazu gehört ein Vorbehalt: Die bekannte Fassung stammt aus
+        Frank Waters’ „Book of the Hopi“ (1963), und die Forschung hält die dortige Deutung
+        der Prophezeiungen für stark von der Gegenkultur der sechziger Jahre gefärbt; auch
+        war die Veröffentlichung geschützten Zeremonialwissens unter den Hopi selbst
+        umstritten. Das Bild der Lakota dagegen steht für sich: Der Büffel trägt die Welt
+        auf vier Beinen, verliert in jedem Zeitalter ein Bein und in jedem Jahr ein Haar;
+        fällt das letzte Bein, kehrt die Weiße Büffelkalbfrau wieder. In Indien steht genau
+        dasselbe Bild — der Stier des Dharma steht im Satya Yuga auf vier Beinen, im Treta
+        auf drei, im Dwapara auf zwei und im Kali auf einem. Vier Zeitalter, ein
+        vierbeiniges Rind, je ein Bein weniger. Eine Verbindung ist nicht denkbar, und die
+        Übereinstimmung bleibt trotzdem die engste des ganzen Vergleichs.`
+    },
+    {
+      titel: 'Australien: kein Zeitalter, aber das längste Gedächtnis',
+      quelle: 'W. E. H. Stanner zum Begriff der Traumzeit; Patrick Nunn und Nicholas Reid (2016)',
+      einleitung: `Hier fällt die Frage selbst weg — und dafür steht etwas anderes da, das
+        in diesem Vergleich einzig ist.`,
+      zeilen: [
+        ['Traumzeit', 'kein Damals, sondern „everywhen“', 'Stanner'],
+        ['Richtung', 'keine, auch kein Verfall', ''],
+        ['Erneuerung', 'durch Zeremonie, nicht durch Umbruch', ''],
+        ['Küstenfluten', 'an der ganzen Küste erzählt', 'Nunn & Reid'],
+        ['datierbar auf', '13.000 bis 7.000 Jahre vor heute', ''],
+        ['bisher angenommen', 'mündliche Überlieferung trägt rund 800 Jahre', '']
+      ],
+      nachsatz: `Die Traumzeit ist kein vergangenes Zeitalter. W. E. H. Stanner prägte
+        dafür das Wort „everywhen“: Sie ist nicht damals, sondern immer, und wird in der
+        Zeremonie nicht erinnert, sondern gegenwärtig gehalten. Damit fehlt die Grundfigur
+        dieses ganzen Vergleichs — es gibt keinen Abstieg, weil es keine Reihe gibt.
+        Dafür steht hier etwas, das keine andere Überlieferung hat: Patrick Nunn und
+        Nicholas Reid haben 2016 gezeigt, dass entlang der gesamten australischen Küste
+        Geschichten von Land erzählt werden, das das Meer verschlang — und dass diese
+        Geschichten sich auf den nacheiszeitlichen Meeresspiegelanstieg zwischen etwa
+        13.000 und 7.000 Jahren vor heute beziehen lassen. Bis dahin galt, dass mündliche
+        Überlieferung höchstens achthundert Jahre trägt. Wenn es stimmt, ist hier nicht
+        die Figur eines Weltalters überliefert, sondern die Katastrophe selbst.`
     }],
     hinweis: `Die Präzession ist gemessene Astronomie. Die Einteilung in Yugas und die Kopplung
       an das galaktische Zentrum sind Misras Deutung und keine gesicherte Wissenschaft —
