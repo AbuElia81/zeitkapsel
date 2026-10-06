@@ -87,11 +87,11 @@ zeigt die Infotafel zu jedem Abschnitt die passende Ovid-Stelle.
 Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm geht es nur
 abwärts — der aufsteigende Bogen fehlt.
 
-Die Infotafel der äußersten Schale trägt dazu zwanzig aufklappbare
-Vergleichstafeln in zwei Gruppen. **Dieselbe Figur anderswo** — vierzehn
-Erzählungen: Ovid, Hesiod, Mesoamerika, Babylon, Ägypten, die Anden,
-Afrika südlich der Sahara, die Germanen, China, die Etrusker, die Kelten, die
-Slawen, Nordamerika und Australien. **Die großen Rechnungen** — sechs
+Die Infotafel der äußersten Schale trägt dazu einundzwanzig aufklappbare
+Vergleichstafeln in zwei Gruppen. **Dieselbe Figur anderswo** — fünfzehn
+Erzählungen: Ovid, Hesiod, die Maya, die Azteken, Babylon, Ägypten, die
+Anden, Afrika südlich der Sahara, die Germanen, China, die Etrusker, die
+Kelten, die Slawen, Nordamerika und Australien. **Die großen Rechnungen** — sechs
 astronomische Systeme: der Kalpa der Siddhantas (4,32 Milliarden Jahre),
 Aryabhatas vier gleiche Viertel, das persische Weltjahr von 360.000 Jahren,
 Māshāʾallāhs Konjunktionsgeschichte, die Fardār-Leiter mit den Planetenjahren

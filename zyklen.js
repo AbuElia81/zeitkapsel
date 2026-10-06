@@ -174,17 +174,17 @@ export const SCHICHTEN = [
         sich, später geboren zu sein — als könnte nach dem Eisen etwas anderes kommen.`
     },
     {
-      titel: 'Mesoamerika: Maya und Azteken',
-      quelle: 'Popol Vuh der Kʼicheʼ-Maya; Leyenda de los Soles der Nahua; Lange Zählung',
+      titel: 'Maya: die vierte Welt und die Lange Zählung',
+      quelle: 'Popol Vuh der Kʼicheʼ-Maya; Lange Zählung der Inschriften',
       einleitung: `Jenseits des Atlantiks dieselbe Grundfigur: nicht eine Schöpfung,
         sondern eine Reihe von Welten, von denen jede untergeht. Und auch hier stehen
         Feuer und Flut unter den Untergängen.`,
       zeilen: [
         ['Popol Vuh', 'die jetzige ist die vierte Welt', ''],
+        ['1. Welt', 'von Tieren zerstört', ''],
         ['2. Welt', 'durch die Flut vernichtet', ''],
         ['3. Welt', 'durch Feuer vernichtet', ''],
-        ['3. Sonne', 'Regen aus Feuer — Tlaloc', 'Azteken'],
-        ['4. Sonne', 'die große Flut — Chalchiuhtlicue', 'Azteken'],
+        ['4. Welt', 'die Menschen aus Mais halten stand', 'jetzt'],
         ['Großer Zyklus', '13 Baktun = 5.125 Jahre', 'Lange Zählung'],
         ['Beginn', '11. August 3114 v. Chr.', ''],
         ['Ende', '21. Dezember 2012', '']
@@ -194,10 +194,38 @@ export const SCHICHTEN = [
         0,7 Prozent nahe. Das ist eine moderne Beobachtung, keine Maya-Lehre — in den
         Inschriften steht nichts davon. Und der Aufbau ist ein anderer: kein Abstieg
         durch Metalle, sondern abgeschlossene Welten, die enden und ersetzt werden.
-        Bemerkenswert bleibt, dass drei Überlieferungen unabhängig voneinander auf
-        dieselben zwei Untergangsarten kommen — Wasser und Feuer — und dass das Ende
-        des 13. Baktun 2012 und Misras Ende des Kali Yuga 2025 nur dreizehn Jahre
-        auseinanderliegen.`
+        Bemerkenswert bleibt, dass das Ende des 13. Baktun 2012 und Misras Ende des
+        Kali Yuga 2025 nur dreizehn Jahre auseinanderliegen.`
+    },
+    {
+      titel: 'Azteken: die Fünf Sonnen',
+      quelle: 'Leyenda de los Soles (Codex Chimalpopoca); Sonnenstein von Tenochtitlan',
+      einleitung: `Nicht vier Welten wie bei den Maya, sondern fünf Sonnen — und jede
+        geht auf ihre eigene Weise unter. Die vier vergangenen stehen als Zeichen um
+        das Gesicht in der Mitte des Sonnensteins.`,
+      zeilen: [
+        ['1. Sonne', 'Nahui-Ocelotl — Jaguare verschlingen die Menschen', 'Tezcatlipoca'],
+        ['2. Sonne', 'Nahui-Ehécatl — Wirbelstürme', 'Quetzalcóatl'],
+        ['3. Sonne', 'Nahui-Quiahuitl — Regen aus Feuer', 'Tláloc'],
+        ['4. Sonne', 'Nahui-Atl — die große Flut', 'Chalchiuhtlicue'],
+        ['5. Sonne', 'Nahui-Ollin — endet im Erdbeben', 'Tonatiuh, jetzt'],
+        ['1. Sonne dauerte', '676 Jahre = 13 × 52', ''],
+        ['Kalenderrunde', '52 Jahre = 18.980 Tage', ''],
+        ['Neues Feuer', 'zuletzt Januar 1507', 'Huixachtlan']
+      ],
+      nachsatz: `Die Namen sind Kalenderdaten: Nahui-Ocelotl heißt „Vier Jaguar“,
+        Nahui-Atl „Vier Wasser“ — jede Sonne trägt den Tag ihres Untergangs als Namen.
+        Zwei der Untergänge sind die bekannten: Die dritte Sonne endet im Feuerregen,
+        die vierte in der großen Flut. Die fünfte, in der wir stehen, soll im Erdbeben
+        enden. Gezählt wird in Zweiundfünfzigern: Die erste Sonne dauerte 676 Jahre,
+        und das sind genau dreizehn Kalenderrunden zu je 52 Jahren. Diese 52 Jahre sind
+        der eigentliche Herzschlag der aztekischen Zeit — sie entstehen, wenn der
+        260-tägige Ritualkalender und das 365-tägige Sonnenjahr wieder zusammenfallen,
+        nach 18.980 Tagen. Am Ende jeder Runde löschte man in ganz Tenochtitlan die
+        Feuer, und die Priester zogen auf den Hügel Huixachtlan hinaus, um dort ein
+        neues zu bohren. Gelänge es nicht, so glaubte man, ginge die Sonne nicht wieder
+        auf. Die letzte dieser Zeremonien fand im Januar 1507 statt, zwölf Jahre vor
+        der Ankunft der Spanier.`
     },
     {
       titel: 'Babylon: Berossos und die Könige vor der Flut',

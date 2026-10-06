@@ -1,8 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=66';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=66';
-import { deuten } from './deutung.js?v=66';
+         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=67';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=67';
+import { deuten } from './deutung.js?v=67';
 
 const HG = 0x05070d;
 

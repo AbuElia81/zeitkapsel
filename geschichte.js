@@ -103,6 +103,7 @@ const ROH = [
   [1450,   'kultur', 'Mainz', 'Gutenberg druckt mit beweglichen Lettern'],
   [1453,   'kultur', 'Konstantinopel', 'Die Stadt fällt; griechische Gelehrte bringen die antiken Texte nach Italien'],
   [1492,   'kultur', 'Atlantik', 'Kolumbus landet in der Karibik; zwei Welten stoßen aufeinander'],
+  [1507,   'kultur', 'Tenochtitlan', 'Die Azteken begehen zum letzten Mal das Neue Feuer: Am Ende jeder Kalenderrunde von 52 Jahren werden alle Feuer gelöscht und auf dem Hügel Huixachtlan ein neues gebohrt — gelänge es nicht, ginge die Sonne nicht wieder auf'],
   [1543,   'himmel', 'Frauenburg', 'Kopernikus stellt die Sonne in die Mitte'],
   [1572,   'himmel', 'Dänemark', 'Tychos Supernova erscheint in der Kassiopeia — ein neuer Stern widerlegt die Unveränderlichkeit des Himmels'],
   [1600,   'natur',  'Huaynaputina, Peru', 'Der stärkste Ausbruch Südamerikas; die folgende Kälte löst in Russland eine Hungersnot mit Millionen Toten aus'],

@@ -112,13 +112,32 @@ dritte im **Feuer**. Erst die Menschen aus Mais hielten stand.
 
 **Leyenda de los Soles** (Nahua/Azteken): Fünf Sonnen.
 
-| Sonne | Herrscher | Untergang |
-|---|---|---|
-| 1. | Tezcatlipoca | Jaguare verschlingen die Menschen |
-| 2. | Quetzalcóatl | Wirbelstürme |
-| 3. | Tláloc | **Regen aus Feuer** |
-| 4. | Chalchiuhtlicue | **die große Flut** |
-| 5. | *jetzt* | Erdbeben |
+| Sonne | Name | Herrscher | Untergang |
+|---|---|---|---|
+| 1. | Nahui-Ocelotl — *Vier Jaguar* | Tezcatlipoca | Jaguare verschlingen die Menschen |
+| 2. | Nahui-Ehécatl — *Vier Wind* | Quetzalcóatl | Wirbelstürme |
+| 3. | Nahui-Quiahuitl — *Vier Regen* | Tláloc | **Regen aus Feuer** |
+| 4. | Nahui-Atl — *Vier Wasser* | Chalchiuhtlicue | **die große Flut** |
+| 5. | Nahui-Ollin — *Vier Bewegung* | Tonatiuh, *jetzt* | Erdbeben |
+
+Die Namen sind Kalenderdaten: Jede Sonne trägt den Tag ihres Untergangs als
+Namen. Die vier vergangenen stehen als Zeichen um das Gesicht in der Mitte des
+**Sonnensteins** von Tenochtitlan.
+
+### Gezählt wird in Zweiundfünfzigern
+
+Die erste Sonne dauerte **676 Jahre — genau dreizehn Kalenderrunden zu je 52
+Jahren**. Diese 52 Jahre sind der eigentliche Herzschlag der aztekischen Zeit:
+Sie entstehen, wenn der 260-tägige Ritualkalender und das 365-tägige Sonnenjahr
+wieder zusammenfallen, nach **18.980 Tagen**.
+
+Am Ende jeder Runde löschte man in ganz Tenochtitlan die Feuer, und die
+Priester zogen auf den Hügel **Huixachtlan** hinaus, um dort mit dem Bohrer ein
+neues zu entzünden — das **Neue Feuer**, *xiuhmolpilli*, die „Bindung der
+Jahre". Gelänge es nicht, so glaubte man, ginge die Sonne nicht wieder auf.
+
+Die letzte dieser Zeremonien fand im **Januar 1507** statt, zwölf Jahre vor der
+Ankunft der Spanier.
 
 **Lange Zählung:** Der Große Zyklus umfasst 13 Baktun = 1.872.000 Tage =
 **5.125 Jahre**. Nullpunkt ist der 11. August 3114 v. Chr., das Ende fiel auf
