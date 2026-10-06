@@ -67,10 +67,22 @@ zeigt die Infotafel zu jedem Abschnitt die passende Ovid-Stelle.
 Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm geht es nur
 abwärts — der aufsteigende Bogen fehlt.
 
-Die Infotafel der äußersten Schale trägt dazu vierzehn aufklappbare
-Vergleichstafeln: Ovid, Hesiod, Mesoamerika, Babylon, Ägypten, die Anden,
+Die Infotafel der äußersten Schale trägt dazu zwanzig aufklappbare
+Vergleichstafeln in zwei Gruppen. **Dieselbe Figur anderswo** — vierzehn
+Erzählungen: Ovid, Hesiod, Mesoamerika, Babylon, Ägypten, die Anden,
 Afrika südlich der Sahara, die Germanen, China, die Etrusker, die Kelten, die
-Slawen, Nordamerika und Australien. Am auffälligsten ist Babylon — Berossos gibt den
+Slawen, Nordamerika und Australien. **Die großen Rechnungen** — sechs
+astronomische Systeme: der Kalpa der Siddhantas (4,32 Milliarden Jahre),
+Aryabhatas vier gleiche Viertel, das persische Weltjahr von 360.000 Jahren,
+Māshāʾallāhs Konjunktionsgeschichte, die Fardār-Leiter mit den Planetenjahren
+und die Lehre von Saturn und Mars im Krebs.
+
+Daraus stammen die Zahlen, auf denen alles ruht — und sie hängen zusammen:
+Das Weltjahr von 360.000 Jahren ist genau ein Zwölftel des Mahayuga und so
+gewählt, dass Saturn zwölftausend Umläufe zu dreißig Jahren und Jupiter
+dreißigtausend zu zwölf Jahren schafft. Die „kleinen Jahre" der Planeten —
+Saturn 30, Jupiter 12, Venus 8, Sonne 19 — sind in dieser Kugel vier eigene
+Schalen. Am auffälligsten ist Babylon — Berossos gibt den
 zehn Königen vor der Flut zusammen **432.000 Jahre**, exakt die Länge des Kali
 Yuga in der klassischen indischen Rechnung, und Seneca überliefert von ihm die
 Lehre, dass die Welt im Feuer vergeht, wenn alle Planeten im Krebs

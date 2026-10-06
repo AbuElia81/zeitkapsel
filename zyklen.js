@@ -462,6 +462,171 @@ export const SCHICHTEN = [
         13.000 und 7.000 Jahren vor heute beziehen lassen. Bis dahin galt, dass mündliche
         Überlieferung höchstens achthundert Jahre trägt. Wenn es stimmt, ist hier nicht
         die Figur eines Weltalters überliefert, sondern die Katastrophe selbst.`
+    },
+    {
+      gruppe: 'rechnung',
+      titel: 'Indien: der Kalpa der Siddhantas',
+      quelle: 'Surya Siddhanta; über Brahmaguptas Brahmasphutasiddhanta als Zij as-Sindhind nach Bagdad, um 770',
+      einleitung: `Die äußerste Schale dieser Kugel zeigt Misras rekonstruierten Zyklus von
+        25.800 Jahren. Die klassische indische Astronomie rechnet ganz anders — in Zahlen,
+        neben denen die Präzession verschwindet.`,
+      zeilen: [
+        ['1 Mahayuga', '4.320.000 Jahre', '12.000 Götterjahre'],
+        ['Satya', '1.728.000 Jahre', '4 Teile'],
+        ['Treta', '1.296.000 Jahre', '3 Teile'],
+        ['Dwapara', '864.000 Jahre', '2 Teile'],
+        ['Kali', '432.000 Jahre', '1 Teil'],
+        ['1 Kalpa', '1.000 Mahayugas', '4,32 Milliarden Jahre'],
+        ['', 'ein Tag im Leben Brahmas', ''],
+        ['Kali Yuga beginnt', '18. Februar 3102 v. Chr.', 'um Mitternacht']
+      ],
+      nachsatz: `Hier stehen die Yugas im Verhältnis 4:3:2:1 — jedes Zeitalter ein Viertel
+        kürzer als das vorige. Ein Götterjahr zählt 360 Menschenjahre, zwölftausend davon
+        ergeben die 4.320.000. Tausend Mahayugas sind ein Kalpa, ein Tag im Leben Brahmas:
+        4,32 Milliarden Jahre — dieselbe Größenordnung wie das Alter der Erde, das die
+        Geologie mit 4,54 Milliarden angibt. Und darin steckt die Zahl, die in Babylon
+        wiederkehrt: Das Kali Yuga misst 432.000 Jahre, genau so viel wie die
+        Regierungszeit der zehn Könige vor der Flut bei Berossos. Misras 25.800 Jahre sind
+        eine Rekonstruktion gegen diese Überlieferung, nicht aus ihr. In den frühen 770er
+        Jahren ließ Kalif al-Mansur in Bagdad Brahmaguptas Werke übersetzen: aus dem
+        Brahmasphutasiddhanta wurde der Zij as-Sindhind, aus dem Khandakhadyaka der Zij
+        al-Arkand. Mit ihnen kamen diese Zahlen — und die indischen Ziffern — in die
+        arabische Wissenschaft.`
+    },
+    {
+      gruppe: 'rechnung',
+      titel: 'Aryabhata: vier gleiche Viertel',
+      quelle: 'Aryabhatiya, 499 n. Chr.',
+      einleitung: `Aryabhata rechnet mit derselben Gesamtlänge, teilt sie aber anders — und
+        seine Planetenwerte sind so genau, dass man sie heute noch nachrechnen kann.`,
+      zeilen: [
+        ['1 Mahayuga', '4.320.000 Jahre', 'wie bei den Siddhantas'],
+        ['aber geteilt in', 'vier gleiche Viertel', 'je 1.080.000 Jahre'],
+        ['Jupiter', '364.224 Umläufe je Mahayuga', '= 11,8608 Jahre'],
+        ['Saturn', '146.564 Umläufe je Mahayuga', '= 29,4749 Jahre'],
+        ['Kali Yuga beginnt', '3102 v. Chr.', ''],
+        ['Aryabhatiya geschrieben', 'im Kali-Jahr 3600', '= 499 n. Chr.']
+      ],
+      nachsatz: `Der Unterschied ist grundsätzlich: Bei den Siddhantas fallen die Yugas im
+        Verhältnis 4:3:2:1 ab, bei Aryabhata sind alle vier gleich lang — je 1.080.000
+        Jahre. Der Abstieg steckt dann nicht mehr in der Dauer. Dafür sind seine
+        Planetenwerte erstaunlich: Aus 364.224 Jupiter-Umläufen je Mahayuga folgt eine
+        Umlaufzeit von 11,8608 Jahren (heute gemessen 11,862), aus 146.564 Saturn-Umläufen
+        29,4749 Jahre (heute 29,457). Das Datum seines Buches gibt er selbst an — im
+        Kali-Jahr 3600, im Alter von dreiundzwanzig; daraus ergibt sich 499 n. Chr. und
+        rückwärts der Beginn des Kali Yuga 3102 v. Chr.`
+    },
+    {
+      gruppe: 'rechnung',
+      titel: 'Persien: das Weltjahr von 360.000 Jahren',
+      quelle: 'Zij al-Arkand (aus Brahmaguptas Khandakhadyaka, Bagdad um 770); Abu Maʿšar, Kitāb al-ulūf; David Pingree (1968)',
+      einleitung: `Aus den indischen Zahlen bauten die persisch-arabischen Astronomen ein
+        eigenes Maß — und es ist genau so gewählt, dass Jupiter und Saturn glatt aufgehen.`,
+      zeilen: [
+        ['1 Weltjahr', '360.000 Jahre', 'ein Zwölftel des Mahayuga'],
+        ['Saturn bei Abu Maʿšar', '12.000 Umläufe', 'je 30 Jahre'],
+        ['Jupiter bei Abu Maʿšar', '30.000 Umläufe', 'je 12 Jahre'],
+        ['Saturn bei Aryabhata', '12.214 Umläufe', 'je 29,47 Jahre'],
+        ['Jupiter bei Aryabhata', '30.352 Umläufe', 'je 11,86 Jahre'],
+        ['Die Flut', 'Große Konjunktion 3101 v. Chr.', 'Kitāb al-ulūf'],
+        ['Weltanfang', 'alle Planeten im Widder', ''],
+        ['Weltende', 'alle Planeten in den Fischen', '']
+      ],
+      nachsatz: `Das Weltjahr ist kein beobachteter Zeitraum, sondern ein konstruierter:
+        360.000 Jahre sind genau zwölftausend Saturnumläufe zu dreißig Jahren und
+        dreißigtausend Jupiterumläufe zu zwölf Jahren — bei beiden geht die Rechnung glatt
+        auf. Rechnet man dagegen mit Aryabhatas genaueren Werten, kommen 12.214 und 30.352
+        heraus: nah dran, aber nicht rund. In dieser Spannung zwischen der idealen und der
+        gemessenen Zahl steckt die ganze Konstruktion. Abu Maʿšar legte in seinem „Buch der
+        Tausende“ die Große Konjunktion aller Planeten auf das Jahr 3101 v. Chr. — und
+        erklärte sie zur Sintflut. Das ist derselbe Zeitpunkt, den die indische Astronomie
+        als Beginn des Kali Yuga führt, nur anders gedeutet: Was in Indien ein Zeitalter
+        eröffnet, wird im Islam und im Christentum zur Flut Noahs. Die Welt, so Abu Maʿšar,
+        sei entstanden, als die sieben Planeten im Widder zusammenstanden, und werde enden,
+        wenn sie in den Fischen zusammentreten.`
+    },
+    {
+      gruppe: 'rechnung',
+      titel: 'Māshāʾallāh: die Geschichte aus Konjunktionen',
+      quelle: 'Kitāb fī l-qirānāt wa-l-adyān wa-l-milal (um 800); Gründungshoroskop Bagdads, 762',
+      einleitung: `Eine Generation vor Abu Maʿšar legte Māshāʾallāh ibn Atharī, persischer
+        Jude in Bagdad, das Verfahren fest, nach dem die ganze spätere
+        Konjunktionsastrologie arbeitet.`,
+      zeilen: [
+        ['Māshāʾallāh', 'um 740 bis 815, Bagdad', ''],
+        ['762', 'stellt mit al-Nawbacht das Gründungshoroskop Bagdads', ''],
+        ['Sein Buch', 'über Konjunktionen, Religionen und Völker', ''],
+        ['Methode', 'Weltgeschichte aus Jupiter-Saturn-Konjunktionen', ''],
+        ['alle 20 Jahre', 'eine Große Konjunktion', ''],
+        ['rund 200 Jahre', 'dasselbe Trigon', ''],
+        ['Trigonwechsel', 'bedeutet den Umbruch', '']
+      ],
+      nachsatz: `Māshāʾallāh war einer der beiden Astrologen, die 762 den Zeitpunkt für die
+        Grundsteinlegung Bagdads wählten — die Stadt wurde nach einem Horoskop gegründet.
+        Sein „Buch über Konjunktionen, Religionen und Völker“ ist der erste Versuch, die
+        ganze Weltgeschichte aus den Großen Konjunktionen abzuleiten: alle zwanzig Jahre
+        eine Konjunktion, rund zweihundert Jahre im selben Trigon, und der Wechsel in ein
+        neues Trigon bedeutet den Umbruch von Reichen und Religionen. Abu Maʿšar baute das
+        eine Generation später aus. Was in dieser Kugel als Jupiter-Saturn-Schale steht,
+        geht auf diese beiden zurück.`
+    },
+    {
+      gruppe: 'rechnung',
+      titel: 'Die Fardār und die Planetenjahre',
+      quelle: 'Abu Maʿšar zu den Fardār-Perioden; al-Qabīsī und al-Bīrūnī zu den Planetenjahren',
+      einleitung: `Neben den Konjunktionen läuft ein zweites Verfahren: Jedem Planeten
+        gehört eine Zeitspanne, und diese Spannen werden zu Leitern gestapelt — von
+        dreihundertsechzig Jahren bis hinauf zum Weltjahr.`,
+      zeilen: [
+        ['Fardār-Leiter', '360 Jahre', ''],
+        ['', '3.600 Jahre', ''],
+        ['', '36.000 Jahre', 'das Große Jahr'],
+        ['', '360.000 Jahre', 'das Weltjahr'],
+        ['Kleine Jahre', 'Saturn 30 · Jupiter 12 · Mars 15', ''],
+        ['', 'Sonne 19 · Venus 8 · Merkur 20 · Mond 25', ''],
+        ['Mittlere Jahre', 'Saturn 43,5 · Jupiter 45,5 · Mars 40,5', ''],
+        ['', 'Sonne 69,5 · Venus 45 · Merkur 48 · Mond 66,5', ''],
+        ['Große Jahre', 'Saturn 57 · Jupiter 79 · Mars 66', ''],
+        ['', 'Sonne 120 · Venus 82 · Merkur 76 · Mond 108', '']
+      ],
+      nachsatz: `Die Leiter ist dezimal gebaut: 360, 3.600, 36.000, 360.000 — vier Stufen
+        astrologischer Wirksamkeit, von denen die dritte genau das Große Jahr ist, das
+        Hipparch und Ptolemaios für die Präzession ansetzten, und die vierte das persische
+        Weltjahr. Im mundanen Gebrauch zählt dabei das Jahr zu 360 Tagen, nicht zu 365.
+        Die kleinen Jahre sind keine Erfindung, sondern Umlaufzeiten: Saturn 30 und Jupiter
+        12 sind ihre Bahnen, Venus 8 ist die Rose der Venus, und die 19 Jahre der Sonne
+        sind der Meton-Zyklus, nach dem Sonnen- und Mondkalender wieder zusammenfallen.
+        Vier dieser Zahlen sind in dieser Kugel eigene Schalen. Die mittleren Jahre sind
+        das Mittel aus kleinen und großen, die großen die Summe der Grenzen eines Planeten
+        über den Tierkreis. Eine vierte Reihe, die „größten Jahre“, geben die Quellen
+        widersprüchlich an — für den Mond nennt Lilly 320, Bonatti 420, al-Qabīsī und
+        al-Bīrūnī dagegen 520.`
+    },
+    {
+      gruppe: 'rechnung',
+      titel: 'Saturn und Mars im Krebs',
+      quelle: 'al-Kindī; Abu Maʿšar; Thema Mundi der hellenistischen Astrologie',
+      einleitung: `Die kürzeste und zugleich unheimlichste dieser Lehren — und sie trifft
+        sich mit Berossos auf denselben Punkt des Himmels.`,
+      zeilen: [
+        ['Treffen', 'Saturn und Mars im Krebs', ''],
+        ['Wiederkehr', 'rund alle 30 Jahre', ''],
+        ['al-Kindī', 'zur Dauer der arabischen Herrschaft', 'früheste Erwähnung'],
+        ['Abu Maʿšar', 'macht die Lehre bekannt', ''],
+        ['Thema Mundi', 'der Krebs steigt auf, bei 15 Grad', 'Geburtsbild der Welt'],
+        ['Berossos', 'Weltenbrand bei Konjunktion im Krebs', 'Seneca III, 29']
+      ],
+      nachsatz: `Saturn und Mars sind in der klassischen Lehre die beiden Übeltäter; treffen
+        sie sich ausgerechnet im Krebs, gilt das als Zeichen für Dürre, Krieg und den Sturz
+        von Herrschaft. Weil Saturn knapp dreißig Jahre für einen Umlauf braucht, kehrt
+        diese Stellung rund alle dreißig Jahre wieder — dieselbe Zahl, die auch als kleines
+        Jahr des Saturn in der Tafel darüber steht. Die früheste Erwähnung findet sich bei
+        al-Kindī, der damit die Dauer der arabischen Herrschaft zu bestimmen suchte; Abu
+        Maʿšar machte sie bekannt. Warum gerade der Krebs? Im Thema Mundi, dem Geburtsbild
+        der Welt in der hellenistischen Astrologie, steigt der Krebs auf — er ist der
+        Aszendent der Welt selbst. Und Berossos nennt bei Seneca denselben Ort für den
+        Weltenbrand: wenn alle Planeten im Krebs zusammentreten. Drei Überlieferungen, ein
+        Zeichen.`
     }],
     hinweis: `Die Präzession ist gemessene Astronomie. Die Einteilung in Yugas und die Kopplung
       an das galaktische Zentrum sind Misras Deutung und keine gesicherte Wissenschaft —

@@ -454,7 +454,178 @@ als Doggerland, Schwarzmeerflutung und Storegga steht.
 
 ---
 
-## 16. Was sich wirklich überschneidet
+# Teil II: Die großen Rechnungen
+
+Die ersten fünfzehn Abschnitte vergleichen *Erzählungen*. Was folgt, sind
+**Rechnungen** — die astronomischen Systeme, aus denen die Yuga-Zahlen stammen
+und über die sie nach Persien, Bagdad und Europa gelangten.
+
+---
+
+## 16. Indien: der Kalpa der Siddhantas
+
+Die äußerste Schale der Zeitkugel zeigt Misras rekonstruierten Zyklus von
+25.800 Jahren. Die klassische indische Astronomie rechnet ganz anders.
+
+| | | |
+|---|---|---|
+| 1 Mahayuga | **4.320.000 Jahre** | 12.000 Götterjahre à 360 |
+| Satya | 1.728.000 Jahre | 4 Teile |
+| Treta | 1.296.000 Jahre | 3 Teile |
+| Dwapara | 864.000 Jahre | 2 Teile |
+| Kali | **432.000 Jahre** | 1 Teil |
+| 1 Kalpa | 1.000 Mahayugas | **4,32 Milliarden Jahre** |
+
+Die Yugas stehen im Verhältnis **4:3:2:1** — jedes Zeitalter ein Viertel kürzer
+als das vorige. Tausend Mahayugas sind ein **Kalpa**, ein Tag im Leben Brahmas:
+4,32 Milliarden Jahre, in derselben Größenordnung wie das Alter der Erde, das
+die Geologie mit 4,54 Milliarden angibt.
+
+Und darin steckt die Zahl aus Abschnitt 5: Das Kali Yuga misst **432.000**
+Jahre — genau die Regierungszeit der zehn Könige vor der Flut bei Berossos.
+
+Nach den Siddhantas begann das Kali Yuga am **18. Februar 3102 v. Chr.** um
+Mitternacht.
+
+**Wichtig für die Einordnung der ganzen Kugel:** Misras 25.800 Jahre sind eine
+Rekonstruktion *gegen* diese Überlieferung, nicht aus ihr.
+
+---
+
+## 17. Aryabhata: vier gleiche Viertel
+
+Aryabhata (*Aryabhatiya*, 499 n. Chr.) rechnet mit derselben Gesamtlänge, teilt
+sie aber **in vier gleiche Viertel** von je 1.080.000 Jahren. Der Abstieg
+steckt dann nicht mehr in der Dauer.
+
+Seine Planetenwerte sind erstaunlich genau:
+
+| Planet | Umläufe je Mahayuga | daraus Umlaufzeit | heute gemessen |
+|---|---|---|---|
+| Jupiter | 364.224 | 11,8608 Jahre | 11,862 |
+| Saturn | 146.564 | 29,4749 Jahre | 29,457 |
+
+Das Datum seines Buches gibt er selbst an — im Kali-Jahr 3600, im Alter von
+dreiundzwanzig. Daraus ergibt sich 499 n. Chr. und rückwärts der Beginn des
+Kali Yuga 3102 v. Chr.
+
+---
+
+## 18. Persien: das Weltjahr von 360.000 Jahren
+
+In den frühen 770er Jahren ließ Kalif al-Mansur in Bagdad Brahmaguptas Werke
+übersetzen: aus dem *Brahmasphutasiddhanta* wurde der **Zij as-Sindhind**, aus
+dem *Khandakhadyaka* der **Zij al-Arkand**. Mit ihnen kamen die indischen
+Zahlen — und die indischen Ziffern — in die arabische Wissenschaft.
+
+Daraus bauten die persisch-arabischen Astronomen ein eigenes Maß: das
+**Weltjahr von 360.000 Jahren**, genau ein Zwölftel des Mahayuga.
+
+Und es ist so gewählt, dass die beiden langsamen Planeten glatt aufgehen:
+
+| | Umläufe in 360.000 Jahren | daraus |
+|---|---|---|
+| Saturn bei Abu Maʿšar | **12.000** | je 30 Jahre |
+| Jupiter bei Abu Maʿšar | **30.000** | je 12 Jahre |
+| Saturn bei Aryabhata | 12.214 | je 29,47 Jahre |
+| Jupiter bei Aryabhata | 30.352 | je 11,86 Jahre |
+
+Mit den runden Werten geht die Rechnung auf; mit Aryabhatas genaueren nicht
+ganz. In dieser Spannung zwischen der idealen und der gemessenen Zahl steckt
+die ganze Konstruktion.
+
+**Und die Flut.** Abu Maʿšar legte in seinem *Buch der Tausende* die Große
+Konjunktion aller Planeten auf das Jahr **3101 v. Chr.** — und erklärte sie zur
+**Sintflut**. Das ist derselbe Zeitpunkt, den die indische Astronomie als
+Beginn des Kali Yuga führt, nur anders gedeutet: Was in Indien ein Zeitalter
+eröffnet, wird im Islam und im Christentum zur Flut Noahs.
+
+Die Welt, so Abu Maʿšar, sei entstanden, als die sieben Planeten im **Widder**
+zusammenstanden, und werde enden, wenn sie in den **Fischen** zusammentreten.
+
+---
+
+## 19. Māshāʾallāh: die Geschichte aus Konjunktionen
+
+Eine Generation vor Abu Maʿšar legte **Māshāʾallāh ibn Atharī** (um 740–815),
+persischer Jude in Bagdad, das Verfahren fest, nach dem die ganze spätere
+Konjunktionsastrologie arbeitet. Er war einer der beiden Astrologen, die 762
+den Zeitpunkt für die Grundsteinlegung Bagdads wählten — die Stadt wurde nach
+einem Horoskop gegründet.
+
+Sein *Buch über Konjunktionen, Religionen und Völker* ist der erste Versuch,
+die ganze Weltgeschichte aus den Großen Konjunktionen abzuleiten: alle zwanzig
+Jahre eine Konjunktion, rund zweihundert Jahre im selben Trigon, und der
+Wechsel in ein neues Trigon bedeutet den Umbruch von Reichen und Religionen.
+
+Abu Maʿšar baute das eine Generation später aus. Was in der Zeitkugel als
+Jupiter-Saturn-Schale steht, geht auf diese beiden zurück.
+
+---
+
+## 20. Die Fardār und die Planetenjahre
+
+Neben den Konjunktionen läuft ein zweites Verfahren. Abu Maʿšar unterscheidet
+vier Stufen astrologischer Wirksamkeit, dezimal gestapelt:
+
+**360 — 3.600 — 36.000 — 360.000 Jahre**
+
+Die dritte Stufe ist genau das Große Jahr, das Hipparch und Ptolemaios für die
+Präzession ansetzten; die vierte das persische Weltjahr. Im mundanen Gebrauch
+zählt dabei das Jahr zu 360 Tagen, nicht zu 365.
+
+Dazu die **Planetenjahre**:
+
+| Planet | klein | mittel | groß |
+|---|---|---|---|
+| Saturn | **30** | 43,5 | 57 |
+| Jupiter | **12** | 45,5 | 79 |
+| Mars | 15 | 40,5 | 66 |
+| Sonne | **19** | 69,5 | 120 |
+| Venus | **8** | 45 | 82 |
+| Merkur | 20 | 48 | 76 |
+| Mond | 25 | 66,5 | 108 |
+
+Die **kleinen Jahre** sind keine Erfindung, sondern Umlaufzeiten: Saturn 30 und
+Jupiter 12 sind ihre Bahnen, Venus 8 ist die Rose der Venus, und die 19 Jahre
+der Sonne sind der Meton-Zyklus, nach dem Sonnen- und Mondkalender wieder
+zusammenfallen. **Vier dieser Zahlen sind in der Zeitkugel eigene Schalen.**
+
+Die **mittleren Jahre** sind das Mittel aus kleinen und großen, die **großen**
+die Summe der Grenzen eines Planeten über den Tierkreis. Eine vierte Reihe, die
+„größten Jahre", geben die Quellen widersprüchlich an — für den Mond nennt
+Lilly 320, Bonatti 420, al-Qabīsī und al-Bīrūnī dagegen 520.
+
+---
+
+## 21. Saturn und Mars im Krebs
+
+Die kürzeste dieser Lehren — und sie trifft sich mit Berossos auf demselben
+Punkt des Himmels.
+
+Saturn und Mars sind in der klassischen Lehre die beiden Übeltäter. Treffen sie
+sich ausgerechnet im **Krebs**, gilt das als Zeichen für Dürre, Krieg und den
+Sturz von Herrschaft. Weil Saturn knapp dreißig Jahre für einen Umlauf braucht,
+kehrt diese Stellung **rund alle dreißig Jahre** wieder — dieselbe Zahl, die
+auch als kleines Jahr des Saturn in der Tafel oben steht.
+
+Die früheste Erwähnung findet sich bei **al-Kindī**, der damit die Dauer der
+arabischen Herrschaft zu bestimmen suchte; Abu Maʿšar machte sie bekannt.
+
+**Warum gerade der Krebs?** Im **Thema Mundi**, dem Geburtsbild der Welt in der
+hellenistischen Astrologie, steigt der Krebs auf — er ist der Aszendent der
+Welt selbst. Und **Berossos** nennt bei Seneca denselben Ort für den
+Weltenbrand: wenn alle Planeten im Krebs zusammentreten.
+
+Drei Überlieferungen, ein Zeichen.
+
+---
+
+# Teil III: Bilanz
+
+---
+
+## 22. Was sich wirklich überschneidet
 
 **Stark:**
 
@@ -516,7 +687,7 @@ lagen um gut vierzig Prozent daneben. Keine der hier verglichenen
 
 ---
 
-## 17. Einordnung
+## 23. Einordnung
 
 Die Übereinstimmungen sind real, aber sie belegen nicht, was sie auf den ersten
 Blick zu belegen scheinen. Dass drei weit auseinanderliegende Kulturen von
@@ -584,5 +755,15 @@ nebeneinander und benennt, wo sie sich decken und wo nicht.
 - Nunn und Reid zu australischen Küstenfluten —
   [Mündliche Überlieferung über Jahrtausende](https://une.edu.au/about-une/faculty-of-humanities-arts-social-sciences-and-education/hass/news-and-events/linguistics-seminars/seminar-series/oral-traditions-about-sea-level-rises-aboriginal-cultural-transmission-over-great-time-depths),
   [Zusammenfassung](https://www.sciencenews.org/?p=18856)
+- Mahayuga, Kalpa und das Verhältnis 4:3:2:1 — [Yuga](https://en.wikipedia.org/wiki/Yuga)
+- Zij as-Sindhind und Zij al-Arkand, Übersetzung in Bagdad —
+  [Zij as-Sindhind](https://en.wikipedia.org/wiki/Zij_as-Sindhind),
+  [Khandakhadyaka](https://en.wikipedia.org/wiki/Khandakhadyaka)
+- Abu Maʿšar, Weltjahr und Flutdatierung — David Pingree, *The Thousands of
+  Abū Maʿshar* (1968); [Encyclopaedia Iranica](https://iranicaonline.org/articles/abu-masar-jafar-b)
+- Māshāʾallāh ibn Atharī — [Biographie](https://islamsci.mcgill.ca/RASI/BEA/Masha'allah_ibn_Athari_BEA.htm)
+- Fardār und Planetenjahre — [Planetary years](https://stellium.readthedocs.io/en/stable/methodology/research/planetary-years.html)
+- Saturn-Mars im Krebs und das Thema Mundi —
+  [Thema Mundi](https://en.wikipedia.org/wiki/Thema_Mundi)
 - Bibhu Dev Misra, *Yuga Shift* —
   [Der Yuga-Zyklus und die Präzession](https://www.bibhudevmisra.com/2024/03/the-yuga-cycle-and-earths-precession.html)

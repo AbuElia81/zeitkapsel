@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=60';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=60';
+         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=62';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=62';
 
 const HG = 0x05070d;
 
@@ -634,16 +634,21 @@ function tafelFuellen(s) {
       ${s.kern ? '<p class="menschZeile"></p>' : ''}
       ${s.termine ? '<p class="terminKopf">Termine</p><ul class="termine"></ul>' : ''}
       <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
-      ${s.vergleiche ? `<p class="terminKopf">Dieselbe Figur anderswo</p>
-        ${s.vergleiche.map((v, k) => `
-        <details class="vergleichsBlock"${k === 0 ? ' open' : ''}>
+      ${s.vergleiche ? ['figur', 'rechnung'].map(g => {
+        const teil = s.vergleiche.filter(v => (v.gruppe || 'figur') === g);
+        if (!teil.length) return '';
+        return `<p class="terminKopf">${g === 'figur'
+          ? 'Dieselbe Figur anderswo' : 'Die großen Rechnungen'}</p>
+        ${teil.map((v, k) => `
+        <details class="vergleichsBlock"${k === 0 && g === 'figur' ? ' open' : ''}>
           <summary>${v.titel}</summary>
           <p class="fliess klein">${v.einleitung}</p>
           <table class="vergleich">${v.zeilen.map(([a, b, c]) =>
             `<tr><td>${a}</td><td>${b}</td><td><i>${c}</i></td></tr>`).join('')}</table>
           <p class="hinweis">${v.nachsatz}</p>
           <p class="quelle quelleKlein">${v.quelle}</p>
-        </details>`).join('')}` : ''}
+        </details>`).join('')}`;
+      }).join('') : ''}
       ${s.hinweis ? `<p class="hinweis">${s.hinweis}</p>` : ''}
       <p class="quelle">${s.quelle}</p>`;
     tafelZeitTeil();
