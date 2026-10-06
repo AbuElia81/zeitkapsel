@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Zeitkugel">
-<link rel="stylesheet" href="stil.css?v=62">
+<link rel="stylesheet" href="stil.css?v=66">
 </head>
 <body>
 
@@ -25,6 +25,7 @@
   <div id="zeitleiste">
     <div id="zeitKopf">
       <span id="zeitAnzeige">—</span>
+      <button id="deutungKnopf" title="Die Qualität dieser Zeit">Deutung</button>
       <button id="jetztKnopf" title="zurück zur Gegenwart">Jetzt</button>
     </div>
     <input id="schieber" type="range" aria-label="Zeitschieber durch den Yuga-Zyklus">
@@ -55,6 +56,11 @@
     <aside id="tafel" class="ein"></aside>
   </div>
 
+  <aside id="deutung" hidden>
+    <button id="deutungZu" title="schließen" aria-label="schließen">×</button>
+    <div id="deutungInhalt"></div>
+  </aside>
+
   <nav id="leiste" aria-label="Zeitschichten"></nav>
 
   <div id="pult">
@@ -65,7 +71,7 @@
   <p id="hinweisZeile">Ziehen dreht die Kugel · Scrollen taucht ein · ↑ ↓ blättert durch die Schichten · der Schieber oben verschiebt die Zeit</p>
 </main>
 
-<script type="module" src="spende.js?v=62"></script>
-<script type="module" src="kugel.js?v=62"></script>
+<script type="module" src="spende.js?v=66"></script>
+<script type="module" src="kugel.js?v=66"></script>
 </body>
 </html>

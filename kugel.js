@@ -1,7 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=62';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=62';
+         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=66';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=66';
+import { deuten } from './deutung.js?v=66';
 
 const HG = 0x05070d;
 
@@ -520,6 +521,43 @@ function chronikFuellen() {
   chronikUhr = setTimeout(() => chronik.classList.remove('regt'), 700);
 }
 
+// ------------------------------------------------------------------ Deutung
+// Liest aus allen Schalen zugleich und setzt daraus ein Bild der Zeit zusammen.
+const deutungFeld = document.getElementById('deutung');
+const deutungInhalt = document.getElementById('deutungInhalt');
+
+function deutungFuellen() {
+  if (deutungFeld.hidden) return;
+  const d = deuten(zeitJahr);
+  deutungInhalt.innerHTML = `
+    <p class="deutungEpoche">${d.epoche} · ${zeitText(zeitJahr, amJetzt)}</p>
+    <h2>${d.titel}</h2>
+    <div class="messwerte">${d.messwerte.map(m => `
+      <div class="messwert">
+        <span class="messName">${m.name}</span>
+        <span class="messBalken"><i style="width:${Math.round(m.wert * 100)}%;
+          background:${m.ton}"></i></span>
+        <span class="messZahl">${Math.round(m.wert * 100)}</span>
+      </div>`).join('')}</div>
+    ${d.absaetze.map(a => `
+      <p class="deutungKopf">${a.kopf}</p>
+      <p class="deutungText">${a.text}</p>`).join('')}
+    <p class="hinweis">Dies ist eine Deutung, kein Befund. Sie wird aus dem Stand der
+      sechzehn Schalen zusammengesetzt, in der Sprache, in der die Quellen selbst von
+      den Zeitaltern sprechen. Gewürfelt wird nichts: Dieselbe Zeit ergibt immer
+      dieselbe Lesart.</p>`;
+}
+
+document.getElementById('deutungKnopf').onclick = () => {
+  deutungFeld.hidden = !deutungFeld.hidden;
+  document.getElementById('deutungKnopf').classList.toggle('an', !deutungFeld.hidden);
+  deutungFuellen();
+};
+document.getElementById('deutungZu').onclick = () => {
+  deutungFeld.hidden = true;
+  document.getElementById('deutungKnopf').classList.remove('an');
+};
+
 // --------------------------------------------------------- Zeitschieber
 const schieber = document.getElementById('schieber');
 const zeitAnzeige = document.getElementById('zeitAnzeige');
@@ -538,6 +576,7 @@ function zeitSetzen(j, jetzt = false, vomSchieber = false, richten = true) {
   zeitleiste.classList.toggle('verschoben', !amJetzt);
   markenAktualisieren();
   chronikFuellen();
+  deutungFuellen();
   if (richten) ausrichten = true;
   menschSetzen(yugaLicht(zeitJahr));
   tafelZeitTeil();
@@ -555,8 +594,11 @@ SCHICHTEN.forEach((s, i) => {
   const b = document.createElement('button');
   b.className = 'stufe';
   b.style.setProperty('--ton', s.farbe);
-  b.innerHTML = `<span class="punkt"></span><span class="stufeText">
-    <em>${s.name}</em><small>${s.dauer}</small></span>`;
+  // Außen der größte Punkt, innen der kleinste — die Zwiebel von oben gesehen
+  b.style.setProperty('--punktMass',
+    (1.35 - 0.75 * (i / (SCHICHTEN.length - 1))).toFixed(3));
+  b.innerHTML = `<span class="punktFeld"><span class="punkt"></span></span>
+    <span class="stufeText"><em>${s.name}</em><small>${s.dauer}</small></span>`;
   b.onclick = () => ebeneSetzen(i);
   leiste.appendChild(b);
 });

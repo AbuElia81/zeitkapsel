@@ -30,6 +30,26 @@ Schicht für Schicht nach innen — bis zum Kern.
 | 15 | Der Atemzug | rund 4 Sekunden |
 | 16 | Der Herzschlag | rund 1,2 Sekunden |
 
+## Die Deutung
+
+Der Knopf **Deutung** oben öffnet eine Lesart der eingestellten Zeit. Sie wird
+aus dem Stand aller sechzehn Schalen zugleich zusammengesetzt: Licht der Welt,
+Kraft der Sonne über fünf Rhythmen gemittelt, Entfaltung von Jupiter und
+Saturn, Weite des Mondes — als vier Balken — und darunter vier Absätze: die
+Qualität der Zeit, der Himmel, der Mensch, die Dynamik.
+
+Die Sprache ist die der Quellen selbst. Gewürfelt wird nichts: Dieselbe Zeit
+ergibt immer dieselbe Lesart. Dass es eine Deutung ist und kein Befund, steht
+in der Tafel selbst.
+
+## Die Farben
+
+Die Schalen folgen dem Chakrasystem — von innen nach außen, vom kleinsten zum
+größten Zyklus: Der Herzschlag im Kern trägt das Rot des Wurzelchakras, der
+Yuga-Zyklus als äußerste Schale das Violett des Kronenchakras, dazwischen
+Orange, Gelb, Grün, Blau und Indigo. In der Zyklenleiste rechts wachsen die
+Punkte entsprechend mit: außen am größten, innen am kleinsten.
+
 ## Der Zeitschieber
 
 Oben sitzt ein Schieber über die volle Länge des Yuga-Zyklus: von der
@@ -172,6 +192,7 @@ Statische Seiten, kein Build.
 - `kugel.js` — die Szene (Three.js): Schalen, Bänder, Drehung, Eintauchen
 - `vendor/three.module.js` — Three.js r169, mitgeliefert
 - `geschichte.js` — die historischen Marken und die Epocheneinteilung
+- `deutung.js` — die Lesart der Zeit aus allen Schalen zugleich
 - `spende.js` — der Spendenknopf, PayPal.Me mit Betrag im Pfad
 - `bilder/milchstrasse.jpg` — Hintergrund, erzeugt mit `gemini-3-pro-image`
 - `bilder/icon-*.png`, `site.webmanifest` — Symbol für den Startbildschirm
