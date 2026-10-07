@@ -1,8 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, RING_ANKER } from './zyklen.js?v=67';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=67';
-import { deuten } from './deutung.js?v=67';
+         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=69';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=69';
+import { deuten } from './deutung.js?v=69';
 
 const HG = 0x05070d;
 
@@ -670,6 +670,7 @@ function tafelFuellen(s) {
       <h2>${s.name}</h2>
       <p class="dauer">${s.dauer}</p>
       <p class="unter">${s.untertitel}</p>
+      <p class="masstab">${masstab(SCHICHTEN.indexOf(s))}</p>
       <p class="fliess">${s.text}</p>
       <p class="jetztZeile"></p>
       ${s.vergleiche ? '<div class="ovidZeile"></div>' : ''}

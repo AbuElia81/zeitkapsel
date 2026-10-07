@@ -1174,6 +1174,7 @@ export const SCHICHTEN = [
     farbe: '#e65a35',
     einheit: 'Sekunden',
     echtzeit: 4,
+    dauerJahre: 4 / (365.2422 * 86400),
     text: `Der erste Zyklus, den wir selbst steuern können. In Ruhe atmet ein Mensch
       zwölf- bis achtzehnmal in der Minute; das Ausatmen dauert länger als das Einatmen.
       Zwischen Atem und Herzschlag besteht eine feste Kopplung — der Puls beschleunigt
@@ -1203,6 +1204,7 @@ export const SCHICHTEN = [
     kern: true,
     einheit: 'Sekunden',
     echtzeit: 1.2,
+    dauerJahre: 1.2 / (365.2422 * 86400),
     text: `Im Innersten schlägt der kleinste Zyklus, den wir unmittelbar spüren — und in
       ihm steht der Mensch. Bei einem ruhigen Puls von fünfzig Schlägen in der Minute sind
       das rund 26 Millionen Schläge in einem Jahr, gut zwei Milliarden in einem langen
@@ -1222,3 +1224,32 @@ export const SCHICHTEN = [
     jetztText: 'Der Kern schlägt in Echtzeit — der Zeitschieber gilt hier nicht.'
   }
 ];
+
+
+// --------------------------------------------------------------- Maßstab
+// Wie oft passt eine Schale in die nächstgrößere? Das ist die eine Zahl, die
+// das Zwiebelmodell begreiflich macht — sie reicht von 1,07 bis zu 26 Millionen.
+const GALAKTISCHES_JAHR = 225e6;   // ein Sonnenumlauf um das galaktische Zentrum
+
+function zahlwort(n) {
+  if (n >= 1e9) return `${(n / 1e9).toLocaleString('de-DE', { maximumFractionDigits: 1 })} Milliarden`;
+  if (n >= 1e6) return `${(n / 1e6).toLocaleString('de-DE', { maximumFractionDigits: 1 })} Millionen`;
+  if (n >= 1000) return Math.round(n).toLocaleString('de-DE');
+  if (n >= 10) return Math.round(n).toLocaleString('de-DE');
+  return n.toLocaleString('de-DE', { maximumFractionDigits: 2 });
+}
+
+export function masstab(i) {
+  const dauer = (s) => s.dauerJahre ?? s.periode;
+  const hier = dauer(SCHICHTEN[i]);
+  if (i === 0) {
+    return `${zahlwort(GALAKTISCHES_JAHR / hier)} Yuga-Zyklen füllen ein galaktisches
+      Jahr — einen Umlauf der Sonne um das Zentrum der Milchstraße, rund 225 Millionen
+      Jahre. Von dort aus gesehen ist diese äußerste Schale selbst nur ein Augenblick.`;
+  }
+  const darueber = SCHICHTEN[i - 1];
+  const n = dauer(darueber) / hier;
+  const erste = `${zahlwort(n)} davon füllen die Schale darüber — ${darueber.name}.`;
+  if (i === 1) return erste;          // sonst stünde dieselbe Zahl zweimal da
+  return `${erste} ${zahlwort(dauer(SCHICHTEN[0]) / hier)} füllen die äußerste.`;
+}

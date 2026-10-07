@@ -565,3 +565,11 @@ main { position: relative; z-index: 1; height: 100%; }
   }
   .messName { width: 7.5rem; font-size: .68rem; }
 }
+
+/* Das Größenverhältnis zur nächsten Schale — die Zahl, die das Modell erklärt */
+#tafel .masstab {
+  margin: .1rem 0 .95rem; padding: .45rem .65rem;
+  font-size: .76rem; line-height: 1.5; color: #c2b8a7;
+  background: rgba(255,255,255,.035);
+  border-left: 1px solid var(--ton); border-radius: 0 2px 2px 0;
+}

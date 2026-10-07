@@ -30,6 +30,15 @@ Schicht für Schicht nach innen — bis zum Kern.
 | 15 | Der Atemzug | rund 4 Sekunden |
 | 16 | Der Herzschlag | rund 1,2 Sekunden |
 
+## Der Maßstab
+
+Jede Schale sagt oben, wie oft sie in die nächstgrößere passt — und wie oft in
+die äußerste. Das ist die eine Zahl, die das Zwiebelmodell begreiflich macht:
+Zwischen zwei benachbarten Schalen liegt oft nur der Faktor 1,1, zwischen der
+äußersten und dem Kern aber **678 Milliarden**. Beim Yuga-Zyklus geht der Blick
+noch eine Stufe weiter hinaus: 8.721 davon füllen ein galaktisches Jahr, einen
+Umlauf der Sonne um das Zentrum der Milchstraße.
+
 ## Die Deutung
 
 Der Knopf **Deutung** oben öffnet eine Lesart der eingestellten Zeit. Sie wird
