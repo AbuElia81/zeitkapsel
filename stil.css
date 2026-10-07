@@ -647,30 +647,38 @@ main { position: relative; z-index: 1; height: 100%; }
 /* ------------------------------------------------------------------- Lineal */
 /* Sitzt zwischen der linken Spalte und dem Pult, damit es nichts verdeckt. */
 #lineal {
-  position: absolute; bottom: clamp(2.2rem, 5vh, 3.4rem);
+  position: absolute; bottom: clamp(2.4rem, 5.5vh, 3.6rem);
   left: calc(min(24rem, 34vw) + clamp(1.1rem, 3vw, 2.6rem) + 1.6rem);
   right: 13.5rem;
   pointer-events: none;
 }
 #linealAchse {
-  position: relative; height: 16px;
-  border-bottom: 1px solid rgba(236,231,220,.14);
+  position: relative; height: 34px;
+  border-bottom: 1px solid rgba(236,231,220,.26);
 }
 .linealMarke {
   position: absolute; bottom: 0; transform: translateX(-50%);
-  width: 3px; height: 9px; padding: 0; border: 0; border-radius: 1px;
-  background: var(--ton); opacity: .55; cursor: pointer;
-  pointer-events: auto; transition: height .2s, opacity .2s;
+  width: 4px; height: 17px; padding: 0; border: 0; border-radius: 1px;
+  background: var(--ton); opacity: .8; cursor: pointer;
+  pointer-events: auto; transition: height .2s, opacity .2s, box-shadow .2s;
 }
-.linealMarke:hover { opacity: 1; height: 13px; }
+.linealMarke::after {                 /* größere Trefferfläche als der Strich */
+  content: ""; position: absolute; inset: -6px -5px;
+}
+.linealMarke:hover { opacity: 1; height: 26px; box-shadow: 0 0 10px var(--ton); }
 .linealMarke.aktiv {
-  opacity: 1; height: 16px; width: 3px;
-  box-shadow: 0 0 8px var(--ton);
+  opacity: 1; height: 34px; width: 5px;
+  box-shadow: 0 0 14px var(--ton);
 }
-#linealTexte { position: relative; height: 1.1rem; }
+#linealTexte { position: relative; height: 1.4rem; }
 #linealTexte span {
-  position: absolute; top: .18rem; transform: translateX(-50%);
-  font-size: .58rem; letter-spacing: .08em; color: #645d52; white-space: nowrap;
+  position: absolute; top: .3rem; transform: translateX(-50%);
+  font-size: .68rem; letter-spacing: .1em; color: #8d8577; white-space: nowrap;
+}
+/* Ein feiner Strich führt vom Rand der Achse zur Beschriftung hinunter */
+#linealTexte span::before {
+  content: ""; position: absolute; left: 50%; top: -.3rem;
+  width: 1px; height: .26rem; background: rgba(236,231,220,.26);
 }
 
 @media (max-width: 1100px) { #lineal { right: 11rem; } }

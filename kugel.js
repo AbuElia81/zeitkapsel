@@ -1,8 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=72';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=72';
-import { deuten } from './deutung.js?v=72';
+         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=74';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=74';
+import { deuten } from './deutung.js?v=74';
 
 const HG = 0x05070d;
 
@@ -531,9 +531,11 @@ const L_MIN = Math.log10(0.6 / JAHR_IN_S);
 const L_MAX = Math.log10(40000);
 const linealOrt = (jahre) => (Math.log10(jahre) - L_MIN) / (L_MAX - L_MIN) * 100;
 
+// Jahrhundert und Jahrtausend lägen nur acht Prozent auseinander und würden sich
+// überschreiben — das Jahrhundert ist hier der nützlichere Anker.
 const LINEAL_TEXTE = [
   [1 / JAHR_IN_S, 'Sekunde'], [3600 / JAHR_IN_S, 'Stunde'], [1 / 365.2422, 'Tag'],
-  [1, 'Jahr'], [100, 'Jahrhundert'], [1000, 'Jahrtausend']
+  [1, 'Jahr'], [100, 'Jahrhundert']
 ];
 
 (function linealBauen() {
