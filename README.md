@@ -30,6 +30,20 @@ Schicht für Schicht nach innen — bis zum Kern.
 | 15 | Der Atemzug | rund 4 Sekunden |
 | 16 | Der Herzschlag | rund 1,2 Sekunden |
 
+## Der Einstieg
+
+Beim ersten Besuch erklärt eine Tafel in vier Zeilen, was die Kugel ist und wie
+man sie bedient. Danach ist sie weg; das Fragezeichen neben dem Titel holt sie
+zurück. Gemerkt wird das im `localStorage` des Browsers.
+
+## Das Lineal
+
+Unten läuft ein logarithmischer Maßstab von der Sekunde bis zum Yuga-Zyklus,
+mit einer Marke je Schale. Er zeigt, was die Zwiebel verbirgt: Fünf Schalen
+drängen sich zwischen acht und zweiundzwanzig Jahren auf drei Prozent der
+Strecke, während zwischen Atemzug und Tag ein Drittel der Skala leer bleibt.
+Ein Klick auf eine Marke springt in die Schale.
+
 ## Der Maßstab
 
 Jede Schale sagt oben, wie oft sie in die nächstgrößere passt — und wie oft in
@@ -96,8 +110,8 @@ zeigt die Infotafel zu jedem Abschnitt die passende Ovid-Stelle.
 Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm geht es nur
 abwärts — der aufsteigende Bogen fehlt.
 
-Die Infotafel der äußersten Schale trägt dazu einundzwanzig aufklappbare
-Vergleichstafeln in zwei Gruppen. **Dieselbe Figur anderswo** — fünfzehn
+Der Knopf **Weltalter** oben öffnet eine eigene Ansicht mit einundzwanzig
+aufklappbaren Vergleichstafeln in zwei Gruppen. **Dieselbe Figur anderswo** — fünfzehn
 Erzählungen: Ovid, Hesiod, die Maya, die Azteken, Babylon, Ägypten, die
 Anden, Afrika südlich der Sahara, die Germanen, China, die Etrusker, die
 Kelten, die Slawen, Nordamerika und Australien. **Die großen Rechnungen** — sechs

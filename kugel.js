@@ -1,8 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=69';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=69';
-import { deuten } from './deutung.js?v=69';
+         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=72';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=72';
+import { deuten } from './deutung.js?v=72';
 
 const HG = 0x05070d;
 
@@ -392,6 +392,7 @@ function ebeneSetzen(neu, sanft = true) {
   ausrichten = true;
   tafelFuellen(SCHICHTEN[ebene]);
   leisteMarkieren();
+  linealMarkieren();
 }
 
 // Zielopazität je Schale abhängig von der aktiven Ebene
@@ -521,6 +522,115 @@ function chronikFuellen() {
   chronikUhr = setTimeout(() => chronik.classList.remove('regt'), 700);
 }
 
+// ------------------------------------------------------------------- Lineal
+// Ein logarithmischer Maßstab von der Sekunde bis zum Yuga-Zyklus. Er zeigt,
+// was die Zwiebel verbirgt: Sechs Schalen drängen sich zwischen drei und
+// zweiundzwanzig Jahren, während rechts und links davon Lücken klaffen.
+const JAHR_IN_S = 365.2422 * 86400;
+const L_MIN = Math.log10(0.6 / JAHR_IN_S);
+const L_MAX = Math.log10(40000);
+const linealOrt = (jahre) => (Math.log10(jahre) - L_MIN) / (L_MAX - L_MIN) * 100;
+
+const LINEAL_TEXTE = [
+  [1 / JAHR_IN_S, 'Sekunde'], [3600 / JAHR_IN_S, 'Stunde'], [1 / 365.2422, 'Tag'],
+  [1, 'Jahr'], [100, 'Jahrhundert'], [1000, 'Jahrtausend']
+];
+
+(function linealBauen() {
+  const achse = document.getElementById('linealAchse');
+  const texte = document.getElementById('linealTexte');
+  SCHICHTEN.forEach((sch, i) => {
+    const d = sch.dauerJahre ?? sch.periode;
+    const m = document.createElement('button');
+    m.type = 'button';
+    m.className = 'linealMarke';
+    m.style.left = linealOrt(d).toFixed(2) + '%';
+    m.style.setProperty('--ton', sch.farbe);
+    m.title = `${sch.name} — ${sch.dauer}`;
+    m.onclick = () => ebeneSetzen(i);
+    achse.appendChild(m);
+  });
+  LINEAL_TEXTE.forEach(([d, name]) => {
+    const t = document.createElement('span');
+    t.style.left = linealOrt(d).toFixed(2) + '%';
+    t.textContent = name;
+    texte.appendChild(t);
+  });
+})();
+
+function linealMarkieren() {
+  [...document.getElementById('linealAchse').children]
+    .forEach((m, i) => m.classList.toggle('aktiv', i === ebene));
+}
+
+// ----------------------------------------------------------------- Einstieg
+// Beim ersten Besuch kurz erklären, was das hier ist. Danach nur noch über das
+// Fragezeichen neben dem Titel.
+const einstiegFeld = document.getElementById('einstieg');
+const EINSTIEG_SCHLUESSEL = 'zeitkugel-einstieg-gesehen';
+
+function einstiegSchliessen() {
+  einstiegFeld.hidden = true;
+  try { localStorage.setItem(EINSTIEG_SCHLUESSEL, '1'); } catch (_) {}
+}
+document.getElementById('einstiegKnopf').onclick = () => { einstiegFeld.hidden = false; };
+document.getElementById('einstiegZu').onclick = einstiegSchliessen;
+document.getElementById('losKnopf').onclick = einstiegSchliessen;
+
+try {
+  if (!localStorage.getItem(EINSTIEG_SCHLUESSEL)) einstiegFeld.hidden = false;
+} catch (_) { einstiegFeld.hidden = false; }
+
+// ---------------------------------------------------------------- Weltalter
+// Die Vergleichstafeln stehen in einer eigenen Ansicht, damit die Schicht-Tafel
+// bei ihrer Sache bleibt.
+const weltalterFeld = document.getElementById('weltalter');
+const weltalterInhalt = document.getElementById('weltalterInhalt');
+let weltalterGebaut = false;
+
+function weltalterBauen() {
+  if (weltalterGebaut) return;
+  const s = SCHICHTEN.find(x => x.vergleiche);
+  if (!s) return;
+  weltalterInhalt.innerHTML = `
+    <p class="deutungEpoche">Zum Yuga-Zyklus</p>
+    <h2>Die Weltalter</h2>
+    <p class="fliess klein">Dieselbe Figur — ein Abstieg durch Zeitalter, an dessen
+      Wendepunkten Feuer und Wasser stehen — findet sich über drei Kontinente verteilt.
+      Darunter stehen die Rechnungen, aus denen die Zahlen selbst stammen.</p>
+    ${['figur', 'rechnung'].map(g => {
+      const teil = s.vergleiche.filter(v => (v.gruppe || 'figur') === g);
+      if (!teil.length) return '';
+      return `<p class="terminKopf">${g === 'figur'
+        ? 'Dieselbe Figur anderswo' : 'Die großen Rechnungen'}</p>
+      ${teil.map(v => `
+        <details class="vergleichsBlock">
+          <summary>${v.titel}</summary>
+          <p class="fliess klein">${v.einleitung}</p>
+          <table class="vergleich">${v.zeilen.map(([a, b, c]) =>
+            `<tr><td>${a}</td><td>${b}</td><td><i>${c}</i></td></tr>`).join('')}</table>
+          <p class="hinweis">${v.nachsatz}</p>
+          <p class="quelle quelleKlein">${v.quelle}</p>
+        </details>`).join('')}`;
+    }).join('')}
+    <p class="hinweis">Ausführlich im Arbeitspapier <a href="https://github.com/AbuElia81/zeitkapsel/blob/main/WELTALTER.md"
+      target="_blank" rel="noopener noreferrer">WELTALTER.md</a> im Repo.</p>`;
+  weltalterGebaut = true;
+}
+
+document.getElementById('weltalterKnopf').onclick = () => {
+  const auf = weltalterFeld.hidden;
+  deutungFeld.hidden = true;
+  document.getElementById('deutungKnopf').classList.remove('an');
+  weltalterBauen();
+  weltalterFeld.hidden = !auf;
+  document.getElementById('weltalterKnopf').classList.toggle('an', auf);
+};
+document.getElementById('weltalterZu').onclick = () => {
+  weltalterFeld.hidden = true;
+  document.getElementById('weltalterKnopf').classList.remove('an');
+};
+
 // ------------------------------------------------------------------ Deutung
 // Liest aus allen Schalen zugleich und setzt daraus ein Bild der Zeit zusammen.
 const deutungFeld = document.getElementById('deutung');
@@ -549,6 +659,8 @@ function deutungFuellen() {
 }
 
 document.getElementById('deutungKnopf').onclick = () => {
+  weltalterFeld.hidden = true;
+  document.getElementById('weltalterKnopf').classList.remove('an');
   deutungFeld.hidden = !deutungFeld.hidden;
   document.getElementById('deutungKnopf').classList.toggle('an', !deutungFeld.hidden);
   deutungFuellen();
@@ -677,21 +789,9 @@ function tafelFuellen(s) {
       ${s.kern ? '<p class="menschZeile"></p>' : ''}
       ${s.termine ? '<p class="terminKopf">Termine</p><ul class="termine"></ul>' : ''}
       <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
-      ${s.vergleiche ? ['figur', 'rechnung'].map(g => {
-        const teil = s.vergleiche.filter(v => (v.gruppe || 'figur') === g);
-        if (!teil.length) return '';
-        return `<p class="terminKopf">${g === 'figur'
-          ? 'Dieselbe Figur anderswo' : 'Die großen Rechnungen'}</p>
-        ${teil.map((v, k) => `
-        <details class="vergleichsBlock"${k === 0 && g === 'figur' ? ' open' : ''}>
-          <summary>${v.titel}</summary>
-          <p class="fliess klein">${v.einleitung}</p>
-          <table class="vergleich">${v.zeilen.map(([a, b, c]) =>
-            `<tr><td>${a}</td><td>${b}</td><td><i>${c}</i></td></tr>`).join('')}</table>
-          <p class="hinweis">${v.nachsatz}</p>
-          <p class="quelle quelleKlein">${v.quelle}</p>
-        </details>`).join('')}`;
-      }).join('') : ''}
+      ${s.vergleiche ? `<p class="zuWeltalter">Dieselbe Figur findet sich in
+        einundzwanzig weiteren Überlieferungen und Rechnungen —
+        <button type="button" class="alsLink" onclick="document.getElementById('weltalterKnopf').click()">die Weltalter öffnen</button>.</p>` : ''}
       ${s.hinweis ? `<p class="hinweis">${s.hinweis}</p>` : ''}
       <p class="quelle">${s.quelle}</p>`;
     tafelZeitTeil();

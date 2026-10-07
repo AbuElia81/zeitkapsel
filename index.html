@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Zeitkugel">
-<link rel="stylesheet" href="stil.css?v=69">
+<link rel="stylesheet" href="stil.css?v=72">
 </head>
 <body>
 
@@ -25,6 +25,7 @@
   <div id="zeitleiste">
     <div id="zeitKopf">
       <span id="zeitAnzeige">—</span>
+      <button id="weltalterKnopf" title="Die Weltalter anderer Überlieferungen">Weltalter</button>
       <button id="deutungKnopf" title="Die Qualität dieser Zeit">Deutung</button>
       <button id="jetztKnopf" title="zurück zur Gegenwart">Jetzt</button>
     </div>
@@ -42,7 +43,7 @@
   </div>
 
   <header id="kopf">
-    <h1>Die Zeitkugel</h1>
+    <h1>Die Zeitkugel <button id="einstiegKnopf" title="Was ist das hier?" aria-label="Erklärung">?</button></h1>
     <p>Ein Zwiebelmodell der Zyklen — von der Präzession der Erdachse bis zum Herzschlag</p>
   </header>
 
@@ -56,9 +57,34 @@
     <aside id="tafel" class="ein"></aside>
   </div>
 
-  <aside id="deutung" hidden>
-    <button id="deutungZu" title="schließen" aria-label="schließen">×</button>
+  <aside id="deutung" class="ueberlagerung" hidden>
+    <button class="ueberlagerungZu" id="deutungZu" title="schließen" aria-label="schließen">×</button>
     <div id="deutungInhalt"></div>
+  </aside>
+
+  <aside id="einstieg" class="ueberlagerung" hidden>
+    <button class="ueberlagerungZu" id="einstiegZu" title="schließen" aria-label="schließen">×</button>
+    <p class="deutungEpoche">Ein Zwiebelmodell der Zeit</p>
+    <h2>Die Zeitkugel</h2>
+    <p class="fliess">Sechzehn Zyklen liegen ineinander wie die Schalen einer Zwiebel —
+      von der Präzession der Erdachse über 25.800 Jahre bis zum Herzschlag von
+      1,2 Sekunden im Kern, in dem ein Mensch steht.</p>
+    <ul class="einstiegListe">
+      <li><b>Ziehen</b> dreht die Kugel in jede Richtung.</li>
+      <li><b>Scrollen</b> oder die Pfeiltasten tauchen eine Schale tiefer — die
+        durchstoßene springt nach links und rechts auf.</li>
+      <li><b>Der Schieber</b> oben verschiebt die Zeit über den ganzen Zyklus, von
+        10876 v. Chr. bis 14925 n. Chr. Alle Marken wandern mit, und der Mensch im
+        Kern wandelt sich.</li>
+      <li><b>Deutung</b> liest die Qualität der eingestellten Zeit aus allen Schalen
+        zugleich, <b>Weltalter</b> stellt einundzwanzig Überlieferungen nebeneinander.</li>
+    </ul>
+    <button id="losKnopf">Loslegen</button>
+  </aside>
+
+  <aside id="weltalter" class="ueberlagerung" hidden>
+    <button class="ueberlagerungZu" id="weltalterZu" title="schließen" aria-label="schließen">×</button>
+    <div id="weltalterInhalt"></div>
   </aside>
 
   <nav id="leiste" aria-label="Zeitschichten"></nav>
@@ -68,10 +94,15 @@
     <button id="tiefer" title="eine Schicht nach innen">↓ eintauchen</button>
   </div>
 
+  <div id="lineal" aria-label="Maßstab der Zyklen">
+    <div id="linealAchse"></div>
+    <div id="linealTexte"></div>
+  </div>
+
   <p id="hinweisZeile">Ziehen dreht die Kugel · Scrollen taucht ein · ↑ ↓ blättert durch die Schichten · der Schieber oben verschiebt die Zeit</p>
 </main>
 
-<script type="module" src="spende.js?v=69"></script>
-<script type="module" src="kugel.js?v=69"></script>
+<script type="module" src="spende.js?v=72"></script>
+<script type="module" src="kugel.js?v=72"></script>
 </body>
 </html>

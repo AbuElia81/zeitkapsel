@@ -498,17 +498,17 @@ main { position: relative; z-index: 1; height: 100%; }
 }
 
 /* ------------------------------------------------------------------ Deutung */
-#deutungKnopf {
+#deutungKnopf, #weltalterKnopf {
   flex: none; padding: .2rem .6rem; border-radius: 2px;
   border: 1px solid var(--linie); background: transparent;
   color: var(--gedaempft); font: inherit; font-size: .68rem; letter-spacing: .08em;
   text-transform: uppercase; cursor: pointer;
   transition: color .25s, border-color .25s, background .25s;
 }
-#deutungKnopf:hover { color: #f4ecdd; border-color: rgba(236,231,220,.4); }
-#deutungKnopf.an { color: var(--grund); background: #e8d9b4; border-color: #e8d9b4; }
+#deutungKnopf:hover, #weltalterKnopf:hover { color: #f4ecdd; border-color: rgba(236,231,220,.4); }
+#deutungKnopf.an, #weltalterKnopf.an { color: var(--grund); background: #e8d9b4; border-color: #e8d9b4; }
 
-#deutung {
+.ueberlagerung {
   position: absolute; z-index: 5;
   top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: min(34rem, 72vw); max-height: 78vh; overflow-y: auto;
@@ -519,19 +519,19 @@ main { position: relative; z-index: 1; height: 100%; }
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   scrollbar-width: thin; scrollbar-color: rgba(236,231,220,.3) transparent;
 }
-#deutung[hidden] { display: none; }
-#deutungZu {
+.ueberlagerung[hidden] { display: none; }
+.ueberlagerungZu {
   position: absolute; top: .5rem; right: .7rem;
   border: 0; background: transparent; color: var(--gedaempft);
   font-size: 1.4rem; line-height: 1; cursor: pointer; padding: .2rem .4rem;
 }
-#deutungZu:hover { color: #f4ecdd; }
+.ueberlagerungZu:hover { color: #f4ecdd; }
 
 .deutungEpoche {
   margin: 0 0 .4rem; font-size: .64rem; letter-spacing: .2em; text-transform: uppercase;
   color: #a2937a;
 }
-#deutung h2 {
+.ueberlagerung h2 {
   margin: 0 0 1.1rem; font-weight: 400; font-size: 1.6rem; line-height: 1.15;
   color: #f4ecdd;
 }
@@ -556,10 +556,10 @@ main { position: relative; z-index: 1; height: 100%; }
   margin: 0 0 1.15rem; font-size: .9rem; line-height: 1.62; color: #ddd6c8;
   hyphens: auto;
 }
-#deutung .hinweis { margin-top: .4rem; }
+.ueberlagerung .hinweis { margin-top: .4rem; }
 
 @media (max-width: 900px) {
-  #deutung {
+  .ueberlagerung {
     width: auto; left: .6rem; right: .6rem; transform: translateY(-50%);
     padding: 1.2rem 1.1rem 1.1rem; max-height: 72vh;
   }
@@ -573,3 +573,105 @@ main { position: relative; z-index: 1; height: 100%; }
   background: rgba(255,255,255,.035);
   border-left: 1px solid var(--ton); border-radius: 0 2px 2px 0;
 }
+
+/* Die Vergleichstafeln leben jetzt in der Weltalter-Ansicht */
+.ueberlagerung .vergleichsBlock { margin: 0 0 .5rem; padding: 0 0 .3rem;
+  border-bottom: 1px solid rgba(236,231,220,.07); }
+.ueberlagerung .vergleichsBlock > summary {
+  list-style: none; cursor: pointer; padding: .4rem 0;
+  font-size: .88rem; color: #c9c0b0; transition: color .2s; }
+.ueberlagerung .vergleichsBlock > summary::-webkit-details-marker { display: none; }
+.ueberlagerung .vergleichsBlock > summary::before {
+  content: "▸"; display: inline-block; width: 1em; color: var(--ton);
+  opacity: .7; transition: transform .2s; }
+.ueberlagerung details[open].vergleichsBlock > summary::before { transform: rotate(90deg); }
+.ueberlagerung .vergleichsBlock > summary:hover { color: #f2e7cf; }
+.ueberlagerung .vergleichsBlock > *:not(summary) { margin-left: 1em; }
+.ueberlagerung .fliess { margin: 0 0 .9rem; font-size: .87rem; line-height: 1.62;
+  color: #ddd6c8; hyphens: auto; }
+.ueberlagerung .fliess.klein { font-size: .8rem; }
+.ueberlagerung table.vergleich { width: 100%; border-collapse: collapse;
+  margin: 0 0 .8rem; font-size: .76rem; }
+.ueberlagerung table.vergleich td { padding: .22rem .4rem .22rem 0; vertical-align: top;
+  border-bottom: 1px solid rgba(236,231,220,.07); }
+.ueberlagerung table.vergleich td:first-child { color: var(--ton); white-space: nowrap; }
+.ueberlagerung table.vergleich td:nth-child(2) { color: #ddd6c8; }
+.ueberlagerung table.vergleich td:last-child { color: #7d7568; text-align: right;
+  white-space: nowrap; font-size: .7rem; }
+.ueberlagerung .hinweis { margin: 0 0 .6rem; padding: .6rem .75rem;
+  font-size: .74rem; line-height: 1.5; font-style: italic; color: #a89f90;
+  border-left: 1px solid var(--linie); background: rgba(255,255,255,.025); }
+.ueberlagerung .quelle { margin: 0 0 .8rem; font-size: .68rem; letter-spacing: .06em;
+  color: #6f695d; }
+.ueberlagerung .terminKopf { margin: 1.2rem 0 .5rem; font-size: .64rem;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--ton); opacity: .8; }
+.ueberlagerung a { color: var(--ton); }
+
+#tafel .zuWeltalter { margin: 0 0 1rem; font-size: .78rem; line-height: 1.5;
+  color: #a89f90; }
+.alsLink { border: 0; background: none; padding: 0; font: inherit;
+  color: var(--ton); text-decoration: underline; text-underline-offset: .25em;
+  cursor: pointer; }
+.alsLink:hover { color: #f4ecdd; }
+
+/* ------------------------------------------------------------------ Einstieg */
+#einstiegKnopf {
+  margin-left: .45rem; vertical-align: .12em;
+  width: 1.25rem; height: 1.25rem; padding: 0;
+  border: 1px solid var(--linie); border-radius: 50%;
+  background: transparent; color: var(--gedaempft);
+  font: inherit; font-size: .72rem; line-height: 1; cursor: pointer;
+  pointer-events: auto; transition: color .25s, border-color .25s;
+}
+#einstiegKnopf:hover { color: #f4ecdd; border-color: rgba(236,231,220,.45); }
+#kopf { pointer-events: none; }
+
+.einstiegListe { margin: 0 0 1.4rem; padding: 0; list-style: none; }
+.einstiegListe li {
+  position: relative; padding-left: 1rem; margin-bottom: .55rem;
+  font-size: .84rem; line-height: 1.55; color: #c9c0b0;
+}
+.einstiegListe li::before {
+  content: ""; position: absolute; left: 0; top: .6em;
+  width: 4px; height: 4px; border-radius: 50%; background: var(--ton); opacity: .8;
+}
+.einstiegListe b { font-weight: 400; color: #f2e7cf; }
+#losKnopf {
+  padding: .5rem 1.6rem; border-radius: 2px;
+  border: 1px solid var(--ton); background: transparent;
+  color: #f2e7cf; font: inherit; font-size: .88rem; letter-spacing: .06em;
+  cursor: pointer; transition: background .2s, color .2s;
+}
+#losKnopf:hover { background: var(--ton); color: var(--grund); }
+
+/* ------------------------------------------------------------------- Lineal */
+/* Sitzt zwischen der linken Spalte und dem Pult, damit es nichts verdeckt. */
+#lineal {
+  position: absolute; bottom: clamp(2.2rem, 5vh, 3.4rem);
+  left: calc(min(24rem, 34vw) + clamp(1.1rem, 3vw, 2.6rem) + 1.6rem);
+  right: 13.5rem;
+  pointer-events: none;
+}
+#linealAchse {
+  position: relative; height: 16px;
+  border-bottom: 1px solid rgba(236,231,220,.14);
+}
+.linealMarke {
+  position: absolute; bottom: 0; transform: translateX(-50%);
+  width: 3px; height: 9px; padding: 0; border: 0; border-radius: 1px;
+  background: var(--ton); opacity: .55; cursor: pointer;
+  pointer-events: auto; transition: height .2s, opacity .2s;
+}
+.linealMarke:hover { opacity: 1; height: 13px; }
+.linealMarke.aktiv {
+  opacity: 1; height: 16px; width: 3px;
+  box-shadow: 0 0 8px var(--ton);
+}
+#linealTexte { position: relative; height: 1.1rem; }
+#linealTexte span {
+  position: absolute; top: .18rem; transform: translateX(-50%);
+  font-size: .58rem; letter-spacing: .08em; color: #645d52; white-space: nowrap;
+}
+
+@media (max-width: 1100px) { #lineal { right: 11rem; } }
+@media (max-width: 900px) { #lineal { display: none; } }
