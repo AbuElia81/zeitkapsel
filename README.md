@@ -110,15 +110,16 @@ zeigt die Infotafel zu jedem Abschnitt die passende Ovid-Stelle.
 Zwei Unterschiede bleiben: Ovid nennt keine Jahreszahlen, und bei ihm geht es nur
 abwärts — der aufsteigende Bogen fehlt.
 
-Der Knopf **Weltalter** oben öffnet eine eigene Ansicht mit dreiundzwanzig
+Der Knopf **Weltalter** oben öffnet eine eigene Ansicht mit vierundzwanzig
 aufklappbaren Vergleichstafeln in zwei Gruppen. **Dieselbe Figur anderswo** — fünfzehn
 Erzählungen: Ovid, Hesiod, die Maya, die Azteken, Babylon, die Jainas, die
 Zoroastrier, Ägypten, die Anden, Afrika südlich der Sahara, die Germanen, China, die Etrusker, die
 Kelten, die Slawen, Nordamerika und Australien. **Die großen Rechnungen** — sechs
 astronomische Systeme: der Kalpa der Siddhantas (4,32 Milliarden Jahre),
 Aryabhatas vier gleiche Viertel, das persische Weltjahr von 360.000 Jahren,
-Māshāʾallāhs Konjunktionsgeschichte, die Fardār-Leiter mit den Planetenjahren
-und die Lehre von Saturn und Mars im Krebs.
+Māshāʾallāhs Konjunktionsgeschichte, die Fardār-Leiter mit den Planetenjahren,
+der Mighty Fardār mit 360 Jahren je Zeichen und die Lehre von Saturn und Mars
+im Krebs.
 
 Daraus stammen die Zahlen, auf denen alles ruht — und sie hängen zusammen:
 Das Weltjahr von 360.000 Jahren ist genau ein Zwölftel des Mahayuga und so

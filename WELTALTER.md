@@ -675,7 +675,66 @@ Lilly 320, Bonatti 420, al-Qabīsī und al-Bīrūnī dagegen 520.
 
 ---
 
-## 22. Saturn und Mars im Krebs
+## 22. Der Mighty Fardār: 360 Jahre je Zeichen
+
+Die unterste Sprosse der Fardār-Leiter aus dem vorigen Abschnitt, konkret
+ausgeführt. Jede Periode dauert **360 Sonnenjahre** und wird von einem Zeichen
+**und** einem Planeten zugleich regiert.
+
+| Periode | | ab |
+|---|---|---|
+| 1. | Saturn im Krebs | 3381 v. Chr. |
+| 2. | Jupiter im Löwen | 3021 v. Chr. |
+| 3. | Mars in der Jungfrau | 2661 v. Chr. |
+| … | je 360 Jahre weiter | |
+| 15. | Saturn in der Jungfrau | 1660 |
+| **16.** | **Jupiter in der Waage** | **2020** |
+| 17. | Mars im Skorpion | 2380 |
+
+Die Planeten laufen in chaldäischer Folge: Saturn, Jupiter, Mars, Sonne, Venus,
+Merkur, Mond.
+
+### Die Probe
+
+Rechnet man von 3381 v. Chr., fallen **fünfzehn Perioden zu 360 Jahren genau
+auf 2020** — und die sechzehnte ist Jupiter in der Waage.
+
+Ali Olomi kommt unabhängig davon zu demselben Ergebnis: Abu Maʿšars Fixdatum
+setze 2020 an den Anfang eines neuen 360-Jahre-Zeitalters, des
+**Jupiter-Waage-dawr**. Zwei Wege, ein Ergebnis.
+
+### Warum der Krebs
+
+Im **Thema Mundi**, dem Geburtsbild der Welt, steigt der Krebs auf — er ist der
+Aszendent der Welt selbst. Und **Berossos** nennt bei Seneca dasselbe Zeichen
+für den Weltenbrand (Abschnitt 5).
+
+Andere Überlieferungen beginnen die Reihe mit **Saturn im Widder**, gerechnet
+von der Flut. Diese Variante trifft 2020 nicht.
+
+### Wie es sich schließt
+
+- Der Tierkreis ist nach zwölf Perioden durch: **4.320 Jahre** — dieselbe Zahl
+  wie das Mahayuga (4.320.000) und Shao Yongs Generationen im Yuan (4.320).
+- Die Planetenfolge schließt schon nach sieben Perioden, also 2.520 Jahren.
+- Dasselbe **Paar** aus Zeichen und Planet kehrt erst nach 84 Perioden wieder —
+  nach **30.240 Jahren**.
+- Nach oben schließt die Leiter: Die mächtige Qisma rückt in tausend Jahren um
+  ein Grad weiter und braucht für die volle Runde genau die **360.000 Jahre**
+  des Weltjahres.
+
+### Ein Vorbehalt
+
+Das Datum **3381 v. Chr. steht so in keiner der hier benutzten Quellen**. Es
+ist durch die Probe auf 2020 bestätigt, bleibt aber eine Rekonstruktion.
+
+Damit ist 2020 in dieser Zeitkugel dreifach bezeichnet: als Große Mutation von
+Jupiter und Saturn ins Luftzeichen, als Pandemiejahr und nun als Beginn des
+Jupiter-Waage-dawr.
+
+---
+
+## 23. Saturn und Mars im Krebs
 
 Die kürzeste dieser Lehren — und sie trifft sich mit Berossos auf demselben
 Punkt des Himmels.
@@ -702,7 +761,7 @@ Drei Überlieferungen, ein Zeichen.
 
 ---
 
-## 23. Was sich wirklich überschneidet
+## 24. Was sich wirklich überschneidet
 
 **Stark:**
 
@@ -772,7 +831,7 @@ lagen um gut vierzig Prozent daneben. Keine der hier verglichenen
 
 ---
 
-## 24. Einordnung
+## 25. Einordnung
 
 Die Übereinstimmungen sind real, aber sie belegen nicht, was sie auf den ersten
 Blick zu belegen scheinen. Dass drei weit auseinanderliegende Kulturen von
@@ -857,5 +916,8 @@ nebeneinander und benennt, wo sie sich decken und wo nicht.
 - Jaina-Zeitrad, Aras und Zeitmaße —
   [Jain units of time](https://en.wikipedia.org/wiki/Jain_units_of_time),
   [Jainism Simplified, Kapitel 6](https://websites.umich.edu/%7Eumjains/jainismsimplified/chapter06.html)
+- Mighty Fardār und die Fardārāt-Stufen —
+  [Birchfield, The Fardārāt in Mundane Astrology](https://internationsocietyofclassicalastrologers.wordpress.com/wp-content/uploads/2013/08/the-fardc481rc481t-in-mundane-astrology1.pdf),
+  [Mighty Firdaria und Turns](https://astroapp.com/help/1/mndTurnW.html)
 - Bibhu Dev Misra, *Yuga Shift* —
   [Der Yuga-Zyklus und die Präzession](https://www.bibhudevmisra.com/2024/03/the-yuga-cycle-and-earths-precession.html)

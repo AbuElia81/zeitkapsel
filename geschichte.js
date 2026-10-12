@@ -29,6 +29,7 @@ const ROH = [
   [-3600,  'kultur', 'Malta', 'Die Megalithtempel von Ġgantija — ältere Steinbauten als die Pyramiden'],
   [-3500,  'natur',  'Sahara', 'Die Grüne Sahara endet: Innerhalb weniger Jahrhunderte trocknen Seen und Weiden aus, die Menschen ziehen an den Nil'],
   [-3500,  'kultur', 'Mesopotamien', 'Das Rad, der Pflug und die ersten Rechenzeichen auf Ton'],
+  [-3381,  'himmel', 'Persien und Bagdad', 'Nullpunkt des Mighty Fardār: Von hier an regiert je 360 Jahre ein Zeichen samt Planet, beginnend mit Saturn im Krebs — dem Aszendenten des Weltgeburtsbildes'],
   [-3300,  'kultur', 'Ötztaler Alpen', 'Ötzi stirbt am Tisenjoch — mit Kupferbeil, Bogen und tätowierter Haut'],
   [-3200,  'kultur', 'Sumer und Ägypten', 'Keilschrift und Hieroglyphen — die Schrift beginnt; Ägypten wird zu einem Reich geeint'],
   [-3114,  'kultur', 'Mesoamerika', 'Nullpunkt der Langen Zählung der Maya: 11. August 3114 v. Chr. Von hier an laufen 13 Baktun, 5.125 Jahre, bis zum 21. Dezember 2012'],
@@ -143,7 +144,7 @@ const ROH = [
   [2004,   'natur',  'Indischer Ozean', 'Ein Seebeben vor Sumatra löst eine Flutwelle aus, die über 200.000 Menschen tötet'],
   [2012,   'kultur', 'Mesoamerika', 'Am 21. Dezember endet das 13. Baktun der Langen Zählung — der Große Zyklus der Maya schließt sich nach 5.125 Jahren'],
   [2013,   'himmel', 'Tscheljabinsk, Ural', 'Ein zwanzig Meter großer Körper explodiert über der Stadt; die Druckwelle zerbricht Tausende Fenster'],
-  [2020,   'himmel', 'Weltweit', 'Am 21. Dezember die Große Konjunktion von Jupiter und Saturn in 0°29′ Wassermann — die Große Mutation von Erde zu Luft'],
+  [2020,   'himmel', 'Weltweit', 'Am 21. Dezember die Große Konjunktion von Jupiter und Saturn in 0°29′ Wassermann — die Große Mutation von Erde zu Luft. Im Mighty Fardār beginnt im selben Jahr die sechzehnte Periode seit 3381 v. Chr.: Jupiter in der Waage'],
   [2020,   'natur',  'Weltweit', 'Eine Pandemie legt die Welt für Monate still'],
   [2024,   'himmel', 'Weltweit', 'Die große Mondwende und das Maximum von Sonnenzyklus 25 fallen zusammen'],
   [2025,   'kultur', 'Nach Misras Rechnung', 'Das absteigende Kali Yuga endet, die Ekpyrosis beginnt']

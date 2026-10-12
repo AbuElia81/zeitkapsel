@@ -704,6 +704,48 @@ export const SCHICHTEN = [
     },
     {
       gruppe: 'rechnung',
+      titel: 'Der Mighty Fardār: 360 Jahre je Zeichen',
+      quelle: 'Abu Maʿšar, Kitāb al-ulūf; Mūsā ibn Nawbacht, „Astrological Times and Ages“; Steven Birchfield zu den Fardārāt; Ali A. Olomi zum Jupiter-Waage-dawr',
+      einleitung: `Die unterste Sprosse der Fardār-Leiter, konkret ausgeführt: Jede Periode
+        dauert 360 Sonnenjahre und wird von einem Zeichen und einem Planeten zugleich
+        regiert. Beide laufen verschieden schnell weiter.`,
+      zeilen: [
+        ['1. Periode', 'Saturn im Krebs', 'ab 3381 v. Chr.'],
+        ['2.', 'Jupiter im Löwen', 'ab 3021 v. Chr.'],
+        ['3.', 'Mars in der Jungfrau', 'ab 2661 v. Chr.'],
+        ['…', 'je 360 Jahre weiter', ''],
+        ['15.', 'Saturn in der Jungfrau', 'ab 1660'],
+        ['16.', 'Jupiter in der Waage', 'ab 2020 · jetzt'],
+        ['17.', 'Mars im Skorpion', 'ab 2380'],
+        ['Planetenfolge', 'Saturn, Jupiter, Mars, Sonne, Venus, Merkur, Mond', 'chaldäisch'],
+        ['Voller Tierkreis', '12 × 360 = 4.320 Jahre', ''],
+        ['Paar kehrt wieder', '84 × 360 = 30.240 Jahre', '']
+      ],
+      nachsatz: `Der Mighty Fardār ist die unterste Sprosse der Leiter aus der Tafel
+        darüber — 360, 3.600, 36.000, 360.000 Jahre. Oben schließt sie sich: Die mächtige
+        Qisma rückt in tausend Jahren um ein Grad weiter und braucht für die volle Runde
+        genau die 360.000 Jahre des Weltjahres.
+        Zeichen und Planet laufen verschieden schnell: Der Tierkreis ist nach zwölf
+        Perioden durch, also nach 4.320 Jahren — wieder dieselbe Zahl wie das Mahayuga und
+        Shao Yongs Generationen —, die Planetenfolge schon nach sieben. Dasselbe Paar
+        kehrt erst nach 84 Perioden wieder, nach 30.240 Jahren.
+        Rechnet man von 3381 v. Chr., fallen fünfzehn Perioden zu 360 Jahren genau auf
+        das Jahr 2020, und die sechzehnte ist Jupiter in der Waage. Ali Olomi kommt
+        unabhängig davon zu demselben Ergebnis: Abu Maʿšars Fixdatum setze 2020 an den
+        Anfang eines neuen 360-Jahre-Zeitalters, des Jupiter-Waage-dawr. Zwei Wege, ein
+        Ergebnis.
+        Warum der Krebs? Im Thema Mundi, dem Geburtsbild der Welt, steigt der Krebs auf —
+        er ist der Aszendent der Welt selbst, und Berossos nennt bei Seneca dasselbe
+        Zeichen für den Weltenbrand. Andere Überlieferungen beginnen die Reihe mit Saturn
+        im Widder, gerechnet von der Flut; diese Variante trifft 2020 nicht.
+        Ein Vorbehalt: Das Datum 3381 v. Chr. steht so in keiner der hier benutzten
+        Quellen. Es ist durch die Probe auf 2020 bestätigt, bleibt aber eine
+        Rekonstruktion. In dieser Kugel ist 2020 damit dreifach bezeichnet — als Große
+        Mutation von Jupiter und Saturn ins Luftzeichen, als Pandemiejahr und nun als
+        Beginn des Jupiter-Waage-dawr.`
+    },
+    {
+      gruppe: 'rechnung',
       titel: 'Saturn und Mars im Krebs',
       quelle: 'al-Kindī; Abu Maʿšar; Thema Mundi der hellenistischen Astrologie',
       einleitung: `Die kürzeste und zugleich unheimlichste dieser Lehren — und sie trifft
