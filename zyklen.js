@@ -252,6 +252,47 @@ export const SCHICHTEN = [
         Babylon nach Indien ist über die hellenistische Astronomie aber belegbar.`
     },
     {
+      titel: 'Tibet: das Kālacakra, das Rad der Zeit',
+      quelle: 'Kālacakra-Tantra und Vimalaprabhā; Gavin Kilty, „Ornament of Stainless Light“ (2004)',
+      einleitung: `Die einzige Überlieferung, die ausdrücklich das tut, was diese Kugel tut:
+        Sie legt die Zyklen des Himmels auf den Körper — und zwar bis auf den Atemzug
+        genau.`,
+      zeilen: [
+        ['Äußeres Rad', 'Welt, Gestirne, Zeitrechnung', '1. Kapitel'],
+        ['Inneres Rad', 'Körper, Kanäle, Winde, Atem', '2. Kapitel'],
+        ['Anderes Rad', 'das Mandala der Erleuchtung', '3. Kapitel'],
+        ['Grundsatz', '„Wie es außen ist, so im Körper“', ''],
+        ['Atemzüge am Tag', '21.600', ''],
+        ['Bogenminuten im Kreis', '360 × 60 = 21.600', ''],
+        ['Rabjung', 'Zyklus zu 60 Jahren ab 1027', 'Feuer-Hase-Jahr'],
+        ['jetzt', '17. Rabjung, seit 1987', ''],
+        ['Shambhala', '7 Dharmakönige, dann 25 Rigden', 'je 100 Jahre'],
+        ['Letzter König', 'Rudra Chakrin — 2327 oder 2424', 'Quellen uneins']
+      ],
+      nachsatz: `Kālacakra heißt „Rad der Zeit“, und das Tantra entfaltet es dreifach: das
+        äußere Rad ist die Welt mit ihren Gestirnen, das innere der Körper mit seinen
+        Kanälen und Winden, das andere das Mandala der Erleuchtung. Der Satz, der alles
+        zusammenhält, steht im Tantra selbst: Wie es außen ist, so ist es im Körper.
+        Und hier trifft sich die Überlieferung mit dieser Kugel auf eine Zahl. Ein Mensch
+        tut am Tag 21.600 Atemzüge — bei den vier Sekunden der Atemschale sind es genau
+        86.400 geteilt durch 4. Ein Vollkreis hat 360 Grad zu je 60 Bogenminuten, also
+        ebenfalls 21.600. Im Kālacakra entspricht deshalb jeder Atemzug einer Bogenminute
+        der Himmelsbewegung: Der Tag des Körpers und die Runde des Himmels sind dieselbe
+        Zahl. Die Zeitkugel rechnet diese 21.600 in der Maßstabszeile der Atemschale aus,
+        ohne dass sie dafür gebaut worden wäre.
+        Gerechnet wird in Rabjung, Zyklen zu sechzig Jahren, gezählt ab dem Feuer-Hase-Jahr
+        1027. Wir stehen im siebzehnten, der 1987 begann. Die Geschichte läuft derweil auf
+        Shambhala zu: sieben Dharmakönige, dann fünfundzwanzig Rigden zu je hundert Jahren,
+        bis der letzte, Rudra Chakrin, in der Endschlacht die Barbaren schlägt und ein
+        goldenes Zeitalter beginnt — also derselbe Bogen aus Verfall, Umbruch und
+        Wiederaufstieg.
+        Drei Vorbehalte. Die Quellen nennen für Rudra Chakrin 2327 oder 2424; sie sind sich
+        nicht einig. Die Königslisten der verschiedenen Schulen weichen voneinander ab. Und
+        dass die 21.600 Atemzüge und die 21.600 Bogenminuten im Tantra ausdrücklich
+        gleichgesetzt werden, ist die gängige Lesart — die Rechnung selbst stimmt in jedem
+        Fall.`
+    },
+    {
       titel: 'Jainas: das Rad mit zwei Hälften',
       quelle: 'Jaina-Kosmologie, Kālacakra; Datierung Mahaviras traditionell',
       einleitung: `Von allen Überlieferungen ist diese die strukturell nächste: ein Rad
@@ -1294,7 +1335,8 @@ export const SCHICHTEN = [
       Zwischen Atem und Herzschlag besteht eine feste Kopplung — der Puls beschleunigt
       beim Einatmen und verlangsamt sich beim Ausatmen.`,
     fakten: [
-      'Rund 20.000 Atemzüge an einem Tag',
+      'Bei vier Sekunden je Atemzug genau 21.600 an einem Tag',
+      'Dieselbe Zahl wie die Bogenminuten des Vollkreises — im Kālacakra entspricht jeder Atemzug einer davon',
       'Ausatmen dauert etwa doppelt so lang wie Einatmen',
       'Respiratorische Sinusarrhythmie: der Herzschlag folgt dem Atem',
       'Etwa drei bis vier Herzschläge auf einen Atemzug'

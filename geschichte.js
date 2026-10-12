@@ -90,6 +90,7 @@ const ROH = [
   [830,    'himmel', 'Bagdad', 'Abu Maʿšar deutet die Großen Konjunktionen von Jupiter und Saturn als Takt der Dynastien. Im „Buch der Tausende“ rechnet er mit einem Weltjahr von 360.000 Jahren und legt die Große Konjunktion von 3101 v. Chr. auf die Sintflut — dasselbe Datum, das Indien als Beginn des Kali Yuga führt'],
   [850,    'himmel', 'Bagdad', 'al-Kindī deutet das Treffen von Saturn und Mars im Krebs — es kehrt alle dreißig Jahre wieder und gilt als Zeichen für Dürre, Krieg und den Sturz von Herrschaft'],
   [1006,   'himmel', 'Weltweit', 'SN 1006 flammt im Wolf auf — der hellste je verzeichnete Stern, bei Nacht konnte man bei seinem Licht lesen'],
+  [1027,   'kultur', 'Tibet', 'Im Feuer-Hase-Jahr beginnt das erste Rabjung: Von hier an zählt der tibetische Kalender in Zyklen zu sechzig Jahren — der siebzehnte läuft seit 1987'],
   [1054,   'himmel', 'China, Japan, Arabien', 'SN 1054 leuchtet 23 Tage lang am Taghimmel; übrig bleibt der Krebsnebel'],
   [1060,   'kultur', 'Luoyang', 'Shao Yong rechnet im Huangji Jingshi den kosmischen Yuan aus: 129.600 Jahre, geteilt in 12 Hui, 360 Yun und 4.320 Generationen — in ihm entsteht die Welt, blüht, verfällt und vergeht'],
   [1066,   'himmel', 'England', 'Der Halleysche Komet steht über der Schlacht von Hastings und wird in den Teppich von Bayeux gestickt'],

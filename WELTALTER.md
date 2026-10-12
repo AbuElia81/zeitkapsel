@@ -21,6 +21,7 @@ erwartet — und die Abweichungen sind genauso aufschlussreich wie die
 | **Hesiod** | 5 | nur abwärts | — | — | keine |
 | **Babylon** | vor / nach der Flut | Bruch | die Flut | Weltenbrand (Krebs) | 432.000 J. vor der Flut |
 | **Jainas** | 6 Aras je Hälfte | **ab und auf** | — | — | 20 koṭākoṭi sāgaropama |
+| **Tibet / Kālacakra** | Rigden-Könige je 100 J. | Verfall bis zur Wende | — | Endschlacht | Rabjung 60 J., ab 1027 |
 | **Zoroastrier** | 4 × 3.000 Jahre | Kampf bis zur Erneuerung | — | **Strom aus flüssigem Metall** | **12.000 J., 9588 v.–2413 n. Chr.** |
 | **Ägypten** | Götter, Halbgötter, Menschen | nur abwärts | — | — | Sothis 1.461 J. |
 | **Maya / Azteken** | 4 bzw. 5 Welten | Ersatz, kein Abstieg | 2. Welt / 4. Sonne | 3. Welt / 3. Sonne | 13 Baktun = 5.125 J. |
@@ -190,7 +191,119 @@ allerdings belegbar: Hellenistische Astronomie erreichte Indien, das
 
 ---
 
-## 6. Persien: die zwölftausend Jahre des Bundahischn
+## 6. Jainas: das Rad mit zwei Hälften
+
+Von allen Überlieferungen ist diese die **strukturell nächste** — näher als
+Ovid, näher als die Völuspá.
+
+Das Jaina-Zeitrad, das **Kālacakra**, besteht aus zwei gespiegelten Hälften:
+
+- **Avasarpiṇī** — die absteigende Hälfte, sechs Aras
+- **Utsarpiṇī** — die aufsteigende, dieselben sechs Aras in umgekehrter Folge
+
+Das ist genau der Bau von Misras Ring, nur mit sechs Stufen je Hälfte statt
+vier.
+
+| Ara | | Dauer |
+|---|---|---|
+| 1. | Sukhama-sukhama — glücklich-glücklich | 4 koṭākoṭi sāgaropama |
+| 2. | Sukhama — glücklich | 3 koṭākoṭi |
+| 3. | Sukhama-dukhama | 2 koṭākoṭi |
+| 4. | Dukhama-sukhama | 1 koṭākoṭi **weniger 42.000 Jahre** |
+| 5. | Dukhama — leidvoll | **21.000 Jahre** · *jetzt* |
+| 6. | Dukhama-dukhama | 21.000 Jahre |
+
+Das ganze Rad: 20 koṭākoṭi sāgaropama.
+
+### Die Überlieferung grenzt die Menschenzeit selbst ab
+
+Die Zahlen sind unvergleichbar groß — ein koṭākoṭi ist 10¹⁴, ein sāgaropama ein
+Gleichnismaß, das sich jeder Rechnung entzieht. Aber die vierte Stufe wird
+ausdrücklich als „ein koṭākoṭi **weniger 42.000 Jahre**" angegeben, und die
+letzten beiden tragen je 21.000.
+
+Die Tradition grenzt damit selbst die 42.000 Jahre ab, in denen
+Menschengeschichte stattfindet.
+
+### Wo wir stehen
+
+In der **fünften Stufe**, die nach der Überlieferung kurz nach Mahaviras
+Nirvana begann — traditionell 527 v. Chr., also um 523 v. Chr. Sie dauert noch
+bis gegen 20500 n. Chr.
+
+Misras absteigendes Kali Yuga beginnt 676 v. Chr. **Beide setzen den
+entscheidenden Abstieg in dieselben anderthalb Jahrhunderte**, mitten in die
+Achsenzeit.
+
+### Zwei Vorbehalte
+
+- Mahaviras Datum ist **traditionell**, nicht historisch gesichert.
+- Die Übersetzungen der Großzahlen weichen voneinander ab.
+
+Dass die 21.000 Jahre zufällig nahe an der **klimatischen Präzession** liegen,
+die in der Erdbahnmechanik rund 21.000 Jahre misst, ist eine Beobachtung und
+keine Behauptung.
+
+---
+
+## 7. Tibet: das Kālacakra, das Rad der Zeit
+
+Die einzige Überlieferung, die ausdrücklich das tut, was diese Zeitkugel tut:
+Sie legt die Zyklen des Himmels auf den Körper.
+
+Das Tantra entfaltet das Rad dreifach:
+
+| | | |
+|---|---|---|
+| **Äußeres Rad** | Welt, Gestirne, Zeitrechnung | 1. Kapitel |
+| **Inneres Rad** | Körper, Kanäle, Winde, Atem | 2. Kapitel |
+| **Anderes Rad** | das Mandala der Erleuchtung | 3. Kapitel |
+
+Der Satz, der alles zusammenhält, steht im Tantra selbst: **„Wie es außen ist,
+so ist es im Körper."**
+
+### Die Zahl 21.600
+
+Hier trifft sich die Überlieferung mit dieser Kugel auf eine einzige Zahl.
+
+- Ein Mensch tut am Tag **21.600 Atemzüge** — bei den vier Sekunden der
+  Atemschale sind es genau 86.400 ÷ 4.
+- Ein Vollkreis hat 360 Grad zu je 60 Bogenminuten — ebenfalls **21.600**.
+
+Im Kālacakra entspricht deshalb **jeder Atemzug einer Bogenminute** der
+Himmelsbewegung: Der Tag des Körpers und die Runde des Himmels sind dieselbe
+Zahl.
+
+Die Zeitkugel rechnet diese 21.600 in der Maßstabszeile der Atemschale aus —
+ohne dass sie dafür gebaut worden wäre.
+
+### Die Zeitrechnung
+
+Gerechnet wird in **Rabjung**, Zyklen zu sechzig Jahren, gezählt ab dem
+Feuer-Hase-Jahr **1027**. Wir stehen im siebzehnten, der 1987 begann; 2026 ist
+sein vierzigstes Jahr.
+
+### Shambhala
+
+Die Geschichte läuft auf Shambhala zu: sieben Dharmakönige, dann
+**fünfundzwanzig Rigden** (Kalki-Könige) zu je hundert Jahren, bis der letzte,
+**Rudra Chakrin**, in der Endschlacht die Barbaren schlägt und ein goldenes
+Zeitalter beginnt.
+
+Also wieder derselbe Bogen: Verfall, Umbruch, Wiederaufstieg.
+
+### Drei Vorbehalte
+
+- Die Quellen nennen für Rudra Chakrin **2327 oder 2424** — sie sind sich nicht
+  einig.
+- Die Königslisten der verschiedenen Schulen weichen voneinander ab.
+- Dass die 21.600 Atemzüge und die 21.600 Bogenminuten im Tantra **ausdrücklich
+  gleichgesetzt** werden, ist die gängige Lesart. Die Rechnung selbst stimmt in
+  jedem Fall.
+
+---
+
+## 8. Persien: die zwölftausend Jahre des Bundahischn
 
 Von allen hier verglichenen Rechnungen kommt diese Misras Ring am nächsten —
 und sie tut es, **ohne dass man etwas zurechtrückt**.
@@ -246,7 +359,7 @@ bemerkenswert: Sie ist nicht auf Misra hin gebaut.
 
 ---
 
-## 7. Ägypten: Zep Tepi und die Götterdynastien
+## 9. Ägypten: Zep Tepi und die Götterdynastien
 
 Ägypten kennt keine Metallalter, aber dieselbe Grundfigur. Der **Turiner
 Königspapyrus** (13. Jh. v. Chr.) führt vor den menschlichen Pharaonen ein
@@ -267,7 +380,7 @@ den Kalender, nicht den Verfall der Welt.
 
 ---
 
-## 8. Anden: Pachakuti und die fünf Menschengeschlechter
+## 10. Anden: Pachakuti und die fünf Menschengeschlechter
 
 Felipe Guamán Poma de Ayala beschreibt 1615 in der *Nueva corónica y buen
 gobierno* fünf andine Menschengeschlechter:
@@ -289,7 +402,7 @@ legte die andine Zählung bewusst neben die biblische. Wie viel davon andine
 
 ---
 
-## 9. Südlich der Sahara: ein Befund ohne Entsprechung
+## 11. Südlich der Sahara: ein Befund ohne Entsprechung
 
 Hier fällt das Ergebnis anders aus, und das gehört genauso zum Vergleich:
 **Außerhalb Ägyptens findet sich in Afrika kein absteigendes Weltalterschema.**
@@ -311,7 +424,7 @@ zu vier Zeitaltern geordnet.
 
 ---
 
-## 10. Germanen: Ragnarök und die goldenen Spielsteine
+## 12. Germanen: Ragnarök und die goldenen Spielsteine
 
 Von allen hier verglichenen Überlieferungen kommt diese der Yuga-Figur am
 nächsten — weil sie als **einzige neben Indien den Wiederaufstieg** kennt.
@@ -344,7 +457,7 @@ Bevölkerungseinbruch — seinen Abdruck in der nordischen Dichtung hinterließ.
 
 ---
 
-## 11. China: der Yuan und der Abstieg vom Dao
+## 13. China: der Yuan und der Abstieg vom Dao
 
 China rechnet groß, aber anders. **Shao Yong** (1011–1077) legt im *Huangji
 Jingshi* einen kosmischen Zyklus fest, in dem die Welt entsteht, blüht,
@@ -374,7 +487,7 @@ wiederholt sich in Jahrhunderten, nicht in Weltaltern.
 
 ---
 
-## 12. Etrusker: die zehn Saecula
+## 14. Etrusker: die zehn Saecula
 
 Die unheimlichste Fassung, weil sie kein Rad ist, sondern eine **gezählte
 Frist**.
@@ -406,7 +519,7 @@ Derselbe Satz steht in der Zeitkugel beim **aufsteigenden Satya Yuga**.
 
 ---
 
-## 13. Kelten: Feuer und Wasser bei den Druiden
+## 15. Kelten: Feuer und Wasser bei den Druiden
 
 Die Kelten haben nichts aufgeschrieben — die Druiden lernten zwanzig Jahre lang
 auswendig und misstrauten der Schrift. Was wir haben, steht bei römischen
@@ -441,7 +554,7 @@ Weltalter gibt es nirgends.
 
 ---
 
-## 14. Slawen: ein zweiter Befund ohne Entsprechung
+## 16. Slawen: ein zweiter Befund ohne Entsprechung
 
 Wie südlich der Sahara — und bei kaum einer anderen Überlieferung ist so viel
 im Umlauf, das nachweislich erfunden ist.
@@ -469,7 +582,7 @@ Russland bis 1700 in Gebrauch — dann schaffte Peter I. sie ab, und aus dem Jah
 
 ---
 
-## 15. Nordamerika: vier Welten und der Büffel auf vier Beinen
+## 17. Nordamerika: vier Welten und der Büffel auf vier Beinen
 
 Hier steht die auffälligste Einzelheit des ganzen Vergleichs.
 
@@ -503,7 +616,7 @@ solche Übereinstimmungen nichts über Herkunft beweisen.
 
 ---
 
-## 16. Australien: kein Zeitalter, aber das längste Gedächtnis
+## 18. Australien: kein Zeitalter, aber das längste Gedächtnis
 
 Hier fällt die Frage selbst weg.
 
@@ -539,7 +652,7 @@ und über die sie nach Persien, Bagdad und Europa gelangten.
 
 ---
 
-## 17. Indien: der Kalpa der Siddhantas
+## 19. Indien: der Kalpa der Siddhantas
 
 Die äußerste Schale der Zeitkugel zeigt Misras rekonstruierten Zyklus von
 25.800 Jahren. Die klassische indische Astronomie rechnet ganz anders.
@@ -569,7 +682,7 @@ Rekonstruktion *gegen* diese Überlieferung, nicht aus ihr.
 
 ---
 
-## 18. Aryabhata: vier gleiche Viertel
+## 20. Aryabhata: vier gleiche Viertel
 
 Aryabhata (*Aryabhatiya*, 499 n. Chr.) rechnet mit derselben Gesamtlänge, teilt
 sie aber **in vier gleiche Viertel** von je 1.080.000 Jahren. Der Abstieg
@@ -588,7 +701,7 @@ Kali Yuga 3102 v. Chr.
 
 ---
 
-## 19. Persien: das Weltjahr von 360.000 Jahren
+## 21. Persien: das Weltjahr von 360.000 Jahren
 
 In den frühen 770er Jahren ließ Kalif al-Mansur in Bagdad Brahmaguptas Werke
 übersetzen: aus dem *Brahmasphutasiddhanta* wurde der **Zij as-Sindhind**, aus
@@ -622,7 +735,7 @@ zusammenstanden, und werde enden, wenn sie in den **Fischen** zusammentreten.
 
 ---
 
-## 20. Māshāʾallāh: die Geschichte aus Konjunktionen
+## 22. Māshāʾallāh: die Geschichte aus Konjunktionen
 
 Eine Generation vor Abu Maʿšar legte **Māshāʾallāh ibn Atharī** (um 740–815),
 persischer Jude in Bagdad, das Verfahren fest, nach dem die ganze spätere
@@ -640,7 +753,7 @@ Jupiter-Saturn-Schale steht, geht auf diese beiden zurück.
 
 ---
 
-## 21. Die Fardār und die Planetenjahre
+## 23. Die Fardār und die Planetenjahre
 
 Neben den Konjunktionen läuft ein zweites Verfahren. Abu Maʿšar unterscheidet
 vier Stufen astrologischer Wirksamkeit, dezimal gestapelt:
@@ -675,7 +788,7 @@ Lilly 320, Bonatti 420, al-Qabīsī und al-Bīrūnī dagegen 520.
 
 ---
 
-## 22. Der Mighty Fardār: 360 Jahre je Zeichen
+## 24. Der Mighty Fardār: 360 Jahre je Zeichen
 
 Die unterste Sprosse der Fardār-Leiter aus dem vorigen Abschnitt, konkret
 ausgeführt. Jede Periode dauert **360 Sonnenjahre** und wird von einem Zeichen
@@ -734,7 +847,7 @@ Jupiter-Waage-dawr.
 
 ---
 
-## 23. Saturn und Mars im Krebs
+## 25. Saturn und Mars im Krebs
 
 Die kürzeste dieser Lehren — und sie trifft sich mit Berossos auf demselben
 Punkt des Himmels.
@@ -761,7 +874,7 @@ Drei Überlieferungen, ein Zeichen.
 
 ---
 
-## 24. Was sich wirklich überschneidet
+## 26. Was sich wirklich überschneidet
 
 **Stark:**
 
@@ -782,7 +895,11 @@ Drei Überlieferungen, ein Zeichen.
 6. **Beide Untergangsarten in einem Ereignis** — bei Ragnarök brennt die Welt
    *und* versinkt im Meer.
 7. **Ein Umbruch in unserer Lebenszeit** — 2012 und 2025.
-8. **Die genaueste Deckung überhaupt:** Die zwölftausend Jahre des Bundahischn,
+8. **Die Zahl 21.600.** Die Atemzüge eines Tages und die Bogenminuten des
+   Vollkreises sind dieselbe Zahl — im Kālacakra entspricht jeder Atemzug einer
+   Bogenminute der Himmelsbewegung. Die Zeitkugel rechnet sie in der
+   Maßstabszeile der Atemschale selbst aus.
+9. **Die genaueste Deckung überhaupt:** Die zwölftausend Jahre des Bundahischn,
    von ihrem eigenen Anker aus gerechnet, beginnen 88 Jahre nach Misras
    absteigendem Satya Yuga und enden mitten in seiner Ekpyrosis — ohne dass
    irgendetwas darauf hin zurechtgerückt wurde.
@@ -831,7 +948,7 @@ lagen um gut vierzig Prozent daneben. Keine der hier verglichenen
 
 ---
 
-## 25. Einordnung
+## 27. Einordnung
 
 Die Übereinstimmungen sind real, aber sie belegen nicht, was sie auf den ersten
 Blick zu belegen scheinen. Dass drei weit auseinanderliegende Kulturen von
@@ -913,6 +1030,10 @@ nebeneinander und benennt, wo sie sich decken und wo nicht.
   [Zoroastrische Zyklen](https://hinduwebsite.com/zoroastrianism/cycles.asp),
   [Frašōkərəti (Encyclopaedia Iranica)](https://iranicaonline.org/articles/frasokrti),
   [Gochihr](https://en.wikipedia.org/wiki/Gochihr_(Zoroastrianism))
+- Kālacakra-Tantra, äußeres und inneres Rad, Rabjung und Shambhala —
+  [Kalachakra](https://en.wikipedia.org/wiki/Kalachakra),
+  [Kalachakra, New World Encyclopedia](https://www.newworldencyclopedia.org/entry/Kalachakra),
+  [Die Könige von Shambhala](https://rywiki.tsadra.org/index.php/Kulika)
 - Jaina-Zeitrad, Aras und Zeitmaße —
   [Jain units of time](https://en.wikipedia.org/wiki/Jain_units_of_time),
   [Jainism Simplified, Kapitel 6](https://websites.umich.edu/%7Eumjains/jainismsimplified/chapter06.html)
