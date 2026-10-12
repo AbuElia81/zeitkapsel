@@ -1,8 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=78';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=78';
-import { deuten } from './deutung.js?v=78';
+         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=81';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=81';
+import { deuten } from './deutung.js?v=81';
 
 const HG = 0x05070d;
 
@@ -565,6 +565,27 @@ function linealMarkieren() {
     .forEach((m, i) => m.classList.toggle('aktiv', i === ebene));
 }
 
+// -------------------------------------------- Die linke Spalte am Handy
+// Auf schmalen Geräten nimmt die Spalte aus Chronik, Schicht-Tafel und
+// Spendenknopf zu viel Platz weg. Dort wird sie zum Pop-up.
+const spalte = document.getElementById('linkeSpalte');
+const tafelKnopf = document.getElementById('tafelKnopf');
+
+function spalteZu() {
+  spalte.classList.remove('auf');
+  tafelKnopf.classList.remove('an');
+}
+document.getElementById('spalteZuKnopf').onclick = spalteZu;
+tafelKnopf.onclick = () => {
+  const auf = !spalte.classList.contains('auf');
+  deutungFeld.hidden = true;
+  weltalterFeld.hidden = true;
+  document.getElementById('deutungKnopf').classList.remove('an');
+  document.getElementById('weltalterKnopf').classList.remove('an');
+  spalte.classList.toggle('auf', auf);
+  tafelKnopf.classList.toggle('an', auf);
+};
+
 // ----------------------------------------------------------------- Einstieg
 // Beim ersten Besuch kurz erklären, was das hier ist. Danach nur noch über das
 // Fragezeichen neben dem Titel.
@@ -622,6 +643,7 @@ function weltalterBauen() {
 
 document.getElementById('weltalterKnopf').onclick = () => {
   const auf = weltalterFeld.hidden;
+  spalteZu();
   deutungFeld.hidden = true;
   document.getElementById('deutungKnopf').classList.remove('an');
   weltalterBauen();
@@ -661,6 +683,7 @@ function deutungFuellen() {
 }
 
 document.getElementById('deutungKnopf').onclick = () => {
+  spalteZu();
   weltalterFeld.hidden = true;
   document.getElementById('weltalterKnopf').classList.remove('an');
   deutungFeld.hidden = !deutungFeld.hidden;
@@ -875,7 +898,7 @@ function groesse() {
   kamera.updateProjectionMatrix();
   zielAbstand = abstandFuer(ebene);
   // Auf schmalen Geräten liegt die Infotafel unten — die Kugel rückt nach oben
-  versatz = kamera.aspect < 0.9 ? 0.19 : 0;
+  versatz = kamera.aspect < 0.9 ? 0.05 : 0;
 }
 addEventListener('resize', groesse);
 groesse();

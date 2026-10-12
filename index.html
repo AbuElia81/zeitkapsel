@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Zeitkugel">
-<link rel="stylesheet" href="stil.css?v=78">
+<link rel="stylesheet" href="stil.css?v=81">
 </head>
 <body>
 
@@ -25,6 +25,7 @@
   <div id="zeitleiste">
     <div id="zeitKopf">
       <span id="zeitAnzeige">—</span>
+      <button id="tafelKnopf" title="Diese Schicht">Schicht</button>
       <button id="weltalterKnopf" title="Die Weltalter anderer Überlieferungen">Weltalter</button>
       <button id="deutungKnopf" title="Die Qualität dieser Zeit">Deutung</button>
       <button id="jetztKnopf" title="zurück zur Gegenwart">Jetzt</button>
@@ -48,6 +49,7 @@
   </header>
 
   <div id="linkeSpalte">
+    <button class="ueberlagerungZu" id="spalteZuKnopf" title="schließen" aria-label="schließen">×</button>
     <aside id="chronik" aria-live="polite">
       <p class="chronikKopf"><span id="epoche">—</span></p>
       <ul id="chronikListe"></ul>
@@ -102,7 +104,7 @@
   <p id="hinweisZeile">Ziehen dreht die Kugel · Scrollen taucht ein · ↑ ↓ blättert durch die Schichten · der Schieber oben verschiebt die Zeit</p>
 </main>
 
-<script type="module" src="spende.js?v=78"></script>
-<script type="module" src="kugel.js?v=78"></script>
+<script type="module" src="spende.js?v=81"></script>
+<script type="module" src="kugel.js?v=81"></script>
 </body>
 </html>

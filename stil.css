@@ -197,16 +197,25 @@ main { position: relative; z-index: 1; height: 100%; }
 @media (max-width: 900px) {
   #kopf { max-width: 60vw; }
   #kopf p { display: none; }
+
+  /* Chronik, Schicht-Tafel und Spendenknopf werden zum Pop-up, damit die
+     Kugel den Bildschirm behält. */
   #linkeSpalte {
-    left: 0; right: 0; bottom: 0; top: auto; width: auto;
-    max-height: 46vh; gap: 0;
+    display: none;
+    left: .5rem; right: .5rem; bottom: 9.4rem; top: 4.6rem; width: auto;
+    gap: .5rem; z-index: 6;
   }
+  #linkeSpalte.auf { display: flex; }
   #tafel {
-    border-left: 0; border-top: 2px solid var(--ton);
-    border-radius: 0; padding: .9rem 1.1rem 3.2rem;
+    border-left: 2px solid var(--ton); border-radius: 3px;
+    padding: 1rem 1.1rem 1.1rem;
+  }
+  #chronik, .spende {
+    border-left: 2px solid var(--ton); border-top: 1px solid var(--linie);
+    border-radius: 3px;
   }
   #leiste {
-    top: auto; bottom: calc(46vh + .55rem); left: 0; right: 0; transform: none;
+    top: auto; bottom: 8.2rem; left: 0; right: 0; transform: none;
     flex-direction: row; justify-content: center; align-items: center;
     gap: .1rem; max-height: none; padding: .3rem .5rem;
   }
@@ -307,12 +316,17 @@ main { position: relative; z-index: 1; height: 100%; }
 
 @media (max-width: 900px) {
   #zeitleiste {
-    top: auto; bottom: calc(46vh + 3.1rem); left: .6rem; right: .6rem;
+    top: auto; bottom: .5rem; left: .5rem; right: .5rem;
     width: auto; min-width: 0; transform: none;
-    padding: .5rem .7rem .45rem;
+    padding: .4rem .6rem .45rem;
   }
-  #zeitAnzeige { font-size: .88rem; }
-  #zeitSchritte button { font-size: .58rem; }
+  /* Datum oben über die volle Breite, die Knöpfe in eine eigene Zeile darunter */
+  #zeitKopf { flex-wrap: wrap; gap: .3rem; align-items: center; }
+  #zeitAnzeige { flex: 1 1 100%; font-size: .82rem; }
+  #zeitKopf button { flex: 1 1 0; padding: .26rem .2rem; font-size: .6rem;
+    letter-spacing: .04em; }
+  #schieber { height: 18px; margin: .25rem 0 .1rem; }
+  #zeitSchritte button { font-size: .55rem; padding: .14rem 0; }
   #kopf p { display: none; }
 }
 
@@ -498,15 +512,16 @@ main { position: relative; z-index: 1; height: 100%; }
 }
 
 /* ------------------------------------------------------------------ Deutung */
-#deutungKnopf, #weltalterKnopf {
+#tafelKnopf { display: none; }
+#deutungKnopf, #weltalterKnopf, #tafelKnopf {
   flex: none; padding: .2rem .6rem; border-radius: 2px;
   border: 1px solid var(--linie); background: transparent;
   color: var(--gedaempft); font: inherit; font-size: .68rem; letter-spacing: .08em;
   text-transform: uppercase; cursor: pointer;
   transition: color .25s, border-color .25s, background .25s;
 }
-#deutungKnopf:hover, #weltalterKnopf:hover { color: #f4ecdd; border-color: rgba(236,231,220,.4); }
-#deutungKnopf.an, #weltalterKnopf.an { color: var(--grund); background: #e8d9b4; border-color: #e8d9b4; }
+#deutungKnopf:hover, #weltalterKnopf:hover, #tafelKnopf:hover { color: #f4ecdd; border-color: rgba(236,231,220,.4); }
+#deutungKnopf.an, #weltalterKnopf.an, #tafelKnopf.an { color: var(--grund); background: #e8d9b4; border-color: #e8d9b4; }
 
 .ueberlagerung {
   position: absolute; z-index: 5;
@@ -683,3 +698,19 @@ main { position: relative; z-index: 1; height: 100%; }
 
 @media (max-width: 1100px) { #lineal { right: 11rem; } }
 @media (max-width: 900px) { #lineal { display: none; } }
+
+
+/* Der Schicht-Knopf gehört ans Ende: Die Regel oben setzt ihn auf none, und
+   nur eine spätere Media Query darf ihn am Handy wieder einblenden. */
+@media (max-width: 900px) {
+  #tafelKnopf { display: inline-block; }
+}
+
+/* Das Kreuz gehört nur zum Handy-Pop-up der linken Spalte */
+#spalteZuKnopf { display: none; }
+@media (max-width: 900px) {
+  #spalteZuKnopf {
+    display: block; position: absolute; top: .2rem; right: .4rem; z-index: 2;
+    pointer-events: auto;
+  }
+}
