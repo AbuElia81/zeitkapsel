@@ -57,6 +57,7 @@ const ROH = [
   [-588,   'kultur', 'Iran', 'Nach dem Bundahischn tritt Zarathustra 258 Jahre vor Alexander auf und eröffnet damit das letzte der vier Jahrtausendpaare — die zwölftausend Jahre der Welt enden danach 2413 n. Chr. mit der Frashokereti'],
   [-585,   'himmel', 'Halys, Kleinasien', 'Eine totale Sonnenfinsternis unterbricht die Schlacht zwischen Lydern und Medern; Thales soll sie vorhergesagt haben'],
   [-563,   'kultur', 'Indien, China, Persien', 'Achsenzeit: Buddha, Laozi, Konfuzius, die Upanischaden, Zarathustra und die israelitischen Propheten fast gleichzeitig'],
+  [-527,   'kultur', 'Indien', 'Mahaviras Nirvana nach der Überlieferung; kurz darauf beginnt in der Jaina-Rechnung die fünfte Stufe des absteigenden Halbrades, die 21.000 Jahre dauert'],
   [-480,   'kultur', 'Griechenland', 'Salamis und das klassische Athen — Sokrates, das Drama, der Beginn der Philosophie'],
   [-360,   'kultur', 'Athen', 'Platon beschreibt im Timaios das Große Jahr: die Zeit, bis alle Gestirne wieder an ihrem Ausgangsort stehen'],
   [-336,   'kultur', 'Makedonien bis zum Indus', 'Alexander zieht nach Osten und verbindet die griechische Welt mit Asien'],

@@ -252,6 +252,44 @@ export const SCHICHTEN = [
         Babylon nach Indien ist über die hellenistische Astronomie aber belegbar.`
     },
     {
+      titel: 'Jainas: das Rad mit zwei Hälften',
+      quelle: 'Jaina-Kosmologie, Kālacakra; Datierung Mahaviras traditionell',
+      einleitung: `Von allen Überlieferungen ist diese die strukturell nächste: ein Rad
+        mit einer absteigenden und einer aufsteigenden Hälfte — genau der Bau von Misras
+        Ring, nur mit sechs Stufen je Hälfte statt vier.`,
+      zeilen: [
+        ['Avasarpiṇī', 'die absteigende Hälfte', 'sechs Aras'],
+        ['Utsarpiṇī', 'die aufsteigende, in umgekehrter Folge', 'sechs Aras'],
+        ['1. Ara', 'Sukhama-sukhama — glücklich-glücklich', '4 koṭākoṭi'],
+        ['2. Ara', 'Sukhama — glücklich', '3 koṭākoṭi'],
+        ['3. Ara', 'Sukhama-dukhama', '2 koṭākoṭi'],
+        ['4. Ara', 'Dukhama-sukhama', '1 koṭākoṭi − 42.000 J.'],
+        ['5. Ara', 'Dukhama — leidvoll', '21.000 Jahre · jetzt'],
+        ['6. Ara', 'Dukhama-dukhama', '21.000 Jahre'],
+        ['Ganzes Rad', '20 koṭākoṭi sāgaropama', '']
+      ],
+      nachsatz: `Das Rad dreht sich ohne Anfang und Ende: Auf die absteigende Hälfte folgt
+        die aufsteigende, in der dieselben sechs Stufen rückwärts durchlaufen werden. Damit
+        ist dies neben dem Yuga-Zyklus die einzige Überlieferung mit einem vollständig
+        symmetrischen Auf und Ab — die Völuspá kennt zwar den Wiederaufstieg, aber keine
+        gespiegelten Hälften.
+        Die Zahlen sind unvergleichbar groß: Ein koṭākoṭi ist 10¹⁴, ein sāgaropama ein
+        Gleichnismaß, das sich jeder Rechnung entzieht. Nur die letzten beiden Stufen der
+        absteigenden Hälfte tragen menschliche Zahlen — je 21.000 Jahre —, und die vierte
+        wird ausdrücklich als „ein koṭākoṭi weniger 42.000 Jahre“ angegeben. Die
+        Überlieferung grenzt also genau die 42.000 Jahre ab, in denen Menschengeschichte
+        stattfindet.
+        Wir stehen in der fünften Stufe, die nach der Überlieferung kurz nach Mahaviras
+        Nirvana begann — traditionell 527 v. Chr., also um 523 v. Chr. Misras absteigendes
+        Kali Yuga beginnt 676 v. Chr.: Beide setzen den entscheidenden Abstieg in dieselben
+        anderthalb Jahrhunderte, mitten in die Achsenzeit. Nach der Jaina-Rechnung dauert
+        diese Stufe noch bis gegen 20500 n. Chr.
+        Zwei Vorbehalte: Mahaviras Datum ist traditionell, nicht historisch gesichert, und
+        die Übersetzungen der Großzahlen weichen voneinander ab. Dass die 21.000 Jahre
+        zufällig nahe an der klimatischen Präzession liegen, die in der Erdbahnmechanik
+        rund 21.000 Jahre misst, ist eine Beobachtung und keine Behauptung.`
+    },
+    {
       titel: 'Persien: die zwölftausend Jahre des Bundahischn',
       quelle: 'Bundahischn, besonders Kapitel 30; Datierung Zarathustras nach dem Großen Bundahischn',
       einleitung: `Von allen hier verglichenen Rechnungen kommt diese Misras Ring am

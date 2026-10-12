@@ -20,6 +20,7 @@ erwartet — und die Abweichungen sind genauso aufschlussreich wie die
 | **Ovid** | 4 | nur abwärts | Deukalions Flut | Phaethons Fahrt | keine |
 | **Hesiod** | 5 | nur abwärts | — | — | keine |
 | **Babylon** | vor / nach der Flut | Bruch | die Flut | Weltenbrand (Krebs) | 432.000 J. vor der Flut |
+| **Jainas** | 6 Aras je Hälfte | **ab und auf** | — | — | 20 koṭākoṭi sāgaropama |
 | **Zoroastrier** | 4 × 3.000 Jahre | Kampf bis zur Erneuerung | — | **Strom aus flüssigem Metall** | **12.000 J., 9588 v.–2413 n. Chr.** |
 | **Ägypten** | Götter, Halbgötter, Menschen | nur abwärts | — | — | Sothis 1.461 J. |
 | **Maya / Azteken** | 4 bzw. 5 Welten | Ersatz, kein Abstieg | 2. Welt / 4. Sonne | 3. Welt / 3. Sonne | 13 Baktun = 5.125 J. |
@@ -732,7 +733,11 @@ Drei Überlieferungen, ein Zeichen.
 1. **Die Zahlen für die Zeitalter selbst.** 2.700 Jahre je Yuga, 5.125 Jahre je
    Baktun-Zyklus, 500 Jahre je Pachakuti, bei Ovid, Hesiod und Ägypten gar
    keine. Nur die 432.000 treffen sich.
-2. **Der Wiederaufstieg.** Außer den Yugas kennt ihn nur die *Völuspá* — dort
+2. **Der Wiederaufstieg.** Außer den Yugas kennen ihn nur die *Jainas* und die
+   *Völuspá*. Das Jaina-Rad ist dabei der nächste Verwandte überhaupt: eine
+   absteigende und eine aufsteigende Hälfte mit gespiegelter Stufenfolge,
+   genau der Bau von Misras Ring, nur mit sechs Stufen statt vier. Die Völuspá
+   kennt zwar den Umschwung, aber keine symmetrischen Hälften — dort
    aber vollständig, bis hin zu den goldenen Spielsteinen, die im Gras der
    neuen Erde wiedergefunden werden. Ovid und Hesiod enden im Eisen;
    Mesoamerika und die Anden setzen eine neue Welt an, steigen aber nicht auf.
@@ -849,5 +854,8 @@ nebeneinander und benennt, wo sie sich decken und wo nicht.
   [Zoroastrische Zyklen](https://hinduwebsite.com/zoroastrianism/cycles.asp),
   [Frašōkərəti (Encyclopaedia Iranica)](https://iranicaonline.org/articles/frasokrti),
   [Gochihr](https://en.wikipedia.org/wiki/Gochihr_(Zoroastrianism))
+- Jaina-Zeitrad, Aras und Zeitmaße —
+  [Jain units of time](https://en.wikipedia.org/wiki/Jain_units_of_time),
+  [Jainism Simplified, Kapitel 6](https://websites.umich.edu/%7Eumjains/jainismsimplified/chapter06.html)
 - Bibhu Dev Misra, *Yuga Shift* —
   [Der Yuga-Zyklus und die Präzession](https://www.bibhudevmisra.com/2024/03/the-yuga-cycle-and-earths-precession.html)
