@@ -20,6 +20,7 @@ erwartet — und die Abweichungen sind genauso aufschlussreich wie die
 | **Ovid** | 4 | nur abwärts | Deukalions Flut | Phaethons Fahrt | keine |
 | **Hesiod** | 5 | nur abwärts | — | — | keine |
 | **Babylon** | vor / nach der Flut | Bruch | die Flut | Weltenbrand (Krebs) | 432.000 J. vor der Flut |
+| **Zoroastrier** | 4 × 3.000 Jahre | Kampf bis zur Erneuerung | — | **Strom aus flüssigem Metall** | **12.000 J., 9588 v.–2413 n. Chr.** |
 | **Ägypten** | Götter, Halbgötter, Menschen | nur abwärts | — | — | Sothis 1.461 J. |
 | **Maya / Azteken** | 4 bzw. 5 Welten | Ersatz, kein Abstieg | 2. Welt / 4. Sonne | 3. Welt / 3. Sonne | 13 Baktun = 5.125 J. |
 | **Anden** | 5 | Umbrüche | — | — | Pachakuti ≈ 500 J. |
@@ -188,7 +189,63 @@ allerdings belegbar: Hellenistische Astronomie erreichte Indien, das
 
 ---
 
-## 6. Ägypten: Zep Tepi und die Götterdynastien
+## 6. Persien: die zwölftausend Jahre des Bundahischn
+
+Von allen hier verglichenen Rechnungen kommt diese Misras Ring am nächsten —
+und sie tut es, **ohne dass man etwas zurechtrückt**.
+
+Der *Bundahischn* teilt die Weltzeit in **12.000 Jahre zu vier Teilen von je
+3.000**:
+
+| | | |
+|---|---|---|
+| 1. Teil | geistige Schöpfung | *mēnōg* |
+| 2. Teil | stoffliche Schöpfung, ungestört | *gētīg* |
+| 3. Teil | die Vermischung — Ahrimans Angriff | *gumēzišn* |
+| 4. Teil | der Kampf bis zur Erneuerung | ab Zarathustra |
+
+### Der einzige Anker, den die Quelle selbst nennt
+
+Zarathustras Auftreten, **258 Jahre vor Alexander** — also 588 v. Chr. —
+eröffnet den vierten und letzten Teil. Rechnet man von dort aus, laufen die
+zwölftausend Jahre von **9588 v. Chr. bis 2413 n. Chr.**
+
+Und beides fällt auf:
+
+- Der Anfang liegt **88 Jahre** nach dem Beginn des absteigenden Satya Yuga
+  (9676 v. Chr.) — also im Goldenen Zeitalter, kurz nachdem es begonnen hat.
+- Das Ende liegt **mitten in der Ekpyrosis** (2025–3225).
+
+### Und das Ende ist dieselbe Figur
+
+Bei der **Frashokereti**, der Erneuerung, schmilzt das Metall in den Bergen und
+strömt über die Erde. Alle müssen hindurch — den Gerechten ist es wie warme
+Milch, den Ungerechten ein Brennen. Ausgelöst wird es, als **Gochihr** auf die
+Erde fällt.
+
+Ein Reinigungsfeuer, gezündet von einem Körper aus dem Himmel: Ekpyrosis und
+Kataklysmos in einem einzigen Bild — und derselbe Auslöser, auf den Misra seine
+Katastrophenzeiten stützt.
+
+### Drei Vorbehalte
+
+- Die Zahl der Jahrtausende **schwankt je nach Fassung** — sechs, neun oder
+  zwölf.
+- Die 258 Jahre sind **Dynastienrechnung**, kein gesichertes historisches Datum.
+- Ob Gochihr ein **Komet** ist, wird bestritten.
+
+### Zum Zurechtrücken
+
+Ließe man die zwölftausend Jahre genau **2025** enden, müsste der Anfang auf
+9976 v. Chr. fallen — und der liegt **900 Jahre tief im Kataklysmos**, auf
+keiner Grenze.
+
+Die ungerückte Rechnung sitzt also besser als die gerückte. Genau das macht sie
+bemerkenswert: Sie ist nicht auf Misra hin gebaut.
+
+---
+
+## 7. Ägypten: Zep Tepi und die Götterdynastien
 
 Ägypten kennt keine Metallalter, aber dieselbe Grundfigur. Der **Turiner
 Königspapyrus** (13. Jh. v. Chr.) führt vor den menschlichen Pharaonen ein
@@ -209,7 +266,7 @@ den Kalender, nicht den Verfall der Welt.
 
 ---
 
-## 7. Anden: Pachakuti und die fünf Menschengeschlechter
+## 8. Anden: Pachakuti und die fünf Menschengeschlechter
 
 Felipe Guamán Poma de Ayala beschreibt 1615 in der *Nueva corónica y buen
 gobierno* fünf andine Menschengeschlechter:
@@ -231,7 +288,7 @@ legte die andine Zählung bewusst neben die biblische. Wie viel davon andine
 
 ---
 
-## 8. Südlich der Sahara: ein Befund ohne Entsprechung
+## 9. Südlich der Sahara: ein Befund ohne Entsprechung
 
 Hier fällt das Ergebnis anders aus, und das gehört genauso zum Vergleich:
 **Außerhalb Ägyptens findet sich in Afrika kein absteigendes Weltalterschema.**
@@ -253,7 +310,7 @@ zu vier Zeitaltern geordnet.
 
 ---
 
-## 9. Germanen: Ragnarök und die goldenen Spielsteine
+## 10. Germanen: Ragnarök und die goldenen Spielsteine
 
 Von allen hier verglichenen Überlieferungen kommt diese der Yuga-Figur am
 nächsten — weil sie als **einzige neben Indien den Wiederaufstieg** kennt.
@@ -286,7 +343,7 @@ Bevölkerungseinbruch — seinen Abdruck in der nordischen Dichtung hinterließ.
 
 ---
 
-## 10. China: der Yuan und der Abstieg vom Dao
+## 11. China: der Yuan und der Abstieg vom Dao
 
 China rechnet groß, aber anders. **Shao Yong** (1011–1077) legt im *Huangji
 Jingshi* einen kosmischen Zyklus fest, in dem die Welt entsteht, blüht,
@@ -316,7 +373,7 @@ wiederholt sich in Jahrhunderten, nicht in Weltaltern.
 
 ---
 
-## 11. Etrusker: die zehn Saecula
+## 12. Etrusker: die zehn Saecula
 
 Die unheimlichste Fassung, weil sie kein Rad ist, sondern eine **gezählte
 Frist**.
@@ -348,7 +405,7 @@ Derselbe Satz steht in der Zeitkugel beim **aufsteigenden Satya Yuga**.
 
 ---
 
-## 12. Kelten: Feuer und Wasser bei den Druiden
+## 13. Kelten: Feuer und Wasser bei den Druiden
 
 Die Kelten haben nichts aufgeschrieben — die Druiden lernten zwanzig Jahre lang
 auswendig und misstrauten der Schrift. Was wir haben, steht bei römischen
@@ -383,7 +440,7 @@ Weltalter gibt es nirgends.
 
 ---
 
-## 13. Slawen: ein zweiter Befund ohne Entsprechung
+## 14. Slawen: ein zweiter Befund ohne Entsprechung
 
 Wie südlich der Sahara — und bei kaum einer anderen Überlieferung ist so viel
 im Umlauf, das nachweislich erfunden ist.
@@ -411,7 +468,7 @@ Russland bis 1700 in Gebrauch — dann schaffte Peter I. sie ab, und aus dem Jah
 
 ---
 
-## 14. Nordamerika: vier Welten und der Büffel auf vier Beinen
+## 15. Nordamerika: vier Welten und der Büffel auf vier Beinen
 
 Hier steht die auffälligste Einzelheit des ganzen Vergleichs.
 
@@ -445,7 +502,7 @@ solche Übereinstimmungen nichts über Herkunft beweisen.
 
 ---
 
-## 15. Australien: kein Zeitalter, aber das längste Gedächtnis
+## 16. Australien: kein Zeitalter, aber das längste Gedächtnis
 
 Hier fällt die Frage selbst weg.
 
@@ -481,7 +538,7 @@ und über die sie nach Persien, Bagdad und Europa gelangten.
 
 ---
 
-## 16. Indien: der Kalpa der Siddhantas
+## 17. Indien: der Kalpa der Siddhantas
 
 Die äußerste Schale der Zeitkugel zeigt Misras rekonstruierten Zyklus von
 25.800 Jahren. Die klassische indische Astronomie rechnet ganz anders.
@@ -511,7 +568,7 @@ Rekonstruktion *gegen* diese Überlieferung, nicht aus ihr.
 
 ---
 
-## 17. Aryabhata: vier gleiche Viertel
+## 18. Aryabhata: vier gleiche Viertel
 
 Aryabhata (*Aryabhatiya*, 499 n. Chr.) rechnet mit derselben Gesamtlänge, teilt
 sie aber **in vier gleiche Viertel** von je 1.080.000 Jahren. Der Abstieg
@@ -530,7 +587,7 @@ Kali Yuga 3102 v. Chr.
 
 ---
 
-## 18. Persien: das Weltjahr von 360.000 Jahren
+## 19. Persien: das Weltjahr von 360.000 Jahren
 
 In den frühen 770er Jahren ließ Kalif al-Mansur in Bagdad Brahmaguptas Werke
 übersetzen: aus dem *Brahmasphutasiddhanta* wurde der **Zij as-Sindhind**, aus
@@ -564,7 +621,7 @@ zusammenstanden, und werde enden, wenn sie in den **Fischen** zusammentreten.
 
 ---
 
-## 19. Māshāʾallāh: die Geschichte aus Konjunktionen
+## 20. Māshāʾallāh: die Geschichte aus Konjunktionen
 
 Eine Generation vor Abu Maʿšar legte **Māshāʾallāh ibn Atharī** (um 740–815),
 persischer Jude in Bagdad, das Verfahren fest, nach dem die ganze spätere
@@ -582,7 +639,7 @@ Jupiter-Saturn-Schale steht, geht auf diese beiden zurück.
 
 ---
 
-## 20. Die Fardār und die Planetenjahre
+## 21. Die Fardār und die Planetenjahre
 
 Neben den Konjunktionen läuft ein zweites Verfahren. Abu Maʿšar unterscheidet
 vier Stufen astrologischer Wirksamkeit, dezimal gestapelt:
@@ -617,7 +674,7 @@ Lilly 320, Bonatti 420, al-Qabīsī und al-Bīrūnī dagegen 520.
 
 ---
 
-## 21. Saturn und Mars im Krebs
+## 22. Saturn und Mars im Krebs
 
 Die kürzeste dieser Lehren — und sie trifft sich mit Berossos auf demselben
 Punkt des Himmels.
@@ -644,7 +701,7 @@ Drei Überlieferungen, ein Zeichen.
 
 ---
 
-## 22. Was sich wirklich überschneidet
+## 23. Was sich wirklich überschneidet
 
 **Stark:**
 
@@ -665,6 +722,10 @@ Drei Überlieferungen, ein Zeichen.
 6. **Beide Untergangsarten in einem Ereignis** — bei Ragnarök brennt die Welt
    *und* versinkt im Meer.
 7. **Ein Umbruch in unserer Lebenszeit** — 2012 und 2025.
+8. **Die genaueste Deckung überhaupt:** Die zwölftausend Jahre des Bundahischn,
+   von ihrem eigenen Anker aus gerechnet, beginnen 88 Jahre nach Misras
+   absteigendem Satya Yuga und enden mitten in seiner Ekpyrosis — ohne dass
+   irgendetwas darauf hin zurechtgerückt wurde.
 
 **Schwach oder gar nicht:**
 
@@ -706,7 +767,7 @@ lagen um gut vierzig Prozent daneben. Keine der hier verglichenen
 
 ---
 
-## 23. Einordnung
+## 24. Einordnung
 
 Die Übereinstimmungen sind real, aber sie belegen nicht, was sie auf den ersten
 Blick zu belegen scheinen. Dass drei weit auseinanderliegende Kulturen von
@@ -784,5 +845,9 @@ nebeneinander und benennt, wo sie sich decken und wo nicht.
 - Fardār und Planetenjahre — [Planetary years](https://stellium.readthedocs.io/en/stable/methodology/research/planetary-years.html)
 - Saturn-Mars im Krebs und das Thema Mundi —
   [Thema Mundi](https://en.wikipedia.org/wiki/Thema_Mundi)
+- Zoroastrische Weltzeit und Frashokereti —
+  [Zoroastrische Zyklen](https://hinduwebsite.com/zoroastrianism/cycles.asp),
+  [Frašōkərəti (Encyclopaedia Iranica)](https://iranicaonline.org/articles/frasokrti),
+  [Gochihr](https://en.wikipedia.org/wiki/Gochihr_(Zoroastrianism))
 - Bibhu Dev Misra, *Yuga Shift* —
   [Der Yuga-Zyklus und die Präzession](https://www.bibhudevmisra.com/2024/03/the-yuga-cycle-and-earths-precession.html)

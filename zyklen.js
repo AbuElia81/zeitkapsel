@@ -252,6 +252,40 @@ export const SCHICHTEN = [
         Babylon nach Indien ist über die hellenistische Astronomie aber belegbar.`
     },
     {
+      titel: 'Persien: die zwölftausend Jahre des Bundahischn',
+      quelle: 'Bundahischn, besonders Kapitel 30; Datierung Zarathustras nach dem Großen Bundahischn',
+      einleitung: `Von allen hier verglichenen Rechnungen kommt diese Misras Ring am
+        nächsten — und sie tut es, ohne dass man etwas zurechtrückt.`,
+      zeilen: [
+        ['Ganze Dauer', '12.000 Jahre in vier Teilen zu 3.000', ''],
+        ['1. Teil', 'geistige Schöpfung', 'mēnōg'],
+        ['2. Teil', 'stoffliche Schöpfung, ungestört', 'gētīg'],
+        ['3. Teil', 'die Vermischung — Ahrimans Angriff', 'gumēzišn'],
+        ['4. Teil', 'der Kampf bis zur Erneuerung', 'ab Zarathustra'],
+        ['Zarathustra', '258 Jahre vor Alexander — 588 v. Chr.', 'Bundahischn'],
+        ['daraus', '9588 v. Chr. bis 2413 n. Chr.', ''],
+        ['Das Ende', 'Frashokereti — der Strom aus flüssigem Metall', '']
+      ],
+      nachsatz: `Rechnet man die zwölftausend Jahre von dem einzigen Datum aus, das die
+        Quelle selbst nennt — Zarathustras Auftreten 258 Jahre vor Alexander, also
+        588 v. Chr., womit der letzte Drittelteil beginnt —, dann laufen sie von
+        9588 v. Chr. bis 2413 n. Chr. Beides fällt auf. Der Anfang liegt nur
+        88 Jahre nach dem Beginn des absteigenden Satya Yuga (9676 v. Chr.), und das
+        Ende liegt mitten in der Ekpyrosis (2025–3225). Und das Ende selbst ist
+        dieselbe Figur: Bei der Frashokereti, der Erneuerung, schmilzt das Metall in
+        den Bergen und strömt über die Erde; alle müssen hindurch — den Gerechten ist
+        es wie warme Milch, den Ungerechten ein Brennen. Ausgelöst wird es, als Gochihr
+        auf die Erde fällt. Ein Reinigungsfeuer, von einem Körper aus dem Himmel
+        gezündet: Ekpyrosis und Kataklysmos in einem Bild.
+        Drei Vorbehalte gehören dazu. Die Zahl der Jahrtausende schwankt je nach
+        Fassung — sechs, neun oder zwölf. Die 258 Jahre sind Dynastienrechnung, kein
+        gesichertes Datum. Und ob Gochihr ein Komet ist, wird bestritten.
+        Zum Zurechtrücken: Ließe man die zwölftausend Jahre genau 2025 enden, müsste
+        der Anfang auf 9976 v. Chr. fallen — und der liegt 900 Jahre tief im
+        Kataklysmos, auf keiner Grenze. Die ungerückte Rechnung sitzt also besser als
+        die gerückte; genau das macht sie bemerkenswert.`
+    },
+    {
       titel: 'Ägypten: Zep Tepi und die Götterdynastien',
       quelle: 'Turiner Königspapyrus (13. Jh. v. Chr.); Manetho, Aigyptiaka (3. Jh. v. Chr.)',
       einleitung: `Ägypten kennt keine Metallalter, aber dieselbe Grundfigur: eine Erste

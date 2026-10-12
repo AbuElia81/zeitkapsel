@@ -54,6 +54,7 @@ const ROH = [
   [-763,   'himmel', 'Assyrien', 'Die Sonnenfinsternis von Bur-Sagale wird in den assyrischen Eponymenlisten vermerkt — der älteste sicher datierte Tag der Geschichte'],
   [-753,   'kultur', 'Rom', 'Das überlieferte Gründungsjahr Roms'],
   [-700,   'kultur', 'Böotien', 'Hesiod schreibt „Werke und Tage“ — die älteste Fassung der Weltalter: Gold, Silber, Erz, Heroen, Eisen'],
+  [-588,   'kultur', 'Iran', 'Nach dem Bundahischn tritt Zarathustra 258 Jahre vor Alexander auf und eröffnet damit das letzte der vier Jahrtausendpaare — die zwölftausend Jahre der Welt enden danach 2413 n. Chr. mit der Frashokereti'],
   [-585,   'himmel', 'Halys, Kleinasien', 'Eine totale Sonnenfinsternis unterbricht die Schlacht zwischen Lydern und Medern; Thales soll sie vorhergesagt haben'],
   [-563,   'kultur', 'Indien, China, Persien', 'Achsenzeit: Buddha, Laozi, Konfuzius, die Upanischaden, Zarathustra und die israelitischen Propheten fast gleichzeitig'],
   [-480,   'kultur', 'Griechenland', 'Salamis und das klassische Athen — Sokrates, das Drama, der Beginn der Philosophie'],
