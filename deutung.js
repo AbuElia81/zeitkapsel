@@ -6,8 +6,8 @@
    selbst von den Zeitaltern sprechen. Gleiche Zeit ergibt immer dieselbe
    Deutung — gewürfelt wird nichts.
    --------------------------------------------------------------------- */
-import { SCHICHTEN, anteil, segmentBei, yugaLicht, jahrText } from './zyklen.js?v=93';
-import { epocheVon } from './geschichte.js?v=93';
+import { SCHICHTEN, anteil, segmentBei, yugaLicht, jahrText } from './zyklen.js?v=94';
+import { epocheVon } from './geschichte.js?v=94';
 
 const S = (name) => SCHICHTEN.find(s => s.name === name);
 const SONNENSCHALEN = ['Halstatt-Zyklus', 'Eddy-Zyklus', 'Suess-de-Vries-Zyklus',
@@ -16,6 +16,23 @@ const ARTWERT = { hoch: 1, auf: 0.66, ab: 0.34, tief: 0 };
 const ZEICHEN = ['Widder', 'Stier', 'Zwillingen', 'Krebs', 'Löwen', 'Jungfrau',
                  'Waage', 'Skorpion', 'Schützen', 'Steinbock', 'Wassermann', 'Fischen'];
 const SCHWAERME = [1988, 1995, 1998, 2005, 2015, 2022, 2032];
+
+// ------------------------------------------------- Der galaktische Kern
+// Das schmale Band über dem Yuga-Ring: Sgr A* liegt nach Misra die ganze
+// absteigende Hälfte im Dunkeln, zündet in der Ekpyrosis und brennt die
+// aufsteigende hindurch. Daraus wird hier ein Wert zwischen 0 und 1.
+function kernStand(jahr) {
+  const yuga = SCHICHTEN[0];
+  const band = yuga.nebenband;
+  if (!band) return { feuer: 0, phase: 'unbekannt', bisJahr: jahr };
+  const { seg, vonJahr, bisJahr } = segmentBei({ ...yuga, segmente: band.segmente }, jahr);
+  const lauf = (jahr - vonJahr) / Math.max(1, bisJahr - vonJahr);
+  const feuer = seg.art === 'agn' ? 1
+              : seg.art === 'agn-an' ? lauf
+              : seg.art === 'agn-aus' ? 1 - lauf
+              : 0;
+  return { feuer, phase: seg.name, art: seg.art, vonJahr, bisJahr };
+}
 
 // --------------------------------------------------------------- Messwerte
 function stand(jahr) {
@@ -47,6 +64,7 @@ function stand(jahr) {
     zeichen: ZEICHEN[Math.min(11, Math.floor(anteil(S('Jupiter-Zyklus'), jahr) * 12))],
     blatt: Math.floor(anteil(S('Venus-Zyklus'), jahr) * 5) + 1,
     schwarm: SCHWAERME.reduce((n, y) => Math.abs(y - jahr) < Math.abs(n - jahr) ? y : n, 9e9),
+    kern: kernStand(jahr),
     epoche: epocheVon(jahr)
   };
 }
@@ -151,6 +169,49 @@ function himmel(z) {
   return teile.join('. ') + '.';
 }
 
+// --------------------------------------------- Der galaktische Kern (Text)
+function kern(z) {
+  const k = z.kern;
+  const wende = `Der nächste Wechsel steht ${jahrText(k.bisJahr)} an.`;
+  const grund = `Gemessen ist: Sagittarius A* ist heute eines der lichtschwächsten
+    bekannten Schwarzen Löcher, acht Größenordnungen unter seiner Eddington-Grenze.
+    Das war nicht immer so. Röntgen-Echos in den Molekülwolken Sgr B2 und Sgr C
+    zeigen, dass der Kern noch vor fünfhundert Jahren hunderttausendfach heller
+    stand; die Fermi-Blasen über und unter der Scheibe zeugen von einem Ausbruch
+    vor ein bis drei Millionen Jahren, und die Ionisation des Magellanschen Stroms
+    von einem Seyfert-Ausbruch vor rund 3,5 Millionen Jahren, der etwa
+    dreihunderttausend Jahre angehalten hat. Dass dieser Rhythmus mit dem
+    Yuga-Zyklus zusammenfällt, ist Misras Deutung und keine Messung.`;
+
+  if (k.art === 'agn') {
+    const reif = z.richtung === 'auf'
+      ? `Die Milchstraße hat ihre Lampe an, und die Welt wächst in diesem Licht.`
+      : `Der Kern brennt, aber die Richtung des großen Zyklus weist dagegen.`;
+    return `Das Zentrum ist offen. Was in der Mitte der Galaxis sitzt, strahlt —
+      und die Erde steht nicht daneben, sondern darin. ${reif} Misra erwartet von
+      dieser Phase keine Zerstörung: Das Feuer der Katastrophen kommt nach ihm aus
+      dem Tauriden-Schwarm, das Licht aus dem Kern dagegen ist aufbauend, es rührt
+      an Körper und Stimmung. ${wende} ${grund}`;
+  }
+  if (k.art === 'agn-an') {
+    return `Der Kern zündet gerade. Dies ist die kurze Strecke, in der die Lampe
+      angeht — nach Misra genau die 1.200 Jahre der Ekpyrosis, in denen auch alles
+      andere umbricht. Was danach kommt, ist nicht dasselbe wie das, was vorher
+      war: Nicht die Welt wird heller, sondern das Licht, in dem sie steht.
+      ${wende} ${grund}`;
+  }
+  if (k.art === 'agn-aus') {
+    return `Der Kern schaltet ab. Das Licht, in dem die aufsteigende Hälfte stand,
+      zieht sich zurück, und es bleibt, was aus eigener Kraft leuchtet. ${wende}
+      ${grund}`;
+  }
+  return `Das Zentrum ist dunkel. Sagittarius A* schluckt und strahlt kaum — die
+    ganze absteigende Hälfte des Zyklus liegt nach Misra in diesem Schatten. Was
+    in dieser Zeit an Licht da ist, ist mitgebrachtes Licht: Es stammt aus der
+    letzten Zündung und wird weniger, nicht mehr. Darum ist der Abstieg kein
+    Verfall von Sitten, sondern ein Entzug von Quelle. ${wende} ${grund}`;
+}
+
 // ------------------------------------------------------------- Der Mensch
 function mensch(z) {
   if (z.katastrophe) return `Der Mensch lebt in dieser Zeit ohne Maßstab. Die
@@ -221,10 +282,12 @@ export function deuten(jahr) {
       { name: 'Licht der Welt', wert: z.licht, ton: '#e8b95c' },
       { name: 'Kraft der Sonne', wert: z.sonne, ton: '#d4706a' },
       { name: 'Entfaltung am Himmel', wert: z.entfaltung, ton: '#a163c2' },
-      { name: 'Weite des Mondes', wert: z.mondWeite, ton: '#8a68cd' }
+      { name: 'Weite des Mondes', wert: z.mondWeite, ton: '#8a68cd' },
+      { name: 'Feuer im galaktischen Kern', wert: z.kern.feuer, ton: '#7fa8ef' }
     ],
     absaetze: [
       { kopf: 'Die Qualität der Zeit', text: qualitaet(z) },
+      { kopf: 'Der galaktische Kern', text: kern(z) },
       { kopf: 'Der Himmel', text: himmel(z) },
       { kopf: 'Der Mensch', text: mensch(z) },
       { kopf: 'Die Dynamik', text: dynamik(z, jahr) }

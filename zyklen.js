@@ -129,7 +129,11 @@ export const SCHICHTEN = [
       '8 Yugas × 2.700 + 6 Sandhis × 300 + 2 × 1.200 Jahre = 25.800 Jahre',
       'Zwei der acht 300-Jahr-Übergänge stecken bereits in den Katastrophenzeiten',
       'Das absteigende Kali Yuga läuft nach Misra von 676 v. Chr. bis 2025 n. Chr.',
-      'Das schmale Band darüber: der Kern der Milchstraße schaltet ein, ist aktiv, schaltet ab',
+      'Das schmale Band darüber: der Kern der Milchstraße — dunkel in der absteigenden Hälfte, zündend in der Ekpyrosis, aktiv die ganze aufsteigende',
+      'Sgr A* ist heute eines der lichtschwächsten bekannten Schwarzen Löcher — acht Größenordnungen unter seiner Eddington-Grenze',
+      'Röntgen-Echos in den Wolken Sgr B2 und Sgr C: noch vor 500 Jahren war der Kern vier- bis sechshunderttausendmal heller als heute',
+      'Die Fermi-Blasen, 10 kpc über und unter der Scheibe, zeugen von einem Ausbruch vor 1 bis 3 Millionen Jahren',
+      'Die Ionisation des Magellanschen Stroms deutet auf einen Seyfert-Ausbruch vor 3,5 ± 1 Millionen Jahren, rund 300.000 Jahre lang',
       'Die 25.800 Jahre sind astronomisch belegt — die Yuga-Zuordnung ist Misras These',
       'Ovid erzählt dieselbe Abfolge: Gold, Silber, Erz, Eisen — und beide Katastrophen',
       '432.000 Jahre: die babylonischen Könige vor der Flut und das Kali Yuga tragen dieselbe Zahl'
@@ -880,14 +884,18 @@ export const SCHICHTEN = [
           was: `Saturns Zeit kehrt wieder — was Vergil in der vierten Ekloge der
             Menschheit verheißt: „iam redit et Virgo, redeunt Saturnia regna“.` } }
     ],
+    // Misra setzt den AGN-Zyklus von Sgr A* gleich lang an wie die Präzession
+    // selbst — 25.800 Jahre, eine Zündung je Umlauf. Die Phase beginnt nach
+    // seinen Worten „nach dem Ende des Kali Yuga 2025“, irgendwann in der
+    // Ekpyrosis, und hält „die ganzen 11.700 Jahre des aufsteigenden Zyklus,
+    // bis zum Ende des Goldenen Zeitalters“. Die absteigende Hälfte liegt
+    // demnach im Dunkeln.
     nebenband: {
       titel: 'Der galaktische Kern — Sgr A*',
       segmente: [
-        { name: 'Galaktischer Kern schaltet ein', laenge: 3900, art: 'agn-an' },
-        { name: '', laenge: 5100, art: 'leer' },
-        { name: 'Galaktischer Kern aktiv', laenge: 8100, art: 'agn' },
-        { name: 'Galaktischer Kern schaltet ab', laenge: 3900, art: 'agn-aus' },
-        { name: '', laenge: 4800, art: 'leer' }
+        { name: 'Galaktischer Kern dunkel', laenge: 12900, art: 'agn-dunkel' },
+        { name: 'Galaktischer Kern schaltet ein', laenge: 1200, art: 'agn-an' },
+        { name: 'Galaktischer Kern aktiv', laenge: 11700, art: 'agn' }
       ]
     },
     jetztText: `Wir stehen am Ende des absteigenden Kali Yuga und am Beginn der

@@ -1,8 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=93';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=93';
-import { deuten } from './deutung.js?v=93';
+         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=94';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=94';
+import { deuten } from './deutung.js?v=94';
 
 const HG = 0x05070d;
 
@@ -51,9 +51,10 @@ const TON = {
   auf:         [0.24, 0.80],
   ab:          [0.16, 0.68],
   tief:        [0.07, 0.42],
-  agn:         [0.45, 0.95],
-  'agn-an':    [0.30, 0.85],
-  'agn-aus':   [0.30, 0.85],
+  agn:          [0.45, 0.95],
+  'agn-an':     [0.30, 0.85],
+  'agn-aus':    [0.30, 0.85],
+  'agn-dunkel': [0.05, 0.34],
   leer:        [0.0, 0.0]
 };
 
