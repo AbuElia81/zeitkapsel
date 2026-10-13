@@ -1,9 +1,10 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, kernStand, RING_ANKER } from './zyklen.js?v=113';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=113';
-import { deuten } from './deutung.js?v=113';
-import { weltalterStand } from './weltalter.js?v=113';
+         yugaLicht, menschZustand, masstab, kernStand, schiefe,
+         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=116';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=116';
+import { deuten } from './deutung.js?v=116';
+import { weltalterStand } from './weltalter.js?v=116';
 
 const HG = 0x05070d;
 
@@ -19,14 +20,17 @@ kamera.position.set(0, 0, 14);
 
 // Die Kugel steht fest in ihrer Achse und dreht sich nur um sie — wie ein
 // Globus im Gestell. Die Neigung ist die der Erde: 23,44 Grad.
-const ERDNEIGUNG = 23.4392811 * Math.PI / 180;
+// Die Neigung steht nicht fest: Sie folgt der wirklichen Schiefe der Erdachse
+// zum eingestellten Jahr — dem Milanković-Zyklus von 41.000 Jahren.
+let zielNeigung = 23.4392811 * Math.PI / 180;
+let istNeigung = zielNeigung;
 const buehneWelt = new THREE.Group();   // nimmt den Versatz nach oben auf
 szene.add(buehneWelt);
 const blick = new THREE.Group();        // man schaut leicht von oben darauf
 blick.rotation.x = -0.17;
 buehneWelt.add(blick);
 const achse = new THREE.Group();        // die Erdneigung, sichtbar in der Bildebene
-achse.rotation.z = -ERDNEIGUNG;
+achse.rotation.z = -istNeigung;
 blick.add(achse);
 const welt = new THREE.Group();         // dreht sich beim Anschieben um die Achse
 achse.add(welt);
@@ -1021,6 +1025,7 @@ function zeitSetzen(j, jetzt = false, vomSchieber = false, richten = true) {
   streifenFuellen();
   if (richten) ausrichten = true;
   menschSetzen(yugaLicht(zeitJahr));
+  zielNeigung = schiefe(zeitJahr) * Math.PI / 180;
   tafelZeitTeil();
 }
 
@@ -1123,6 +1128,18 @@ function tafelZeitTeil() {
 
   weltalterZeitTeil();
 
+  const sz = tafel.querySelector('.schiefeZeile');
+  if (sz) {
+    const g = schiefe(zeitJahr);
+    const vorher = schiefe(zeitJahr - 100);
+    const weit = Math.abs(zeitJahr - 2000) > SCHIEFE_SICHER;
+    sz.innerHTML = `Die Achse der Kugel steht so schief wie die der Erde in diesem
+      Jahr: <b>${g.toFixed(2).replace('.', ',')}°</b> — ${g > vorher ? 'sie richtet sich auf'
+      : 'sie neigt sich weiter'}. Im Milanković-Zyklus von 41.000 Jahren wandert sie
+      zwischen 22,1° und 24,5°; am Zeitschieber kippt die Kugel mit.
+      ${weit ? '<em>So weit draußen ist der Wert fortgeschrieben, nicht gerechnet.</em>' : ''}`;
+  }
+
   const mz = tafel.querySelector('.menschZeile');
   if (mz) {
     const l = yugaLicht(zeitJahr);
@@ -1148,7 +1165,7 @@ function tafelFuellen(s) {
       <p class="masstab">${masstab(SCHICHTEN.indexOf(s))}</p>
       <p class="fliess">${s.text}</p>
       <p class="jetztZeile"></p>
-      ${s.vergleiche ? '<div class="ovidZeile"></div>' : ''}
+      ${s.vergleiche ? '<p class="schiefeZeile"></p><div class="ovidZeile"></div>' : ''}
       ${s.kern ? '<p class="menschZeile"></p>' : ''}
       ${s.termine ? '<p class="terminKopf">Termine</p><ul class="termine"></ul>' : ''}
       <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
@@ -1183,6 +1200,10 @@ function bild() {
   istAbstand += (zielAbstand - istAbstand) * Math.min(1, dt * 3.4);
   kamera.position.z = istAbstand;
   const hoehe = 2 * istAbstand * Math.tan((kamera.fov / 2) * Math.PI / 180);
+  // Die Achse folgt der Schiefe des eingestellten Jahres, weich nachgezogen
+  istNeigung += (zielNeigung - istNeigung) * Math.min(1, dt * 4.5);
+  achse.rotation.z = -istNeigung;
+
   istVersatz += (versatz - istVersatz) * Math.min(1, dt * 3.4);
   buehneWelt.position.y = istVersatz * hoehe;
   // Der Mensch steht ausserhalb der Weltgruppe — er rueckt eigens mit

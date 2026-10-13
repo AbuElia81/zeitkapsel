@@ -354,6 +354,15 @@ main { position: relative; z-index: 1; height: 100%; }
   #kopf p { display: none; }
 }
 
+#tafel .schiefeZeile {
+  margin: -.2rem 0 1rem; padding: .55rem .7rem;
+  font-size: .78rem; line-height: 1.5; color: #d8cfbd;
+  background: rgba(255,255,255,.035);
+  border-left: 1px solid var(--ton); border-radius: 0 2px 2px 0;
+}
+#tafel .schiefeZeile b { font-weight: 400; color: #fff2d0; }
+#tafel .schiefeZeile em { font-style: normal; color: var(--gedaempft); }
+
 #tafel .menschZeile {
   margin: -.4rem 0 1rem; padding: .55rem .7rem;
   font-size: .78rem; line-height: 1.5; color: #d8cfbd;

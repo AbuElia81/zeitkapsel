@@ -6,8 +6,8 @@
    selbst von den Zeitaltern sprechen. Gleiche Zeit ergibt immer dieselbe
    Deutung — gewürfelt wird nichts.
    --------------------------------------------------------------------- */
-import { SCHICHTEN, anteil, segmentBei, yugaLicht, jahrText, kernStand } from './zyklen.js?v=113';
-import { epocheVon } from './geschichte.js?v=113';
+import { SCHICHTEN, anteil, segmentBei, yugaLicht, jahrText, kernStand, schiefe } from './zyklen.js?v=116';
+import { epocheVon } from './geschichte.js?v=116';
 
 const S = (name) => SCHICHTEN.find(s => s.name === name);
 const SONNENSCHALEN = ['Halstatt-Zyklus', 'Eddy-Zyklus', 'Suess-de-Vries-Zyklus',
@@ -48,6 +48,8 @@ function stand(jahr) {
     blatt: Math.floor(anteil(S('Venus-Zyklus'), jahr) * 5) + 1,
     schwarm: SCHWAERME.reduce((n, y) => Math.abs(y - jahr) < Math.abs(n - jahr) ? y : n, 9e9),
     kern: kernStand(jahr),
+    schiefe: schiefe(jahr),
+    schiefeAuf: schiefe(jahr) > schiefe(jahr - 100),
     epoche: epocheVon(jahr)
   };
 }
@@ -149,6 +151,9 @@ function himmel(z) {
       : `Der Mond ist auf halbem Weg zwischen seinen Wenden`);
 
   teile.push(`Jupiter steht im ${z.zeichen}, Venus im ${z.blatt}. Blatt ihrer Rose`);
+  teile.push(`Die Erdachse steht ${z.schiefe.toFixed(2).replace('.', ',')}° schief —
+    ${z.schiefeAuf ? 'sie richtet sich auf, die Jahreszeiten werden milder'
+                   : 'sie neigt sich weiter, die Jahreszeiten werden schärfer'}`);
   return teile.join('. ') + '.';
 }
 

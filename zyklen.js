@@ -66,6 +66,26 @@ export function segmentBei(schicht, jahr) {
   return { seg: schicht.segmente[0], vonJahr: jahr, bisJahr: jahr };
 }
 
+// ----------------------------------------------- Die Schiefe der Erdachse
+// Der zweite Milanković-Zyklus: In rund 41.000 Jahren wandert die Neigung der
+// Erdachse zwischen etwa 22,1° und 24,5°. Gerechnet wird mit Laskars Reihe,
+// wie sie bei Meeus steht (Astronomical Algorithms, Kap. 22). Sie gilt sauber
+// ±10.000 Jahre um das Jahr 2000; weiter draußen ist sie eine Fortschreibung,
+// darum wird das Ergebnis in die physikalische Spanne gelegt.
+const SCHIEFE_GLIEDER = [-4680.93, -1.55, 1999.25, -51.38, -249.67,
+                         -39.05, 7.12, 27.87, 5.79, 2.45];
+export const SCHIEFE_HEUTE = 23.4392811;   // 2000 n. Chr., in Grad
+export const SCHIEFE_SICHER = 10000;       // so weit trägt die Reihe
+
+export function schiefe(jahr) {
+  const u = (jahr - 2000) / 10000;
+  let bogen = 23 * 3600 + 26 * 60 + 21.448;      // 23° 26' 21,448"
+  for (let i = 0; i < SCHIEFE_GLIEDER.length; i++) {
+    bogen += SCHIEFE_GLIEDER[i] * Math.pow(u, i + 1);
+  }
+  return Math.max(22.0, Math.min(24.6, bogen / 3600));
+}
+
 // ------------------------------------------------- Der galaktische Kern
 // Das schmale Band über dem Yuga-Ring: Sgr A* liegt nach Misra die ganze
 // absteigende Hälfte im Dunkeln, zündet in der Ekpyrosis und brennt die
@@ -152,6 +172,9 @@ export const SCHICHTEN = [
       'Die Fermi-Blasen, 10 kpc über und unter der Scheibe, zeugen von einem Ausbruch vor 1 bis 3 Millionen Jahren',
       'Die Ionisation des Magellanschen Stroms deutet auf einen Seyfert-Ausbruch vor 3,5 ± 1 Millionen Jahren, rund 300.000 Jahre lang',
       'Die 25.800 Jahre sind astronomisch belegt — die Yuga-Zuordnung ist Misras These',
+      'Die Präzession ist zugleich der dritte Milanković-Zyklus — die beiden größeren sind die Schiefe der Erdachse (41.000 Jahre) und die Exzentrizität der Erdbahn (100.000)',
+      'Die Neigung der Kugel ist nicht gesetzt: Sie folgt der wirklichen Schiefe der Erdachse zum eingestellten Jahr',
+      'Höchststand 24,22° um 8700 v. Chr., Tiefststand 22,61° um 11800 n. Chr. — heute 23,44° und fallend',
       'Ovid erzählt dieselbe Abfolge: Gold, Silber, Erz, Eisen — und beide Katastrophen',
       '432.000 Jahre: die babylonischen Könige vor der Flut und das Kali Yuga tragen dieselbe Zahl'
     ],
