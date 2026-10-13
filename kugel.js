@@ -1,10 +1,10 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
          yugaLicht, menschZustand, masstab, kernStand, schiefe,
-         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=117';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=117';
-import { deuten } from './deutung.js?v=117';
-import { weltalterStand } from './weltalter.js?v=117';
+         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=120';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=120';
+import { deuten } from './deutung.js?v=120';
+import { weltalterStand } from './weltalter.js?v=120';
 
 const HG = 0x05070d;
 
@@ -103,9 +103,9 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
   // die Länge gezogen wird, wächst die Leinwand mit — und alle Schriftgrade
   // wachsen im selben Maß mit ihr.
   const k = H / (klein ? 128 : 256);
-  // Die Schrift waechst mit, aber nicht ganz so stark wie das Band: Sonst
-  // fuellt ein Name wie „Kali“ sein Feld von Rand zu Rand.
-  const kf = k * 0.68;
+  // Die Schrift waechst voll mit dem Band mit — die Namen duerfen ihr Feld
+  // ausfuellen; passend() faengt ab, was nicht hineinpasst.
+  const kf = k * 0.98;
   const c = document.createElement('canvas');
   c.width = B; c.height = H;
   const x = c.getContext('2d');
@@ -147,7 +147,7 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
 
     // Beschriftung — die Schrift wird so weit verkleinert, bis sie ins Feld passt
     const gross = (klein ? 34 : 52) * kf, mittel = (klein ? 26 : 38) * kf;
-    const mx = x0 + br / 2, platz = br - 18;
+    const mx = x0 + br / 2, platz = br - 12;
     x.textAlign = 'center'; x.textBaseline = 'middle';
     x.shadowColor = 'rgba(0,0,0,0.9)'; x.shadowBlur = 10;
 
@@ -159,18 +159,18 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
       if (seg.name) {
         const gN = passend(x, seg.name, platz, gross, 19 * kf, 600);
         x.font = `600 ${gN}px Georgia, "Times New Roman", serif`;
-        x.fillText(seg.name, mx, klein ? H / 2 : H * 0.49);
+        x.fillText(seg.name, mx, klein ? H / 2 : H * 0.475);
       }
       if (!klein) {
         x.fillStyle = `rgba(233,223,203,${Math.min(0.88, 0.35 + linie * 0.5)})`;
         const gD = passend(x, dauerText, platz, mittel, 15 * kf, 400);
         x.font = `400 ${gD}px Georgia, serif`;
-        x.fillText(dauerText, mx, H * 0.655);
+        x.fillText(dauerText, mx, H * 0.665);
         if (seg.zusatz) {
           const gZ = passend(x, seg.zusatz, platz, mittel * 0.86, 14 * kf, 400);
           x.font = `400 ${gZ}px Georgia, serif`;
           x.fillStyle = `rgba(255,243,221,${Math.min(0.8, 0.28 + linie * 0.45)})`;
-          x.fillText(seg.zusatz, mx, H * 0.79);
+          x.fillText(seg.zusatz, mx, H * 0.815);
         }
       }
     } else if (platz >= 14 && seg.name) {
@@ -485,6 +485,133 @@ function markenAktualisieren() {
 }
 markenAktualisieren();
 
+// ----------------------------------------------------------- Der Planet
+// Damit die Zeitkugel als Planet zu lesen ist und nicht als Drahtgitter:
+// ein Körper mit angedeuteter Oberfläche, ein Atmosphärenrand und die Achse
+// mit ihren beiden Polen. Alles wächst mit der gerade gewählten Schale.
+
+// Fester Zufall — dieselbe Welt bei jedem Aufruf
+function wuerfel(saat) {
+  let z = saat >>> 0;
+  return () => { z = (z * 1664525 + 1013904223) >>> 0; return z / 4294967296; };
+}
+
+function planetTextur() {
+  const B = 1024, H = 512, c = document.createElement('canvas');
+  c.width = B; c.height = H;
+  const x = c.getContext('2d');
+  const r = wuerfel(20261013);
+
+  const tief = x.createLinearGradient(0, 0, 0, H);
+  tief.addColorStop(0.00, '#0a1e33');
+  tief.addColorStop(0.32, '#10314f');
+  tief.addColorStop(0.50, '#143a5c');
+  tief.addColorStop(0.68, '#10314f');
+  tief.addColorStop(1.00, '#0a1e33');
+  x.fillStyle = tief; x.fillRect(0, 0, B, H);
+
+  // Landmassen: weiche Flecken, die sich zu Kontinenten zusammenlegen
+  const land = ['#1d3d2a', '#24462c', '#2e4a2d', '#3a4630', '#2a3f33'];
+  for (let i = 0; i < 120; i++) {
+    const mx = r() * B, my = H * (0.12 + r() * 0.76);
+    const br = 24 + r() * 120, ho = 18 + r() * 70;
+    x.save();
+    x.globalAlpha = 0.30 + r() * 0.42;
+    x.fillStyle = land[Math.floor(r() * land.length)];
+    x.beginPath(); x.ellipse(mx, my, br, ho, r() * Math.PI, 0, Math.PI * 2); x.fill();
+    x.restore();
+  }
+  // Eis an den Polen
+  const eis = (y0, y1) => {
+    const g = x.createLinearGradient(0, y0, 0, y1);
+    g.addColorStop(0, 'rgba(226,238,248,0.72)');
+    g.addColorStop(1, 'rgba(226,238,248,0)');
+    x.fillStyle = g; x.fillRect(0, Math.min(y0, y1), B, Math.abs(y1 - y0));
+  };
+  eis(0, H * 0.14); eis(H, H * 0.87);
+
+  // Wolkenzüge, waagerecht gestreckt wie in den Westwindbändern
+  for (let i = 0; i < 90; i++) {
+    const my = H * (0.06 + r() * 0.88);
+    x.save();
+    x.globalAlpha = 0.05 + r() * 0.13;
+    x.fillStyle = '#eef4ff';
+    x.beginPath();
+    x.ellipse(r() * B, my, 40 + r() * 190, 5 + r() * 16, 0, 0, Math.PI * 2);
+    x.fill();
+    x.restore();
+  }
+
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.wrapS = THREE.RepeatWrapping;
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  return t;
+}
+
+function randTextur() {
+  const N = 512, c = document.createElement('canvas');
+  c.width = c.height = N;
+  const x = c.getContext('2d');
+  const g = x.createRadialGradient(N / 2, N / 2, 0, N / 2, N / 2, N / 2);
+  g.addColorStop(0.000, 'rgba(120,180,255,0)');
+  g.addColorStop(0.760, 'rgba(120,180,255,0)');
+  g.addColorStop(0.880, 'rgba(130,186,255,0.30)');
+  g.addColorStop(0.945, 'rgba(176,214,255,0.62)');
+  g.addColorStop(0.985, 'rgba(120,180,255,0.14)');
+  g.addColorStop(1.000, 'rgba(120,180,255,0)');
+  x.fillStyle = g; x.fillRect(0, 0, N, N);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+// Der Körper dreht sich mit der Kugel
+const planetMat = new THREE.MeshBasicMaterial({
+  map: planetTextur(), transparent: true, opacity: 0.22,
+  side: THREE.FrontSide, depthWrite: false
+});
+const planet = new THREE.Mesh(new THREE.SphereGeometry(0.985, 64, 48), planetMat);
+welt.add(planet);
+
+// Der Atmosphärenrand steht still und schaut immer zum Betrachter
+const randMat = new THREE.SpriteMaterial({
+  map: randTextur(), transparent: true, opacity: 0.85,
+  blending: THREE.AdditiveBlending, depthWrite: false
+});
+const atmosphaere = new THREE.Sprite(randMat);
+achse.add(atmosphaere);
+
+// Die Achse selbst: eine dünne Spindel mit zwei Polen, wie beim Globus
+const achsMat = new THREE.LineBasicMaterial({
+  color: 0xcfe2ff, transparent: true, opacity: 0.34, depthWrite: false
+});
+const achsLinie = new THREE.BufferGeometry();
+achsLinie.setAttribute('position', new THREE.BufferAttribute(
+  new Float32Array([0, -1.17, 0, 0, 1.17, 0]), 3));
+const spindel = new THREE.Line(achsLinie, achsMat);
+achse.add(spindel);
+
+const polMat = new THREE.SpriteMaterial({
+  map: SCHEIN, color: 0xdceaff, transparent: true, opacity: 0.75,
+  blending: THREE.AdditiveBlending, depthWrite: false
+});
+const pole = [1, -1].map(v => {
+  const p = new THREE.Sprite(polMat);
+  p.position.y = v * 1.02;
+  p.scale.setScalar(0.3);
+  achse.add(p);
+  return p;
+});
+
+function planetSetzen() {
+  const r = SCHICHTEN[ebene].radius;
+  planet.scale.setScalar(r);
+  atmosphaere.scale.setScalar(r * 2.42);
+  spindel.scale.setScalar(r);
+  pole.forEach(p => { p.position.y = Math.sign(p.position.y) * 1.02 * r; p.scale.setScalar(0.3 * r); });
+}
+
 // ------------------------------------------- Der Strahl aus dem galaktischen Kern
 // Solange Sgr A* nach Misra in seiner AGN-Phase steht, fällt von dort ein Strahl
 // auf die Kugel. Er kommt aus der Richtung, in der im Hintergrundbild der Kern
@@ -569,7 +696,7 @@ function abstandFuer(e) {
 function raumSetzen() {
   const schmal = kamera.aspect < 0.9;
   if (!schmal) versatz = 0;
-  else if (!tafelFrei) versatz = 0.09;      // unter den Punkten, über dem Streifen
+  else if (!tafelFrei) versatz = 0.10;      // unter den Punkten, über dem Streifen
   else versatz = SCHICHTEN[ebene].kern ? 0.195 : 0.245;
   zielAbstand = abstandFuer(ebene);
 }
@@ -886,6 +1013,7 @@ function streifenFuellen() {
     const lauf = liste.find(e => e.laufend) || liste[0];
     streifenChronik.textContent = lauf ? `${jahrText(lauf.jahr, true)} — ${lauf.was}` : '';
   }
+  hoehenMelden();
 }
 
 // ----------------------------------------------------------------- Einstieg
@@ -1012,6 +1140,15 @@ const zeitleiste = document.getElementById('zeitleiste');
 const leisteFeld = document.getElementById('leiste');
 const leisteHeimat = leisteFeld.parentNode;
 const leisteNachbar = leisteFeld.nextSibling;
+// Streifen und Tafeln richten sich nach der wirklichen Höhe der Zeitleiste,
+// damit sie nicht überlappen, wenn deren Knöpfe wachsen.
+function hoehenMelden() {
+  const w = document.documentElement.style;
+  w.setProperty('--zeitHoehe', Math.round(zeitleiste.getBoundingClientRect().height) + 'px');
+  w.setProperty('--streifenHoehe', Math.round(streifen.getBoundingClientRect().height || 62) + 'px');
+}
+addEventListener('resize', hoehenMelden);
+
 function leisteEinhaengen() {
   if (leisteFeld.parentNode !== leisteHeimat)
     leisteHeimat.insertBefore(leisteFeld, leisteNachbar);
@@ -1264,6 +1401,7 @@ function bild() {
     }
   });
 
+  planetSetzen();
   strahlSetzen(t);
   sterne.rotation.y += dt * 0.004;
   renderer.render(szene, kamera);
