@@ -206,8 +206,8 @@ main { position: relative; z-index: 1; height: 100%; }
      Kugel den Bildschirm behält. */
   #linkeSpalte {
     display: none;
-    left: .5rem; right: .5rem; top: 40%; width: auto;
-    bottom: calc(var(--zeitHoehe, 157px) + var(--streifenHoehe, 62px) + 1.6rem + 1rem);
+    left: .5rem; right: .5rem; top: 6.3rem; width: auto;
+    bottom: calc(var(--zeitHoehe, 175px) + 1.6rem + .8rem);
     gap: .5rem; z-index: 6; overflow-y: auto;
   }
   #linkeSpalte.auf { display: flex; }
@@ -615,8 +615,8 @@ main { position: relative; z-index: 1; height: 100%; }
      hoch, sobald eine Tafel aufgeht. */
   .ueberlagerung {
     width: auto; left: .5rem; right: .5rem;
-    top: 40%; transform: none; max-height: none;
-    bottom: calc(var(--zeitHoehe, 157px) + var(--streifenHoehe, 62px) + 1.6rem + 1rem);
+    top: 6.3rem; transform: none; max-height: none;
+    bottom: calc(var(--zeitHoehe, 175px) + 1.6rem + .8rem);
     padding: .9rem .9rem .85rem;
   }
   .ueberlagerung h2 { margin-bottom: .7rem; font-size: 1.25rem; }
@@ -853,4 +853,13 @@ body.fliegt #zeitleiste, body.fliegt #linkeSpalte, body.fliegt #pult,
 body.fliegt #lineal, body.fliegt #hinweisZeile { opacity: 0; pointer-events: none; }
 #kopf, #leiste, #streifen, #zeitleiste, #linkeSpalte, #pult, #lineal {
   transition: opacity .8s;
+}
+
+/* Die Aufschrift über dem Schieber — sagt, was man da in der Hand hat */
+#zeitMarke {
+  margin: 0 0 .3rem; font-size: .6rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--ton, #e8b95c); opacity: .78;
+}
+@media (max-width: 900px) {
+  #zeitleiste #zeitMarke { order: 0; margin: 0 0 .35rem; }
 }

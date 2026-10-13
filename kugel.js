@@ -1,11 +1,12 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
          yugaLicht, menschZustand, masstab, kernStand, schiefe,
-         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=122';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=122';
-import { deuten } from './deutung.js?v=122';
-import { NACHBARN, PLANETEN, abschnittBei, weg } from './anflug.js?v=122';
-import { weltalterStand } from './weltalter.js?v=122';
+         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=126';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=126';
+import { deuten } from './deutung.js?v=126';
+import { NACHBARN, PLANETEN, abschnittBei, weg } from './anflug.js?v=126';
+import { LAND } from './erde.js?v=126';
+import { weltalterStand } from './weltalter.js?v=126';
 
 const HG = 0x05070d;
 
@@ -384,7 +385,7 @@ const schalen = SCHICHTEN.map((schicht, i) => {
   // nicht mehr nur ein Reifen, sondern eine in Segmente geteilte Zwiebelhaut.
   const feldMat = schicht.kern ? null : new THREE.MeshBasicMaterial({
     map: bandTextur(schicht, schicht.segmente, 96, false, true),
-    transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 0.46
+    transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 0.30
   });
   if (feldMat) teile.push({ mat: feldMat, rolle: 'feld' });
 
@@ -497,48 +498,90 @@ function wuerfel(saat) {
   return () => { z = (z * 1664525 + 1013904223) >>> 0; return z / 4294967296; };
 }
 
+// Die Erde, aus den echten Küstenlinien gezeichnet (Natural Earth, gemeinfrei).
+// Keine Fotografie: Unter sechzehn leuchtenden Schalen und ihren Namen trägt
+// eine ruhige Karte weiter als eine Aufnahme.
 function planetTextur() {
-  const B = 1024, H = 512, c = document.createElement('canvas');
+  const B = 2048, H = 1024, c = document.createElement('canvas');
   c.width = B; c.height = H;
   const x = c.getContext('2d');
   const r = wuerfel(20261013);
+  const px = (lon) => (lon + 180) / 360 * B;
+  const py = (lat) => (90 - lat) / 180 * H;
 
-  const tief = x.createLinearGradient(0, 0, 0, H);
-  tief.addColorStop(0.00, '#0a1e33');
-  tief.addColorStop(0.32, '#10314f');
-  tief.addColorStop(0.50, '#143a5c');
-  tief.addColorStop(0.68, '#10314f');
-  tief.addColorStop(1.00, '#0a1e33');
-  x.fillStyle = tief; x.fillRect(0, 0, B, H);
+  // Das Meer
+  const see = x.createLinearGradient(0, 0, 0, H);
+  see.addColorStop(0.00, '#0b2136');
+  see.addColorStop(0.30, '#0f3153');
+  see.addColorStop(0.50, '#14406b');
+  see.addColorStop(0.70, '#0f3153');
+  see.addColorStop(1.00, '#0b2136');
+  x.fillStyle = see; x.fillRect(0, 0, B, H);
 
-  // Landmassen: weiche Flecken, die sich zu Kontinenten zusammenlegen
-  const land = ['#1d3d2a', '#24462c', '#2e4a2d', '#3a4630', '#2a3f33'];
-  for (let i = 0; i < 120; i++) {
-    const mx = r() * B, my = H * (0.12 + r() * 0.76);
-    const br = 24 + r() * 120, ho = 18 + r() * 70;
-    x.save();
-    x.globalAlpha = 0.30 + r() * 0.42;
-    x.fillStyle = land[Math.floor(r() * land.length)];
-    x.beginPath(); x.ellipse(mx, my, br, ho, r() * Math.PI, 0, Math.PI * 2); x.fill();
-    x.restore();
+  // Die Landmassen. Ringe, die über den Datumswechsel laufen, werden dort
+  // getrennt — sonst zöge sich ein Band quer über die ganze Karte.
+  const wege = [];
+  for (const ring of LAND) {
+    let teil = [];
+    for (let i = 0; i < ring.length; i++) {
+      if (i > 0 && Math.abs(ring[i][0] - ring[i - 1][0]) > 180) {
+        if (teil.length > 2) wege.push(teil);
+        teil = [];
+      }
+      teil.push(ring[i]);
+    }
+    if (teil.length > 2) wege.push(teil);
   }
-  // Eis an den Polen
+
+  const malen = () => {
+    for (const teil of wege) {
+      x.beginPath();
+      x.moveTo(px(teil[0][0]), py(teil[0][1]));
+      for (let i = 1; i < teil.length; i++) x.lineTo(px(teil[i][0]), py(teil[i][1]));
+      x.closePath();
+      x.fill();
+      x.stroke();
+    }
+  };
+  x.fillStyle = '#2b4434';
+  x.strokeStyle = 'rgba(150,196,164,0.55)';
+  x.lineWidth = 1.6;
+  x.lineJoin = 'round';
+  malen();
+
+  // Wüstengürtel und kalte Zonen legen sich als Schleier über das Land
+  x.save();
+  x.globalCompositeOperation = 'source-atop';
+  const zonen = x.createLinearGradient(0, 0, 0, H);
+  zonen.addColorStop(0.00, 'rgba(226,238,248,0.80)');
+  zonen.addColorStop(0.14, 'rgba(198,214,226,0.35)');
+  zonen.addColorStop(0.28, 'rgba(60,90,62,0.00)');
+  zonen.addColorStop(0.36, 'rgba(154,126,74,0.42)');
+  zonen.addColorStop(0.46, 'rgba(96,120,66,0.10)');
+  zonen.addColorStop(0.56, 'rgba(142,118,70,0.30)');
+  zonen.addColorStop(0.72, 'rgba(60,90,62,0.00)');
+  zonen.addColorStop(0.88, 'rgba(198,214,226,0.40)');
+  zonen.addColorStop(1.00, 'rgba(236,244,252,0.88)');
+  x.fillStyle = zonen; x.fillRect(0, 0, B, H);
+  x.restore();
+
+  // Das Eis greift über die Küsten hinaus aufs Meer
   const eis = (y0, y1) => {
     const g = x.createLinearGradient(0, y0, 0, y1);
-    g.addColorStop(0, 'rgba(226,238,248,0.72)');
-    g.addColorStop(1, 'rgba(226,238,248,0)');
+    g.addColorStop(0, 'rgba(230,241,250,0.78)');
+    g.addColorStop(1, 'rgba(230,241,250,0)');
     x.fillStyle = g; x.fillRect(0, Math.min(y0, y1), B, Math.abs(y1 - y0));
   };
-  eis(0, H * 0.14); eis(H, H * 0.87);
+  eis(0, H * 0.085); eis(H, H * 0.845);
 
   // Wolkenzüge, waagerecht gestreckt wie in den Westwindbändern
-  for (let i = 0; i < 90; i++) {
-    const my = H * (0.06 + r() * 0.88);
+  for (let i = 0; i < 110; i++) {
+    const my = H * (0.05 + r() * 0.90);
     x.save();
-    x.globalAlpha = 0.05 + r() * 0.13;
+    x.globalAlpha = 0.04 + r() * 0.12;
     x.fillStyle = '#eef4ff';
     x.beginPath();
-    x.ellipse(r() * B, my, 40 + r() * 190, 5 + r() * 16, 0, 0, Math.PI * 2);
+    x.ellipse(r() * B, my, 60 + r() * 300, 7 + r() * 22, 0, 0, Math.PI * 2);
     x.fill();
     x.restore();
   }
@@ -569,7 +612,7 @@ function randTextur() {
 
 // Der Körper dreht sich mit der Kugel
 const planetMat = new THREE.MeshBasicMaterial({
-  map: planetTextur(), transparent: true, opacity: 0.22,
+  map: planetTextur(), transparent: true, opacity: 0.62,
   side: THREE.FrontSide, depthWrite: false
 });
 const planet = new THREE.Mesh(new THREE.SphereGeometry(0.985, 64, 48), planetMat);
@@ -676,9 +719,7 @@ let tafelFrei = false;    // am Handy steht unten ein Pop-up — die Kugel rueck
 
 function abstandFuer(e) {
   const schmal = kamera.aspect < 0.9;
-  // Pop-up unten: die Kugel muss in die obere Haelfte passen. Die hohe Figur
-  // im Kern braucht dafuer mehr Abstand als die breite Schale.
-  const platz = tafelFrei && schmal ? (SCHICHTEN[e].kern ? 1.9 : 1.18) : 1;
+  const platz = 1;
   if (SCHICHTEN[e].kern) {
     // Im Kern zaehlt nicht mehr die Schale, sondern die Figur. Sie ist hoch und
     // nicht breit — darum wird hier auf die Hoehe eingepasst statt auf die
@@ -696,9 +737,9 @@ function abstandFuer(e) {
 // die obere Haelfte des Bildschirms, damit nichts von ihr verdeckt wird.
 function raumSetzen() {
   const schmal = kamera.aspect < 0.9;
-  if (!schmal) versatz = 0;
-  else if (!tafelFrei) versatz = 0.10;      // unter den Punkten, über dem Streifen
-  else versatz = SCHICHTEN[ebene].kern ? 0.195 : 0.245;
+  // Die Tafeln reichen am Handy über die ganze Kugel; sie muss ihnen nicht
+  // mehr ausweichen und bleibt stehen, wo sie steht.
+  versatz = schmal ? 0.10 : 0;
   zielAbstand = abstandFuer(ebene);
 }
 
