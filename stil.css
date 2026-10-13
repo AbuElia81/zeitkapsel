@@ -218,21 +218,24 @@ main { position: relative; z-index: 1; height: 100%; }
     border-left: 2px solid var(--ton); border-top: 1px solid var(--linie);
     border-radius: 3px;
   }
-  /* Die Punkte sitzen als erste Zeile in der Zeitleiste — ein Feld statt zwei */
-  #zeitleiste > #leiste {
-    position: static; transform: none;
+  /* Die Punkte stehen ganz oben, gleich unter dem Titel */
+  #leiste {
+    top: 3.5rem; bottom: auto; left: .5rem; right: .5rem; transform: none;
     flex-direction: row; justify-content: space-between; align-items: center;
     gap: 0; max-height: none; overflow: visible;
-    margin: 0 0 .35rem; padding: 0 0 .35rem;
-    border-bottom: 1px solid var(--linie);
+    padding: .35rem .5rem;
+    background: linear-gradient(160deg, rgba(10,13,22,.72), rgba(6,8,14,.58));
+    border: 1px solid var(--linie); border-radius: 3px;
+    backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
   }
   .stufe .stufeText { display: none; }
-  .stufe { padding: .3rem .28rem; }
+  /* Sechzehn Punkte müssen nebeneinander in die Breite passen */
+  .stufe { padding: .28rem .1rem; }
   .stufe .punktFeld {
-  flex: none; display: flex; align-items: center; justify-content: center;
-  width: calc(var(--zeile) * .40);
-}
-.stufe .punkt { width: 11px; height: 11px; }
+    flex: none; display: flex; align-items: center; justify-content: center;
+    width: 1.05rem;
+  }
+  .stufe .punkt { width: 11px; height: 11px; }
   #leiste { --zeile: 40px; }
   .stufe.durch { opacity: .8; }
   /* Am Handy wird mit zwei Fingern gezoomt — die Knoepfe entfallen */
@@ -330,11 +333,17 @@ main { position: relative; z-index: 1; height: 100%; }
 #tafel .jetztZeile b { font-weight: 600; color: #fff2d0; }
 
 @media (max-width: 900px) {
+  /* Die Zeitachse steht jetzt oben in der Leiste, dort wo vorher die Punkte waren */
   #zeitleiste {
     top: auto; bottom: 1.6rem; left: .5rem; right: .5rem;
     width: auto; min-width: 0; transform: none;
-    padding: .35rem .6rem .45rem;
+    padding: .5rem .6rem .45rem;
+    display: flex; flex-direction: column;
   }
+  #zeitleiste #schieber { order: 1; margin: 0 0 .45rem; }
+  #zeitleiste #zeitKopf { order: 2; }
+  #zeitleiste #zeitSchritte { order: 3; }
+  #zeitleiste #zeitFuss { order: 4; }
   /* Datum oben über die volle Breite, die Knöpfe in eine eigene Zeile darunter */
   #zeitKopf { flex-wrap: wrap; gap: .3rem; align-items: center; }
   #zeitAnzeige { flex: 1 1 100%; font-size: .82rem; }
@@ -754,3 +763,15 @@ main { position: relative; z-index: 1; height: 100%; }
 .weltalterJetzt .weltalterStand em { font-style: normal; color: var(--gedaempft); }
 .weltalterJetzt .weltalterNamen { font-size: .76rem; color: #a99d88; }
 .weltalterJetzt .weltalterNamen b { font-weight: 400; color: #cfc6b6; }
+
+/* Wo die eingestellte Zeit in den anderen Überlieferungen liegt */
+.weltalterTafel { margin: 0 0 1.2rem; }
+.weltalterZeile {
+  display: grid; grid-template-columns: 1fr; gap: .05rem;
+  padding: .4rem 0; border-bottom: 1px solid rgba(236,231,220,.07);
+}
+.weltalterZeile .waName {
+  font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: #9b9080;
+}
+.weltalterZeile .waLage { font-size: .86rem; color: #f2e7cf; }
+.weltalterZeile .waNote { font-size: .74rem; color: #7d7568; }

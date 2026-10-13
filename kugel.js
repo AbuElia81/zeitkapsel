@@ -1,8 +1,9 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=98';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=98';
-import { deuten } from './deutung.js?v=98';
+         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=103';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=103';
+import { deuten } from './deutung.js?v=103';
+import { weltalterStand } from './weltalter.js?v=103';
 
 const HG = 0x05070d;
 
@@ -84,6 +85,9 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
   // die Länge gezogen wird, wächst die Leinwand mit — und alle Schriftgrade
   // wachsen im selben Maß mit ihr.
   const k = H / (klein ? 128 : 256);
+  // Die Schrift waechst mit, aber nicht ganz so stark wie das Band: Sonst
+  // fuellt ein Name wie „Kali“ sein Feld von Rand zu Rand.
+  const kf = k * 0.68;
   const c = document.createElement('canvas');
   c.width = B; c.height = H;
   const x = c.getContext('2d');
@@ -124,7 +128,7 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
     if (felder) { continue; }
 
     // Beschriftung — die Schrift wird so weit verkleinert, bis sie ins Feld passt
-    const gross = (klein ? 34 : 52) * k, mittel = (klein ? 26 : 38) * k;
+    const gross = (klein ? 34 : 52) * kf, mittel = (klein ? 26 : 38) * kf;
     const mx = x0 + br / 2, platz = br - 18;
     x.textAlign = 'center'; x.textBaseline = 'middle';
     x.shadowColor = 'rgba(0,0,0,0.9)'; x.shadowBlur = 10;
@@ -135,20 +139,20 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
       // Waagerecht: Name oben, Dauer und Richtung darunter
       x.fillStyle = `rgba(255,243,221,${Math.min(0.97, 0.45 + linie * 0.55)})`;
       if (seg.name) {
-        const gN = passend(x, seg.name, platz, gross, 19 * k, 600);
+        const gN = passend(x, seg.name, platz, gross, 19 * kf, 600);
         x.font = `600 ${gN}px Georgia, "Times New Roman", serif`;
-        x.fillText(seg.name, mx, klein ? H / 2 : H * 0.33);
+        x.fillText(seg.name, mx, klein ? H / 2 : H * 0.40);
       }
       if (!klein) {
         x.fillStyle = `rgba(233,223,203,${Math.min(0.88, 0.35 + linie * 0.5)})`;
-        const gD = passend(x, dauerText, platz, mittel, 15 * k, 400);
+        const gD = passend(x, dauerText, platz, mittel, 15 * kf, 400);
         x.font = `400 ${gD}px Georgia, serif`;
-        x.fillText(dauerText, mx, H * 0.63);
+        x.fillText(dauerText, mx, H * 0.565);
         if (seg.zusatz) {
-          const gZ = passend(x, seg.zusatz, platz, mittel * 0.86, 14 * k, 400);
+          const gZ = passend(x, seg.zusatz, platz, mittel * 0.86, 14 * kf, 400);
           x.font = `400 ${gZ}px Georgia, serif`;
           x.fillStyle = `rgba(255,243,221,${Math.min(0.8, 0.28 + linie * 0.45)})`;
-          x.fillText(seg.zusatz, mx, H * 0.86);
+          x.fillText(seg.zusatz, mx, H * 0.70);
         }
       }
     } else if (platz >= 14 && seg.name) {
@@ -158,7 +162,7 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
       x.rotate(-Math.PI / 2);
       x.fillStyle = rgb(Math.min(1, linie + 0.25));
       x.fillStyle = `rgba(255,243,221,${Math.min(0.95, 0.45 + linie * 0.55)})`;
-      const gQ = Math.min(passend(x, dauerText, H - 26 * k, 30 * k, 14 * k, 400), platz * 1.4);
+      const gQ = Math.min(passend(x, dauerText, H - 26 * kf, 30 * kf, 14 * kf, 400), platz * 1.4);
       x.font = `400 ${gQ}px Georgia, serif`;
       x.fillText(dauerText, 0, 0);
       x.restore();
@@ -313,7 +317,8 @@ function menschSetzen(licht) {
 // ------------------------------------------------------------ Schichten bauen
 // Wie hoch das beschriftete Band um jede Schale steht. Ein breites Band laesst
 // den Zyklus auch auf dem Handy lesen — die Schrift waechst im selben Mass mit.
-const BAND_K = 1.7;
+const BAND_K = 3.4;
+const bandNetze = [];        // alle beschrifteten Bänder — zum Antippen
 const nebenHoch = 0.055 * BAND_K;
 
 const schalen = SCHICHTEN.map((schicht, i) => {
@@ -374,9 +379,14 @@ const schalen = SCHICHTEN.map((schicht, i) => {
         phiVon, lang), feldMat));
     }
 
-    halb.add(new THREE.Mesh(uvAusschnitt(
-      new THREE.SphereGeometry(bandRadius, 110, 12, phiVon, lang, Math.PI / 2 - bandHalb, bandHalb * 2),
-      phiVon, lang).translate(0, bandTief, 0), bandMat));
+    // Das beschriftete Band bleibt greifbar: Ein Tipp darauf taucht eine
+    // Schale tiefer, wie ein Tipp auf die Punkte.
+    const bandNetz = new THREE.Mesh(uvAusschnitt(
+      new THREE.SphereGeometry(bandRadius, 110, 24, phiVon, lang, Math.PI / 2 - bandHalb, bandHalb * 2),
+      phiVon, lang).translate(0, bandTief, 0), bandMat);
+    bandNetz.userData.schicht = i;
+    bandNetze.push(bandNetz);
+    halb.add(bandNetz);
 
     if (nebenMat) {
       halb.add(new THREE.Mesh(uvAusschnitt(
@@ -549,7 +559,30 @@ function kneifen() {
   else if (f < 0.75) { ebeneSetzen(ebene - 1); kneif0 = d; }
 }
 
+// --------------------------------------------------- Tippen auf ein Band
+// Ein kurzer Tipp auf das beschriftete Band taucht eine Schale tiefer — derselbe
+// Griff wie auf die Punkte. Trifft der Tipp eine schon durchstoßene Schale, die
+// als offene Hälfte am Rand steht, führt er dorthin zurück.
+const strahl = new THREE.Raycaster();
+const tipp = new THREE.Vector2();
+let tippVon = null;
+
+function bandGetroffen(e) {
+  const r = el.getBoundingClientRect();
+  tipp.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+  tipp.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+  strahl.setFromCamera(tipp, kamera);
+  const treffer = strahl.intersectObjects(bandNetze, false)
+    .filter(t => t.object.material.opacity > 0.08);
+  if (!treffer.length) return false;
+  const i = treffer[0].object.userData.schicht;
+  ebeneSetzen(i < ebene ? i : ebene + 1);
+  return true;
+}
+
 el.addEventListener('pointerdown', e => {
+  if (zeiger.size === 0) tippVon = { x: e.clientX, y: e.clientY, t: performance.now() };
+  else tippVon = null;
   zeiger.set(e.pointerId, { x: e.clientX, y: e.clientY });
   el.setPointerCapture(e.pointerId);
   if (zeiger.size >= 2) {                  // zweiter Finger: ab jetzt wird gezoomt
@@ -565,8 +598,9 @@ el.addEventListener('pointerdown', e => {
 el.addEventListener('pointermove', e => {
   const p = zeiger.get(e.pointerId);
   if (p) { p.x = e.clientX; p.y = e.clientY; }
-  if (zeiger.size >= 2) { kneifen(); return; }
+  if (zeiger.size >= 2) { tippVon = null; kneifen(); return; }
   if (!ziehend) return;
+  if (tippVon && Math.hypot(e.clientX - tippVon.x, e.clientY - tippVon.y) > 9) tippVon = null;
   const dx = e.clientX - letzteX, dy = e.clientY - letzteY;
   letzteX = e.clientX; letzteY = e.clientY;
   drehen(dx);
@@ -576,6 +610,11 @@ el.addEventListener('pointermove', e => {
 function loslassen(e) {
   zeiger.delete(e.pointerId);
   try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+  if (zeiger.size === 0 && tippVon && performance.now() - tippVon.t < 500
+      && Math.hypot(e.clientX - tippVon.x, e.clientY - tippVon.y) <= 9) {
+    bandGetroffen(e);
+  }
+  if (zeiger.size === 0) tippVon = null;
   if (zeiger.size < 2) { kneif0 = 0; zielAbstand = abstandFuer(ebene); }
   if (zeiger.size === 1) {
     // Ein Finger bleibt liegen — von hier an wird wieder gedreht, ohne Sprung
@@ -742,6 +781,7 @@ function weltalterBauen() {
     <p class="deutungEpoche">Zum Yuga-Zyklus</p>
     <h2>Die Weltalter</h2>
     <div class="weltalterJetzt"></div>
+    <div class="weltalterTafel"></div>
     <p class="fliess klein">Dieselbe Figur — ein Abstieg durch Zeitalter, an dessen
       Wendepunkten Feuer und Wasser stehen — findet sich über drei Kontinente verteilt.
       Darunter stehen die Rechnungen, aus denen die Zahlen selbst stammen.</p>
@@ -780,6 +820,16 @@ function weltalterZeitTeil() {
     <span class="weltalterStand"><b>${seg.name}</b>${seg.zusatz ? ', ' + seg.zusatz : ''}
       <em>${jahrText(vonJahr)} bis ${jahrText(bisJahr)}</em></span>
     ${namen.length ? `<span class="weltalterNamen">${namen.join(' · ')}</span>` : ''}`;
+
+  const tafel = weltalterInhalt.querySelector('.weltalterTafel');
+  if (!tafel) return;
+  tafel.innerHTML = `<p class="terminKopf">Wo diese Zeit anderswo liegt</p>` +
+    weltalterStand(zeitJahr).map(e => `
+      <div class="weltalterZeile">
+        <span class="waName">${e.name}</span>
+        <span class="waLage">${e.lage}</span>
+        <span class="waNote">${e.note}</span>
+      </div>`).join('');
 }
 
 document.getElementById('weltalterKnopf').onclick = () => {
@@ -841,15 +891,14 @@ const schieber = document.getElementById('schieber');
 const zeitAnzeige = document.getElementById('zeitAnzeige');
 const zeitleiste = document.getElementById('zeitleiste');
 
-// Am Handy sitzen Punktleiste und Zeitleiste als ein einziges Feld zusammen:
-// die Punkte ruecken dafuer als erste Zeile in die Zeitleiste hinein.
+// Die Punktleiste steht am Handy oben unter dem Titel; frueher hing sie in der
+// Zeitleiste. Sie wird hier nur noch an ihren Platz im Hauptfeld zurueckgesetzt,
+// falls eine aeltere Fassung sie verschoben hat.
 const leisteFeld = document.getElementById('leiste');
 const leisteHeimat = leisteFeld.parentNode;
 const leisteNachbar = leisteFeld.nextSibling;
 function leisteEinhaengen() {
-  const schmal = innerWidth <= 900;
-  if (schmal && leisteFeld.parentNode !== zeitleiste) zeitleiste.prepend(leisteFeld);
-  else if (!schmal && leisteFeld.parentNode !== leisteHeimat)
+  if (leisteFeld.parentNode !== leisteHeimat)
     leisteHeimat.insertBefore(leisteFeld, leisteNachbar);
 }
 leisteEinhaengen();
