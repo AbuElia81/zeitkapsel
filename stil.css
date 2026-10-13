@@ -206,7 +206,7 @@ main { position: relative; z-index: 1; height: 100%; }
      Kugel den Bildschirm behält. */
   #linkeSpalte {
     display: none;
-    left: .5rem; right: .5rem; bottom: 11.2rem; top: 40%; width: auto;
+    left: .5rem; right: .5rem; bottom: 12.6rem; top: 40%; width: auto;
     gap: .5rem; z-index: 6; overflow-y: auto;
   }
   #linkeSpalte.auf { display: flex; }
@@ -218,10 +218,13 @@ main { position: relative; z-index: 1; height: 100%; }
     border-left: 2px solid var(--ton); border-top: 1px solid var(--linie);
     border-radius: 3px;
   }
-  #leiste {
-    top: auto; bottom: 9.2rem; left: 0; right: 0; transform: none;
-    flex-direction: row; justify-content: center; align-items: center;
-    gap: .1rem; max-height: none; padding: .3rem .5rem;
+  /* Die Punkte sitzen als erste Zeile in der Zeitleiste — ein Feld statt zwei */
+  #zeitleiste > #leiste {
+    position: static; transform: none;
+    flex-direction: row; justify-content: space-between; align-items: center;
+    gap: 0; max-height: none; overflow: visible;
+    margin: 0 0 .35rem; padding: 0 0 .35rem;
+    border-bottom: 1px solid var(--linie);
   }
   .stufe .stufeText { display: none; }
   .stufe { padding: .3rem .28rem; }
@@ -295,6 +298,10 @@ main { position: relative; z-index: 1; height: 100%; }
 }
 #schieber:focus-visible { outline: 1px solid rgba(255,242,208,.5); outline-offset: 3px; }
 
+/* Der Jetzt-Knopf steht unter der Zeitleiste, nicht mehr in der Kopfzeile */
+#zeitFuss { display: flex; margin-top: .4rem; }
+#zeitFuss #jetztKnopf { flex: 1 1 auto; text-align: center; }
+
 #zeitSchritte { display: flex; gap: 2px; justify-content: space-between; }
 #zeitSchritte button {
   flex: 1; padding: .18rem 0; border: 0; border-radius: 2px;
@@ -324,9 +331,9 @@ main { position: relative; z-index: 1; height: 100%; }
 
 @media (max-width: 900px) {
   #zeitleiste {
-    top: auto; bottom: 1.9rem; left: .5rem; right: .5rem;
+    top: auto; bottom: 1.6rem; left: .5rem; right: .5rem;
     width: auto; min-width: 0; transform: none;
-    padding: .4rem .6rem .45rem;
+    padding: .35rem .6rem .45rem;
   }
   /* Datum oben über die volle Breite, die Knöpfe in eine eigene Zeile darunter */
   #zeitKopf { flex-wrap: wrap; gap: .3rem; align-items: center; }
@@ -587,7 +594,7 @@ main { position: relative; z-index: 1; height: 100%; }
      hoch, sobald eine Tafel aufgeht. */
   .ueberlagerung {
     width: auto; left: .5rem; right: .5rem;
-    top: 40%; bottom: 11.2rem; transform: none; max-height: none;
+    top: 40%; bottom: 12.6rem; transform: none; max-height: none;
     padding: .9rem .9rem .85rem;
   }
   .ueberlagerung h2 { margin-bottom: .7rem; font-size: 1.25rem; }
@@ -730,3 +737,20 @@ main { position: relative; z-index: 1; height: 100%; }
     pointer-events: auto;
   }
 }
+
+/* Die Zeile in den Weltaltern, die mit dem Zeitschieber mitwandert */
+.weltalterJetzt {
+  display: flex; flex-direction: column; gap: .18rem;
+  margin: 0 0 1rem; padding: .55rem .7rem;
+  background: rgba(255,242,208,.05);
+  border-left: 2px solid var(--ton); border-radius: 0 2px 2px 0;
+  font-size: .82rem; line-height: 1.45; color: #d8cfbd;
+}
+.weltalterJetzt .weltalterKopf {
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ton); opacity: .8;
+}
+.weltalterJetzt .weltalterStand b { font-weight: 400; color: #fff2d0; }
+.weltalterJetzt .weltalterStand em { font-style: normal; color: var(--gedaempft); }
+.weltalterJetzt .weltalterNamen { font-size: .76rem; color: #a99d88; }
+.weltalterJetzt .weltalterNamen b { font-weight: 400; color: #cfc6b6; }

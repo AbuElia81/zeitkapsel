@@ -1,8 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=91';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=91';
-import { deuten } from './deutung.js?v=91';
+         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=93';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=93';
+import { deuten } from './deutung.js?v=93';
 
 const HG = 0x05070d;
 
@@ -209,7 +209,7 @@ function gitterkugel(r, farbe, meridiane = 16, parallelen = 9, phiVon = 0, phiLa
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(p), 3));
   return new THREE.LineSegments(g, new THREE.LineBasicMaterial({
-    color: farbe, transparent: true, opacity: 0.16, depthWrite: false
+    color: farbe, transparent: true, opacity: 0.40, depthWrite: false
   }));
 }
 
@@ -332,7 +332,7 @@ const schalen = SCHICHTEN.map((schicht, i) => {
       teile.push({ mat: gitter.material, rolle: 'haut' });
 
       const huelle = new THREE.MeshBasicMaterial({
-        color: farbe, transparent: true, opacity: 0.035,
+        color: farbe, transparent: true, opacity: 0.085,
         blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false
       });
       halb.add(new THREE.Mesh(new THREE.SphereGeometry(r, 24, 26, phiVon, lang), huelle));
@@ -450,15 +450,15 @@ function zielOpazitaet(i, rolle) {
   // Durchstoßene Schalen springen auf und bleiben als offene Hälften am Rand
   // stehen — je weiter man eingetaucht ist, desto blasser werden sie.
   if (i < ebene) {
-    if (rolle === 'haut') return Math.max(0.10, 0.60 - 0.10 * (ebene - i));
+    if (rolle === 'haut') return Math.max(0.09, 0.42 - 0.08 * (ebene - i));
     if (rolle === 'band') return Math.max(0, 0.45 - 0.11 * (ebene - i));
     return 0;
   }
-  if (i === ebene) return 1;                                // aktiv
-  if (rolle === 'band') return 0.12;                        // tiefere Bänder nur andeuten
+  if (i === ebene) return 1;                                // aktiv — voll und dicht
+  if (rolle === 'band') return 0.10;                        // tiefere Bänder nur andeuten
   if (rolle === 'marke') return 0.06;
   if (rolle === 'mensch') return 0.42;                      // die Figur scheint durch
-  return 0.34;                                              // Zwiebelhaut bleibt sichtbar
+  return 0.16;                                              // Zwiebelhaut bleibt sichtbar
 }
 
 // ------------------------------------------------- Die Jetzt-Marke nach vorn
@@ -709,6 +709,7 @@ function weltalterBauen() {
   weltalterInhalt.innerHTML = `
     <p class="deutungEpoche">Zum Yuga-Zyklus</p>
     <h2>Die Weltalter</h2>
+    <div class="weltalterJetzt"></div>
     <p class="fliess klein">Dieselbe Figur — ein Abstieg durch Zeitalter, an dessen
       Wendepunkten Feuer und Wasser stehen — findet sich über drei Kontinente verteilt.
       Darunter stehen die Rechnungen, aus denen die Zahlen selbst stammen.</p>
@@ -730,6 +731,23 @@ function weltalterBauen() {
     <p class="hinweis">Ausführlich im Arbeitspapier <a href="https://github.com/AbuElia81/zeitkapsel/blob/main/WELTALTER.md"
       target="_blank" rel="noopener noreferrer">WELTALTER.md</a> im Repo.</p>`;
   weltalterGebaut = true;
+  weltalterZeitTeil();
+}
+
+// Welches Zeitalter gerade eingestellt ist — die Zeile wandert mit dem Schieber
+function weltalterZeitTeil() {
+  const feld = weltalterInhalt.querySelector('.weltalterJetzt');
+  if (!feld) return;
+  const s = SCHICHTEN.find(x => x.vergleiche);
+  const { seg, vonJahr, bisJahr } = segmentBei(s, zeitJahr);
+  const namen = [];
+  if (seg.ovid) namen.push(`bei Ovid <b>${seg.ovid.alter}</b>`);
+  if (seg.hesiod) namen.push(`bei Hesiod <b>${seg.hesiod.alter}</b>`);
+  feld.innerHTML = `
+    <span class="weltalterKopf">${zeitText(zeitJahr, amJetzt)}</span>
+    <span class="weltalterStand"><b>${seg.name}</b>${seg.zusatz ? ', ' + seg.zusatz : ''}
+      <em>${jahrText(vonJahr)} bis ${jahrText(bisJahr)}</em></span>
+    ${namen.length ? `<span class="weltalterNamen">${namen.join(' · ')}</span>` : ''}`;
 }
 
 document.getElementById('weltalterKnopf').onclick = () => {
@@ -791,6 +809,20 @@ const schieber = document.getElementById('schieber');
 const zeitAnzeige = document.getElementById('zeitAnzeige');
 const zeitleiste = document.getElementById('zeitleiste');
 
+// Am Handy sitzen Punktleiste und Zeitleiste als ein einziges Feld zusammen:
+// die Punkte ruecken dafuer als erste Zeile in die Zeitleiste hinein.
+const leisteFeld = document.getElementById('leiste');
+const leisteHeimat = leisteFeld.parentNode;
+const leisteNachbar = leisteFeld.nextSibling;
+function leisteEinhaengen() {
+  const schmal = innerWidth <= 900;
+  if (schmal && leisteFeld.parentNode !== zeitleiste) zeitleiste.prepend(leisteFeld);
+  else if (!schmal && leisteFeld.parentNode !== leisteHeimat)
+    leisteHeimat.insertBefore(leisteFeld, leisteNachbar);
+}
+leisteEinhaengen();
+addEventListener('resize', leisteEinhaengen);
+
 schieber.min = RING_ANKER;
 schieber.max = RING_ENDE;
 schieber.step = 0.0005;
@@ -805,6 +837,7 @@ function zeitSetzen(j, jetzt = false, vomSchieber = false, richten = true) {
   markenAktualisieren();
   chronikFuellen();
   deutungFuellen();
+  weltalterZeitTeil();
   if (richten) ausrichten = true;
   menschSetzen(yugaLicht(zeitJahr));
   tafelZeitTeil();
@@ -815,6 +848,9 @@ schieber.addEventListener('input', () => zeitSetzen(parseFloat(schieber.value), 
 // Die ganze Leiste ist ein Schieber: Wer irgendwo auf ihr nach links oder rechts
 // zieht, wandert durch die Zeit — genauso weit, wie der Knopf selbst wandern
 // wuerde. Knoepfe und der Schieber selbst behalten ihre eigene Bedienung.
+// Viermal feiner als der Knopf selbst: eine Fingerbreite sind rund zwanzig
+// Jahre, eine Wischbewegung ueber den Bildschirm ein Viertel des Zyklus.
+const ZIEH_FEIN = 4;
 let zeitZieht = false, zeitLetztesX = 0;
 
 zeitleiste.addEventListener('pointerdown', e => {
@@ -829,7 +865,7 @@ zeitleiste.addEventListener('pointermove', e => {
   const dx = e.clientX - zeitLetztesX;
   zeitLetztesX = e.clientX;
   const breite = Math.max(1, schieber.getBoundingClientRect().width);
-  zeitSetzen(zeitJahr + dx * (RING_ENDE - RING_ANKER) / breite, false);
+  zeitSetzen(zeitJahr + dx * (RING_ENDE - RING_ANKER) / (breite * ZIEH_FEIN), false);
 });
 
 function zeitLosLassen(e) {
@@ -986,8 +1022,8 @@ function bild() {
 
     // Aufspringen: die beiden Halbschalen weichen nach links und rechts
     const aufZiel = i < ebene ? 1 : 0;
-    sch.oeffnung += (aufZiel - sch.oeffnung) * Math.min(1, dt * 3.0);
-    const weg = sch.schicht.radius * 1.32 * sch.oeffnung;
+    sch.oeffnung += (aufZiel - sch.oeffnung) * Math.min(1, dt * 4.4);
+    const weg = sch.schicht.radius * 1.9 * sch.oeffnung;
     sch.haelften.forEach(h => { h.gruppe.position.x = h.vorz * weg; });
 
     // Marken der schnellen Zyklen laufen mit
