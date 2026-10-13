@@ -6,8 +6,8 @@
    selbst von den Zeitaltern sprechen. Gleiche Zeit ergibt immer dieselbe
    Deutung — gewürfelt wird nichts.
    --------------------------------------------------------------------- */
-import { SCHICHTEN, anteil, segmentBei, yugaLicht, jahrText } from './zyklen.js?v=103';
-import { epocheVon } from './geschichte.js?v=103';
+import { SCHICHTEN, anteil, segmentBei, yugaLicht, jahrText, kernStand } from './zyklen.js?v=109';
+import { epocheVon } from './geschichte.js?v=109';
 
 const S = (name) => SCHICHTEN.find(s => s.name === name);
 const SONNENSCHALEN = ['Halstatt-Zyklus', 'Eddy-Zyklus', 'Suess-de-Vries-Zyklus',
@@ -16,23 +16,6 @@ const ARTWERT = { hoch: 1, auf: 0.66, ab: 0.34, tief: 0 };
 const ZEICHEN = ['Widder', 'Stier', 'Zwillingen', 'Krebs', 'Löwen', 'Jungfrau',
                  'Waage', 'Skorpion', 'Schützen', 'Steinbock', 'Wassermann', 'Fischen'];
 const SCHWAERME = [1988, 1995, 1998, 2005, 2015, 2022, 2032];
-
-// ------------------------------------------------- Der galaktische Kern
-// Das schmale Band über dem Yuga-Ring: Sgr A* liegt nach Misra die ganze
-// absteigende Hälfte im Dunkeln, zündet in der Ekpyrosis und brennt die
-// aufsteigende hindurch. Daraus wird hier ein Wert zwischen 0 und 1.
-function kernStand(jahr) {
-  const yuga = SCHICHTEN[0];
-  const band = yuga.nebenband;
-  if (!band) return { feuer: 0, phase: 'unbekannt', bisJahr: jahr };
-  const { seg, vonJahr, bisJahr } = segmentBei({ ...yuga, segmente: band.segmente }, jahr);
-  const lauf = (jahr - vonJahr) / Math.max(1, bisJahr - vonJahr);
-  const feuer = seg.art === 'agn' ? 1
-              : seg.art === 'agn-an' ? lauf
-              : seg.art === 'agn-aus' ? 1 - lauf
-              : 0;
-  return { feuer, phase: seg.name, art: seg.art, vonJahr, bisJahr };
-}
 
 // --------------------------------------------------------------- Messwerte
 function stand(jahr) {

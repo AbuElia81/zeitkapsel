@@ -1,9 +1,9 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=103';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=103';
-import { deuten } from './deutung.js?v=103';
-import { weltalterStand } from './weltalter.js?v=103';
+         yugaLicht, menschZustand, masstab, kernStand, RING_ANKER } from './zyklen.js?v=109';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=109';
+import { deuten } from './deutung.js?v=109';
+import { weltalterStand } from './weltalter.js?v=109';
 
 const HG = 0x05070d;
 
@@ -445,6 +445,60 @@ function markenAktualisieren() {
 }
 markenAktualisieren();
 
+// ------------------------------------------- Der Strahl aus dem galaktischen Kern
+// Solange Sgr A* nach Misra in seiner AGN-Phase steht, fällt von dort ein Strahl
+// auf die Kugel. Er kommt aus der Richtung, in der im Hintergrundbild der Kern
+// der Milchstraße leuchtet, und wird mit dem Wert aus kernStand() gedimmt.
+const QUELLE = new THREE.Vector3(0.80, -0.42, 0.43).normalize();
+
+function strahlTextur() {
+  const B = 8, H = 256, c = document.createElement('canvas');
+  c.width = B; c.height = H;
+  const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0.00, 'rgba(255,255,255,0.00)');   // fern, am Kern
+  g.addColorStop(0.45, 'rgba(255,255,255,0.14)');
+  g.addColorStop(0.82, 'rgba(255,255,255,0.52)');
+  g.addColorStop(1.00, 'rgba(255,255,255,0.95)');   // dicht an der Kugel
+  x.fillStyle = g; x.fillRect(0, 0, B, H);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+const kernStrahl = new THREE.Group();
+buehneWelt.add(kernStrahl);
+
+const kegelMat = new THREE.MeshBasicMaterial({
+  map: strahlTextur(), color: 0xbfd6ff, transparent: true, opacity: 0,
+  blending: THREE.AdditiveBlending, side: THREE.DoubleSide, depthWrite: false
+});
+const kegel = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.62, 0.15, 3.4, 28, 1, true), kegelMat);
+kegel.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), QUELLE);
+kegel.position.copy(QUELLE).multiplyScalar(0.98 + 1.7);
+kernStrahl.add(kegel);
+
+const treffMat = new THREE.SpriteMaterial({
+  map: SCHEIN, color: 0xdce9ff, transparent: true, opacity: 0,
+  blending: THREE.AdditiveBlending, depthWrite: false
+});
+const treffPunkt = new THREE.Sprite(treffMat);
+treffPunkt.scale.setScalar(1.05);
+treffPunkt.position.copy(QUELLE).multiplyScalar(0.96);
+kernStrahl.add(treffPunkt);
+
+function strahlSetzen(t) {
+  const feuer = kernStand(zeitJahr).feuer;
+  kernStrahl.visible = feuer > 0.004;
+  if (!kernStrahl.visible) return;
+  kernStrahl.scale.setScalar(SCHICHTEN[ebene].radius);
+  // Ein langsames Pulsen, damit der Strahl lebt und nicht als Balken steht
+  const puls = 0.86 + 0.14 * Math.sin(t * 0.55) + 0.06 * Math.sin(t * 1.9);
+  kegelMat.opacity = 0.42 * feuer * puls;
+  treffMat.opacity = 0.80 * feuer * puls;
+}
+
 // ------------------------------------------------------------------- Steuerung
 let ebene = 0;            // welche Schicht ist aktiv
 let versatz = 0, istVersatz = 0;   // schiebt die Kugel bei hochkantem Bild nach oben
@@ -475,8 +529,8 @@ function abstandFuer(e) {
 function raumSetzen() {
   const schmal = kamera.aspect < 0.9;
   if (!schmal) versatz = 0;
-  else if (!tafelFrei) versatz = 0.05;
-  else versatz = SCHICHTEN[ebene].kern ? 0.21 : 0.265;
+  else if (!tafelFrei) versatz = 0.09;      // unter den Punkten, über dem Streifen
+  else versatz = SCHICHTEN[ebene].kern ? 0.195 : 0.245;
   zielAbstand = abstandFuer(ebene);
 }
 
@@ -486,6 +540,7 @@ function ebeneSetzen(neu, sanft = true) {
   if (!sanft) { istAbstand = zielAbstand; istVersatz = versatz; }
   ausrichten = true;
   tafelFuellen(SCHICHTEN[ebene]);
+  streifenFuellen();
   leisteMarkieren();
   linealMarkieren();
 }
@@ -731,22 +786,48 @@ function linealMarkieren() {
 // Auf schmalen Geräten nimmt die Spalte aus Chronik, Schicht-Tafel und
 // Spendenknopf zu viel Platz weg. Dort wird sie zum Pop-up.
 const spalte = document.getElementById('linkeSpalte');
-const tafelKnopf = document.getElementById('tafelKnopf');
+const streifen = document.getElementById('streifen');
 
 function spalteZu() {
   spalte.classList.remove('auf');
-  tafelKnopf.classList.remove('an');
+  streifen.classList.remove('an');
 }
 document.getElementById('spalteZuKnopf').onclick = spalteZu;
-tafelKnopf.onclick = () => {
+// Am Handy läuft unter der Kugel ein schmaler Streifen mit. Ein Tipp darauf
+// klappt dieselbe Tafel auf, die am Rechner ohnehin links steht.
+streifen.onclick = () => {
   const auf = !spalte.classList.contains('auf');
   deutungFeld.hidden = true;
-  weltalterFeld.hidden = true;
   document.getElementById('deutungKnopf').classList.remove('an');
-  document.getElementById('weltalterKnopf').classList.remove('an');
   spalte.classList.toggle('auf', auf);
-  tafelKnopf.classList.toggle('an', auf);
+  streifen.classList.toggle('an', auf);
 };
+
+// Was im Streifen steht: laufende Schicht, laufender Abschnitt, nächstes Ereignis
+const streifenSchicht = document.getElementById('streifenSchicht');
+const streifenStand = document.getElementById('streifenStand');
+const streifenChronik = document.getElementById('streifenChronik');
+
+function streifenFuellen() {
+  const s = SCHICHTEN[ebene];
+  streifen.style.setProperty('--ton', s.farbe);
+  streifenSchicht.textContent =
+    `Schicht ${ebene + 1} von ${SCHICHTEN.length} · ${s.name}`;
+  if (s.echtzeit) {
+    streifenStand.textContent = s.dauer;
+  } else {
+    const { seg } = segmentBei(s, zeitJahr);
+    streifenStand.textContent =
+      `${seg.name}${seg.zusatz ? ', ' + seg.zusatz : ''} · ${s.dauer}`;
+  }
+  if (zeitJahr > 2035) {
+    streifenChronik.textContent = 'Jenseits der Überlieferung — es bleibt der Zyklus';
+  } else {
+    const liste = ereignisseUm(zeitJahr);
+    const lauf = liste.find(e => e.laufend) || liste[0];
+    streifenChronik.textContent = lauf ? `${jahrText(lauf.jahr, true)} — ${lauf.was}` : '';
+  }
+}
 
 // ----------------------------------------------------------------- Einstieg
 // Beim ersten Besuch kurz erklären, was das hier ist. Danach nur noch über das
@@ -769,22 +850,13 @@ try {
 // ---------------------------------------------------------------- Weltalter
 // Die Vergleichstafeln stehen in einer eigenen Ansicht, damit die Schicht-Tafel
 // bei ihrer Sache bleibt.
-const weltalterFeld = document.getElementById('weltalter');
-const weltalterInhalt = document.getElementById('weltalterInhalt');
-let weltalterGebaut = false;
-
-function weltalterBauen() {
-  if (weltalterGebaut) return;
-  const s = SCHICHTEN.find(x => x.vergleiche);
-  if (!s) return;
-  weltalterInhalt.innerHTML = `
-    <p class="deutungEpoche">Zum Yuga-Zyklus</p>
-    <h2>Die Weltalter</h2>
-    <div class="weltalterJetzt"></div>
+// Die Weltalter sind kein eigenes Fenster mehr: Sie gehören zur äußersten
+// Schale und stehen deshalb unten in deren Tafel.
+function weltalterHtml(s) {
+  if (!s.vergleiche) return '';
+  return `
+    <p class="terminKopf weltalterKopfZeile">Die Weltalter</p>
     <div class="weltalterTafel"></div>
-    <p class="fliess klein">Dieselbe Figur — ein Abstieg durch Zeitalter, an dessen
-      Wendepunkten Feuer und Wasser stehen — findet sich über drei Kontinente verteilt.
-      Darunter stehen die Rechnungen, aus denen die Zahlen selbst stammen.</p>
     ${['figur', 'rechnung'].map(g => {
       const teil = s.vergleiche.filter(v => (v.gruppe || 'figur') === g);
       if (!teil.length) return '';
@@ -802,49 +874,35 @@ function weltalterBauen() {
     }).join('')}
     <p class="hinweis">Ausführlich im Arbeitspapier <a href="https://github.com/AbuElia81/zeitkapsel/blob/main/WELTALTER.md"
       target="_blank" rel="noopener noreferrer">WELTALTER.md</a> im Repo.</p>`;
-  weltalterGebaut = true;
-  weltalterZeitTeil();
 }
 
-// Welches Zeitalter gerade eingestellt ist — die Zeile wandert mit dem Schieber
+// Wo die eingestellte Zeit in den Überlieferungen liegt — der Yuga-Zyklus
+// zuerst, dann die anderen. Die Liste wandert mit dem Schieber.
 function weltalterZeitTeil() {
-  const feld = weltalterInhalt.querySelector('.weltalterJetzt');
-  if (!feld) return;
-  const s = SCHICHTEN.find(x => x.vergleiche);
-  const { seg, vonJahr, bisJahr } = segmentBei(s, zeitJahr);
+  const wo = tafel.querySelector('.weltalterTafel');
+  if (!wo) return;
+  const y = SCHICHTEN.find(x => x.vergleiche);
+  const { seg, vonJahr, bisJahr } = segmentBei(y, zeitJahr);
   const namen = [];
   if (seg.ovid) namen.push(`bei Ovid <b>${seg.ovid.alter}</b>`);
   if (seg.hesiod) namen.push(`bei Hesiod <b>${seg.hesiod.alter}</b>`);
-  feld.innerHTML = `
-    <span class="weltalterKopf">${zeitText(zeitJahr, amJetzt)}</span>
-    <span class="weltalterStand"><b>${seg.name}</b>${seg.zusatz ? ', ' + seg.zusatz : ''}
-      <em>${jahrText(vonJahr)} bis ${jahrText(bisJahr)}</em></span>
-    ${namen.length ? `<span class="weltalterNamen">${namen.join(' · ')}</span>` : ''}`;
 
-  const tafel = weltalterInhalt.querySelector('.weltalterTafel');
-  if (!tafel) return;
-  tafel.innerHTML = `<p class="terminKopf">Wo diese Zeit anderswo liegt</p>` +
-    weltalterStand(zeitJahr).map(e => `
-      <div class="weltalterZeile">
-        <span class="waName">${e.name}</span>
-        <span class="waLage">${e.lage}</span>
-        <span class="waNote">${e.note}</span>
-      </div>`).join('');
+  const zeilen = [{
+    name: 'Yuga-Zyklus nach Misra',
+    lage: `${seg.name}${seg.zusatz ? ', ' + seg.zusatz : ''}`,
+    note: `${jahrText(vonJahr)} bis ${jahrText(bisJahr)}`
+         + (namen.length ? ` · ${namen.join(' · ')}` : '')
+  }, ...weltalterStand(zeitJahr)];
+
+  wo.innerHTML = zeilen.map(e => `
+    <div class="weltalterZeile">
+      <span class="waName">${e.name}</span>
+      <span class="waLage">${e.lage}</span>
+      <span class="waNote">${e.note}</span>
+    </div>`).join('');
 }
 
-document.getElementById('weltalterKnopf').onclick = () => {
-  const auf = weltalterFeld.hidden;
-  spalteZu();
-  deutungFeld.hidden = true;
-  document.getElementById('deutungKnopf').classList.remove('an');
-  weltalterBauen();
-  weltalterFeld.hidden = !auf;
-  document.getElementById('weltalterKnopf').classList.toggle('an', auf);
-};
-document.getElementById('weltalterZu').onclick = () => {
-  weltalterFeld.hidden = true;
-  document.getElementById('weltalterKnopf').classList.remove('an');
-};
+
 
 // ------------------------------------------------------------------ Deutung
 // Liest aus allen Schalen zugleich und setzt daraus ein Bild der Zeit zusammen.
@@ -875,8 +933,6 @@ function deutungFuellen() {
 
 document.getElementById('deutungKnopf').onclick = () => {
   spalteZu();
-  weltalterFeld.hidden = true;
-  document.getElementById('weltalterKnopf').classList.remove('an');
   deutungFeld.hidden = !deutungFeld.hidden;
   document.getElementById('deutungKnopf').classList.toggle('an', !deutungFeld.hidden);
   deutungFuellen();
@@ -918,7 +974,7 @@ function zeitSetzen(j, jetzt = false, vomSchieber = false, richten = true) {
   markenAktualisieren();
   chronikFuellen();
   deutungFuellen();
-  weltalterZeitTeil();
+  streifenFuellen();
   if (richten) ausrichten = true;
   menschSetzen(yugaLicht(zeitJahr));
   tafelZeitTeil();
@@ -1021,6 +1077,8 @@ function tafelZeitTeil() {
     ov.style.display = inhalt ? '' : 'none';
   }
 
+  weltalterZeitTeil();
+
   const mz = tafel.querySelector('.menschZeile');
   if (mz) {
     const l = yugaLicht(zeitJahr);
@@ -1050,11 +1108,9 @@ function tafelFuellen(s) {
       ${s.kern ? '<p class="menschZeile"></p>' : ''}
       ${s.termine ? '<p class="terminKopf">Termine</p><ul class="termine"></ul>' : ''}
       <ul class="fakten">${s.fakten.map(f => `<li>${f}</li>`).join('')}</ul>
-      ${s.vergleiche ? `<p class="zuWeltalter">Dieselbe Figur findet sich in
-        einundzwanzig weiteren Überlieferungen und Rechnungen —
-        <button type="button" class="alsLink" onclick="document.getElementById('weltalterKnopf').click()">die Weltalter öffnen</button>.</p>` : ''}
       ${s.hinweis ? `<p class="hinweis">${s.hinweis}</p>` : ''}
-      <p class="quelle">${s.quelle}</p>`;
+      <p class="quelle">${s.quelle}</p>
+      ${weltalterHtml(s)}`;
     tafelZeitTeil();
     tafel.classList.add('ein');
   }, 160);
@@ -1075,7 +1131,7 @@ function bild() {
   }
 
   // Steht unten ein Pop-up? Dann raeumt die Kugel die untere Haelfte.
-  const popOffen = !deutungFeld.hidden || !weltalterFeld.hidden
+  const popOffen = !deutungFeld.hidden
     || !einstiegFeld.hidden || spalte.classList.contains('auf');
   if (popOffen !== tafelFrei) { tafelFrei = popOffen; raumSetzen(); }
 
@@ -1130,6 +1186,7 @@ function bild() {
     }
   });
 
+  strahlSetzen(t);
   sterne.rotation.y += dt * 0.004;
   renderer.render(szene, kamera);
 }

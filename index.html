@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Zeitkugel">
-<link rel="stylesheet" href="stil.css?v=103">
+<link rel="stylesheet" href="stil.css?v=109">
 </head>
 <body>
 
@@ -25,8 +25,6 @@
   <div id="zeitleiste">
     <div id="zeitKopf">
       <span id="zeitAnzeige">—</span>
-      <button id="tafelKnopf" title="Diese Schicht">Schicht</button>
-      <button id="weltalterKnopf" title="Die Weltalter anderer Überlieferungen">Weltalter</button>
       <button id="deutungKnopf" title="Die Qualität dieser Zeit">Deutung</button>
     </div>
     <input id="schieber" type="range" aria-label="Zeitschieber durch den Yuga-Zyklus">
@@ -82,18 +80,22 @@
         verschiebt die Zeit über den ganzen Zyklus, von
         10876 v. Chr. bis 14925 n. Chr. Alle Marken wandern mit, und der Mensch im
         Kern wandelt sich.</li>
+      <li><b>Die Tafel</b> zur laufenden Schicht steht links; bei der äußersten
+        stehen darin die Weltalter — einundzwanzig Überlieferungen nebeneinander
+        und die Rechnung, wo die eingestellte Zeit in jeder von ihnen liegt.</li>
       <li><b>Deutung</b> liest die Qualität der eingestellten Zeit aus allen Schalen
-        zugleich, <b>Weltalter</b> stellt einundzwanzig Überlieferungen nebeneinander.</li>
+        zugleich.</li>
     </ul>
     <button id="losKnopf">Loslegen</button>
   </aside>
 
-  <aside id="weltalter" class="ueberlagerung" hidden>
-    <button class="ueberlagerungZu" id="weltalterZu" title="schließen" aria-label="schließen">×</button>
-    <div id="weltalterInhalt"></div>
-  </aside>
-
   <nav id="leiste" aria-label="Zeitschichten"></nav>
+
+  <button id="streifen" type="button" aria-label="Die ganze Tafel zu dieser Schicht öffnen">
+    <span id="streifenSchicht">—</span>
+    <span id="streifenStand">—</span>
+    <span id="streifenChronik">—</span>
+  </button>
 
   <div id="pult">
     <button id="hoeher" title="eine Schicht nach außen">↑ hinaus</button>
@@ -108,7 +110,7 @@
   <p id="hinweisZeile">Ziehen dreht die Kugel · Scrollen taucht ein · ↑ ↓ blättert durch die Schichten · der Schieber oben verschiebt die Zeit</p>
 </main>
 
-<script type="module" src="spende.js?v=103"></script>
-<script type="module" src="kugel.js?v=103"></script>
+<script type="module" src="spende.js?v=109"></script>
+<script type="module" src="kugel.js?v=109"></script>
 </body>
 </html>

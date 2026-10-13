@@ -747,22 +747,6 @@ main { position: relative; z-index: 1; height: 100%; }
   }
 }
 
-/* Die Zeile in den Weltaltern, die mit dem Zeitschieber mitwandert */
-.weltalterJetzt {
-  display: flex; flex-direction: column; gap: .18rem;
-  margin: 0 0 1rem; padding: .55rem .7rem;
-  background: rgba(255,242,208,.05);
-  border-left: 2px solid var(--ton); border-radius: 0 2px 2px 0;
-  font-size: .82rem; line-height: 1.45; color: #d8cfbd;
-}
-.weltalterJetzt .weltalterKopf {
-  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--ton); opacity: .8;
-}
-.weltalterJetzt .weltalterStand b { font-weight: 400; color: #fff2d0; }
-.weltalterJetzt .weltalterStand em { font-style: normal; color: var(--gedaempft); }
-.weltalterJetzt .weltalterNamen { font-size: .76rem; color: #a99d88; }
-.weltalterJetzt .weltalterNamen b { font-weight: 400; color: #cfc6b6; }
 
 /* Wo die eingestellte Zeit in den anderen Überlieferungen liegt */
 .weltalterTafel { margin: 0 0 1.2rem; }
@@ -775,3 +759,40 @@ main { position: relative; z-index: 1; height: 100%; }
 }
 .weltalterZeile .waLage { font-size: .86rem; color: #f2e7cf; }
 .weltalterZeile .waNote { font-size: .74rem; color: #7d7568; }
+.weltalterZeile .waNote b { font-weight: 400; color: #a99d88; }
+.weltalterZeile:first-child { border-left: 2px solid var(--ton); padding-left: .6rem; }
+.weltalterZeile:first-child .waLage { color: #fff2d0; font-size: .95rem; }
+.weltalterKopfZeile { margin-top: 1.4rem; }
+
+/* Der Streifen unter der Kugel — am Handy läuft hier die Schicht immer mit */
+#streifen { display: none; }
+@media (max-width: 900px) {
+  #streifen {
+    --ton: #e8b95c;
+    display: flex; flex-direction: column; gap: .1rem; text-align: left;
+    position: absolute; left: .5rem; right: .5rem; bottom: 10.4rem; z-index: 4;
+    padding: .4rem .7rem .45rem;
+    background: linear-gradient(160deg, rgba(10,13,22,.78), rgba(6,8,14,.62));
+    border: 1px solid var(--linie); border-left: 2px solid var(--ton);
+    border-radius: 3px; color: #c2b8a7; font: inherit; cursor: pointer;
+    backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+    transition: border-color .25s;
+  }
+  #streifen.an { border-color: rgba(236,231,220,.34); border-left-color: var(--ton); }
+  /* Steht eine Tafel offen, sagt sie dasselbe ausführlicher — der Streifen tritt ab */
+  #linkeSpalte.auf ~ #streifen,
+  #deutung:not([hidden]) ~ #streifen,
+  #einstieg:not([hidden]) ~ #streifen { display: none; }
+  #streifenSchicht {
+    font-size: .58rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ton); opacity: .85;
+  }
+  #streifenStand {
+    font-size: .88rem; color: #f2e7cf; line-height: 1.25;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  #streifenChronik {
+    font-size: .68rem; color: #7d7568; line-height: 1.25;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+}

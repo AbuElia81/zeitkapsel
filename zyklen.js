@@ -66,6 +66,23 @@ export function segmentBei(schicht, jahr) {
   return { seg: schicht.segmente[0], vonJahr: jahr, bisJahr: jahr };
 }
 
+// ------------------------------------------------- Der galaktische Kern
+// Das schmale Band über dem Yuga-Ring: Sgr A* liegt nach Misra die ganze
+// absteigende Hälfte im Dunkeln, zündet in der Ekpyrosis und brennt die
+// aufsteigende hindurch. Daraus wird hier ein Wert zwischen 0 und 1.
+export function kernStand(jahr) {
+  const y = SCHICHTEN[0];
+  const band = y.nebenband;
+  if (!band) return { feuer: 0, phase: 'unbekannt', art: 'leer', vonJahr: jahr, bisJahr: jahr };
+  const { seg, vonJahr, bisJahr } = segmentBei({ ...y, segmente: band.segmente }, jahr);
+  const lauf = (jahr - vonJahr) / Math.max(1, bisJahr - vonJahr);
+  const feuer = seg.art === 'agn' ? 1
+              : seg.art === 'agn-an' ? lauf
+              : seg.art === 'agn-aus' ? 1 - lauf
+              : 0;
+  return { feuer, phase: seg.name, art: seg.art, vonJahr, bisJahr };
+}
+
 // Wie hell ist der Mensch im Kern? 1 = Goldenes Zeitalter, 0 = erloschen.
 // Zwischen den Yugas wird linear überblendet, die Sandhis halten den Stand.
 export function yugaLicht(jahr) {
