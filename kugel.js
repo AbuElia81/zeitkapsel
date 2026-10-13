@@ -1,12 +1,12 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
          yugaLicht, menschZustand, masstab, kernStand, schiefe,
-         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=126';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=126';
-import { deuten } from './deutung.js?v=126';
-import { NACHBARN, PLANETEN, abschnittBei, weg } from './anflug.js?v=126';
-import { LAND } from './erde.js?v=126';
-import { weltalterStand } from './weltalter.js?v=126';
+         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=128';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=128';
+import { deuten } from './deutung.js?v=128';
+import { NACHBARN, PLANETEN, abschnittBei, weg } from './anflug.js?v=128';
+import { LAND } from './erde.js?v=128';
+import { weltalterStand } from './weltalter.js?v=128';
 
 const HG = 0x05070d;
 
@@ -88,7 +88,7 @@ const TON = {
 };
 
 // Wie viel vom Band oben der Name des Zyklus einnimmt
-const KOPF_HOCH = 0.235;
+const KOPF_HOCH = 0.30;
 
 // Größte Schriftgröße, mit der der Text noch in die Breite passt
 function passend(x, text, breite, basis, minimum, gewicht) {
@@ -107,7 +107,7 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
   const k = H / (klein ? 128 : 256);
   // Die Schrift waechst voll mit dem Band mit — die Namen duerfen ihr Feld
   // ausfuellen; passend() faengt ab, was nicht hineinpasst.
-  const kf = k * 0.98;
+  const kf = k * 0.60;
   const c = document.createElement('canvas');
   c.width = B; c.height = H;
   const x = c.getContext('2d');
@@ -161,28 +161,28 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
       if (seg.name) {
         const gN = passend(x, seg.name, platz, gross, 19 * kf, 600);
         x.font = `600 ${gN}px Georgia, "Times New Roman", serif`;
-        x.fillText(seg.name, mx, klein ? H / 2 : H * 0.475);
+        x.fillText(seg.name, mx, klein ? H / 2 : H * 0.565);
       }
       if (!klein) {
         x.fillStyle = `rgba(233,223,203,${Math.min(0.88, 0.35 + linie * 0.5)})`;
         const gD = passend(x, dauerText, platz, mittel, 15 * kf, 400);
         x.font = `400 ${gD}px Georgia, serif`;
-        x.fillText(dauerText, mx, H * 0.665);
+        x.fillText(dauerText, mx, H * 0.705);
         if (seg.zusatz) {
           const gZ = passend(x, seg.zusatz, platz, mittel * 0.86, 14 * kf, 400);
           x.font = `400 ${gZ}px Georgia, serif`;
           x.fillStyle = `rgba(255,243,221,${Math.min(0.8, 0.28 + linie * 0.45)})`;
-          x.fillText(seg.zusatz, mx, H * 0.815);
+          x.fillText(seg.zusatz, mx, H * 0.835);
         }
       }
     } else if (platz >= 14 && seg.name) {
       // Schmales Feld (Sandhi): Dauer quer zum Band, wie in der Vorlage
       x.save();
-      x.translate(mx, H * 0.63);
+      x.translate(mx, H * 0.69);
       x.rotate(-Math.PI / 2);
       x.fillStyle = rgb(Math.min(1, linie + 0.25));
       x.fillStyle = `rgba(255,243,221,${Math.min(0.95, 0.45 + linie * 0.55)})`;
-      const gQ = Math.min(passend(x, dauerText, H * 0.62, 30 * kf, 14 * kf, 400), platz * 1.4);
+      const gQ = Math.min(passend(x, dauerText, H * 0.56, 30 * kf, 14 * kf, 400), platz * 1.4);
       x.font = `400 ${gQ}px Georgia, serif`;
       x.fillText(dauerText, 0, 0);
       x.restore();
@@ -192,9 +192,12 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
   // Der Name des Zyklus läuft als Kopfzeile rund um das Band — sechsmal, damit
   // er aus jeder Blickrichtung dasteht. Ein Tipp darauf öffnet die Erklärung.
   if (!felder && !klein) {
-    const kopf = `${schicht.name.toUpperCase()}  ·  ${schicht.dauer.toUpperCase()}`;
-    const WIE_OFT = 4;                       // viermal rund herum
-    const kg = passend(x, kopf, (B / WIE_OFT) * 0.76, 26 * k, 10 * k, 600);
+    // Zwei Zeilen statt einer: So wird der Name des Zyklus wirklich groß.
+    const WIE_OFT = 3;                       // dreimal rund herum
+    const platzKopf = (B / WIE_OFT) * 0.84;
+    const kg = passend(x, schicht.name.toUpperCase(), platzKopf, 44 * k, 14 * k, 600);
+    const kg2 = Math.min(kg * 0.62,
+      passend(x, schicht.dauer.toUpperCase(), platzKopf, 30 * k, 11 * k, 400));
     x.save();
     x.beginPath(); x.rect(0, 0, B, H * KOPF_HOCH); x.clip();
     x.fillStyle = rgb(0.30);
@@ -203,10 +206,15 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
     x.beginPath(); x.moveTo(0, H * KOPF_HOCH); x.lineTo(B, H * KOPF_HOCH); x.stroke();
     x.textAlign = 'center'; x.textBaseline = 'middle';
     x.shadowColor = 'rgba(0,0,0,0.9)'; x.shadowBlur = 8 * k;
-    x.font = `600 ${kg}px Georgia, "Times New Roman", serif`;
-    x.fillStyle = 'rgba(255,243,221,0.92)';
-    for (let i = 0; i < WIE_OFT; i++)
-      x.fillText(kopf, (i + 0.5) * B / WIE_OFT, H * KOPF_HOCH * 0.52);
+    for (let i = 0; i < WIE_OFT; i++) {
+      const mx = (i + 0.5) * B / WIE_OFT;
+      x.font = `600 ${kg}px Georgia, "Times New Roman", serif`;
+      x.fillStyle = 'rgba(255,245,226,0.96)';
+      x.fillText(schicht.name.toUpperCase(), mx, H * KOPF_HOCH * 0.37);
+      x.font = `400 ${kg2}px Georgia, serif`;
+      x.fillStyle = 'rgba(255,243,221,0.74)';
+      x.fillText(schicht.dauer.toUpperCase(), mx, H * KOPF_HOCH * 0.75);
+    }
     x.shadowBlur = 0;
     x.restore();
   }
@@ -385,7 +393,7 @@ const schalen = SCHICHTEN.map((schicht, i) => {
   // nicht mehr nur ein Reifen, sondern eine in Segmente geteilte Zwiebelhaut.
   const feldMat = schicht.kern ? null : new THREE.MeshBasicMaterial({
     map: bandTextur(schicht, schicht.segmente, 96, false, true),
-    transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 0.30
+    transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 0.21
   });
   if (feldMat) teile.push({ mat: feldMat, rolle: 'feld' });
 
@@ -511,11 +519,11 @@ function planetTextur() {
 
   // Das Meer
   const see = x.createLinearGradient(0, 0, 0, H);
-  see.addColorStop(0.00, '#0b2136');
-  see.addColorStop(0.30, '#0f3153');
-  see.addColorStop(0.50, '#14406b');
-  see.addColorStop(0.70, '#0f3153');
-  see.addColorStop(1.00, '#0b2136');
+  see.addColorStop(0.00, '#071829');
+  see.addColorStop(0.30, '#0b2742');
+  see.addColorStop(0.50, '#0f3357');
+  see.addColorStop(0.70, '#0b2742');
+  see.addColorStop(1.00, '#071829');
   x.fillStyle = see; x.fillRect(0, 0, B, H);
 
   // Die Landmassen. Ringe, die über den Datumswechsel laufen, werden dort
@@ -543,9 +551,9 @@ function planetTextur() {
       x.stroke();
     }
   };
-  x.fillStyle = '#2b4434';
-  x.strokeStyle = 'rgba(150,196,164,0.55)';
-  x.lineWidth = 1.6;
+  x.fillStyle = '#3d6147';
+  x.strokeStyle = 'rgba(206,240,214,0.92)';
+  x.lineWidth = 2.6;
   x.lineJoin = 'round';
   malen();
 
@@ -612,7 +620,7 @@ function randTextur() {
 
 // Der Körper dreht sich mit der Kugel
 const planetMat = new THREE.MeshBasicMaterial({
-  map: planetTextur(), transparent: true, opacity: 0.62,
+  map: planetTextur(), transparent: true, opacity: 0.82,
   side: THREE.FrontSide, depthWrite: false
 });
 const planet = new THREE.Mesh(new THREE.SphereGeometry(0.985, 64, 48), planetMat);
