@@ -1,8 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=94';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=94';
-import { deuten } from './deutung.js?v=94';
+         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=98';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=98';
+import { deuten } from './deutung.js?v=98';
 
 const HG = 0x05070d;
 
@@ -16,8 +16,19 @@ const szene = new THREE.Scene();
 const kamera = new THREE.PerspectiveCamera(42, 1, 0.05, 400);
 kamera.position.set(0, 0, 14);
 
-const welt = new THREE.Group();      // dreht sich beim Ziehen
-szene.add(welt);
+// Die Kugel steht fest in ihrer Achse und dreht sich nur um sie — wie ein
+// Globus im Gestell. Die Neigung ist die der Erde: 23,44 Grad.
+const ERDNEIGUNG = 23.4392811 * Math.PI / 180;
+const buehneWelt = new THREE.Group();   // nimmt den Versatz nach oben auf
+szene.add(buehneWelt);
+const blick = new THREE.Group();        // man schaut leicht von oben darauf
+blick.rotation.x = -0.17;
+buehneWelt.add(blick);
+const achse = new THREE.Group();        // die Erdneigung, sichtbar in der Bildebene
+achse.rotation.z = -ERDNEIGUNG;
+blick.add(achse);
+const welt = new THREE.Group();         // dreht sich beim Anschieben um die Achse
+achse.add(welt);
 
 // ------------------------------------------------------------------ Sternfeld
 function sternfeld() {
@@ -67,7 +78,7 @@ function passend(x, text, breite, basis, minimum, gewicht) {
   return Math.max(minimum, Math.floor(basis * breite / b));
 }
 
-function bandTextur(schicht, segmente, hoehe, klein) {
+function bandTextur(schicht, segmente, hoehe, klein, felder) {
   const B = 4096, H = hoehe;
   // Das Band ist jetzt deutlich höher als früher. Damit die Schrift nicht in
   // die Länge gezogen wird, wächst die Leinwand mit — und alle Schriftgrade
@@ -80,6 +91,9 @@ function bandTextur(schicht, segmente, hoehe, klein) {
   const rgb = (a) => `rgba(${Math.round(farbe.r * 255)},${Math.round(farbe.g * 255)},${Math.round(farbe.b * 255)},${a})`;
 
   x.clearRect(0, 0, B, H);
+  // Das beschriftete Band bekommt einen dunklen Grund, damit die Namen auch
+  // vor den kräftigen Feldern der ganzen Kugel noch zu lesen sind.
+  if (!felder) { x.fillStyle = 'rgba(5,7,13,0.62)'; x.fillRect(0, 0, B, H); }
   const gesamt = segmente.reduce((s, g) => s + g.laenge, 0);
   let lauf = 0;
 
@@ -89,7 +103,7 @@ function bandTextur(schicht, segmente, hoehe, klein) {
     const [fuell, linie] = TON[seg.art] || TON.auf;
     if (fuell === 0 && linie === 0) continue;
 
-    x.fillStyle = rgb(fuell * 0.55);
+    x.fillStyle = rgb(fuell * (felder ? 0.62 : 0.80));
     x.fillRect(x0, 0, br, H);
 
     // Schraffur für Übergangszeiten
@@ -107,6 +121,8 @@ function bandTextur(schicht, segmente, hoehe, klein) {
     x.strokeStyle = rgb(linie * 0.9); x.lineWidth = 3 * k;
     x.beginPath(); x.moveTo(x0, 0); x.lineTo(x0, H); x.stroke();
 
+    if (felder) { continue; }
+
     // Beschriftung — die Schrift wird so weit verkleinert, bis sie ins Feld passt
     const gross = (klein ? 34 : 52) * k, mittel = (klein ? 26 : 38) * k;
     const mx = x0 + br / 2, platz = br - 18;
@@ -117,21 +133,21 @@ function bandTextur(schicht, segmente, hoehe, klein) {
 
     if (platz >= 52) {
       // Waagerecht: Name oben, Dauer und Richtung darunter
-      x.fillStyle = rgb(Math.min(1, linie + 0.25));
+      x.fillStyle = `rgba(255,243,221,${Math.min(0.97, 0.45 + linie * 0.55)})`;
       if (seg.name) {
         const gN = passend(x, seg.name, platz, gross, 19 * k, 600);
         x.font = `600 ${gN}px Georgia, "Times New Roman", serif`;
         x.fillText(seg.name, mx, klein ? H / 2 : H * 0.33);
       }
       if (!klein) {
-        x.fillStyle = rgb(linie * 0.78);
+        x.fillStyle = `rgba(233,223,203,${Math.min(0.88, 0.35 + linie * 0.5)})`;
         const gD = passend(x, dauerText, platz, mittel, 15 * k, 400);
         x.font = `400 ${gD}px Georgia, serif`;
         x.fillText(dauerText, mx, H * 0.63);
         if (seg.zusatz) {
           const gZ = passend(x, seg.zusatz, platz, mittel * 0.86, 14 * k, 400);
           x.font = `400 ${gZ}px Georgia, serif`;
-          x.fillStyle = rgb(linie * 0.62);
+          x.fillStyle = `rgba(255,243,221,${Math.min(0.8, 0.28 + linie * 0.45)})`;
           x.fillText(seg.zusatz, mx, H * 0.86);
         }
       }
@@ -141,6 +157,7 @@ function bandTextur(schicht, segmente, hoehe, klein) {
       x.translate(mx, H / 2);
       x.rotate(-Math.PI / 2);
       x.fillStyle = rgb(Math.min(1, linie + 0.25));
+      x.fillStyle = `rgba(255,243,221,${Math.min(0.95, 0.45 + linie * 0.55)})`;
       const gQ = Math.min(passend(x, dauerText, H - 26 * k, 30 * k, 14 * k, 400), platz * 1.4);
       x.font = `400 ${gQ}px Georgia, serif`;
       x.fillText(dauerText, 0, 0);
@@ -149,10 +166,15 @@ function bandTextur(schicht, segmente, hoehe, klein) {
     x.shadowBlur = 0;
   }
   // Ränder
+  if (felder) { const t0 = fertig(c); return t0; }
   x.strokeStyle = rgb(0.55); x.lineWidth = 4 * k;
   x.beginPath(); x.moveTo(0, 2 * k); x.lineTo(B, 2 * k);
   x.moveTo(0, H - 2 * k); x.lineTo(B, H - 2 * k); x.stroke();
 
+  return fertig(c);
+}
+
+function fertig(c) {
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   t.wrapS = THREE.RepeatWrapping;
@@ -210,7 +232,7 @@ function gitterkugel(r, farbe, meridiane = 16, parallelen = 9, phiVon = 0, phiLa
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(p), 3));
   return new THREE.LineSegments(g, new THREE.LineBasicMaterial({
-    color: farbe, transparent: true, opacity: 0.40, depthWrite: false
+    color: farbe, transparent: true, opacity: 0.62, depthWrite: false
   }));
 }
 
@@ -312,6 +334,14 @@ const schalen = SCHICHTEN.map((schicht, i) => {
   });
   teile.push({ mat: bandMat, rolle: 'band' });
 
+  // Dieselben Felder, aber über die ganze Kugel gezogen: Die Schale ist damit
+  // nicht mehr nur ein Reifen, sondern eine in Segmente geteilte Zwiebelhaut.
+  const feldMat = schicht.kern ? null : new THREE.MeshBasicMaterial({
+    map: bandTextur(schicht, schicht.segmente, 96, false, true),
+    transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 0.46
+  });
+  if (feldMat) teile.push({ mat: feldMat, rolle: 'feld' });
+
   let nebenMat = null;
   if (schicht.nebenband) {
     nebenMat = new THREE.MeshBasicMaterial({
@@ -333,11 +363,15 @@ const schalen = SCHICHTEN.map((schicht, i) => {
       teile.push({ mat: gitter.material, rolle: 'haut' });
 
       const huelle = new THREE.MeshBasicMaterial({
-        color: farbe, transparent: true, opacity: 0.085,
+        color: farbe, transparent: true, opacity: 0.12,
         blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false
       });
       halb.add(new THREE.Mesh(new THREE.SphereGeometry(r, 24, 26, phiVon, lang), huelle));
       teile.push({ mat: huelle, rolle: 'haut' });
+
+      halb.add(new THREE.Mesh(uvAusschnitt(
+        new THREE.SphereGeometry(r * 0.997, 128, 48, phiVon, lang, 0, Math.PI),
+        phiVon, lang), feldMat));
     }
 
     halb.add(new THREE.Mesh(uvAusschnitt(
@@ -453,10 +487,12 @@ function zielOpazitaet(i, rolle) {
   if (i < ebene) {
     if (rolle === 'haut') return Math.max(0.09, 0.42 - 0.08 * (ebene - i));
     if (rolle === 'band') return Math.max(0, 0.45 - 0.11 * (ebene - i));
+    if (rolle === 'feld') return Math.max(0, 0.30 - 0.08 * (ebene - i));
     return 0;
   }
   if (i === ebene) return 1;                                // aktiv — voll und dicht
   if (rolle === 'band') return 0.10;                        // tiefere Bänder nur andeuten
+  if (rolle === 'feld') return 0.07;                        // tiefere Felder nur als Hauch
   if (rolle === 'marke') return 0.06;
   if (rolle === 'mensch') return 0.42;                      // die Figur scheint durch
   return 0.16;                                              // Zwiebelhaut bleibt sichtbar
@@ -467,34 +503,29 @@ function zielOpazitaet(i, rolle) {
 // Hochachse, bis die Marke zum Betrachter zeigt. Sobald jemand selbst zieht,
 // hört sie damit auf und bleibt stehen, wo sie steht.
 let ausrichten = true;
-const HOCH = new THREE.Vector3(0, 1, 0);
 
 function markeNachVorn(dt) {
   const sch = schalen[ebene];
   if (sch.schicht.echtzeit) { ausrichten = false; return; }
+  // Die Marke sitzt bei psi auf dem Ring; um sie nach vorn zu holen, muss die
+  // Kugel auf -(psi + 90 Grad) stehen. Der kuerzere Weg dorthin wird gewaehlt.
   const psi = Math.PI + anteil(sch.schicht, zeitJahr) * Math.PI * 2;
-  const richtung = new THREE.Vector3(Math.cos(psi), 0, -Math.sin(psi))
-    .applyQuaternion(welt.quaternion);
-  const phi = Math.atan2(richtung.x, richtung.z);
-  if (Math.abs(phi) < 0.004) { ausrichten = false; return; }
-  // Um die eigene Hochachse der Kugel drehen, nicht um die des Bildschirms —
-  // sonst kippt die Neigung beim Ausrichten in eine Schräglage.
-  const achse = HOCH.clone().applyQuaternion(welt.quaternion);
-  welt.quaternion.premultiply(
-    new THREE.Quaternion().setFromAxisAngle(achse, -phi * Math.min(1, dt * 3.2)));
+  const ziel = -(psi + Math.PI / 2);
+  let weg = (ziel - welt.rotation.y) % (Math.PI * 2);
+  if (weg > Math.PI) weg -= Math.PI * 2;
+  if (weg < -Math.PI) weg += Math.PI * 2;
+  if (Math.abs(weg) < 0.004) { ausrichten = false; return; }
+  welt.rotation.y += weg * Math.min(1, dt * 3.2);
 }
 
 // --------------------------------------------------------------- Drehen (frei)
 let ziehend = false, letzteX = 0, letzteY = 0, vX = 0, vY = 0;
 const el = renderer.domElement;
 
-function drehen(dx, dy) {
-  const laenge = Math.hypot(dx, dy);
-  if (laenge < 0.0001) return;
-  const achse = new THREE.Vector3(dy, dx, 0).normalize();
-  achse.applyQuaternion(kamera.quaternion);          // Achse im Kamerablick
-  const q = new THREE.Quaternion().setFromAxisAngle(achse, laenge * 0.0055);
-  welt.quaternion.premultiply(q);
+// Anschieben: nur waagerecht, nur um die eigene Achse. Die Neigung bleibt.
+function drehen(dx) {
+  if (Math.abs(dx) < 0.0001) return;
+  welt.rotation.y += dx * 0.0055;
 }
 
 // Zwei Finger kneifen: auseinander taucht ein, zusammen fuehrt hinaus.
@@ -538,7 +569,7 @@ el.addEventListener('pointermove', e => {
   if (!ziehend) return;
   const dx = e.clientX - letzteX, dy = e.clientY - letzteY;
   letzteX = e.clientX; letzteY = e.clientY;
-  drehen(dx, dy);
+  drehen(dx);
   vX = dx; vY = dy;
 });
 
@@ -989,8 +1020,8 @@ function bild() {
 
   // Nachlauf und ruhige Eigendrehung
   if (!ziehend) {
-    vX *= 0.94; vY *= 0.94;
-    if (Math.abs(vX) > 0.02 || Math.abs(vY) > 0.02) drehen(vX, vY);
+    vX *= 0.972; vY *= 0.972;
+    if (Math.abs(vX) > 0.015) drehen(vX);
     else { vX = 0; vY = 0; if (ausrichten) markeNachVorn(dt); }
   }
 
@@ -1004,7 +1035,7 @@ function bild() {
   kamera.position.z = istAbstand;
   const hoehe = 2 * istAbstand * Math.tan((kamera.fov / 2) * Math.PI / 180);
   istVersatz += (versatz - istVersatz) * Math.min(1, dt * 3.4);
-  welt.position.y = istVersatz * hoehe;
+  buehneWelt.position.y = istVersatz * hoehe;
   // Der Mensch steht ausserhalb der Weltgruppe — er rueckt eigens mit
   if (menschBuehne) menschBuehne.position.y = istVersatz * hoehe;
 
@@ -1065,7 +1096,6 @@ function groesse() {
 addEventListener('resize', groesse);
 groesse();
 
-welt.rotation.x = -0.34;
 ebeneSetzen(0, false);
 zeitSetzen(jahrJetzt(), true);
 bild();
