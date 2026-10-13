@@ -873,3 +873,17 @@ body.fliegt #lineal, body.fliegt #hinweisZeile { opacity: 0; pointer-events: non
   cursor: pointer; transition: color .25s, border-color .25s;
 }
 #anflugNochmal:hover { color: #f4ecdd; border-color: rgba(236,231,220,.4); }
+
+/* Der Schalter am Ende der Punktleiste: elf oder alle sechzehn */
+.stufe.mehrSchalen { --ton: #8d8577; }
+.stufe.mehrSchalen .mehrZeichen {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; font-size: calc(var(--zeile) * .30);
+  color: var(--ton); letter-spacing: 0;
+}
+@media (max-width: 900px) {
+  .stufe.mehrSchalen .mehrZeichen { font-size: .62rem; }
+}
+.stufe.mehrSchalen:hover .mehrZeichen { color: #ded6c7; }
+/* Stillgelegte Schalen bleiben im Lineal stehen, aber blass */
+.linealMarke.still { opacity: .2; pointer-events: none; }

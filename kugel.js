@@ -1,12 +1,12 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
          yugaLicht, menschZustand, masstab, kernStand, schiefe,
-         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=129';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=129';
-import { deuten } from './deutung.js?v=129';
-import { NACHBARN, PLANETEN, abschnittBei, weg } from './anflug.js?v=129';
-import { LAND } from './erde.js?v=129';
-import { weltalterStand } from './weltalter.js?v=129';
+         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=131';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=131';
+import { deuten } from './deutung.js?v=131';
+import { NACHBARN, PLANETEN, abschnittBei, weg } from './anflug.js?v=131';
+import { LAND } from './erde.js?v=131';
+import { weltalterStand } from './weltalter.js?v=131';
 
 const HG = 0x05070d;
 
@@ -718,6 +718,21 @@ function strahlSetzen(t) {
   treffMat.opacity = 0.80 * feuer * puls;
 }
 
+// --------------------------------------------------- Elf oder alle sechzehn
+// Fünf der sechzehn sind Beiwerk: drei weitere Sonnenrhythmen neben Eddy und
+// Hale, dazu Jupiter (steckt schon in der Großen Konjunktion) und Venus. Sie
+// liegen voreingestellt still und kommen auf Wunsch dazu.
+const ALLE_SCHLUESSEL = 'zeitkugel-alle-schalen';
+let alleSchalen = false;
+try { alleSchalen = localStorage.getItem(ALLE_SCHLUESSEL) === '1'; } catch (_) {}
+const sichtbar = (i) => alleSchalen || !SCHICHTEN[i].nebenbei;
+
+// „Schicht 3 von 11" — gezählt wird, was gerade zu sehen ist
+function stufenZahl(i) {
+  const gezeigt = SCHICHTEN.map((s, k) => k).filter(sichtbar);
+  return { nr: Math.max(1, gezeigt.indexOf(i) + 1), von: gezeigt.length };
+}
+
 // ------------------------------------------------------------------- Steuerung
 let ebene = 0;            // welche Schicht ist aktiv
 let versatz = 0, istVersatz = 0;   // schiebt die Kugel bei hochkantem Bild nach oben
@@ -752,7 +767,20 @@ function raumSetzen() {
 }
 
 function ebeneSetzen(neu, sanft = true) {
-  ebene = Math.max(0, Math.min(SCHICHTEN.length - 1, neu));
+  let ziel = Math.max(0, Math.min(SCHICHTEN.length - 1, neu));
+  // Stillgelegte Schalen werden übersprungen, in der Richtung der Bewegung
+  if (!sichtbar(ziel)) {
+    const hin = ziel >= ebene ? 1 : -1;
+    let k = ziel;
+    while (k >= 0 && k < SCHICHTEN.length && !sichtbar(k)) k += hin;
+    if (k < 0 || k >= SCHICHTEN.length) {
+      k = ziel;
+      while (k >= 0 && k < SCHICHTEN.length && !sichtbar(k)) k -= hin;
+    }
+    if (k < 0 || k >= SCHICHTEN.length) return;
+    ziel = k;
+  }
+  ebene = ziel;
   raumSetzen();
   if (!sanft) { istAbstand = zielAbstand; istVersatz = versatz; }
   ausrichten = true;
@@ -764,6 +792,7 @@ function ebeneSetzen(neu, sanft = true) {
 
 // Zielopazität je Schale abhängig von der aktiven Ebene
 function zielOpazitaet(i, rolle) {
+  if (!sichtbar(i)) return 0;
   // Durchstoßene Schalen springen auf und bleiben als offene Hälften am Rand
   // stehen — je weiter man eingetaucht ist, desto blasser werden sie.
   if (i < ebene) {
@@ -1006,8 +1035,10 @@ const LINEAL_TEXTE = [
 })();
 
 function linealMarkieren() {
-  [...document.getElementById('linealAchse').children]
-    .forEach((m, i) => m.classList.toggle('aktiv', i === ebene));
+  [...document.getElementById('linealAchse').children].forEach((m, i) => {
+    m.classList.toggle('aktiv', i === ebene);
+    m.classList.toggle('still', !sichtbar(i));
+  });
 }
 
 // -------------------------------------------- Die linke Spalte am Handy
@@ -1047,8 +1078,8 @@ const streifenChronik = document.getElementById('streifenChronik');
 function streifenFuellen() {
   const s = SCHICHTEN[ebene];
   streifen.style.setProperty('--ton', s.farbe);
-  streifenSchicht.textContent =
-    `Schicht ${ebene + 1} von ${SCHICHTEN.length} · ${s.name}`;
+  const z = stufenZahl(ebene);
+  streifenSchicht.textContent = `Schicht ${z.nr} von ${z.von} · ${s.name}`;
   if (s.echtzeit) {
     streifenStand.textContent = s.dauer;
   } else {
@@ -1274,24 +1305,56 @@ document.querySelectorAll('#zeitSchritte button').forEach(b => {
 
 // Tiefenleiste
 const leiste = document.getElementById('leiste');
-SCHICHTEN.forEach((s, i) => {
-  const b = document.createElement('button');
-  b.className = 'stufe';
-  b.style.setProperty('--ton', s.farbe);
-  // Außen der größte Punkt, innen der kleinste — die Zwiebel von oben gesehen
-  b.style.setProperty('--punktMass',
-    (1.35 - 0.75 * (i / (SCHICHTEN.length - 1))).toFixed(3));
-  b.innerHTML = `<span class="punktFeld"><span class="punkt"></span></span>
-    <span class="stufeText"><em>${s.name}</em><small>${s.dauer}</small></span>`;
-  b.onclick = () => ebeneSetzen(i);
-  leiste.appendChild(b);
-});
+
+function leisteBauen() {
+  leiste.innerHTML = '';
+  const gezeigt = SCHICHTEN.map((s, i) => i).filter(sichtbar);
+  gezeigt.forEach((i, k) => {
+    const s = SCHICHTEN[i];
+    const b = document.createElement('button');
+    b.className = 'stufe';
+    b.dataset.schicht = i;
+    b.style.setProperty('--ton', s.farbe);
+    // Außen der größte Punkt, innen der kleinste — die Zwiebel von oben gesehen
+    b.style.setProperty('--punktMass',
+      (1.35 - 0.75 * (k / Math.max(1, gezeigt.length - 1))).toFixed(3));
+    b.innerHTML = `<span class="punktFeld"><span class="punkt"></span></span>
+      <span class="stufeText"><em>${s.name}</em><small>${s.dauer}</small></span>`;
+    b.onclick = () => ebeneSetzen(i);
+    leiste.appendChild(b);
+  });
+
+  const mehr = document.createElement('button');
+  mehr.className = 'stufe mehrSchalen';
+  mehr.type = 'button';
+  mehr.title = alleSchalen
+    ? 'Halstatt, Suess-de-Vries, Gleißberg, Jupiter und Venus wieder stilllegen'
+    : 'Fünf weitere Schalen zeigen: Halstatt, Suess-de-Vries, Gleißberg, Jupiter, Venus';
+  mehr.innerHTML = `<span class="punktFeld"><span class="mehrZeichen">${
+    alleSchalen ? '−5' : '+5'}</span></span>
+    <span class="stufeText"><em>${alleSchalen ? 'nur die elf' : 'alle sechzehn'}</em>
+    <small>${alleSchalen ? 'fünf stilllegen' : 'fünf weitere'}</small></span>`;
+  mehr.onclick = () => {
+    alleSchalen = !alleSchalen;
+    try { localStorage.setItem(ALLE_SCHLUESSEL, alleSchalen ? '1' : '0'); } catch (_) {}
+    leisteBauen();
+    linealMarkieren();
+    ebeneSetzen(ebene);
+    tafelFuellen(SCHICHTEN[ebene]);
+  };
+  leiste.appendChild(mehr);
+  leisteMarkieren();
+}
+
 function leisteMarkieren() {
-  [...leiste.children].forEach((b, i) => {
+  [...leiste.children].forEach(b => {
+    const i = Number(b.dataset.schicht);
+    if (Number.isNaN(i)) return;
     b.classList.toggle('aktiv', i === ebene);
     b.classList.toggle('durch', i < ebene);
   });
 }
+leisteBauen();
 
 // ----------------------------------------------------------------- Infotafel
 const tafel = document.getElementById('tafel');
@@ -1366,7 +1429,7 @@ function tafelFuellen(s) {
   tafelUhr = setTimeout(() => {
     tafel.style.setProperty('--ton', s.farbe);
     tafel.innerHTML = `
-      <p class="stufeNr">Schicht ${String(SCHICHTEN.indexOf(s) + 1).padStart(2, '0')} von ${SCHICHTEN.length}</p>
+      <p class="stufeNr">Schicht ${String(stufenZahl(SCHICHTEN.indexOf(s)).nr).padStart(2, '0')} von ${stufenZahl(SCHICHTEN.indexOf(s)).von}</p>
       <h2>${s.name}</h2>
       <p class="dauer">${s.dauer}</p>
       <p class="unter">${s.untertitel}</p>

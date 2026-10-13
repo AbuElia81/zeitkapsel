@@ -944,6 +944,7 @@ export const SCHICHTEN = [
 
   {
     name: 'Halstatt-Zyklus',
+    nebenbei: true,   // erst sichtbar, wenn alle sechzehn gezeigt werden
     dauer: '2.400 Jahre',
     untertitel: 'Der große Sonnenrhythmus, auch Bray-Zyklus',
     quelle: 'aus ¹⁴C- und ¹⁰Be-Reihen in Baumringen und Eisbohrkernen',
@@ -1002,6 +1003,7 @@ export const SCHICHTEN = [
 
   {
     name: 'Suess-de-Vries-Zyklus',
+    nebenbei: true,   // erst sichtbar, wenn alle sechzehn gezeigt werden
     dauer: '208 Jahre',
     untertitel: 'Die großen Sonnenminima',
     quelle: 'Sonnenfleckenrekonstruktion und ¹⁴C',
@@ -1030,6 +1032,7 @@ export const SCHICHTEN = [
 
   {
     name: 'Gleißberg-Zyklus',
+    nebenbei: true,   // erst sichtbar, wenn alle sechzehn gezeigt werden
     dauer: '88 Jahre',
     untertitel: 'Die Hüllkurve der Sonnenflecken',
     quelle: 'Sonnenfleckenzählung seit 1749',
@@ -1166,6 +1169,7 @@ export const SCHICHTEN = [
 
   {
     name: 'Jupiter-Zyklus',
+    nebenbei: true,   // erst sichtbar, wenn alle sechzehn gezeigt werden
     dauer: '11,86 Jahre',
     untertitel: 'Ein Umlauf durch den Tierkreis, ein Zeichen je Jahr',
     quelle: 'siderische Umlaufzeit; chinesischer Jahresstern Suìxīng',
@@ -1197,6 +1201,7 @@ export const SCHICHTEN = [
 
   {
     name: 'Venus-Zyklus',
+    nebenbei: true,   // erst sichtbar, wenn alle sechzehn gezeigt werden
     dauer: '8 Jahre',
     untertitel: 'Die Rose der Venus — fünf Blätter in acht Jahren',
     quelle: 'synodische Periode 583,92 Tage; Venustafeln des Dresdner Kodex',
