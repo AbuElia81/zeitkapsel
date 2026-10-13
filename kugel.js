@@ -1,12 +1,12 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
          yugaLicht, menschZustand, masstab, kernStand, schiefe,
-         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=128';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=128';
-import { deuten } from './deutung.js?v=128';
-import { NACHBARN, PLANETEN, abschnittBei, weg } from './anflug.js?v=128';
-import { LAND } from './erde.js?v=128';
-import { weltalterStand } from './weltalter.js?v=128';
+         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=129';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=129';
+import { deuten } from './deutung.js?v=129';
+import { NACHBARN, PLANETEN, abschnittBei, weg } from './anflug.js?v=129';
+import { LAND } from './erde.js?v=129';
+import { weltalterStand } from './weltalter.js?v=129';
 
 const HG = 0x05070d;
 
@@ -1079,6 +1079,11 @@ function einstiegSchliessen() {
 document.getElementById('einstiegKnopf').onclick = () => { einstiegFeld.hidden = false; };
 document.getElementById('einstiegZu').onclick = einstiegSchliessen;
 document.getElementById('losKnopf').onclick = einstiegSchliessen;
+document.getElementById('anflugNochmal').onclick = () => {
+  einstiegSchliessen();
+  nochmal = true;
+  flugStarten(true);
+};
 
 // Der Einstieg kommt erst, wenn der Anflug durch ist
 function einstiegZeigen() {
@@ -1507,9 +1512,16 @@ const anflugFeld = document.getElementById('anflug');
 const anflugTitel = document.getElementById('anflugTitel');
 const anflugUnten = document.getElementById('anflugUnten');
 const himmelFeld = document.getElementById('himmel');
+const ANFLUG_SCHLUESSEL = 'zeitkugel-anflug-gesehen';
 let fliegt = false, flugAb = 0, flugTitel = '';
 
-function flugStarten() {
+function flugStarten(erzwingen = false) {
+  // Beim ersten Besuch von selbst, danach nur noch auf Wunsch
+  if (!erzwingen) {
+    try {
+      if (localStorage.getItem(ANFLUG_SCHLUESSEL)) { einstiegZeigen(); return; }
+    } catch (_) {}
+  }
   fliegt = true;
   flugAb = uhr.getElapsedTime();
   flug.visible = true;
@@ -1520,6 +1532,7 @@ function flugStarten() {
 function flugEnde() {
   if (!fliegt) return;
   fliegt = false;
+  try { localStorage.setItem(ANFLUG_SCHLUESSEL, '1'); } catch (_) {}
   flug.visible = false;
   anflugFeld.hidden = true;
   document.body.classList.remove('fliegt');
@@ -1527,8 +1540,10 @@ function flugEnde() {
   kamera.position.set(0, 0, istAbstand);
   kamera.rotation.set(0, 0, 0);
   kamera.updateProjectionMatrix();
-  einstiegZeigen();
+  if (!nochmal) einstiegZeigen();
+  nochmal = false;
 }
+let nochmal = false;
 document.getElementById('anflugZu').onclick = flugEnde;
 
 function flugBild(t) {

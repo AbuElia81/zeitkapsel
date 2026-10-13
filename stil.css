@@ -863,3 +863,13 @@ body.fliegt #lineal, body.fliegt #hinweisZeile { opacity: 0; pointer-events: non
 @media (max-width: 900px) {
   #zeitleiste #zeitMarke { order: 0; margin: 0 0 .35rem; }
 }
+
+/* Loslegen und der Anflug noch einmal stehen nebeneinander */
+.einstiegKnoepfe { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.2rem 0 0; }
+#anflugNochmal {
+  padding: .6rem 1.1rem; border-radius: 2px;
+  border: 1px solid var(--linie); background: transparent;
+  color: var(--gedaempft); font: inherit; font-size: .78rem; letter-spacing: .06em;
+  cursor: pointer; transition: color .25s, border-color .25s;
+}
+#anflugNochmal:hover { color: #f4ecdd; border-color: rgba(236,231,220,.4); }
