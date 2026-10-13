@@ -810,3 +810,47 @@ main { position: relative; z-index: 1; height: 100%; }
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
 }
+
+/* ------------------------------------------------------------- Der Anflug */
+#anflug {
+  position: absolute; inset: 0; z-index: 7; pointer-events: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding: 0 1.2rem clamp(3rem, 12vh, 7rem);
+  text-align: center;
+}
+#anflug[hidden] { display: none; }
+#anflugTitel {
+  margin: 0 0 .35rem; font-size: clamp(1.5rem, 5vw, 2.6rem); font-weight: 400;
+  letter-spacing: .04em; color: #f4ecdd; line-height: 1.1;
+  text-shadow: 0 0 30px rgba(0,0,0,.9);
+  transition: opacity .5s;
+}
+#anflugUnten {
+  margin: 0; font-size: clamp(.74rem, 2.4vw, .92rem); line-height: 1.5;
+  letter-spacing: .04em; color: #a99d88; max-width: 28rem;
+  text-shadow: 0 0 20px rgba(0,0,0,.9);
+  transition: opacity .5s;
+}
+#anflugMarke {
+  position: absolute; margin: 0; font-size: .66rem; letter-spacing: .14em;
+  text-transform: uppercase; color: #cfc6b6; white-space: nowrap;
+  text-shadow: 0 0 14px rgba(0,0,0,.95); opacity: 0;
+  transition: opacity .35s;
+}
+#anflugZu {
+  position: absolute; top: clamp(.9rem, 3vh, 1.6rem); right: clamp(.8rem, 3vw, 1.8rem);
+  pointer-events: auto;
+  padding: .5rem .9rem; border-radius: 2px;
+  border: 1px solid var(--linie); background: rgba(10,13,22,.6);
+  color: #ddd5c6; font: inherit; font-size: .72rem; letter-spacing: .08em;
+  cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+#anflugZu:hover { border-color: rgba(236,231,220,.4); color: #f4ecdd; }
+
+/* Während des Anflugs tritt alle Bedienung ab */
+body.fliegt #kopf, body.fliegt #leiste, body.fliegt #streifen,
+body.fliegt #zeitleiste, body.fliegt #linkeSpalte, body.fliegt #pult,
+body.fliegt #lineal, body.fliegt #hinweisZeile { opacity: 0; pointer-events: none; }
+#kopf, #leiste, #streifen, #zeitleiste, #linkeSpalte, #pult, #lineal {
+  transition: opacity .8s;
+}

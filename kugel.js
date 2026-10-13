@@ -1,10 +1,11 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
          yugaLicht, menschZustand, masstab, kernStand, schiefe,
-         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=120';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=120';
-import { deuten } from './deutung.js?v=120';
-import { weltalterStand } from './weltalter.js?v=120';
+         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=122';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=122';
+import { deuten } from './deutung.js?v=122';
+import { NACHBARN, PLANETEN, abschnittBei, weg } from './anflug.js?v=122';
+import { weltalterStand } from './weltalter.js?v=122';
 
 const HG = 0x05070d;
 
@@ -1030,9 +1031,12 @@ document.getElementById('einstiegKnopf').onclick = () => { einstiegFeld.hidden =
 document.getElementById('einstiegZu').onclick = einstiegSchliessen;
 document.getElementById('losKnopf').onclick = einstiegSchliessen;
 
-try {
-  if (!localStorage.getItem(EINSTIEG_SCHLUESSEL)) einstiegFeld.hidden = false;
-} catch (_) { einstiegFeld.hidden = false; }
+// Der Einstieg kommt erst, wenn der Anflug durch ist
+function einstiegZeigen() {
+  try {
+    if (!localStorage.getItem(EINSTIEG_SCHLUESSEL)) einstiegFeld.hidden = false;
+  } catch (_) { einstiegFeld.hidden = false; }
+}
 
 // ---------------------------------------------------------------- Weltalter
 // Die Vergleichstafeln stehen in einer eigenen Ansicht, damit die Schicht-Tafel
@@ -1327,6 +1331,181 @@ function tafelFuellen(s) {
   }, 160);
 }
 
+// --------------------------------------------------------------- Der Anflug
+// Von außerhalb der Milchstraße bis zur Erde. Die Entfernungen sind gestaucht —
+// im wahren Maßstab wäre das eine schwarze Leinwand mit einem Punkt darin. Die
+// Reihenfolge stimmt, und die Zahlen stehen in den Beschriftungen.
+const FLUG_DAUER = 11.5;        // Sekunden
+const FLUG_FERN = 1500;         // von dort fällt die Kamera
+
+function schriftSprite(text, farbe = '#cfc6b6', gross = 44) {
+  const c = document.createElement('canvas');
+  const x0 = c.getContext('2d');
+  x0.font = `${gross}px Georgia, serif`;
+  c.width = Math.ceil(x0.measureText(text).width) + 40;
+  c.height = gross * 2;
+  const x = c.getContext('2d');
+  x.font = `${gross}px Georgia, "Times New Roman", serif`;
+  x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.shadowColor = 'rgba(0,0,0,0.95)'; x.shadowBlur = 14;
+  x.fillStyle = farbe;
+  x.fillText(text, c.width / 2, c.height / 2);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: t, transparent: true, opacity: 0.9, depthWrite: false
+  }));
+  sp.scale.set(c.width / gross * 1.5, c.height / gross * 1.5, 1);
+  return sp;
+}
+
+const flug = new THREE.Group();
+szene.add(flug);
+
+// Der Korridor aus Sternen, durch den die Kamera fällt
+(() => {
+  const n = 5000, pos = new Float32Array(n * 3), hell = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) {
+    const z = -160 + Math.random() * (FLUG_FERN + 400);
+    const w = Math.random() * Math.PI * 2;
+    const r = 30 + Math.pow(Math.random(), 0.55) * 460;
+    pos[i * 3] = Math.cos(w) * r;
+    pos[i * 3 + 1] = Math.sin(w) * r * 0.72;
+    pos[i * 3 + 2] = z;
+    const g = 0.55 + Math.random() * 0.45;
+    hell[i * 3] = g; hell[i * 3 + 1] = g * (0.93 + Math.random() * 0.07);
+    hell[i * 3 + 2] = g * (0.95 + Math.random() * 0.05);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setAttribute('color', new THREE.BufferAttribute(hell, 3));
+  flug.add(new THREE.Points(g, new THREE.PointsMaterial({
+    size: 1.5, sizeAttenuation: true, vertexColors: true,
+    transparent: true, opacity: 0.95, depthWrite: false
+  })));
+})();
+
+// Die Nachbarsterne, von fern nach nah
+const nachbarZ = [1230, 980, 760, 575];
+NACHBARN.forEach((n, i) => {
+  const z = nachbarZ[i];
+  const x = (i % 2 ? 1 : -1) * (58 + i * 26);
+  const y = (i % 3 === 0 ? 1 : -1) * (24 + i * 14);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: SCHEIN, color: n.farbe, transparent: true, opacity: 0.95,
+    blending: THREE.AdditiveBlending, depthWrite: false
+  }));
+  sp.position.set(x, y, z);
+  sp.scale.setScalar(26 * n.gross);
+  flug.add(sp);
+  const be = schriftSprite(`${n.name} · ${String(n.lj).replace('.', ',')} Lj`);
+  be.position.set(x, y - 15 * n.gross, z);
+  flug.add(be);
+});
+
+// Das Sonnensystem: Bahnen quer zum Flug, auf jeder ihr Planet
+const planetZ = [330, 282, 238, 196, 142, 106, 76];
+PLANETEN.forEach((p, i) => {
+  const z = planetZ[i];
+  const r = 15 + p.ae * 6.2;
+  const bahn = new THREE.Group();
+  bahn.position.z = z;
+  bahn.rotation.x = 1.18;
+  bahn.rotation.z = 0.2 + i * 0.1;
+  const kreis = new THREE.Mesh(
+    new THREE.RingGeometry(r - 0.22, r + 0.22, 160),
+    new THREE.MeshBasicMaterial({
+      color: p.farbe, transparent: true, opacity: 0.22,
+      side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending
+    }));
+  bahn.add(kreis);
+  flug.add(bahn);
+
+  const w = 0.6 + i * 1.1;
+  const px = Math.cos(w) * r * 0.92, py = Math.sin(w) * r * 0.42;
+  const kugel = new THREE.Mesh(
+    new THREE.SphereGeometry(p.gross * 2.6, 24, 18),
+    new THREE.MeshBasicMaterial({ color: p.farbe, transparent: true, opacity: 0.95 }));
+  kugel.position.set(px, py, z);
+  flug.add(kugel);
+  if (p.ring) {
+    const sr = new THREE.Mesh(
+      new THREE.RingGeometry(p.gross * 3.4, p.gross * 5.4, 48),
+      new THREE.MeshBasicMaterial({ color: 0xd9c08a, transparent: true,
+        opacity: 0.55, side: THREE.DoubleSide, depthWrite: false }));
+    sr.position.copy(kugel.position);
+    sr.rotation.x = 1.1; sr.rotation.y = 0.4;
+    flug.add(sr);
+  }
+  const be = schriftSprite(`${p.name} · ${String(p.ae).replace('.', ',')} AE`, '#b9ae9a', 38);
+  be.position.set(px, py - p.gross * 5.2, z);
+  flug.add(be);
+});
+
+// Die Sonne zieht kurz vor dem Ziel links vorbei
+const sonne = new THREE.Sprite(new THREE.SpriteMaterial({
+  map: SCHEIN, color: 0xfff0c4, transparent: true, opacity: 1,
+  blending: THREE.AdditiveBlending, depthWrite: false
+}));
+sonne.position.set(-30, 11, 46);
+sonne.scale.setScalar(52);
+flug.add(sonne);
+const sonneText = schriftSprite('Die Sonne · 1 AE', '#e8d9b4', 40);
+sonneText.position.set(-30, -5, 46);
+flug.add(sonneText);
+
+const anflugFeld = document.getElementById('anflug');
+const anflugTitel = document.getElementById('anflugTitel');
+const anflugUnten = document.getElementById('anflugUnten');
+const himmelFeld = document.getElementById('himmel');
+let fliegt = false, flugAb = 0, flugTitel = '';
+
+function flugStarten() {
+  fliegt = true;
+  flugAb = uhr.getElapsedTime();
+  flug.visible = true;
+  anflugFeld.hidden = false;
+  document.body.classList.add('fliegt');
+}
+
+function flugEnde() {
+  if (!fliegt) return;
+  fliegt = false;
+  flug.visible = false;
+  anflugFeld.hidden = true;
+  document.body.classList.remove('fliegt');
+  himmelFeld.style.transform = '';
+  kamera.position.set(0, 0, istAbstand);
+  kamera.rotation.set(0, 0, 0);
+  kamera.updateProjectionMatrix();
+  einstiegZeigen();
+}
+document.getElementById('anflugZu').onclick = flugEnde;
+
+function flugBild(t) {
+  const p = Math.min(1, (t - flugAb) / FLUG_DAUER);
+  const g = weg(p);
+  // Die Kamera fällt, taumelt leicht und richtet sich zum Ende hin aus
+  const rest = 1 - g;
+  kamera.position.set(
+    Math.sin(p * 5.1) * 9 * rest,
+    Math.cos(p * 3.7) * 6 * rest,
+    istAbstand + (FLUG_FERN - istAbstand) * rest);
+  kamera.lookAt(0, 0, 0);
+  // Die Milchstraße im Hintergrund weitet sich beim Hineinfliegen
+  himmelFeld.style.transform = `scale(${(1.06 + 1.5 * rest).toFixed(3)})`;
+
+  const a = abschnittBei(p);
+  if (a.titel !== flugTitel) {
+    flugTitel = a.titel;
+    anflugTitel.textContent = a.titel;
+    anflugUnten.textContent = a.unten;
+  }
+  const rand = Math.min(1, p * 9, (1 - p) * 7);
+  anflugTitel.style.opacity = anflugUnten.style.opacity = Math.max(0, rand).toFixed(2);
+  if (p >= 1) flugEnde();
+}
+
 // ----------------------------------------------------------------- Bildschleife
 const uhr = new THREE.Clock();
 function bild() {
@@ -1348,7 +1527,7 @@ function bild() {
 
   // Kamera sanft nachziehen
   istAbstand += (zielAbstand - istAbstand) * Math.min(1, dt * 3.4);
-  kamera.position.z = istAbstand;
+  if (!fliegt) kamera.position.z = istAbstand;
   const hoehe = 2 * istAbstand * Math.tan((kamera.fov / 2) * Math.PI / 180);
   // Die Achse folgt der Schiefe des eingestellten Jahres, weich nachgezogen
   istNeigung += (zielNeigung - istNeigung) * Math.min(1, dt * 4.5);
@@ -1403,6 +1582,7 @@ function bild() {
 
   planetSetzen();
   strahlSetzen(t);
+  if (fliegt) flugBild(t);
   sterne.rotation.y += dt * 0.004;
   renderer.render(szene, kamera);
 }
@@ -1421,6 +1601,7 @@ groesse();
 ebeneSetzen(0, false);
 zeitSetzen(jahrJetzt(), true);
 bild();
+flugStarten();
 
 // Solange der Schieber auf der Gegenwart steht, läuft die Zeit weiter
 setInterval(() => { if (amJetzt) zeitSetzen(jahrJetzt(), true, false, false); }, 1000);

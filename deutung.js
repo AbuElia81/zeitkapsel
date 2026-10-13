@@ -6,8 +6,8 @@
    selbst von den Zeitaltern sprechen. Gleiche Zeit ergibt immer dieselbe
    Deutung — gewürfelt wird nichts.
    --------------------------------------------------------------------- */
-import { SCHICHTEN, anteil, segmentBei, yugaLicht, jahrText, kernStand, schiefe } from './zyklen.js?v=120';
-import { epocheVon } from './geschichte.js?v=120';
+import { SCHICHTEN, anteil, segmentBei, yugaLicht, jahrText, kernStand, schiefe } from './zyklen.js?v=122';
+import { epocheVon } from './geschichte.js?v=122';
 
 const S = (name) => SCHICHTEN.find(s => s.name === name);
 const SONNENSCHALEN = ['Halstatt-Zyklus', 'Eddy-Zyklus', 'Suess-de-Vries-Zyklus',
