@@ -1,9 +1,9 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, kernStand, RING_ANKER } from './zyklen.js?v=109';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=109';
-import { deuten } from './deutung.js?v=109';
-import { weltalterStand } from './weltalter.js?v=109';
+         yugaLicht, menschZustand, masstab, kernStand, RING_ANKER } from './zyklen.js?v=113';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=113';
+import { deuten } from './deutung.js?v=113';
+import { weltalterStand } from './weltalter.js?v=113';
 
 const HG = 0x05070d;
 
@@ -69,6 +69,9 @@ const TON = {
   'agn-dunkel': [0.05, 0.34],
   leer:        [0.0, 0.0]
 };
+
+// Wie viel vom Band oben der Name des Zyklus einnimmt
+const KOPF_HOCH = 0.235;
 
 // Größte Schriftgröße, mit der der Text noch in die Breite passt
 function passend(x, text, breite, basis, minimum, gewicht) {
@@ -141,34 +144,56 @@ function bandTextur(schicht, segmente, hoehe, klein, felder) {
       if (seg.name) {
         const gN = passend(x, seg.name, platz, gross, 19 * kf, 600);
         x.font = `600 ${gN}px Georgia, "Times New Roman", serif`;
-        x.fillText(seg.name, mx, klein ? H / 2 : H * 0.40);
+        x.fillText(seg.name, mx, klein ? H / 2 : H * 0.49);
       }
       if (!klein) {
         x.fillStyle = `rgba(233,223,203,${Math.min(0.88, 0.35 + linie * 0.5)})`;
         const gD = passend(x, dauerText, platz, mittel, 15 * kf, 400);
         x.font = `400 ${gD}px Georgia, serif`;
-        x.fillText(dauerText, mx, H * 0.565);
+        x.fillText(dauerText, mx, H * 0.655);
         if (seg.zusatz) {
           const gZ = passend(x, seg.zusatz, platz, mittel * 0.86, 14 * kf, 400);
           x.font = `400 ${gZ}px Georgia, serif`;
           x.fillStyle = `rgba(255,243,221,${Math.min(0.8, 0.28 + linie * 0.45)})`;
-          x.fillText(seg.zusatz, mx, H * 0.70);
+          x.fillText(seg.zusatz, mx, H * 0.79);
         }
       }
     } else if (platz >= 14 && seg.name) {
       // Schmales Feld (Sandhi): Dauer quer zum Band, wie in der Vorlage
       x.save();
-      x.translate(mx, H / 2);
+      x.translate(mx, H * 0.63);
       x.rotate(-Math.PI / 2);
       x.fillStyle = rgb(Math.min(1, linie + 0.25));
       x.fillStyle = `rgba(255,243,221,${Math.min(0.95, 0.45 + linie * 0.55)})`;
-      const gQ = Math.min(passend(x, dauerText, H - 26 * kf, 30 * kf, 14 * kf, 400), platz * 1.4);
+      const gQ = Math.min(passend(x, dauerText, H * 0.62, 30 * kf, 14 * kf, 400), platz * 1.4);
       x.font = `400 ${gQ}px Georgia, serif`;
       x.fillText(dauerText, 0, 0);
       x.restore();
     }
     x.shadowBlur = 0;
   }
+  // Der Name des Zyklus läuft als Kopfzeile rund um das Band — sechsmal, damit
+  // er aus jeder Blickrichtung dasteht. Ein Tipp darauf öffnet die Erklärung.
+  if (!felder && !klein) {
+    const kopf = `${schicht.name.toUpperCase()}  ·  ${schicht.dauer.toUpperCase()}`;
+    const WIE_OFT = 4;                       // viermal rund herum
+    const kg = passend(x, kopf, (B / WIE_OFT) * 0.76, 26 * k, 10 * k, 600);
+    x.save();
+    x.beginPath(); x.rect(0, 0, B, H * KOPF_HOCH); x.clip();
+    x.fillStyle = rgb(0.30);
+    x.fillRect(0, 0, B, H * KOPF_HOCH);
+    x.strokeStyle = rgb(0.75); x.lineWidth = 2.5 * k;
+    x.beginPath(); x.moveTo(0, H * KOPF_HOCH); x.lineTo(B, H * KOPF_HOCH); x.stroke();
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.shadowColor = 'rgba(0,0,0,0.9)'; x.shadowBlur = 8 * k;
+    x.font = `600 ${kg}px Georgia, "Times New Roman", serif`;
+    x.fillStyle = 'rgba(255,243,221,0.92)';
+    for (let i = 0; i < WIE_OFT; i++)
+      x.fillText(kopf, (i + 0.5) * B / WIE_OFT, H * KOPF_HOCH * 0.52);
+    x.shadowBlur = 0;
+    x.restore();
+  }
+
   // Ränder
   if (felder) { const t0 = fertig(c); return t0; }
   x.strokeStyle = rgb(0.55); x.lineWidth = 4 * k;
@@ -631,6 +656,17 @@ function bandGetroffen(e) {
     .filter(t => t.object.material.opacity > 0.08);
   if (!treffer.length) return false;
   const i = treffer[0].object.userData.schicht;
+  // Die Kopfzeile mit dem Namen liegt oben im Band (v nahe 1): Sie führt zur
+  // Erklärung. Der Rest des Bandes taucht eine Schale tiefer.
+  // Die Kopfzeile ist am Bildschirm nur ein schmaler Streifen, weil das Band
+  // sich dort wegkrümmt — der Griffbereich reicht darum etwas tiefer als die
+  // Schrift. Bis zum Namen des Abschnitts (bei 0,51) bleibt Abstand.
+  const v = treffer[0].uv ? treffer[0].uv.y : 0;
+  if (v > 0.62) {
+    if (i !== ebene) ebeneSetzen(i);
+    erklaerungOeffnen();
+    return true;
+  }
   ebeneSetzen(i < ebene ? i : ebene + 1);
   return true;
 }
@@ -796,12 +832,20 @@ document.getElementById('spalteZuKnopf').onclick = spalteZu;
 // Am Handy läuft unter der Kugel ein schmaler Streifen mit. Ein Tipp darauf
 // klappt dieselbe Tafel auf, die am Rechner ohnehin links steht.
 streifen.onclick = () => {
-  const auf = !spalte.classList.contains('auf');
+  if (spalte.classList.contains('auf')) spalteZu(); else erklaerungOeffnen();
+};
+
+// Die Tafel zur laufenden Schicht aufschlagen — vom Streifen oder vom Namen
+// im Band aus. Am Rechner steht sie ohnehin offen; dort wird nur gescrollt.
+function erklaerungOeffnen() {
   deutungFeld.hidden = true;
   document.getElementById('deutungKnopf').classList.remove('an');
-  spalte.classList.toggle('auf', auf);
-  streifen.classList.toggle('an', auf);
-};
+  if (innerWidth <= 900) {
+    spalte.classList.add('auf');
+    streifen.classList.add('an');
+  }
+  tafel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
 
 // Was im Streifen steht: laufende Schicht, laufender Abschnitt, nächstes Ereignis
 const streifenSchicht = document.getElementById('streifenSchicht');

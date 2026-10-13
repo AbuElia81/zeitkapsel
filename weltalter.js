@@ -10,7 +10,7 @@
    genannt ist — nichts hiervon ist hier erfunden.
    --------------------------------------------------------------------- */
 
-import { jahrText } from './zyklen.js?v=109';
+import { jahrText } from './zyklen.js?v=113';
 
 const CHALDAEISCH = ['Saturn', 'Jupiter', 'Mars', 'Sonne', 'Venus', 'Merkur', 'Mond'];
 const TIERKREIS_AB_KREBS = ['Krebs', 'Löwe', 'Jungfrau', 'Waage', 'Skorpion', 'Schütze',
