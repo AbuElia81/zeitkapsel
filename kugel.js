@@ -1,8 +1,8 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
-         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=81';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=81';
-import { deuten } from './deutung.js?v=81';
+         yugaLicht, menschZustand, masstab, RING_ANKER } from './zyklen.js?v=91';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=91';
+import { deuten } from './deutung.js?v=91';
 
 const HG = 0x05070d;
 
@@ -68,6 +68,10 @@ function passend(x, text, breite, basis, minimum, gewicht) {
 
 function bandTextur(schicht, segmente, hoehe, klein) {
   const B = 4096, H = hoehe;
+  // Das Band ist jetzt deutlich höher als früher. Damit die Schrift nicht in
+  // die Länge gezogen wird, wächst die Leinwand mit — und alle Schriftgrade
+  // wachsen im selben Maß mit ihr.
+  const k = H / (klein ? 128 : 256);
   const c = document.createElement('canvas');
   c.width = B; c.height = H;
   const x = c.getContext('2d');
@@ -91,19 +95,19 @@ function bandTextur(schicht, segmente, hoehe, klein) {
     if (seg.art === 'sandhi') {
       x.save();
       x.beginPath(); x.rect(x0, 0, br, H); x.clip();
-      x.strokeStyle = rgb(0.35); x.lineWidth = 2;
-      for (let s = -H; s < br + H; s += 14) {
+      x.strokeStyle = rgb(0.35); x.lineWidth = 2 * k;
+      for (let s = -H; s < br + H; s += 14 * k) {
         x.beginPath(); x.moveTo(x0 + s, H); x.lineTo(x0 + s + H, 0); x.stroke();
       }
       x.restore();
     }
 
     // Trennlinien
-    x.strokeStyle = rgb(linie * 0.9); x.lineWidth = 3;
+    x.strokeStyle = rgb(linie * 0.9); x.lineWidth = 3 * k;
     x.beginPath(); x.moveTo(x0, 0); x.lineTo(x0, H); x.stroke();
 
     // Beschriftung — die Schrift wird so weit verkleinert, bis sie ins Feld passt
-    const gross = klein ? 34 : 52, mittel = klein ? 26 : 38;
+    const gross = (klein ? 34 : 52) * k, mittel = (klein ? 26 : 38) * k;
     const mx = x0 + br / 2, platz = br - 18;
     x.textAlign = 'center'; x.textBaseline = 'middle';
     x.shadowColor = 'rgba(0,0,0,0.9)'; x.shadowBlur = 10;
@@ -114,17 +118,17 @@ function bandTextur(schicht, segmente, hoehe, klein) {
       // Waagerecht: Name oben, Dauer und Richtung darunter
       x.fillStyle = rgb(Math.min(1, linie + 0.25));
       if (seg.name) {
-        const gN = passend(x, seg.name, platz, gross, 19, 600);
+        const gN = passend(x, seg.name, platz, gross, 19 * k, 600);
         x.font = `600 ${gN}px Georgia, "Times New Roman", serif`;
         x.fillText(seg.name, mx, klein ? H / 2 : H * 0.33);
       }
       if (!klein) {
         x.fillStyle = rgb(linie * 0.78);
-        const gD = passend(x, dauerText, platz, mittel, 15, 400);
+        const gD = passend(x, dauerText, platz, mittel, 15 * k, 400);
         x.font = `400 ${gD}px Georgia, serif`;
         x.fillText(dauerText, mx, H * 0.63);
         if (seg.zusatz) {
-          const gZ = passend(x, seg.zusatz, platz, mittel * 0.86, 14, 400);
+          const gZ = passend(x, seg.zusatz, platz, mittel * 0.86, 14 * k, 400);
           x.font = `400 ${gZ}px Georgia, serif`;
           x.fillStyle = rgb(linie * 0.62);
           x.fillText(seg.zusatz, mx, H * 0.86);
@@ -136,7 +140,7 @@ function bandTextur(schicht, segmente, hoehe, klein) {
       x.translate(mx, H / 2);
       x.rotate(-Math.PI / 2);
       x.fillStyle = rgb(Math.min(1, linie + 0.25));
-      const gQ = Math.min(passend(x, dauerText, H - 26, 30, 14, 400), platz * 1.4);
+      const gQ = Math.min(passend(x, dauerText, H - 26 * k, 30 * k, 14 * k, 400), platz * 1.4);
       x.font = `400 ${gQ}px Georgia, serif`;
       x.fillText(dauerText, 0, 0);
       x.restore();
@@ -144,8 +148,9 @@ function bandTextur(schicht, segmente, hoehe, klein) {
     x.shadowBlur = 0;
   }
   // Ränder
-  x.strokeStyle = rgb(0.55); x.lineWidth = 4;
-  x.beginPath(); x.moveTo(0, 2); x.lineTo(B, 2); x.moveTo(0, H - 2); x.lineTo(B, H - 2); x.stroke();
+  x.strokeStyle = rgb(0.55); x.lineWidth = 4 * k;
+  x.beginPath(); x.moveTo(0, 2 * k); x.lineTo(B, 2 * k);
+  x.moveTo(0, H - 2 * k); x.lineTo(B, H - 2 * k); x.stroke();
 
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
@@ -213,7 +218,7 @@ function gitterkugel(r, farbe, meridiane = 16, parallelen = 9, phiVon = 0, phiLa
 // überblendet, je nachdem, wo der Zeitschieber im Yuga-Zyklus steht.
 const STUFEN = ['kali', 'dwapara', 'treta', 'satya'];
 const HERZ_VERSATZ = { x: 0.01, y: -0.165 };   // Lage des Herzens im Bild
-let menschTeile = [], herzSchein = null, menschGrund = 1.55;
+let menschTeile = [], herzSchein = null, menschGrund = 1.55, menschBuehne = null;
 
 function mensch(gruppe, r, teile) {
   const lader = new THREE.TextureLoader();
@@ -222,6 +227,7 @@ function mensch(gruppe, r, teile) {
   // während sich die Zwiebelschalen um ihn drehen.
   const buehneMensch = new THREE.Group();
   szene.add(buehneMensch);
+  menschBuehne = buehneMensch;
 
   STUFEN.forEach((name, k) => {
     const tex = lader.load(`bilder/mensch-${name}.jpg`);
@@ -230,6 +236,19 @@ function mensch(gruppe, r, teile) {
       map: tex, transparent: true, opacity: k === 0 ? 1 : 0,
       blending: THREE.AdditiveBlending, depthWrite: false
     });
+    // Ganz nah am Kern wuerde man sonst den rechteckigen Bildrand sehen.
+    // Ein schmaler weicher Saum loest die Figur in den Sternenhimmel auf.
+    mat.onBeforeCompile = (shader) => {
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <alphatest_fragment>',
+        `float saum =
+           smoothstep(0.0, 0.115, vMapUv.x) * smoothstep(1.0, 0.885, vMapUv.x) *
+           smoothstep(0.0, 0.075, vMapUv.y) * smoothstep(1.0, 0.925, vMapUv.y);
+         float licht = max(diffuseColor.r, max(diffuseColor.g, diffuseColor.b));
+         diffuseColor.rgb = max(diffuseColor.rgb - 0.055, 0.0) * 1.058 * saum;
+         diffuseColor.a *= saum * clamp(licht * 3.2, 0.0, 1.0);
+         #include <alphatest_fragment>`);
+    };
     const sp = new THREE.Sprite(mat);
     sp.scale.setScalar(menschGrund);
     // So verschoben, dass das Herz der Figur genau im Mittelpunkt der Kugel liegt
@@ -269,6 +288,11 @@ function menschSetzen(licht) {
 }
 
 // ------------------------------------------------------------ Schichten bauen
+// Wie hoch das beschriftete Band um jede Schale steht. Ein breites Band laesst
+// den Zyklus auch auf dem Handy lesen — die Schrift waechst im selben Mass mit.
+const BAND_K = 1.7;
+const nebenHoch = 0.055 * BAND_K;
+
 const schalen = SCHICHTEN.map((schicht, i) => {
   const gruppe = new THREE.Group();
   const farbe = new THREE.Color(schicht.farbe);
@@ -276,11 +300,13 @@ const schalen = SCHICHTEN.map((schicht, i) => {
   const teile = [];
   const haelften = [];
 
-  const bandHalb = schicht.kern ? 0.085 : 0.105;
+  // Der Kernring waechst nur wenig mit: aus naechster Naehe wuerde er sonst
+  // als rote Flaeche vor der Figur stehen.
+  const bandHalb = schicht.kern ? 0.085 * 1.25 : 0.105 * BAND_K;
   const bandRadius = schicht.kern ? r * 1.72 : r;
-  const bandTief = schicht.kern ? -0.62 : 0;   // der Kernring liegt unter der Figur
+  const bandTief = schicht.kern ? -1.0 : 0;    // der Kernring liegt unter der Figur
   const bandMat = new THREE.MeshBasicMaterial({
-    map: bandTextur(schicht, schicht.segmente, 256, false),
+    map: bandTextur(schicht, schicht.segmente, Math.round(256 * BAND_K), false),
     transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 1
   });
   teile.push({ mat: bandMat, rolle: 'band' });
@@ -288,7 +314,7 @@ const schalen = SCHICHTEN.map((schicht, i) => {
   let nebenMat = null;
   if (schicht.nebenband) {
     nebenMat = new THREE.MeshBasicMaterial({
-      map: bandTextur(schicht, schicht.nebenband.segmente, 128, true),
+      map: bandTextur(schicht, schicht.nebenband.segmente, Math.round(128 * BAND_K), true),
       transparent: true, side: THREE.FrontSide, depthWrite: false, opacity: 1
     });
     teile.push({ mat: nebenMat, rolle: 'band' });
@@ -319,7 +345,8 @@ const schalen = SCHICHTEN.map((schicht, i) => {
 
     if (nebenMat) {
       halb.add(new THREE.Mesh(uvAusschnitt(
-        new THREE.SphereGeometry(r * 1.035, 110, 8, phiVon, lang, Math.PI / 2 - 0.20, 0.055),
+        new THREE.SphereGeometry(r * 1.035, 110, 8, phiVon, lang,
+          Math.PI / 2 - bandHalb - 0.045 - nebenHoch, nebenHoch),
         phiVon, lang), nebenMat));
     }
 
@@ -375,20 +402,43 @@ markenAktualisieren();
 
 // ------------------------------------------------------------------- Steuerung
 let ebene = 0;            // welche Schicht ist aktiv
-let versatz = 0;          // schiebt die Kugel bei hochkantem Bild nach oben
+let versatz = 0, istVersatz = 0;   // schiebt die Kugel bei hochkantem Bild nach oben
 let zielAbstand = 14, istAbstand = 14;
 
+let tafelFrei = false;    // am Handy steht unten ein Pop-up — die Kugel rueckt hoch
+
 function abstandFuer(e) {
+  const schmal = kamera.aspect < 0.9;
+  // Pop-up unten: die Kugel muss in die obere Haelfte passen. Die hohe Figur
+  // im Kern braucht dafuer mehr Abstand als die breite Schale.
+  const platz = tafelFrei && schmal ? (SCHICHTEN[e].kern ? 1.9 : 1.18) : 1;
+  if (SCHICHTEN[e].kern) {
+    // Im Kern zaehlt nicht mehr die Schale, sondern die Figur. Sie ist hoch und
+    // nicht breit — darum wird hier auf die Hoehe eingepasst statt auf die
+    // Breite. Der Mensch rueckt damit ganz nah heran.
+    const sicht = menschGrund / 0.66;
+    return platz * sicht / (2 * Math.tan((kamera.fov / 2) * Math.PI / 180));
+  }
   const r = SCHICHTEN[e].radius;
-  const grund = r * (e === SCHICHTEN.length - 1 ? 3.3 : 3.15) + 0.55;
+  const grund = r * 3.15 + 0.55;
   // Bei hochkantem Bild ist das Sichtfeld horizontal enger — dann weiter weg
-  return grund / Math.min(1, kamera.aspect || 1);
+  return platz * grund / Math.min(1, kamera.aspect || 1);
+}
+
+// Wie viel Platz die Kugel bekommt: steht unten ein Pop-up, schiebt sie sich in
+// die obere Haelfte des Bildschirms, damit nichts von ihr verdeckt wird.
+function raumSetzen() {
+  const schmal = kamera.aspect < 0.9;
+  if (!schmal) versatz = 0;
+  else if (!tafelFrei) versatz = 0.05;
+  else versatz = SCHICHTEN[ebene].kern ? 0.21 : 0.265;
+  zielAbstand = abstandFuer(ebene);
 }
 
 function ebeneSetzen(neu, sanft = true) {
   ebene = Math.max(0, Math.min(SCHICHTEN.length - 1, neu));
-  zielAbstand = abstandFuer(ebene);
-  if (!sanft) istAbstand = zielAbstand;
+  raumSetzen();
+  if (!sanft) { istAbstand = zielAbstand; istVersatz = versatz; }
   ausrichten = true;
   tafelFuellen(SCHICHTEN[ebene]);
   leisteMarkieren();
@@ -446,21 +496,62 @@ function drehen(dx, dy) {
   welt.quaternion.premultiply(q);
 }
 
+// Zwei Finger kneifen: auseinander taucht ein, zusammen fuehrt hinaus.
+// Solange die Finger liegen, folgt die Kamera ihnen unmittelbar; beim Ueber-
+// schreiten der Schwelle springt die naechste Schale ein.
+const zeiger = new Map();
+let kneif0 = 0;
+
+function fingerAbstand() {
+  const [a, b] = [...zeiger.values()];
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+function kneifen() {
+  const d = fingerAbstand();
+  if (!kneif0) { kneif0 = d; return; }
+  const f = d / kneif0;
+  ausrichten = false;
+  zielAbstand = istAbstand = abstandFuer(ebene) / Math.max(0.6, Math.min(1.75, f));
+  if (f > 1.34) { ebeneSetzen(ebene + 1); kneif0 = d; }
+  else if (f < 0.75) { ebeneSetzen(ebene - 1); kneif0 = d; }
+}
+
 el.addEventListener('pointerdown', e => {
+  zeiger.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  el.setPointerCapture(e.pointerId);
+  if (zeiger.size >= 2) {                  // zweiter Finger: ab jetzt wird gezoomt
+    ziehend = false; vX = 0; vY = 0;
+    el.classList.remove('greift');
+    kneif0 = fingerAbstand();
+    return;
+  }
   ziehend = true; ausrichten = false; letzteX = e.clientX; letzteY = e.clientY;
-  el.setPointerCapture(e.pointerId); el.classList.add('greift');
+  el.classList.add('greift');
 });
+
 el.addEventListener('pointermove', e => {
+  const p = zeiger.get(e.pointerId);
+  if (p) { p.x = e.clientX; p.y = e.clientY; }
+  if (zeiger.size >= 2) { kneifen(); return; }
   if (!ziehend) return;
   const dx = e.clientX - letzteX, dy = e.clientY - letzteY;
   letzteX = e.clientX; letzteY = e.clientY;
   drehen(dx, dy);
   vX = dx; vY = dy;
 });
+
 function loslassen(e) {
-  if (!ziehend) return;
-  ziehend = false; el.classList.remove('greift');
+  zeiger.delete(e.pointerId);
   try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+  if (zeiger.size < 2) { kneif0 = 0; zielAbstand = abstandFuer(ebene); }
+  if (zeiger.size === 1) {
+    // Ein Finger bleibt liegen — von hier an wird wieder gedreht, ohne Sprung
+    const [p] = [...zeiger.values()];
+    letzteX = p.x; letzteY = p.y; vX = 0; vY = 0; ziehend = true;
+    el.classList.add('greift');
+  }
+  if (zeiger.size === 0) { ziehend = false; el.classList.remove('greift'); }
 }
 el.addEventListener('pointerup', loslassen);
 el.addEventListener('pointercancel', loslassen);
@@ -720,6 +811,34 @@ function zeitSetzen(j, jetzt = false, vomSchieber = false, richten = true) {
 }
 
 schieber.addEventListener('input', () => zeitSetzen(parseFloat(schieber.value), false, true));
+
+// Die ganze Leiste ist ein Schieber: Wer irgendwo auf ihr nach links oder rechts
+// zieht, wandert durch die Zeit — genauso weit, wie der Knopf selbst wandern
+// wuerde. Knoepfe und der Schieber selbst behalten ihre eigene Bedienung.
+let zeitZieht = false, zeitLetztesX = 0;
+
+zeitleiste.addEventListener('pointerdown', e => {
+  if (e.target.closest('button, input, a')) return;
+  zeitZieht = true; zeitLetztesX = e.clientX;
+  zeitleiste.classList.add('zieht');
+  try { zeitleiste.setPointerCapture(e.pointerId); } catch (_) {}
+});
+
+zeitleiste.addEventListener('pointermove', e => {
+  if (!zeitZieht) return;
+  const dx = e.clientX - zeitLetztesX;
+  zeitLetztesX = e.clientX;
+  const breite = Math.max(1, schieber.getBoundingClientRect().width);
+  zeitSetzen(zeitJahr + dx * (RING_ENDE - RING_ANKER) / breite, false);
+});
+
+function zeitLosLassen(e) {
+  if (!zeitZieht) return;
+  zeitZieht = false; zeitleiste.classList.remove('zieht');
+  try { zeitleiste.releasePointerCapture(e.pointerId); } catch (_) {}
+}
+zeitleiste.addEventListener('pointerup', zeitLosLassen);
+zeitleiste.addEventListener('pointercancel', zeitLosLassen);
 document.getElementById('jetztKnopf').onclick = () => zeitSetzen(jahrJetzt(), true);
 document.querySelectorAll('#zeitSchritte button').forEach(b => {
   b.onclick = () => zeitSetzen(zeitJahr + parseFloat(b.dataset.schritt), false);
@@ -838,11 +957,19 @@ function bild() {
     else { vX = 0; vY = 0; if (ausrichten) markeNachVorn(dt); }
   }
 
+  // Steht unten ein Pop-up? Dann raeumt die Kugel die untere Haelfte.
+  const popOffen = !deutungFeld.hidden || !weltalterFeld.hidden
+    || !einstiegFeld.hidden || spalte.classList.contains('auf');
+  if (popOffen !== tafelFrei) { tafelFrei = popOffen; raumSetzen(); }
+
   // Kamera sanft nachziehen
   istAbstand += (zielAbstand - istAbstand) * Math.min(1, dt * 3.4);
   kamera.position.z = istAbstand;
   const hoehe = 2 * istAbstand * Math.tan((kamera.fov / 2) * Math.PI / 180);
-  welt.position.y = versatz * hoehe;
+  istVersatz += (versatz - istVersatz) * Math.min(1, dt * 3.4);
+  welt.position.y = istVersatz * hoehe;
+  // Der Mensch steht ausserhalb der Weltgruppe — er rueckt eigens mit
+  if (menschBuehne) menschBuehne.position.y = istVersatz * hoehe;
 
   // Schichten ein- und ausblenden
   schalen.forEach((sch, i) => {
@@ -896,9 +1023,7 @@ function groesse() {
   renderer.setSize(b, h);
   kamera.aspect = b / h;
   kamera.updateProjectionMatrix();
-  zielAbstand = abstandFuer(ebene);
-  // Auf schmalen Geräten liegt die Infotafel unten — die Kugel rückt nach oben
-  versatz = kamera.aspect < 0.9 ? 0.05 : 0;
+  raumSetzen();
 }
 addEventListener('resize', groesse);
 groesse();

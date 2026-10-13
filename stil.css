@@ -162,7 +162,11 @@ main { position: relative; z-index: 1; height: 100%; }
   flex: none; border-radius: 50%;
   width: calc(var(--zeile) * .27 * var(--punktMass, 1));
   height: calc(var(--zeile) * .27 * var(--punktMass, 1));
-  border: 1.5px solid var(--ton); background: transparent;
+  /* Auch die nicht gewaehlten Punkte sollen gut zu sehen sein: heller Rand,
+     dazu ein Hauch Fuellung, damit der Ring nicht im Himmel verschwindet. */
+  border: 1.5px solid var(--ton);
+  background: color-mix(in srgb, var(--ton) 26%, transparent);
+  box-shadow: 0 0 6px -1px var(--ton);
   transition: background .3s, box-shadow .3s, transform .3s;
 }
 .stufe .stufeText { display: flex; flex-direction: column; line-height: 1.2; }
@@ -170,8 +174,8 @@ main { position: relative; z-index: 1; height: 100%; }
 .stufe small { font-size: calc(var(--zeile) * .31); opacity: .74; }
 .stufe.aktiv { color: #f4ecdd; background: rgba(255,255,255,.06); }
 .stufe.aktiv .punkt { background: var(--ton); box-shadow: 0 0 10px var(--ton); transform: scale(1.25); }
-.stufe.durch { opacity: .5; }
-.stufe.durch .punkt { border-color: currentColor; opacity: .5; }
+.stufe.durch { opacity: .82; }
+.stufe.durch .punkt { opacity: .78; }
 
 /* ----------------------------------------------------------------- Pult */
 #pult {
@@ -202,8 +206,8 @@ main { position: relative; z-index: 1; height: 100%; }
      Kugel den Bildschirm behält. */
   #linkeSpalte {
     display: none;
-    left: .5rem; right: .5rem; bottom: 9.4rem; top: 4.6rem; width: auto;
-    gap: .5rem; z-index: 6;
+    left: .5rem; right: .5rem; bottom: 11.2rem; top: 40%; width: auto;
+    gap: .5rem; z-index: 6; overflow-y: auto;
   }
   #linkeSpalte.auf { display: flex; }
   #tafel {
@@ -215,7 +219,7 @@ main { position: relative; z-index: 1; height: 100%; }
     border-radius: 3px;
   }
   #leiste {
-    top: auto; bottom: 8.2rem; left: 0; right: 0; transform: none;
+    top: auto; bottom: 9.2rem; left: 0; right: 0; transform: none;
     flex-direction: row; justify-content: center; align-items: center;
     gap: .1rem; max-height: none; padding: .3rem .5rem;
   }
@@ -227,9 +231,9 @@ main { position: relative; z-index: 1; height: 100%; }
 }
 .stufe .punkt { width: 11px; height: 11px; }
   #leiste { --zeile: 40px; }
-  .stufe.durch { opacity: .38; }
-  #pult { bottom: auto; top: 1rem; right: .8rem; }
-  #pult button { padding: .42rem .7rem; font-size: .72rem; }
+  .stufe.durch { opacity: .8; }
+  /* Am Handy wird mit zwei Fingern gezoomt — die Knoepfe entfallen */
+  #pult { display: none; }
   #hinweisZeile { display: none; }
 }
 
@@ -244,6 +248,10 @@ main { position: relative; z-index: 1; height: 100%; }
   transition: border-color .3s;
 }
 #zeitleiste.verschoben { border-color: rgba(255,242,208,.34); }
+/* Die ganze Leiste laesst sich mit dem Finger durch die Zeit ziehen */
+#zeitleiste { touch-action: none; cursor: ew-resize; }
+#zeitleiste button, #zeitleiste input { cursor: pointer; }
+#zeitleiste.zieht { border-color: rgba(255,242,208,.5); }
 
 #zeitKopf { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; }
 #zeitAnzeige {
@@ -316,7 +324,7 @@ main { position: relative; z-index: 1; height: 100%; }
 
 @media (max-width: 900px) {
   #zeitleiste {
-    top: auto; bottom: .5rem; left: .5rem; right: .5rem;
+    top: auto; bottom: 1.9rem; left: .5rem; right: .5rem;
     width: auto; min-width: 0; transform: none;
     padding: .4rem .6rem .45rem;
   }
@@ -574,10 +582,18 @@ main { position: relative; z-index: 1; height: 100%; }
 .ueberlagerung .hinweis { margin-top: .4rem; }
 
 @media (max-width: 900px) {
+  /* Am Handy liegen die Pop-ups unter der Kugel und nie ueber ihr. Die obere
+     Haelfte des Bildschirms gehoert allein der Grafik — sie rueckt dorthin
+     hoch, sobald eine Tafel aufgeht. */
   .ueberlagerung {
-    width: auto; left: .6rem; right: .6rem; transform: translateY(-50%);
-    padding: 1.2rem 1.1rem 1.1rem; max-height: 72vh;
+    width: auto; left: .5rem; right: .5rem;
+    top: 40%; bottom: 11.2rem; transform: none; max-height: none;
+    padding: .9rem .9rem .85rem;
   }
+  .ueberlagerung h2 { margin-bottom: .7rem; font-size: 1.25rem; }
+  .ueberlagerung .fliess { font-size: .8rem; line-height: 1.55; margin-bottom: .6rem; }
+  .deutungText { font-size: .82rem; line-height: 1.55; margin-bottom: .8rem; }
+  .messwerte { margin-bottom: .8rem; gap: .25rem; }
   .messName { width: 7.5rem; font-size: .68rem; }
 }
 
