@@ -1,10 +1,10 @@
 import * as THREE from './vendor/three.module.js';
 import { SCHICHTEN, anteil, segmentBei, jahrJetzt, jahrText, zeitText,
          yugaLicht, menschZustand, masstab, kernStand, schiefe,
-         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=116';
-import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=116';
-import { deuten } from './deutung.js?v=116';
-import { weltalterStand } from './weltalter.js?v=116';
+         SCHIEFE_SICHER, RING_ANKER } from './zyklen.js?v=117';
+import { ereignisseUm, epocheVon, halleyUm } from './geschichte.js?v=117';
+import { deuten } from './deutung.js?v=117';
+import { weltalterStand } from './weltalter.js?v=117';
 
 const HG = 0x05070d;
 
@@ -21,7 +21,18 @@ kamera.position.set(0, 0, 14);
 // Die Kugel steht fest in ihrer Achse und dreht sich nur um sie — wie ein
 // Globus im Gestell. Die Neigung ist die der Erde: 23,44 Grad.
 // Die Neigung steht nicht fest: Sie folgt der wirklichen Schiefe der Erdachse
-// zum eingestellten Jahr — dem Milanković-Zyklus von 41.000 Jahren.
+// zum eingestellten Jahr — dem Milanković-Zyklus von 41.000 Jahren. Wahr sind
+// davon nur 1,6 Grad über die ganze Spanne, und das sieht man kaum. Die Kugel
+// zeigt den Ausschlag darum dreifach überhöht, gespiegelt an der Mitte der
+// physikalischen Spanne. Die Zahl in der Tafel bleibt die wahre.
+const NEIGUNG_MITTE = 23.3;          // Mitte zwischen 22,1° und 24,5°
+const NEIGUNG_MASS = 3;
+
+function neigungFuer(jahr) {
+  return (NEIGUNG_MITTE + (schiefe(jahr) - NEIGUNG_MITTE) * NEIGUNG_MASS)
+    * Math.PI / 180;
+}
+
 let zielNeigung = 23.4392811 * Math.PI / 180;
 let istNeigung = zielNeigung;
 const buehneWelt = new THREE.Group();   // nimmt den Versatz nach oben auf
@@ -1025,7 +1036,7 @@ function zeitSetzen(j, jetzt = false, vomSchieber = false, richten = true) {
   streifenFuellen();
   if (richten) ausrichten = true;
   menschSetzen(yugaLicht(zeitJahr));
-  zielNeigung = schiefe(zeitJahr) * Math.PI / 180;
+  zielNeigung = neigungFuer(zeitJahr);
   tafelZeitTeil();
 }
 
@@ -1137,6 +1148,8 @@ function tafelZeitTeil() {
       Jahr: <b>${g.toFixed(2).replace('.', ',')}°</b> — ${g > vorher ? 'sie richtet sich auf'
       : 'sie neigt sich weiter'}. Im Milanković-Zyklus von 41.000 Jahren wandert sie
       zwischen 22,1° und 24,5°; am Zeitschieber kippt die Kugel mit.
+      <em>Die Kugel zeigt den Ausschlag dreifach überhöht, damit er zu sehen ist —
+      die Zahl ist die wahre.</em>
       ${weit ? '<em>So weit draußen ist der Wert fortgeschrieben, nicht gerechnet.</em>' : ''}`;
   }
 

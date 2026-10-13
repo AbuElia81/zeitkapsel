@@ -173,7 +173,7 @@ export const SCHICHTEN = [
       'Die Ionisation des Magellanschen Stroms deutet auf einen Seyfert-Ausbruch vor 3,5 ± 1 Millionen Jahren, rund 300.000 Jahre lang',
       'Die 25.800 Jahre sind astronomisch belegt — die Yuga-Zuordnung ist Misras These',
       'Die Präzession ist zugleich der dritte Milanković-Zyklus — die beiden größeren sind die Schiefe der Erdachse (41.000 Jahre) und die Exzentrizität der Erdbahn (100.000)',
-      'Die Neigung der Kugel ist nicht gesetzt: Sie folgt der wirklichen Schiefe der Erdachse zum eingestellten Jahr',
+      'Die Neigung der Kugel ist nicht gesetzt: Sie folgt der wirklichen Schiefe der Erdachse zum eingestellten Jahr — dreifach überhöht, damit die Bewegung zu sehen ist',
       'Höchststand 24,22° um 8700 v. Chr., Tiefststand 22,61° um 11800 n. Chr. — heute 23,44° und fallend',
       'Ovid erzählt dieselbe Abfolge: Gold, Silber, Erz, Eisen — und beide Katastrophen',
       '432.000 Jahre: die babylonischen Könige vor der Flut und das Kali Yuga tragen dieselbe Zahl'
